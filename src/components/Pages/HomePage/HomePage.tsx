@@ -17,7 +17,7 @@ import useWow from '@/components/hooks/useWow';
 
 interface Services {
   title: string;
-  icon: string;
+  icon: React.ReactNode;
   subtitle: string;
   description: string;
   footer: string;
@@ -37,7 +37,7 @@ interface TechBlock {
 }
 
 
-const services = [
+const services: Services[] = [
   {
     icon: <FaPalette className="text-orange-500 text-3xl" />,
     title: 'Experience Design',
