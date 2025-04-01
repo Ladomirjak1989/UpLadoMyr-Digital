@@ -1,224 +1,326 @@
 'use client';
-import React, { useState } from 'react';
-import { FaDraftingCompass, FaTools, FaBath, FaTimes, FaPlus } from 'react-icons/fa';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { FaArrowDown } from 'react-icons/fa';
-import { FaUsers, FaKey, FaShieldAlt, FaMoneyBillWave, FaGift, FaWallet } from 'react-icons/fa';
-import { FaEye, FaThumbsUp, FaMapMarkerAlt } from 'react-icons/fa';
+import React from 'react';
+import {
+  FaLightbulb,
+  FaClipboardList,
+  FaComments,
+  FaUserCog,
+  FaClipboardCheck,
+  FaLaptopCode
+} from 'react-icons/fa';
+import { FaCogs, FaCode, FaPalette, FaNetworkWired, FaBug, FaWrench } from 'react-icons/fa';
 
-const reasons = [
-  {
-    icon: <FaUsers className="text-[#FFCD00] text-2xl" />,
-    title: 'Eigen renovatieteams',
-    description: 'Wij schakelen geen externe aannemers in',
-  },
-  {
-    icon: <FaKey className="text-[#FFCD00] text-2xl" />,
-    title: 'Sleutel-op-de-deur',
-    description: 'Van ontwerp tot volledige realisatie',
-  },
-  {
-    icon: <FaShieldAlt className="text-[#FFCD00] text-2xl" />,
-    title: 'Kwaliteitsgarantie',
-    description: 'Wij bieden 36 maanden garantie op renovatie',
-  },
-  {
-    icon: <FaMoneyBillWave className="text-[#FFCD00] text-2xl" />,
-    title: 'Betaalbare prijzen',
-    description: 'Onze prijzen zijn gemiddeld voor de markt',
-  },
-  {
-    icon: <FaGift className="text-[#FFCD00] text-2xl" />,
-    title: 'Leuke extra’s',
-    description: 'Gratis ontwerp bij volledige renovatie-opdracht',
-  },
-  {
-    icon: <FaWallet className="text-[#FFCD00] text-2xl" />,
-    title: 'Gespreide betaling',
-    description: 'Flexibel betalingssysteem',
-  },
-];
+
+import 'animate.css';
+import useWow from '@/components/hooks/useWow';
+
+
+interface Services {
+  title: string;
+  icon: string;
+  subtitle: string;
+  description: string;
+  footer: string;
+
+}
+
+type MethodStep = {
+  icon: React.ReactNode;
+  title: string;
+  color: string;
+
+};
+
+interface TechBlock {
+  title: string;
+  tech: string;
+}
+
 
 const services = [
   {
-    icon: <FaDraftingCompass size={40} />,
-    title: 'BOUWTEKENINGEN',
+    icon: <FaPalette className="text-orange-500 text-3xl" />,
+    title: 'Experience Design',
+    subtitle: 'Designing Intuitive, Engaging User Experiences',
     description:
-      'Het opstellen van gedetailleerde bouwplannen met bekwame architecten en management. Of ze nu aan uw aannemer worden overhandigd of door ons worden beheerd, wij behandelen cruciale details voor optimale oplossingen.',
+      'Crafting seamless, intuitive user journeys with ADA-compliant designs for faster task completion and higher engagement.',
+    footer: 'ADA/WCAG Compliant | Mobile-responsive | Optimized for user engagement',
   },
   {
-    icon: <FaTools size={40} />,
-    title: 'BOUWVERGUNNINGEN',
+    icon: <FaNetworkWired className="text-pink-500 text-3xl" />,
+    title: 'Architecture & Scalability',
+    subtitle: 'Building Robust, Scalable System Architectures',
     description:
-      'Denkt u aan een uitbreiding van uw huis? Wij leveren uitgebreide plannen aan de gemeente en beheren het proces totdat uw aannemer met de nieuwe vergunning kan bouwen. Ons team staat klaar om uw visie tot leven te brengen.',
+      'Developing scalable, cloud-native architectures with microservices and APIs for future-proof, high-performance digital solutions.',
+    footer: 'Flexible & scalable infrastructure | Optimized for performance and security',
   },
   {
-    icon: <FaBath size={40} />,
-    title: 'TOTALE RENOVATIE',
+    icon: <FaCode className="text-blue-500 text-3xl" />,
+    title: 'Full Stack Development',
+    subtitle: 'Turning Ideas into High-Impact Digital Solutions',
     description:
-      'Kies voor onze complete renovatiediensten. Als projectmanagers voor ons bouwteam handelen wij on-site communicatie, kwaliteitscontroles en prijsafstemming af, waardoor de noodzaak voor een afzonderlijke aannemer vervalt. Waarom ergens anders inhuren als wij het afgedekt hebben?',
+      'Full-stack development using both front-end and back-end technologies for responsive, secure, and scalable applications.',
+    footer: 'High-performing, cross-platform apps | Continuous delivery',
+  },
+  {
+    icon: <FaCogs className="text-purple-500 text-3xl" />,
+    title: 'API Integration & Automation',
+    subtitle: 'Streamlining Systems for Seamless Operations',
+    description:
+      'Connect APIs for real-time data sync and optimized workflows across platforms for efficient data flow.',
+    footer: 'Real-time data synchronization | Increased workflow efficiency | Seamless integration with existing systems',
+  },
+  {
+    icon: <FaBug className="text-red-500 text-3xl" />,
+    title: 'QA & Performance Testing',
+    subtitle: 'Ensuring High-Quality, Reliable Applications',
+    description:
+      'Rigorous automated and manual testing to ensure flawless performance, security, and cross-browser compatibility every time.',
+    footer: 'Error-free experience | Mobile and cross-browser optimization | Enhanced security and load performance',
+  },
+  {
+    icon: <FaWrench className="text-green-500 text-3xl" />,
+    title: 'Maintenance & Support',
+    subtitle: 'Ensuring Ongoing Performance and Security',
+    description:
+      'Support from 9:00–18:00 CET, including bug fixes and performance optimization for long-term reliability.',
+    footer: 'Proactive system health checks | Fast response times | Minimized downtime',
   },
 ];
 
-const projects = [
-  {
-    title: 'Dibrova Park Appartement',
-    location: 'Kyiv, Viktor Nekrasova Str. 10a',
-    size: '79,45 m²',
-    likes: 21,
-    views: 2245,
-    image: '/img/homeprojects/img1.webp',
-  },
+const steps: MethodStep[] = [
 
   {
-    title: 'Modern Kitchen Design',
-    location: 'Amsterdam, Westzijde 48',
-    size: '65 m²',
-    likes: 14,
-    views: 1580,
-    image: '/img/homeprojects/img2.png',
+    title: 'Project Initiation',
+    icon: <FaLightbulb className="text-4xl text-indigo-600" />,
+    color: 'text-indigo-400',
   },
   {
-    title: 'Bedroom Renovatie Luxe',
-    location: 'Rotterdam, Blaak 23',
-    size: '45 m²',
-    likes: 32,
-    views: 1990,
-    image: '/img/homeprojects/img3.jpg',
+    title: 'Project Planning',
+    icon: <FaClipboardList className="text-4xl text-yellow-500" />,
+    color: 'text-yellow-500',
   },
   {
-    title: 'Minimalistische Flat',
-    location: 'Den Haag, Lange Vijverberg 7',
-    size: '58 m²',
-    likes: 18,
-    views: 1704,
-    image: '/img/homeprojects/img4.jpg',
+    title: 'Project Communication',
+    icon: <FaComments className="text-4xl text-cyan-500" />,
+    color: 'text-cyan-500',
   },
   {
-    title: 'Scandinavisch Slaapkamer',
-    location: 'Utrecht, Oudegracht 22',
-    size: '48 m²',
-    likes: 26,
-    views: 2100,
-    image: '/img/homeprojects/img5.webp',
+    title: 'Project Development',
+    icon: <FaLaptopCode className="text-4xl text-pink-600" />,
+    color: 'text-pink-600',
   },
   {
-    title: 'Luxe Interieur Renovatie',
-    location: 'Eindhoven, Strijp S',
-    size: '72 m²',
-    likes: 17,
-    views: 1988,
-    image: '/img/homeprojects/img6.jpg',
+    title: 'Monitoring & Control',
+    icon: <FaUserCog className="text-4xl text-teal-600" />,
+    color: 'text-teal-600',
+  },
+  {
+    title: 'Implementation Review',
+    icon: <FaClipboardCheck className="text-4xl text-rose-500" />,
+    color: 'text-rose-500',
   },
 ];
 
-const accordionItems = [
+const blocks: TechBlock[] = [
   {
-    title: 'Moeiteloos Projectbeheer',
-    description:
-      'Wij vereenvoudigen uw leven met uitgebreide diensten en bieden een alles-in-één oplossing voor al uw behoeften.',
-    icon: '📑',
+    title: 'LANGUAGE/FRAMEWORKS',
+    tech: 'JavaScript, TypeScript, MERN, Express Js, Node Js',
   },
   {
-    title: 'Eenvoudige Klantbetrokkenheid',
-    description:
-      'Wij beheren communicatie efficiënt en houden klanten op de hoogte van eventuele veranderingen of complicaties gedurende het proces.',
-    icon: '👍',
+    title: 'FRONTEND',
+    tech: 'HTML, CSS, Tailwind CSS, Bootstrap, React Js, Redux-toolkit, Next Js',
   },
   {
-    title: 'Eerlijke Prijzen en Kwaliteitsborging',
-    description:
-      ' Onze toewijding ligt in transparante en eerlijke prijsstelling, zodat klanten waarde krijgen door duidelijk inzicht in de kosten.',
-    icon: '📊',
+    title: 'DATABASES',
+    tech: 'MongoDB, MySQL, PostgreSQL',
   },
   {
-    title: 'Wereldwijde Toegankelijkheid en Gemak',
-    description:
-      'Als internationaal bedrijf zijn we gespecialiseerd in het assisteren van expats bij hun renovaties, waarbij we duidelijkheid bieden over kosten en regelgeving, zelfs wanneer ze in het buitenland zijn.',
-    icon: '🌍',
+    title: 'VERSION CONTROL',
+    tech: 'GitLab, GitHub',
   },
 ];
 
-const HomePage = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const toggleAccordion = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+const HomePage: React.FC = () => {
+  useWow();
 
   return (
     <>
-      <section className="py-16 bg-white-50 px-4 md:px-12 lg:px-16">
-        <div
-          id="interier"
-          className="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-x-4"
-        >
-          <hr className="w-16 border-t-2 border-green-950" />
-          <span className="text-sm font-light tracking-wide text-green-900">ONZE</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-green-950">Projectbeheer</h2>
-        </div>
-        <p className="mt-4 text-lg text-gray-900 text-center md:text-left">
-          Wij regelen alles van begin tot eind
-        </p>
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="group bg-gray-100 hover:bg-gray-200 transition duration-300 shadow-lg rounded-2xl p-6 text-center border border-[#D4BFAA] hover:border-[#FFCD00]"
-            >
-              {/* Icon */}
-              <div className="flex justify-center mb-4">
-                <div className="w-14 h-14 flex items-center justify-center rounded-full bg-green-950 text-[#FFCD00] text-3xl shadow-md group-hover:scale-110 transition-transform duration-300">
-                  {service.icon}
-                </div>
-              </div>
 
-              {/* Title */}
-              <h3 className="text-xl font-bold text-green-900 group-hover:text-[#FFCD00] transition">
-                {service.title}
-              </h3>
-
-              {/* Description */}
-              <p className="mt-3 text-gray-700 leading-relaxed text-sm">{service.description}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="bg-white-50  dark:bg-[#14532d] text-gray-900 dark:text-white py-16 px-6 lg:px-24 transition-colors duration-500">
-          <h2 className="text-3xl md:text-4xl text-green-950 font-bold text-center mb-12">
-            Waarom kiezen voor ons?
+      <div className="bg-white py-20 px-6 lg:px-16">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="wow animate__animated animate__fadeInDown text-4xl md:text-5xl font-bold text-center text-deep mb-2">
+            All-in-One Web Development for Entrepreneurs
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-            {reasons.map((reason, idx) => (
+          <p className="wow animate__animated animate__fadeInDown text-center text-xl text-yellow-600 italic mb-12">
+            Design <span className="text-blue-700">|</span> Develop <span className="text-blue-700">|</span> Deliver
+          </p>
+
+          <div className="wow animate__animated animate__fadeInDown grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {services.map((service, index) => (
               <div
-                key={idx}
-                className="group flex items-start space-x-4 p-4 border border-transparent 
-          hover:border-[#FFCD00] transition duration-300 rounded-lg 
-          bg-gray-100 dark:bg-[#166534] hover:bg-gray-200 dark:hover:bg-[#1e4d2b] shadow-md"
+                key={index}
+                className="hover:shadow-xl transition-all duration-300 group hover:scale-[1.02] border border-gray-200 rounded-xl shadow-sm p-6 bg-white"
               >
-                <div
-                  className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full 
-            bg-[#022c0b] text-[#14532d] shadow-sm"
-                >
-                  {reason.icon}
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-1 group-hover:text-[#FFCD00] transition">
-                    {reason.title}
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-10 h-10 flex items-center justify-center bg-orange-100 rounded-full">
+                    {service.icon}
+                  </div>
+                  <h3 className="text-lg font-bold text-blue-900 underline underline-offset-2">
+                    {service.title}
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-white/80 leading-relaxed">
-                    {reason.description}
-                  </p>
+                </div>
+                <h4 className="font-semibold text-gray-800 mb-2 leading-snug">
+                  {service.subtitle}
+                </h4>
+                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                  {service.description}
+                </p>
+                <div className="text-xs bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] p-2 rounded-md">
+                  {service.footer}
                 </div>
               </div>
             ))}
           </div>
         </div>
+      </div>
 
-        {/* Проекти */}
-        {/* <div
+
+
+      <div className="relative w-full py-20 overflow-hidden">
+        {/* Wave Top */}
+        <svg
+          className="absolute top-0 left-0 w-full text-brand-light"
+          viewBox="0 0 1440 100"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+        >
+          <path d="M0,100 C360,0 1080,0 1440,100 L1440,0 L0,0 Z" />
+        </svg>
+
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-center text-deep mb-6 wow animate__animated animate__fadeInDown">
+            Web Development Methodology
+          </h2>
+          <p className="text-center text-lg text-yellow-600 italic mb-12 max-w-3xl mx-auto wow animate__animated animate__fadeIn">
+            We focus on transparent processes and a structured approach used to plan, design, and manage the process of creating a web application.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-12 relative">
+            {steps.map((step, index) => (
+              <div key={index} className="relative flex flex-col items-center">
+                {/* Hexagon */}
+                <div
+                  className={`hexagon w-64 h-72 border-[6px] ${step.color}
+            flex items-center justify-center
+            p-2 bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] shadow-lg hover:shadow-2xl transition-all duration-300
+            group wow animate__animated animate__zoomIn animate__delay-${index}s`}
+                  style={{
+                    clipPath: 'polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%)',
+                  }}
+                >
+                  <div
+                    className="w-[90%] h-[90%] bg-white flex flex-col justify-center items-center text-center px-4 py-6 shadow-lg"
+                    style={{
+                      clipPath: 'polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%)',
+                    }}
+                  >
+                    <div className="text-4xl transition-transform duration-300 transform group-hover:scale-110">
+                      {step.icon}
+                    </div>
+                    <h3 className="mt-4 text-base font-semibold text-gray-700">
+                      {step.title}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Стрілка */}
+                {index < steps.length - 1 && (
+                  <div className="hidden sm:block">
+                    <svg
+                      className={`wow animate__animated animate__zoomIn animate__delay-${index}s 
+                  absolute left-[calc(100%+12px)] top-1/2 transform -translate-y-1/2 text-deep w-6 h-6`}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Wave Bottom */}
+        <svg
+          className="absolute bottom-0 left-0 w-full text-brand-light"
+          viewBox="0 0 1440 100"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+        >
+          <path d="M0,0 C360,100 1080,100 1440,0 L1440,100 L0,100 Z" />
+        </svg>
+      </div>
+
+
+
+
+      {/* Technical Expertise */}
+      <div className="relative w-full bg-white py-20 px-6 lg:px-16">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-deep mb-6 wow animate__animated animate__fadeInDown">
+            Technical Expertise
+          </h2>
+          <p className="text-lg text-yellow-600 italic max-w-4xl mx-auto mb-12 wow animate__animated animate__fadeIn">
+            We help businesses grow by delivering fast, modern, and cost-effective web applications using the latest technologies.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+            {blocks.map((block, i) => (
+              <div
+                key={i}
+                className={`
+        wow animate__animated animate__fadeInUp animate__delay-${i}s
+        relative bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] p-6 rounded-lg shadow-md transition-all duration-300
+        hover:shadow-[0_0_20px_rgba(0,0,0,0.1)] hover:drop-shadow-xl hover:-translate-y-1 group
+      `}
+              >
+                {/* Градієнтний бордер зліва */}
+                <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 rounded-l-lg"></div>
+
+                {/* Контент */}
+                <div className="relative z-10">
+                  <h3 className="font-bold text-deep mb-2 underline group-hover:text-accent transition duration-300">
+                    {block.title}
+                  </h3>
+                  <p className="text-gray-700 text-sm leading-relaxed transition duration-300 group-hover:text-gray-900">
+                    {block.tech}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </div>
+    </>
+
+
+  );
+};
+
+export default HomePage;
+
+
+
+
+{/* Проекти */ }
+{/* <div
           id="projects"
           className="p-6 md:p-14 lg:px-16 flex flex-col lg:flex-row items-center lg:items-start gap-12 mt-10"
         >
@@ -246,135 +348,8 @@ const HomePage = () => {
             </p>
           </div> */}
 
-        {/* Слайдер */}
-        {/* <div className="lg:w-1/2 w-full">
+{/* Слайдер */ }
+{/* <div className="lg:w-1/2 w-full">
             <Slider id="flip" />
           </div>
         </div> */}
-
-        <div className="px-6 py-16 bg-white">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, idx) => (
-              <div key={idx} className="relative group overflow-hidden rounded-lg shadow-md">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  width={800}
-                  height={500}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white p-6 flex flex-col justify-end">
-                  <h3 className="text-xl font-semibold mb-1">{project.title}</h3>
-                  <p className="text-sm text-gray-300 mb-2 flex items-center gap-2">
-                    <FaMapMarkerAlt className="text-yellow-400" /> {project.location}
-                  </p>
-                  <p className="text-sm mb-2">
-                    <span className="font-medium">{project.size}</span>
-                  </p>
-                  <div className="flex items-center gap-4 text-sm">
-                    <span className="flex items-center gap-1">
-                      <FaThumbsUp className="text-yellow-400" /> {project.likes}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <FaEye className="text-yellow-400" /> {project.views}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Акордеон Diensten */}
-        <div className="mt-16 flex flex-col lg:flex-row gap-12">
-          <div className="lg:w-1/2 text-center md:text-left">
-            <div className="flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-x-4">
-              <hr className="w-16 border-t-2 border-green-950" />
-              <span className="text-sm font-light tracking-wide text-green-900">ONZE</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-green-950">DIENSTEN</h2>
-            </div>
-            <p className="text-gray-600 mt-4 leading-relaxed">
-              Transformeer uw huis met onze deskundige renovatieoplossingen...
-            </p>
-          </div>
-          <div className="lg:w-1/2 w-full">
-            {accordionItems.map((item, index) => (
-              <div key={index} className="border-b border-gray-300 py-4">
-                <button
-                  onClick={() => toggleAccordion(index)}
-                  className="flex justify-between items-center w-full text-left"
-                >
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-green-900 text-white text-lg">
-                      {item.icon}
-                    </div>
-                    <span className="text-lg font-semibold text-green-900">{item.title}</span>
-                  </div>
-                  {openIndex === index ? (
-                    <FaTimes className="text-green-900" />
-                  ) : (
-                    <FaPlus className="text-green-900" />
-                  )}
-                </button>
-                {openIndex === index && <p className="mt-2 text-gray-600">{item.description}</p>}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA секція з текстом зліва та фото справа */}
-      <div className="bg-white mb-12 px-4">
-        <div className=" bg-gray-100 flex flex-col-reverse lg:flex-row items-center justify-between max-w-7xl mx-auto mt-10 rounded-lg shadow-lg overflow-hidden">
-          {/* Ліва частина — текст */}
-          <div className="w-full lg:w-1/2 p-6 lg:p-12 text-gray-800">
-            <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-4">
-              Samen bouwen aan uw droomruimte.
-            </h2>
-            <p className="text-lg leading-relaxed space-y-2">
-              Wij geloven dat elk project uniek is en persoonlijke aandacht verdient. Van de eerste
-              schets tot de laatste afwerking begeleiden wij u met zorg. Kwaliteit, communicatie en
-              transparantie staan bij ons centraal. Dankzij jarenlange ervaring garanderen we een
-              vlotte uitvoering. Uw wensen vormen de basis voor elk ontwerp en elke renovatie. We
-              zorgen voor slimme oplossingen, binnen planning en budget. Kies voor rust,
-              duidelijkheid en een resultaat waar u trots op bent.
-            </p>
-          </div>
-
-          {/* Права частина — зображення */}
-          <div className="w-full lg:w-1/2 h-[400px] md:h-[500px] relative">
-            <Image
-              src="/img/img4.jpg"
-              alt="Renovation Call-to-Action"
-              layout="fill"
-              objectFit="cover"
-              className="brightness-75"
-            />
-            <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6">
-              <h2 className="text-white text-2xl md:text-4xl font-bold drop-shadow-lg">
-                NEEM CONTACT MET ONS OP VOOR UW RENOVATIE.
-              </h2>
-              <p className="text-white text-lg mt-4 max-w-2xl drop-shadow-md">
-                Ontwerp uw ruimte en ontvang binnen enkele minuten een schatting.
-              </p>
-
-              <motion.div
-                className="mt-6"
-                animate={{ y: [0, 10, 0] }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 1.5,
-                  ease: 'easeInOut',
-                }}
-              >
-                <FaArrowDown className="text-white text-3xl" />
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
-export default HomePage;

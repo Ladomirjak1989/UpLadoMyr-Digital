@@ -75,13 +75,15 @@ const ContactPage: React.FC = () => {
       <div className="bg-white py-16 px-4 sm:px-8 lg:px-20">
         <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12 items-center">
           {/* Ліва частина – картинка */}
-          <div className="w-full lg:w-1/2 relative h-[300px] sm:h-[400px] lg:h-[500px] rounded-xl overflow-hidden ">
+          <div className="w-full lg:w-1/2 relative h-[300px] sm:h-[400px] lg:h-[500px] rounded-xl overflow-hidden">
             <Image
               src="/img/img-contact.avif"
               alt="Contact Visual"
-              className="w-full h-full object-cover rounded-xl"
+              fill
+              className="object-cover rounded-xl"
             />
           </div>
+
 
           {/* Права частина – форма */}
           <div className="w-full lg:w-1/2">

@@ -140,3 +140,46 @@ html {
 .reverse {
   transform: rotate(180deg);
 }
+
+.hexagon {
+  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+.hexagon:hover {
+  transform: scale(1.05);
+}
+
+.hex-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: currentColor;
+  transition: transform 0.3s;
+}
+
+/* Позиції кутів */
+.hex-corner.top-left {
+  top: 6%;
+  left: 22%;
+}
+.hex-corner.top-right {
+  top: 6%;
+  right: 22%;
+}
+.hex-corner.middle-right {
+  top: 48%;
+  right: -6px;
+}
+.hex-corner.bottom-right {
+  bottom: 6%;
+  right: 22%;
+}
+.hex-corner.bottom-left {
+  bottom: 6%;
+  left: 22%;
+}
+.hex-corner.middle-left {
+  top: 48%;
+  left: -6px;
+}

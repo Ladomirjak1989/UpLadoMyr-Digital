@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { FiMenu, FiX } from 'react-icons/fi';
 import Image from 'next/image';
+import { FiMenu, FiX } from 'react-icons/fi';
 import { usePathname } from 'next/navigation';
 
 const navbarConfig = [
@@ -16,85 +16,101 @@ const navbarConfig = [
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const isActive = (path: string) => pathname === path;
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="w-full top-0 left-0 shadow-md z-50 bg-gradient-to-br from-green-50 via-green-100 to-emerald-200">
-      <div className="flex justify-between items-center p-4 lg:px-16">
-        {/* Logo */}
-        <div className="flex items-center space-x-3">
-          <Image
-            src="/img/dalex-b.png"
-            alt="Dalex Bouw Logo"
-            width={0}
-            height={0}
-            sizes="(max-width: 768px) 100px, (max-width: 1024px) 140px, 180px"
-            className="w-20 sm:w-24 md:w-32 lg:w-40 h-auto rounded-2xl"
-          />
+    <header
+      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${isScrolled
+          ? 'bg-white/90 backdrop-blur-md shadow-lg py-2'
+          : 'bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] py-4'
+        }`}
+    >
+      <div className="flex justify-between items-center px-4 lg:px-16">
+        {/* Logo & Text */}
+        <div className="flex items-center space-x-4">
+          <div className="relative w-12 h-12 sm:w-16 sm:h-16">
+            <Image
+              src="/img/header/logo1.jpg"
+              alt="UpLadoMyr Logo"
+              fill
+              className="object-contain rounded-full ring-2 ring-[#ffcd00] bg-white"
+            />
+          </div>
+          <p className="text-sm sm:text-base md:text-lg font-medium tracking-wide text-gray-800">
+            <span className="font-bold text-gray-900">UpLadoMyr</span>{' '}
+            <span className="text-[#deb40a]">Digital</span>{' '}
+            <span className="hidden sm:inline italic text-gray-500">
+              — where ideas come to life in code
+            </span>
+          </p>
         </div>
-        <p className="mr-auto ml-9 underline hidden lg:block text-base text-gray-600 italic tracking-wide leading-relaxed font-medium">
-          UpLadoMyr Digital
-        </p>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex space-x-6 text-gray-900 font-bold">
-          {navbarConfig.map(item => (
+        <nav className="hidden md:flex space-x-6 font-semibold text-gray-800">
+          {navbarConfig.map((item) => (
             <Link
               key={item.link}
               href={item.link}
-              className={`relative group transition ${
-                isActive(item.link)
-                  ? 'text-green-900 underline underline-offset-4'
-                  : 'text-gray-900'
-              }`}
+              className={`relative group transition-all duration-200 ${isActive(item.link)
+                  ? 'text-[#1e3a8a] underline underline-offset-4'
+                  : 'hover:text-[#1e3a8a]'
+                }`}
             >
               {item.text}
-              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-700 transition-all group-hover:w-full"></span>
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#1e3a8a] transition-all group-hover:w-full"></span>
             </Link>
           ))}
         </nav>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle */}
         <div className="md:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-gray-900 text-2xl p-2 rounded-md border border-gray-300 hover:bg-gray-200 transition"
+            className="text-[#1e3a8a] text-2xl p-2 rounded-md border border-gray-300 hover:bg-[#f7f4ea] transition"
           >
             {isOpen ? <FiX /> : <FiMenu />}
           </button>
         </div>
       </div>
 
-      {/* Overlay */}
+      {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-gray-600 bg-opacity-50 md:hidden transition-opacity ${
-          isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}
+        className={`fixed inset-0 bg-black bg-opacity-40 md:hidden transition-opacity ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+          }`}
         onClick={() => setIsOpen(false)}
       ></div>
 
       {/* Mobile Nav */}
       <nav
-        className={`md:hidden fixed top-0 right-0 h-full w-2/3 max-w-[280px] bg-white shadow-lg transform ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        } transition-transform duration-300 ease-in-out z-50 p-6`}
+        className={`md:hidden fixed top-0 right-0 h-full w-2/3 max-w-[280px] bg-[#f7f4ea] shadow-lg transform ${isOpen ? 'translate-x-0' : 'translate-x-full'
+          } transition-transform duration-300 ease-in-out z-50 p-6`}
       >
         <button
           onClick={() => setIsOpen(false)}
-          className="text-gray-900 text-3xl absolute top-5 right-5"
+          className="text-[#1e3a8a] text-3xl absolute top-5 right-5"
         >
           <FiX />
         </button>
 
-        <ul className="flex flex-col space-y-6 mt-12 text-lg font-semibold text-gray-900">
-          {navbarConfig.map(item => (
+        <ul className="flex flex-col space-y-6 mt-12 text-lg font-semibold text-[#1e3a8a]">
+          {navbarConfig.map((item) => (
             <li key={item.link} className="border-b border-gray-300 pb-2">
               <Link
                 href={item.link}
-                className={`block transition ${
-                  isActive(item.link) ? 'text-green-900 font-bold' : 'hover:text-green-900'
-                }`}
+                className={`block transition ${isActive(item.link)
+                    ? 'text-[#374151] font-bold'
+                    : 'hover:text-[#374151]'
+                  }`}
               >
                 {item.text}
               </Link>
