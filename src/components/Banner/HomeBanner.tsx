@@ -25,8 +25,8 @@ const HomeBanner: React.FC = () => {
         </h1>
 
         <p className="text-lg sm:text-xl leading-relaxed text-white/90 drop-shadow-sm">
-          At <span className="text-accent font-semibold text-yellow-500">UpLadoMyr Digital</span> build modern,
-          fast, and stylish landing pages to strengthen your online presence.
+          At <span className="text-accent font-semibold text-yellow-500">UpLadoMyr Digital</span>{' '}
+          build modern, fast, and stylish landing pages to strengthen your online presence.
         </p>
 
         {/* Кнопка з анімацією */}
@@ -48,7 +48,6 @@ const HomeBanner: React.FC = () => {
             className="text-accent bg-white rounded-full p-3 w-12 h-12 shadow-md 
              border border-yellow-500 hover:shadow-lg transition-transform duration-300 hover:scale-110"
           />
-
           +31 (06) 19 - 38 - 88 - 95
         </p>
         <hr className="mt-2 w-52 text-white border-accent" />

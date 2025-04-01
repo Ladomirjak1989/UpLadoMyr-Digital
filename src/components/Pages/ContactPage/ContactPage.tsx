@@ -84,7 +84,6 @@ const ContactPage: React.FC = () => {
             />
           </div>
 
-
           {/* Права частина – форма */}
           <div className="w-full lg:w-1/2">
             <div className="max-w-3xl mx-auto text-center mb-8">

@@ -6,14 +6,12 @@ import {
   FaComments,
   FaUserCog,
   FaClipboardCheck,
-  FaLaptopCode
+  FaLaptopCode,
 } from 'react-icons/fa';
 import { FaCogs, FaCode, FaPalette, FaNetworkWired, FaBug, FaWrench } from 'react-icons/fa';
 
-
 import 'animate.css';
 import useWow from '@/components/hooks/useWow';
-
 
 interface Services {
   title: string;
@@ -21,21 +19,18 @@ interface Services {
   subtitle: string;
   description: string;
   footer: string;
-
 }
 
 type MethodStep = {
   icon: React.ReactNode;
   title: string;
   color: string;
-
 };
 
 interface TechBlock {
   title: string;
   tech: string;
 }
-
 
 const services: Services[] = [
   {
@@ -68,7 +63,8 @@ const services: Services[] = [
     subtitle: 'Streamlining Systems for Seamless Operations',
     description:
       'Connect APIs for real-time data sync and optimized workflows across platforms for efficient data flow.',
-    footer: 'Real-time data synchronization | Increased workflow efficiency | Seamless integration with existing systems',
+    footer:
+      'Real-time data synchronization | Increased workflow efficiency | Seamless integration with existing systems',
   },
   {
     icon: <FaBug className="text-red-500 text-3xl" />,
@@ -76,7 +72,8 @@ const services: Services[] = [
     subtitle: 'Ensuring High-Quality, Reliable Applications',
     description:
       'Rigorous automated and manual testing to ensure flawless performance, security, and cross-browser compatibility every time.',
-    footer: 'Error-free experience | Mobile and cross-browser optimization | Enhanced security and load performance',
+    footer:
+      'Error-free experience | Mobile and cross-browser optimization | Enhanced security and load performance',
   },
   {
     icon: <FaWrench className="text-green-500 text-3xl" />,
@@ -89,7 +86,6 @@ const services: Services[] = [
 ];
 
 const steps: MethodStep[] = [
-
   {
     title: 'Project Initiation',
     icon: <FaLightbulb className="text-4xl text-indigo-600" />,
@@ -146,15 +142,14 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-
-
       <div className="bg-white py-20 px-6 lg:px-16">
         <div className="max-w-7xl mx-auto">
           <h2 className="wow animate__animated animate__fadeInDown text-4xl md:text-5xl font-bold text-center text-deep mb-2">
             All-in-One Web Development for Entrepreneurs
           </h2>
           <p className="wow animate__animated animate__fadeInDown text-center text-xl text-yellow-600 italic mb-12">
-            Design <span className="text-blue-700">|</span> Develop <span className="text-blue-700">|</span> Deliver
+            Design <span className="text-blue-700">|</span> Develop{' '}
+            <span className="text-blue-700">|</span> Deliver
           </p>
 
           <div className="wow animate__animated animate__fadeInDown grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -174,9 +169,7 @@ const HomePage: React.FC = () => {
                 <h4 className="font-semibold text-gray-800 mb-2 leading-snug">
                   {service.subtitle}
                 </h4>
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                  {service.description}
-                </p>
+                <p className="text-gray-600 text-sm mb-4 leading-relaxed">{service.description}</p>
                 <div className="text-xs bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] p-2 rounded-md">
                   {service.footer}
                 </div>
@@ -185,8 +178,6 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </div>
-
-
 
       <div className="relative w-full py-20 overflow-hidden">
         {/* Wave Top */}
@@ -205,7 +196,8 @@ const HomePage: React.FC = () => {
             Web Development Methodology
           </h2>
           <p className="text-center text-lg text-yellow-600 italic mb-12 max-w-3xl mx-auto wow animate__animated animate__fadeIn">
-            We focus on transparent processes and a structured approach used to plan, design, and manage the process of creating a web application.
+            We focus on transparent processes and a structured approach used to plan, design, and
+            manage the process of creating a web application.
           </p>
 
           <div className="flex flex-wrap justify-center gap-12 relative">
@@ -230,9 +222,7 @@ const HomePage: React.FC = () => {
                     <div className="text-4xl transition-transform duration-300 transform group-hover:scale-110">
                       {step.icon}
                     </div>
-                    <h3 className="mt-4 text-base font-semibold text-gray-700">
-                      {step.title}
-                    </h3>
+                    <h3 className="mt-4 text-base font-semibold text-gray-700">{step.title}</h3>
                   </div>
                 </div>
 
@@ -267,9 +257,6 @@ const HomePage: React.FC = () => {
         </svg>
       </div>
 
-
-
-
       {/* Technical Expertise */}
       <div className="relative w-full bg-white py-20 px-6 lg:px-16">
         <div className="max-w-7xl mx-auto text-center">
@@ -277,7 +264,8 @@ const HomePage: React.FC = () => {
             Technical Expertise
           </h2>
           <p className="text-lg text-yellow-600 italic max-w-4xl mx-auto mb-12 wow animate__animated animate__fadeIn">
-            We help businesses grow by delivering fast, modern, and cost-effective web applications using the latest technologies.
+            We help businesses grow by delivering fast, modern, and cost-effective web applications
+            using the latest technologies.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
@@ -305,22 +293,19 @@ const HomePage: React.FC = () => {
               </div>
             ))}
           </div>
-
         </div>
       </div>
     </>
-
-
   );
 };
 
 export default HomePage;
 
-
-
-
-{/* Проекти */ }
-{/* <div
+{
+  /* Проекти */
+}
+{
+  /* <div
           id="projects"
           className="p-6 md:p-14 lg:px-16 flex flex-col lg:flex-row items-center lg:items-start gap-12 mt-10"
         >
@@ -346,10 +331,15 @@ export default HomePage;
               om jouw ruimte te transformeren? Laten we jouw visie tot leven
               brengen.
             </p>
-          </div> */}
+          </div> */
+}
 
-{/* Слайдер */ }
-{/* <div className="lg:w-1/2 w-full">
+{
+  /* Слайдер */
+}
+{
+  /* <div className="lg:w-1/2 w-full">
             <Slider id="flip" />
           </div>
-        </div> */}
+        </div> */
+}
