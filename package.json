@@ -11,8 +11,13 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx}\"",
     "test": "jest --coverage",
-    "testm": "mocha",
-    "lint-staged": "**/*.{ts,tsx,js,jsx,json,md,css,scss}\""
+    "testm": "mocha"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json,md,css,scss}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   },
   "dependencies": {
     "@azure/msal-browser": "^4.7.0",

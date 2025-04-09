@@ -25,7 +25,6 @@ const Footer: React.FC = () => {
   ];
 
   return (
-
     <>
       <div
         className="relative bg-cover bg-center text-white py-16 px-4 sm:px-8 lg:py-24"
@@ -46,7 +45,6 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-
       <div className="relative -mb-1 z-10 pointer-events-none">
         <svg
           className="block w-full h-20 md:h-28 animate-wave-shine"
@@ -60,14 +58,9 @@ const Footer: React.FC = () => {
               <stop offset="100%" stopColor="#f7f4ea" />
             </linearGradient>
           </defs>
-          <path
-            fill="url(#bottomGradient)"
-            d="M0,96 C360,256 1080,0 1440,128L1440,320L0,320Z"
-          />
+          <path fill="url(#bottomGradient)" d="M0,96 C360,256 1080,0 1440,128L1440,320L0,320Z" />
         </svg>
       </div>
-
-
 
       <div className="bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] text-white pt-16 pb-8 px-6 lg:px-16 relative z-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 pb-2">
@@ -92,15 +85,19 @@ const Footer: React.FC = () => {
             </div>
             <ul className="space-y-2 mt-2 text-sm">
               <li className="mt-3 text-black flex items-center gap-2 font-bold text-accent">
-                <FaPhone className=" bg-white rounded-full p-3 w-10 h-10 shadow-md 
-           border border-yellow-500 hover:shadow-lg transition-transform duration-300 hover:scale-110" />
+                <FaPhone
+                  className=" bg-white rounded-full p-3 w-10 h-10 shadow-md 
+           border border-yellow-500 hover:shadow-lg transition-transform duration-300 hover:scale-110"
+                />
                 <a href="tel:+310619388895" className="hover:underline cursor-pointer">
                   +31 (06) 19 - 38 - 88 - 95
                 </a>
               </li>
               <li className="flex items-center space-x-2 font-bold text-black">
-                <FaBriefcase className="text-accent bg-white rounded-full p-3 w-10 h-10 shadow-md 
-           border border-yellow-500 hover:shadow-lg transition-transform duration-300 hover:scale-110" />
+                <FaBriefcase
+                  className="text-accent bg-white rounded-full p-3 w-10 h-10 shadow-md 
+           border border-yellow-500 hover:shadow-lg transition-transform duration-300 hover:scale-110"
+                />
                 <a href="mailto:info@upladomyr.com" className="hover:underline cursor-pointer">
                   info@upladomyr.com
                 </a>
@@ -115,18 +112,20 @@ const Footer: React.FC = () => {
                 SITEMAP
               </h4>
               <ul className="space-y-3 text-gray-800 flex flex-col items-center md:items-start">
-                {navItems.map((item) => (
+                {navItems.map(item => (
                   <li key={item.href} className="w-fit flex items-center gap-2 group">
                     <FaChevronRight
-                      className={`text-xs transition-transform duration-300 group-hover:translate-x-1 ${isActive(item.href) ? 'text-[#1e3a8a]' : 'text-gray-500'
-                        }`}
+                      className={`text-xs transition-transform duration-300 group-hover:translate-x-1 ${
+                        isActive(item.href) ? 'text-[#1e3a8a]' : 'text-gray-500'
+                      }`}
                     />
                     <Link
                       href={item.href}
-                      className={`relative transition-all duration-200 font-bold text-sm sm:text-base ${isActive(item.href)
-                        ? 'text-[#1e3a8a] underline underline-offset-4'
-                        : 'hover:text-[#1e3a8a]'
-                        }`}
+                      className={`relative transition-all duration-200 font-bold text-sm sm:text-base ${
+                        isActive(item.href)
+                          ? 'text-[#1e3a8a] underline underline-offset-4'
+                          : 'hover:text-[#1e3a8a]'
+                      }`}
                     >
                       {item.label}
                       <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#1e3a8a] transition-all group-hover:w-full"></span>
@@ -143,7 +142,8 @@ const Footer: React.FC = () => {
               WANT INSIGHTS IN YOUR INBOX?
             </h4>
             <p className="font-tangerine text-sm text-gray-500 mb-4 leading-relaxed">
-              Looking to grow your business online? Leave your email — we’ll support you with expert tips and practical solutions.
+              Looking to grow your business online? Leave your email — we’ll support you with expert
+              tips and practical solutions.
             </p>
             <form className="flex flex-col sm:flex-row gap-3 group w-full justify-center md:justify-start">
               <input
@@ -163,7 +163,12 @@ const Footer: React.FC = () => {
                   stroke="currentColor"
                   className="w-4 h-4"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-7-7l7 7-7 7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 12h14m-7-7l7 7-7 7"
+                  />
                 </svg>
               </button>
             </form>
@@ -174,8 +179,13 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-400 mt-8 pt-4 px-4 md:px-16 flex flex-col md:flex-row justify-between items-center text-xs text-gray-700 gap-4">
           <div className="flex flex-col md:flex-row items-center gap-2 text-center md:text-left">
             <p>
-              &copy; 2025{" "}
-              <Link href="https://www.upladomyr.com" target="_blank" rel="noopener noreferrer" className="text-blue-950 font-semibold font-dmserif hover:underline">
+              &copy; 2025{' '}
+              <Link
+                href="https://www.upladomyr.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-950 font-semibold font-dmserif hover:underline"
+              >
                 UpLadoMyr Digital
               </Link>
               . All rights reserved.
@@ -185,7 +195,6 @@ const Footer: React.FC = () => {
               Privacy
             </Link>
           </div>
-
 
           {/* Right: Icons */}
           <div className="flex gap-4 justify-center">
@@ -201,7 +210,6 @@ const Footer: React.FC = () => {
         </div>
       </div>
     </>
-
   );
 };
 

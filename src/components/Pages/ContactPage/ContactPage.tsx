@@ -2,9 +2,8 @@
 
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { FaUser, FaEnvelope, FaCommentDots, FaPhone } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaCommentDots } from 'react-icons/fa';
 import Image from 'next/image';
-
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -24,7 +23,6 @@ const ContactPage: React.FC = () => {
     hour: '2-digit',
     minute: '2-digit',
   });
-
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -100,26 +98,23 @@ const ContactPage: React.FC = () => {
               />
             </div>
 
-
             {/* Text Section */}
             <div className="text-center lg:text-left">
               <h2 className="text-center text-2xl sm:text-3xl font-semibold text-blue-950 mb-4">
                 We are here to help!
               </h2>
               <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
-                Let us know how we can best serve you. Use the contact form to email us or select from the topics below that best fit your needs. It's an honor to support you in your journey towards better health.
+                Let us know how we can best serve you. Use the contact form to email us or select
+                from the topics below that best fit your needs. It's an honor to support you in your
+                journey towards better health.
               </p>
             </div>
           </div>
 
-
-
           {/* Права частина – форма */}
           <div className="w-full lg:w-1/2">
             <div className="max-w-3xl mx-auto text-center mb-8">
-              <h2 className="text-3xl sm:text-4xl font-bold text-blue-950 mb-2">
-                Reach out to us
-              </h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-blue-950 mb-2">Reach out to us</h2>
               <p className="text-gray-600 text-sm sm:text-base">
                 Have any questions or feedback? Drop us a message!
               </p>
@@ -203,7 +198,6 @@ const ContactPage: React.FC = () => {
           </div>
         </div>
       </div>
-
     </section>
   );
 };

@@ -147,7 +147,6 @@ const HomePage: React.FC = () => {
     });
   }, []);
 
-
   return (
     <>
       <div className="bg-white py-20 px-6 lg:px-16">
@@ -166,10 +165,7 @@ const HomePage: React.FC = () => {
             <span className="text-blue-700">|</span> Deliver
           </p>
 
-          <div
-            data-aos="fade-up"
-            className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-          >
+          <div data-aos="fade-up" className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, index) => (
               <div
                 key={index}
@@ -188,9 +184,7 @@ const HomePage: React.FC = () => {
                 <h4 className="font-semibold text-gray-800 mb-2 leading-snug">
                   {service.subtitle}
                 </h4>
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                  {service.description}
-                </p>
+                <p className="text-gray-600 text-sm mb-4 leading-relaxed">{service.description}</p>
                 <div className="text-xs bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] p-2 rounded-md">
                   {service.footer}
                 </div>
@@ -249,9 +243,7 @@ const HomePage: React.FC = () => {
                     <div className="text-4xl transition-transform duration-300 transform group-hover:scale-110">
                       {step.icon}
                     </div>
-                    <h3 className="mt-4 text-base font-semibold text-gray-700">
-                      {step.title}
-                    </h3>
+                    <h3 className="mt-4 text-base font-semibold text-gray-700">{step.title}</h3>
                   </div>
                 </div>
 
@@ -287,14 +279,10 @@ const HomePage: React.FC = () => {
         </svg>
       </div>
 
-
       {/* Technical Expertise */}
       <div className="relative w-full bg-white py-20 px-6 lg:px-16">
         <div className="max-w-7xl mx-auto text-center">
-          <h2
-            data-aos="fade-down"
-            className="text-4xl md:text-5xl font-bold text-deep mb-6"
-          >
+          <h2 data-aos="fade-down" className="text-4xl md:text-5xl font-bold text-deep mb-6">
             Technical Expertise
           </h2>
           <p
@@ -334,7 +322,6 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </div>
-
     </>
   );
 };
