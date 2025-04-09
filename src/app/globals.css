@@ -36,13 +36,6 @@ button {
   }
 }
 
-/* === Тема через CSS Variables === */
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
 .container {
   max-width: 1200px;
@@ -146,6 +139,7 @@ html {
   position: relative;
   transition: transform 0.3s ease;
 }
+
 .hexagon:hover {
   transform: scale(1.05);
 }
@@ -163,23 +157,57 @@ html {
   top: 6%;
   left: 22%;
 }
+
 .hex-corner.top-right {
   top: 6%;
   right: 22%;
 }
+
 .hex-corner.middle-right {
   top: 48%;
   right: -6px;
 }
+
 .hex-corner.bottom-right {
   bottom: 6%;
   right: 22%;
 }
+
 .hex-corner.bottom-left {
   bottom: 6%;
   left: 22%;
 }
+
 .hex-corner.middle-left {
   top: 48%;
   left: -6px;
+}
+
+
+
+
+.font-dmserif {
+  font-family: 'DM Serif Text', serif;
+}
+
+.font-tangerine {
+  font-family: 'Tangerine', cursive;
+}
+
+
+@keyframes wave-shine {
+
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.08);
+    /* або 1.07 — як тобі більше подобається */
+  }
+}
+
+.animate-wave-shine {
+  animation: wave-shine 6s ease-in-out infinite;
 }

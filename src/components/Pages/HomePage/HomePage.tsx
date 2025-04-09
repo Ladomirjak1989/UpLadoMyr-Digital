@@ -11,7 +11,9 @@ import {
 import { FaCogs, FaCode, FaPalette, FaNetworkWired, FaBug, FaWrench } from 'react-icons/fa';
 
 import 'animate.css';
-import useWow from '@/components/hooks/useWow';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 interface Services {
   title: string;
@@ -138,24 +140,41 @@ const blocks: TechBlock[] = [
 ];
 
 const HomePage: React.FC = () => {
-  useWow();
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
+  }, []);
+
 
   return (
     <>
       <div className="bg-white py-20 px-6 lg:px-16">
         <div className="max-w-7xl mx-auto">
-          <h2 className="wow animate__animated animate__fadeInDown text-4xl md:text-5xl font-bold text-center text-deep mb-2">
+          <h2
+            data-aos="fade-down"
+            className="text-4xl md:text-5xl font-bold text-center text-deep mb-2"
+          >
             All-in-One Web Development for Entrepreneurs
           </h2>
-          <p className="wow animate__animated animate__fadeInDown text-center text-xl text-yellow-600 italic mb-12">
+          <p
+            data-aos="fade-down"
+            className="font-tangerine text-center text-xl text-yellow-600 italic mb-12"
+          >
             Design <span className="text-blue-700">|</span> Develop{' '}
             <span className="text-blue-700">|</span> Deliver
           </p>
 
-          <div className="wow animate__animated animate__fadeInDown grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div
+            data-aos="fade-up"
+            className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          >
             {services.map((service, index) => (
               <div
                 key={index}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
                 className="hover:shadow-xl transition-all duration-300 group hover:scale-[1.02] border border-gray-200 rounded-xl shadow-sm p-6 bg-white"
               >
                 <div className="flex items-center space-x-3 mb-4">
@@ -169,7 +188,9 @@ const HomePage: React.FC = () => {
                 <h4 className="font-semibold text-gray-800 mb-2 leading-snug">
                   {service.subtitle}
                 </h4>
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">{service.description}</p>
+                <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                  {service.description}
+                </p>
                 <div className="text-xs bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] p-2 rounded-md">
                   {service.footer}
                 </div>
@@ -180,7 +201,6 @@ const HomePage: React.FC = () => {
       </div>
 
       <div className="relative w-full py-20 overflow-hidden">
-        {/* Wave Top */}
         <svg
           className="absolute top-0 left-0 w-full text-brand-light"
           viewBox="0 0 1440 100"
@@ -192,10 +212,16 @@ const HomePage: React.FC = () => {
         </svg>
 
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-deep mb-6 wow animate__animated animate__fadeInDown">
+          <h2
+            data-aos="fade-down"
+            className="text-4xl md:text-5xl font-bold text-center text-deep mb-6"
+          >
             Web Development Methodology
           </h2>
-          <p className="text-center text-lg text-yellow-600 italic mb-12 max-w-3xl mx-auto wow animate__animated animate__fadeIn">
+          <p
+            data-aos="fade-in"
+            className="font-tangerine text-center text-lg text-yellow-600 italic mb-12 max-w-3xl mx-auto"
+          >
             We focus on transparent processes and a structured approach used to plan, design, and
             manage the process of creating a web application.
           </p>
@@ -203,12 +229,13 @@ const HomePage: React.FC = () => {
           <div className="flex flex-wrap justify-center gap-12 relative">
             {steps.map((step, index) => (
               <div key={index} className="relative flex flex-col items-center">
-                {/* Hexagon */}
                 <div
+                  data-aos="zoom-in"
+                  data-aos-delay={index * 100}
                   className={`hexagon w-64 h-72 border-[6px] ${step.color}
             flex items-center justify-center
             p-2 bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] shadow-lg hover:shadow-2xl transition-all duration-300
-            group wow animate__animated animate__zoomIn animate__delay-${index}s`}
+            group`}
                   style={{
                     clipPath: 'polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%)',
                   }}
@@ -222,7 +249,9 @@ const HomePage: React.FC = () => {
                     <div className="text-4xl transition-transform duration-300 transform group-hover:scale-110">
                       {step.icon}
                     </div>
-                    <h3 className="mt-4 text-base font-semibold text-gray-700">{step.title}</h3>
+                    <h3 className="mt-4 text-base font-semibold text-gray-700">
+                      {step.title}
+                    </h3>
                   </div>
                 </div>
 
@@ -230,8 +259,9 @@ const HomePage: React.FC = () => {
                 {index < steps.length - 1 && (
                   <div className="hidden sm:block">
                     <svg
-                      className={`wow animate__animated animate__zoomIn animate__delay-${index}s 
-                  absolute left-[calc(100%+12px)] top-1/2 transform -translate-y-1/2 text-deep w-6 h-6`}
+                      data-aos="zoom-in"
+                      data-aos-delay={index * 100}
+                      className="absolute left-[calc(100%+12px)] top-1/2 transform -translate-y-1/2 text-deep w-6 h-6"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
@@ -245,7 +275,7 @@ const HomePage: React.FC = () => {
             ))}
           </div>
         </div>
-        {/* Wave Bottom */}
+
         <svg
           className="absolute bottom-0 left-0 w-full text-brand-light"
           viewBox="0 0 1440 100"
@@ -257,13 +287,20 @@ const HomePage: React.FC = () => {
         </svg>
       </div>
 
+
       {/* Technical Expertise */}
       <div className="relative w-full bg-white py-20 px-6 lg:px-16">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-deep mb-6 wow animate__animated animate__fadeInDown">
+          <h2
+            data-aos="fade-down"
+            className="text-4xl md:text-5xl font-bold text-deep mb-6"
+          >
             Technical Expertise
           </h2>
-          <p className="text-lg text-yellow-600 italic max-w-4xl mx-auto mb-12 wow animate__animated animate__fadeIn">
+          <p
+            data-aos="fade-in"
+            className="font-tangerine text-lg text-yellow-600 italic max-w-4xl mx-auto mb-12"
+          >
             We help businesses grow by delivering fast, modern, and cost-effective web applications
             using the latest technologies.
           </p>
@@ -272,11 +309,13 @@ const HomePage: React.FC = () => {
             {blocks.map((block, i) => (
               <div
                 key={i}
+                data-aos="fade-up"
+                data-aos-delay={i * 100}
                 className={`
-        wow animate__animated animate__fadeInUp animate__delay-${i}s
-        relative bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] p-6 rounded-lg shadow-md transition-all duration-300
-        hover:shadow-[0_0_20px_rgba(0,0,0,0.1)] hover:drop-shadow-xl hover:-translate-y-1 group
-      `}
+            relative bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] 
+            p-6 rounded-lg shadow-md transition-all duration-300
+            hover:shadow-[0_0_20px_rgba(0,0,0,0.1)] hover:drop-shadow-xl hover:-translate-y-1 group
+          `}
               >
                 {/* Градієнтний бордер зліва */}
                 <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 rounded-l-lg"></div>
@@ -295,6 +334,7 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </div>
+
     </>
   );
 };

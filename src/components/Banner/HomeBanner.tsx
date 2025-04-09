@@ -40,10 +40,10 @@ const HomeBanner: React.FC = () => {
 
       {/* Інформаційний блок у правому нижньому куті */}
       <div className="absolute bottom-6 right-6 bg-deep/90 backdrop-blur-md text-white p-5 sm:p-6 max-w-md rounded-tl-2xl shadow-lg z-10 animate__animated animate__fadeInRight">
-        <p className="text-sm sm:text-base leading-relaxed">
+        <p className="font-tangerine text-sm sm:text-base leading-relaxed">
           Get a complete website from A to Z – from design to launch, fast and professional.
         </p>
-        <p className="mt-3 text-yellow-500 flex items-center gap-2 font-bold text-accent animate__animated animate__pulse animate__infinite">
+        <p className="font-tangerine mt-3 text-yellow-500 flex items-center gap-2 font-bold text-accent animate__animated animate__pulse animate__infinite">
           <FaPhoneAlt
             className="text-accent bg-white rounded-full p-3 w-12 h-12 shadow-md 
              border border-yellow-500 hover:shadow-lg transition-transform duration-300 hover:scale-110"

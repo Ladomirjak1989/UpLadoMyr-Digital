@@ -8,8 +8,8 @@ import { usePathname } from 'next/navigation';
 
 const navbarConfig = [
   { link: '/', text: 'HOME' },
-  { link: '/projects', text: 'PROJECTEN' },
-  { link: '/about', text: 'OVER ONS' },
+  { link: '/projects', text: 'PROJECTS' },
+  { link: '/about', text: 'ABOUT' },
   { link: '/contacts', text: 'CONTACT' },
 ];
 
@@ -48,9 +48,9 @@ const Header: React.FC = () => {
             />
           </div>
           <p className="text-sm sm:text-base md:text-lg font-medium tracking-wide text-gray-800">
-            <span className="font-bold text-gray-900">UpLadoMyr</span>{' '}
-            <span className="text-[#deb40a]">Digital</span>{' '}
-            <span className="hidden sm:inline italic text-gray-500">
+            <span className="font-bold text-blue-950 font-dmserif">UpLadoMyr</span>{' '}
+            <span className="text-[#deb40a] font-dmserif">Digital</span>{' '}
+            <span className="font-tangerine hidden sm:inline italic text-gray-500">
               — where ideas come to life in code
             </span>
           </p>
