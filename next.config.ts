@@ -1,14 +1,39 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'stroiteli.dp.ua',
-      'nash-mayster.lviv.ua',
-      'encrypted-tbn0.gstatic.com',
-      'masteron.ge',
-      'bigfoto.name',
-      'xn--90aibchjc2ankc9k.xn--p1ai', // 👈 це транслітерований домен
-      'remont-otdelka.ru',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'stroiteli.dp.ua',
+      },
+      {
+        protocol: 'https',
+        hostname: 'nash-mayster.lviv.ua',
+      },
+      {
+        protocol: 'https',
+        hostname: 'encrypted-tbn0.gstatic.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'masteron.ge',
+      },
+      {
+        protocol: 'https',
+        hostname: 'bigfoto.name',
+      },
+      {
+        protocol: 'https',
+        hostname: 'xn--90aibchjc2ankc9k.xn--p1ai',
+      },
+      {
+        protocol: 'https',
+        hostname: 'remont-otdelka.ru',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com', // ✅ Cloudinary
+      },
     ],
   },
 };

@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import emailjs from '@emailjs/browser';
 import {
   FaBriefcase,
   FaChevronRight,
@@ -12,10 +13,81 @@ import {
   FaTelegramPlane,
   FaYoutube,
 } from 'react-icons/fa';
+import { useState } from 'react';
 
 const Footer: React.FC = () => {
   const pathname = usePathname();
   const isActive = (path: string) => pathname === path;
+  const [formData, setFormData] = useState({
+
+    email: '',
+
+  });
+
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const time = new Date().toLocaleString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const templateReplyId = process.env.NEXT_PUBLIC_EMAILJS_AUTO_REPLY_TEMPLATE_ID;
+    const userId = process.env.NEXT_PUBLIC_EMAILJS_KEY;
+
+    if (!serviceId || !templateId || !userId || !templateReplyId) {
+      setSuccessMessage('❌ Configuration error. Please contact support.');
+      return;
+    }
+
+    try {
+      const response = await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          email: formData.email,
+          name: formData.email, // <- тут і використовується в шаблоні як {{name}}
+          time: time,
+        },
+
+        userId
+      );
+
+      await emailjs.send(
+        serviceId,
+        templateReplyId,
+        {
+          email: formData.email,
+          name: formData.email,
+          reply_to: process.env.EMAIL_USER,
+          time: time,
+        },
+        userId
+      );
+
+      if (response.status === 200) {
+        setSuccessMessage('✅ Your message has been sent successfully!');
+        setFormData({ email: '' });
+        setTimeout(() => setSuccessMessage(''), 5000);
+      } else {
+        throw new Error('Failed to send message.');
+      }
+    } catch (error) {
+      console.error('Email sending error:', error);
+      setSuccessMessage('❌ Something went wrong. Please try again.');
+    }
+  };
 
   const navItems = [
     { href: '/', label: 'HOME' },
@@ -35,13 +107,36 @@ const Footer: React.FC = () => {
           <h2 className="font-dmserif text-xl sm:text-2xl md:text-3xl font-bold mb-6 leading-snug">
             Want a high-converting landing page or a sleek small website for your business?
           </h2>
+
           <Link
             href="/contacts"
-            className="inline-block bg-[#c7a23f] text-white font-bold hover:bg-yellow-500 text-sm sm:text-base py-3 px-6 rounded-full 
-  transition-all duration-300 shadow-md transform hover:scale-105"
+            className="group relative inline-flex items-center gap-2 px-9 py-4 border-4 border-transparent text-base font-semibold rounded-full text-white bg-blue-900 shadow-[0_0_0_2px_#c7a23f] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-xl hover:shadow-[0_0_0_12px_transparent] hover:text-neutral-900 active:scale-95"
           >
-            GET A FREE CONSULTATION NOW
+            {/* Circle animation */}
+            <span className="absolute top-1/2 left-1/2 w-5 h-5 bg-[#c7a23f] rounded-full opacity-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-[220px] group-hover:h-[220px] group-hover:opacity-100 transform -translate-x-1/2 -translate-y-1/2" />
+
+            {/* Text */}
+            <span className="relative z-10 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-3">
+              FREE CONSULTATION
+            </span>
+
+            {/* Arrow out */}
+            <svg
+              className="absolute right-4 w-6 z-10 fill-[#c7a23f] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:right-[-25%] group-hover:fill-neutral-900"
+              viewBox="0 0 24 24"
+            >
+              <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
+            </svg>
+
+            {/* Arrow in */}
+            <svg
+              className="absolute left-[-25%] w-6 z-10 fill-[#c7a23f] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:left-4 group-hover:fill-neutral-900"
+              viewBox="0 0 24 24"
+            >
+              <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
+            </svg>
           </Link>
+
         </div>
       </div>
 
@@ -115,17 +210,15 @@ const Footer: React.FC = () => {
                 {navItems.map(item => (
                   <li key={item.href} className="w-fit flex items-center gap-2 group">
                     <FaChevronRight
-                      className={`text-xs transition-transform duration-300 group-hover:translate-x-1 ${
-                        isActive(item.href) ? 'text-[#1e3a8a]' : 'text-gray-500'
-                      }`}
+                      className={`text-xs transition-transform duration-300 group-hover:translate-x-1 ${isActive(item.href) ? 'text-[#1e3a8a]' : 'text-gray-500'
+                        }`}
                     />
                     <Link
                       href={item.href}
-                      className={`relative transition-all duration-200 font-bold text-sm sm:text-base ${
-                        isActive(item.href)
-                          ? 'text-[#1e3a8a] underline underline-offset-4'
-                          : 'hover:text-[#1e3a8a]'
-                      }`}
+                      className={`relative transition-all duration-200 font-bold text-sm sm:text-base ${isActive(item.href)
+                        ? 'text-[#1e3a8a] underline underline-offset-4'
+                        : 'hover:text-[#1e3a8a]'
+                        }`}
                     >
                       {item.label}
                       <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#1e3a8a] transition-all group-hover:w-full"></span>
@@ -145,32 +238,45 @@ const Footer: React.FC = () => {
               Looking to grow your business online? Leave your email — we’ll support you with expert
               tips and practical solutions.
             </p>
-            <form className="flex flex-col sm:flex-row gap-3 group w-full justify-center md:justify-start">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col sm:flex-row gap-3 w-full justify-center md:justify-start">
               <input
-                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+
                 placeholder="Your E-mail"
+                required
                 className="w-full sm:max-w-[220px] px-4 py-2 rounded-md bg-white text-gray-900 text-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300"
               />
+
               <button
                 type="submit"
-                className="flex items-center justify-center gap-2 px-5 py-2 rounded-md bg-[#c7a23f] text-white font-bold hover:bg-yellow-500 transition-all duration-300 shadow-md group-hover:scale-105"
+                className="relative overflow-hidden border border-[#c7a23f] text-[#c7a23f] inline-block text-[15px] leading-[15px] py-[18px] px-[24px] bg-white cursor-pointer select-none transition duration-[600ms] ease-[cubic-bezier(0.48,0,0.12,1)] group"
               >
-                <span>SEND</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="w-4 h-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 12h14m-7-7l7 7-7 7"
-                  />
-                </svg>
+                {/* Visible Text */}
+                <span className="relative z-10 transition-colors duration-[600ms] ease-[cubic-bezier(0.48,0,0.12,1)]">
+                  SEND
+                </span>
+
+                {/* Hover Reveal Text */}
+                <span className="absolute bottom-0 left-1/2 text-white text-[13px] leading-[13px] h-[14px] opacity-0 top-1/2 transform -translate-x-1/2 translate-y-[225%] transition-all duration-[900ms] ease-[cubic-bezier(0.48,0,0.12,1)] group-hover:translate-y-[-50%] group-hover:opacity-100 z-[100]">
+                  THANKS!
+                </span>
+
+                {/* Background animation */}
+                <span className="absolute bottom-[-50%] left-0 w-full h-full bg-[#c7a23f] transform skew-y-[9.3deg] scale-y-0 origin-bottom transition-transform duration-[600ms] ease-[cubic-bezier(0.48,0,0.12,1)] group-hover:scale-y-200 z-[50]" />
               </button>
+
+              {successMessage && (
+                <p
+                  className={`text-center font-medium ${successMessage.includes('✅') ? 'text-green-700' : 'text-red-600'}`}
+                >
+                  {successMessage}
+                </p>
+              )}
+
             </form>
           </div>
         </div>

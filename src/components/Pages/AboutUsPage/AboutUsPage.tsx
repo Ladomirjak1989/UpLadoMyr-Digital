@@ -1,82 +1,241 @@
-'use client';
+"use client"
 
-import React, { ReactNode } from 'react';
-import {
-  FaTools,
-  FaLightbulb,
-  FaEuroSign,
-  FaAward,
-  FaMoneyCheck,
-  FaCogs,
-  FaUsers,
-  FaBroom,
-} from 'react-icons/fa';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import Image from 'next/image';
+import { FaCode, FaServer, FaDatabase, FaGithub, FaLightbulb } from 'react-icons/fa';
+import Link from 'next/link';
+import { IoMdCheckmark } from "react-icons/io";
 
-// Тип для елементів переваг
-type Benefit = {
-  icon: ReactNode;
-  text: string;
-};
+// 🔵 Інтерфейс для Tech Stack
+interface TechStackItem {
+  icon: React.ReactNode;
+  title: string;
+  items: string[];
+}
 
-const benefits: Benefit[] = [
+const techStack: TechStackItem[] = [
   {
-    icon: <FaTools className="text-[#ebba2a] text-2xl mb-4" />,
-    text: 'Betrouwbaar renovatieteam met ruime werkervaring.',
+    icon: <FaCode className="text-blue-600 text-3xl" />,
+    title: 'Language/Frameworks',
+    items: ['JavaScript', 'TypeScript', 'MERN', 'Express.js', 'Node.js']
   },
   {
-    icon: <FaLightbulb className="text-[#ebba2a] text-2xl mb-4" />,
-    text: 'We houden rekening met de wensen van de klant – een individuele aanpak voor iedereen.',
+    icon: <FaServer className="text-green-600 text-3xl" />,
+    title: 'Frontend',
+    items: ['HTML', 'CSS', 'Tailwind CSS', 'Bootstrap', 'React.js', 'Redux Toolkit', 'Next.js']
   },
   {
-    icon: <FaEuroSign className="text-[#ebba2a] text-2xl mb-4" />,
-    text: 'Voordelig samenwerken: wij bieden bouwmaterialen tegen groothandelsprijzen.',
+    icon: <FaDatabase className="text-purple-600 text-3xl" />,
+    title: 'Databases',
+    items: ['MongoDB', 'MySQL', 'PostgreSQL']
   },
   {
-    icon: <FaAward className="text-[#ebba2a] text-2xl mb-4" />,
-    text: 'Meer dan 7 jaar ervaring in renovatiewerkzaamheden.',
-  },
-  {
-    icon: <FaMoneyCheck className="text-[#ebba2a] text-2xl mb-4" />,
-    text: 'Betaling vindt plaats na voltooiing en controle van de renovatiefase.',
-  },
-  {
-    icon: <FaCogs className="text-[#ebba2a] text-2xl mb-4" />,
-    text: 'Wij passen moderne Europese technologieën toe.',
-  },
-  {
-    icon: <FaUsers className="text-[#ebba2a] text-2xl mb-4" />,
-    text: 'Ons team is groot, waardoor we meerdere projecten tegelijk kunnen uitvoeren.',
-  },
-  {
-    icon: <FaBroom className="text-[#ebba2a] text-2xl mb-4" />,
-    text: 'Wij ruimen al het afval op na de renovatie- en afwerkingswerken.',
-  },
+    icon: <FaGithub className="text-gray-700 text-3xl" />,
+    title: 'Version Control',
+    items: ['GitLab', 'GitHub']
+  }
 ];
 
-const AboutUsPage = () => {
-  return (
-    <section className="py-16 px-4 sm:px-8 lg:px-20 bg-white text-center">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-gray-800">
-        Voordelen van ons bouwteam
-      </h2>
+const AboutPage: React.FC = () => {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {benefits.map((item, idx) => (
+  return (
+    <div className="bg-white text-gray-800 px-4 py-10 max-w-6xl mx-auto">
+      {/* Hero Section */}
+      <section className="grid md:grid-cols-2 gap-10 items-center mb-16">
+        <div data-aos="fade-right">
+          <h1 className="text-4xl md:text-5xl font-bold text-blue-950 mb-4">
+            Crafting Custom Code, Not Templates.
+          </h1>
+          <p className="text-lg text-gray-700">
+            We are a web development company specializing in creating sleek, high-performance websites for freelancers (ZZP) and small businesses. All our projects are 100% hand-coded — no Webflow, no drag-and-drop builders.
+          </p>
+
+
+          <Link
+            href="/contacts"
+            className=" mt-4 group relative inline-flex items-center gap-2 px-9 py-4 border-4 border-transparent text-base font-semibold rounded-full text-white bg-blue-900 shadow-[0_0_0_2px_#c7a23f] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-xl hover:shadow-[0_0_0_12px_transparent] hover:text-neutral-900 active:scale-95"
+          >
+            {/* Circle animation */}
+            <span className="absolute top-1/2 left-1/2 w-5 h-5 bg-[#c7a23f] rounded-full opacity-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-[220px] group-hover:h-[220px] group-hover:opacity-100 transform -translate-x-1/2 -translate-y-1/2" />
+
+            {/* Text */}
+            <span className="relative z-10 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-3">
+              Let’s Work Together
+            </span>
+
+            {/* Arrow out */}
+            <svg
+              className="absolute right-4 w-6 z-10 fill-[#c7a23f] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:right-[-25%] group-hover:fill-neutral-900"
+              viewBox="0 0 24 24"
+            >
+              <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
+            </svg>
+
+            {/* Arrow in */}
+            <svg
+              className="absolute left-[-25%] w-6 z-10 fill-[#c7a23f] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:left-4 group-hover:fill-neutral-900"
+              viewBox="0 0 24 24"
+            >
+              <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
+            </svg>
+          </Link>
+
+
+        </div>
+        <div data-aos="fade-left">
+          <Image
+            src="/img/bannerabout/about-img.avif"
+            alt="Hero image"
+            width={500}
+            height={400}
+            className="rounded-2xl shadow-lg w-full object-cover"
+          />
+        </div>
+      </section>
+
+
+
+      {/* Technologies */}
+      <h2 className="text-3xl font-tangerine font-bold text-yellow-600 mb-8 text-center">Tech Stack</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12" data-aos="fade-up">
+        {techStack.map((stack, idx) => (
           <div
             key={idx}
-            className="p-6 rounded-xl border-t-4 border-green-900 shadow-sm transition duration-300 hover:shadow-md hover:scale-[1.02] hover:bg-gray-50 animate__animated animate__fadeInUp"
-            style={{ animationDelay: `${idx * 0.1}s` }}
+            className="bg-blue-50 border-b-2 border-blue-900 shadow-md rounded-2xl p-6 flex flex-col items-start gap-4 hover:scale-[1.02] transition"
           >
-            <div className="flex flex-col items-center">
-              {item.icon}
-              <div className="h-1 w-12 bg-green-900 mb-4" />
-              <p className="text-gray-800 text-sm sm:text-base leading-relaxed">{item.text}</p>
-            </div>
+            {stack.icon}
+            <h3 className="text-lg font-semibold underline underline-offset-2 text-blue-950">{stack.title}</h3>
+            <ul className="text-xs sm:text-sm text-gray-700 space-y-2 w-full">
+              {stack.items.map((item, i) => (
+                <li
+                  key={i}
+                  className="flex items-start gap-2 group hover:text-yellow-600 transition"
+                >
+                  <IoMdCheckmark className="text-black group-hover:text-yellow-600 hover:scale-[1.02]  transition-colors duration-300" />
+                  <span className="group-hover:text-yellow-600 underline hover:scale-[1.02]  transition">{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
-    </section>
+
+
+
+      {/*Mission & Vision*/}
+      <section
+        className="mt-20 rounded-2xl p-8 shadow-lg max-w-7xl mx-auto"
+        data-aos="fade-up"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          {/* Image + steps under it */}
+          <div data-aos="zoom-in">
+            <Image
+              src="/img/bannerabout/aboutpage-prototip.jpg"
+              alt="Website design process"
+              width={1000}
+              height={600}
+              className="rounded-2xl shadow-md w-full object-contain mb-4"
+            />
+
+            {/* Steps */}
+            <div className="flex justify-between text-sm text-gray-800 font-semibold px-2">
+              <span>Sketch</span>
+              <span>Wireframe</span>
+              <span>Prototype</span>
+              <span>Development</span>
+            </div>
+            <div className="mt-2 h-1 bg-gradient-to-r from-gray-400 via-blue-400 to-green-500 rounded-full" />
+          </div>
+
+          {/* Text content */}
+          <div data-aos="fade-left" data-aos-delay="200">
+            <h2 className="text-3xl font-tangerine font-bold text-yellow-600 mb-4">Mission & Vision</h2>
+            <p className="text-gray-700 text-lg leading-relaxed">
+              Our mission is to empower freelancers and small businesses with high-quality, handcrafted websites
+              that are fast, responsive, and designed to convert.
+              <br /><br />
+              We envision a web where custom code brings your brand’s identity to life without compromise.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+
+
+      {/* Core Values */}
+      <section className="mt-16" data-aos="fade-up ">
+        <h2 className="text-3xl font-tangerine font-bold text-yellow-600 mb-4 text-center">Core Values</h2>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto text-center">
+          {['Quality Code', 'Transparency', 'Client Focus', 'Innovation', 'Simplicity', 'Collaboration'].map((value, idx) => (
+            <div key={idx} className="p-6 rounded-xl border-b-2 border-blue-900 bg-blue-50 shadow-md hover:shadow-lg hover:scale-[1.02] transition">
+              <p className="font-semibold text-gray-800">{value}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
+      {/* Philosophy */}
+      <section className="mt-20 max-w-7xl mx-auto px-4 relative" data-aos="fade-up">
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+
+          {/* Зображення зліва */}
+          <div data-aos="zoom-in">
+            <Image
+              src="/img/bannerabout/web-design.avif"
+              alt="Web design process"
+              width={600}
+              height={400}
+              className="rounded-xl shadow-md w-full object-cover"
+            />
+          </div>
+
+          {/* Текст + іконка */}
+          <div data-aos="fade-left" className="flex flex-col justify-center relative">
+            {/* Декоративна іконка */}
+            <div className="text-4xl text-yellow-600 mb-2 text-center md:text-left">
+              <FaLightbulb />
+            </div>
+
+            <h2 className="text-3xl font-tangerine font-bold text-yellow-600 mb-4 text-center md:text-left">
+              Our Approach
+            </h2>
+            <p className="text-gray-700 text-lg leading-relaxed text-center md:text-left">
+              Every line of code our company writes is tailored to your business. We care deeply about
+              performance, mobile-first design, and crafting unique experiences that truly reflect your brand —
+              never relying on generic templates.
+            </p>
+          </div>
+        </div>
+
+        {/* Розділювач - хвиля */}
+        <div className="absolute bottom-[-1px] left-0 w-full">
+          <svg viewBox="0 0 1440 100" className="w-full h-[70px]" preserveAspectRatio="none">
+            <path
+              fill="#f3f4f6"
+              d="M0,0 C360,100 1080,0 1440,100 L1440,100 L0,100 Z"
+            />
+          </svg>
+        </div>
+      </section>
+
+    </div>
   );
 };
 
-export default AboutUsPage;
+export default AboutPage;
+
+
+
+
+
+
+
+

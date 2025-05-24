@@ -181,9 +181,20 @@ const ContactPage: React.FC = () => {
               {/* Verzenden */}
               <button
                 type="submit"
-                className="w-full bg-[#c7a23f] hover:bg-yellow-500 text-white py-3 rounded-xl font-semibold transition"
+                className="group relative overflow-hidden border border-[#c7a23f] text-[#c7a23f] inline-block text-[15px] leading-[15px] py-[18px] px-[24px] bg-white cursor-pointer select-none transition duration-[600ms] ease-[cubic-bezier(0.48,0,0.12,1)]"
               >
-                SEND
+                {/* Top layer (visible text) */}
+                <span className="relative z-10 transition-colors duration-[600ms] ease-[cubic-bezier(0.48,0,0.12,1)]">
+                  SEND
+                </span>
+
+                {/* Hidden reveal text */}
+                <span className="absolute bottom-0 left-1/2 text-white text-[13px] leading-[13px] h-[14px] opacity-0 top-1/2 transform translate-x-[-50%] translate-y-[225%] transition-all duration-[900ms] ease-[cubic-bezier(0.48,0,0.12,1)] group-hover:translate-y-[-50%] group-hover:opacity-100 z-[100]">
+                  THANKS!
+                </span>
+
+                {/* Background animation */}
+                <span className="absolute bottom-[-50%] left-0 w-full h-full bg-[#c7a23f] transform skew-y-[9.3deg] scale-y-0 origin-bottom transition-transform duration-[600ms] ease-[cubic-bezier(0.48,0,0.12,1)] group-hover:scale-y-200 z-[50]" />
               </button>
 
               {/* Statusbericht */}

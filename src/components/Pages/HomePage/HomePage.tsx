@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FaLightbulb,
   FaClipboardList,
@@ -8,12 +8,13 @@ import {
   FaClipboardCheck,
   FaLaptopCode,
 } from 'react-icons/fa';
-import { FaCogs, FaCode, FaPalette, FaNetworkWired, FaBug, FaWrench } from 'react-icons/fa';
+import { FaCogs, FaCode, FaPalette, FaNetworkWired, FaBug, FaWrench, FaPlus, FaMinus } from 'react-icons/fa';
 
 import 'animate.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
+import Image from 'next/image';
 
 interface Services {
   title: string;
@@ -33,6 +34,14 @@ interface TechBlock {
   title: string;
   tech: string;
 }
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+
+
 
 const services: Services[] = [
   {
@@ -139,7 +148,82 @@ const blocks: TechBlock[] = [
   },
 ];
 
+
+const faqData = [
+  {
+    question: 'What web development services does UpLadoMyr Digital offer?',
+    answer: 'We offer full-cycle web development: design, frontend, backend, maintenance, and deployment using modern tech.',
+  },
+  {
+    question: 'How do you ensure mobile responsiveness in development?',
+    answer: 'All projects follow mobile-first design with responsive layouts tested on multiple screen sizes and devices.',
+  },
+  {
+    question: 'Can you build custom web applications for niche industries?',
+    answer: 'Yes, we specialize in tailored digital solutions for unique business needs — no templates, fully customized.',
+  },
+  {
+    question: 'What technologies do you use for web development?',
+    answer: 'We use Next.js, TypeScript, Tailwind CSS, React, Node.js, MongoDB, and more.',
+  },
+  {
+    question: 'How does your QA & testing process work?',
+    answer: 'We apply both manual and automated testing across devices and browsers to ensure flawless functionality.',
+  },
+  {
+    question: 'Do you offer ongoing website maintenance services?',
+    answer: 'Yes. We provide continuous maintenance, security updates, performance monitoring, and content support.',
+  },
+  {
+    question: 'How do you approach user experience design in web projects?',
+    answer: 'We follow UX best practices with user flow mapping, wireframes, prototyping, and iterative feedback sessions.',
+  },
+  {
+    question: 'What industries have you served with web development solutions?',
+    answer: 'We’ve served travel, real estate, construction, healthcare, retail, and startup industries with tailored solutions.',
+  },
+  {
+    question: 'How long does a typical web development project take?',
+    answer: 'Most custom projects take between 4 to 12 weeks, depending on scope, complexity, and feedback cycles.',
+  },
+  {
+    question: 'Can you migrate my existing site to a new platform?',
+    answer: 'Absolutely. We handle full-site migrations with URL structure preservation, SEO settings, and zero-downtime strategies.',
+  },
+  {
+    question: 'What security measures do you implement in web development?',
+    answer: 'We use HTTPS, content security policies, input validation, secure authentication, and regular audits.',
+  },
+  {
+    question: 'Do you provide dedicated solution architects for projects?',
+    answer: 'Yes. For large or technical builds, we assign dedicated architects to ensure scalable and efficient architecture.',
+  },
+  {
+    question: 'How do you optimize websites for SEO during development?',
+    answer: 'We implement semantic HTML, performance optimization, meta tags, schema, accessibility, and mobile-first design.',
+  },
+  {
+    question: "What's included in your web maintenance and support plans?",
+    answer: 'Plans include uptime monitoring, backups, bug fixes, performance audits, and regular CMS/security updates.',
+  },
+  {
+    question: 'How do you price custom web development projects?',
+    answer: 'Pricing depends on project size, complexity, timeline, and technologies. We offer fixed-price or hourly models.',
+  },
+];
+
+
+
+
 const HomePage: React.FC = () => {
+  const [expanded, setExpanded] = useState<number | null>(null);
+  const [visibleCount, setVisibleCount] = useState(5);
+
+  const toggleItem = (index: number) => {
+    setExpanded(expanded === index ? null : index);
+
+
+  };
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -322,6 +406,87 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </div>
+
+
+      {/* FAQ content */}
+      <div className="bg-gray-100 py-20 px-4 lg:px-16">
+        <div className="max-w-6xl mx-auto">
+          <h2 data-aos="fade-down" className="text-4xl font-bold text-center text-black mb-10">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-10">
+            {/* Ліва частина з фото */}
+            <div data-aos="fade-right">
+              <img
+                src="/img/bannerhome/img-faq.jpg"
+                alt="FAQ visual"
+                className="rounded-lg shadow-lg w-full"
+              />
+            </div>
+
+            {/* Права частина з FAQ */}
+            <div className="space-y-6">
+              {faqData.slice(0, visibleCount).map((item, idx) => {
+                const isOpen = expanded === idx;
+
+                return (
+                  <div
+                    key={idx}
+                    className={`border-b pb-4 transition-all duration-300 ${isOpen ? 'border-yellow-600 bg-yellow-50/20' : 'border-gray-300'} hover:text-yellow-700`}
+                    data-aos="fade-up"
+                    data-aos-delay={idx * 100}
+                  >
+                    <button
+                      className={`flex justify-between items-center w-full text-left font-semibold transition-transform hover:scale-[1.02] ${isOpen ? 'text-yellow-700' : 'text-gray-800'
+                        }`}
+                      onClick={() => toggleItem(idx)}
+                    >
+                      <span className={`flex gap-2 ${isOpen ? 'text-yellow-700' : ''}`}>
+                        <span className="text-gray-900">{idx + 1}.</span>
+                        <span className={`${isOpen ? 'text-yellow-700 font-semibold' : ''}`}>
+                          {item.question}
+                        </span>
+                      </span>
+                      {isOpen ? (
+                        <FaMinus className="text-yellow-700" />
+                      ) : (
+                        <FaPlus className="text-gray-600 hover:text-yellow-700" />
+                      )}
+                    </button>
+                    {isOpen && (
+                      <p className="mt-2 text-sm text-gray-700" data-aos="fade-in">
+                        {item.answer}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+
+
+              {/* Show More / Less */}
+              <div className="text-center mt-6" data-aos="zoom-in">
+                <button
+                  onClick={() =>
+                    setVisibleCount((prev) => (prev === 5 ? faqData.length : 5))
+                  }
+                  className="group relative font-bold text-sm text-stone-800 bg-stone-800 rounded-full transform -translate-x-1 -translate-y-1 shadow-[0.5px_0.5px_0_0_#292524,1px_1px_0_0_#292524,1.5px_1.5px_0_0_#292524,2px_2px_0_0_#292524,2.5px_2.5px_0_0_#292524,3px_3px_0_0_#292524,0_0_0_2px_#fafaf9,0.5px_0.5px_0_2px_#fafaf9,1px_1px_0_2px_#fafaf9,1.5px_1.5px_0_2px_#fafaf9,2px_2px_0_2px_#fafaf9,2.5px_2.5px_0_2px_#fafaf9,3px_3px_0_2px_#fafaf9,3.5px_3.5px_0_2px_#fafaf9,4px_4px_0_2px_#fafaf9] hover:translate-x-0 hover:translate-y-0 hover:shadow-[0_0_0_2px_#fafaf9] outline-offset-[5px] outline-2 focus-visible:outline-yellow-400 focus-visible:outline-dashed transition-all duration-150 ease-in-out"
+                >
+                  <div className="relative rounded-full bg-yellow-500 border-2 border-white/30 before:content-[''] before:absolute before:inset-0 before:rounded-full before:opacity-50 before:bg-[radial-gradient(rgb(255_255_255_/_0.8)_20%,transparent_20%),radial-gradient(rgb(255_255_255)_20%,transparent_20%)] before:bg-[0_0,4px_4px] before:bg-[8px_8px] before:animate-[dots_0.5s_linear_infinite] before:mix-blend-hard-light">
+                    <span className="relative flex items-center justify-center px-6 py-3 gap-1 text-stone-800 filter drop-shadow-[0_-1px_0_rgba(255,255,255,0.25)] active:translate-y-[2px]">
+                      {visibleCount === 5 ? 'Show More' : 'Show Less'}
+                    </span>
+                  </div>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
     </>
   );
 };
