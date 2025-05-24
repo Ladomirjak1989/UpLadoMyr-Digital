@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import {
   FaLightbulb,
@@ -431,9 +432,11 @@ const HomePage: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-10">
             {/* Ліва частина з фото */}
             <div data-aos="fade-right">
-              <img
+              <Image
                 src="/img/bannerhome/img-faq.jpg"
                 alt="FAQ visual"
+                width={600} // 🔄 заміни на фактичну ширину
+                height={400} // 🔄 заміни на фактичну висоту
                 className="rounded-lg shadow-lg w-full"
               />
             </div>
@@ -451,9 +454,8 @@ const HomePage: React.FC = () => {
                     data-aos-delay={idx * 100}
                   >
                     <button
-                      className={`flex justify-between items-center w-full text-left font-semibold transition-transform hover:scale-[1.02] ${
-                        isOpen ? 'text-yellow-700' : 'text-gray-800'
-                      }`}
+                      className={`flex justify-between items-center w-full text-left font-semibold transition-transform hover:scale-[1.02] ${isOpen ? 'text-yellow-700' : 'text-gray-800'
+                        }`}
                       onClick={() => toggleItem(idx)}
                     >
                       <span className={`flex gap-2 ${isOpen ? 'text-yellow-700' : ''}`}>
