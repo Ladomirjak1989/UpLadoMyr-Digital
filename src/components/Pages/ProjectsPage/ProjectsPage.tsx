@@ -71,7 +71,6 @@
 
 // export default ProjectsPage;
 
-
 'use client';
 
 import React, { useEffect, useState, useMemo } from 'react';
@@ -104,7 +103,6 @@ const ProjectsPage: React.FC = () => {
       }, 300),
     []
   );
-
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

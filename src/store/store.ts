@@ -7,7 +7,7 @@ export const makeStore = () => {
     reducer: {
       counter: counterReducer,
     },
-    middleware: getDefaultMiddleware => getDefaultMiddleware(),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   });
 };
 

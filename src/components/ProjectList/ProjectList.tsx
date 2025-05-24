@@ -103,7 +103,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ searchTerm }) => {
     AOS.init({ duration: 600 });
   }, []);
 
-  const filtered: Project[] = allProjects.filter(p => {
+  const filtered: Project[] = allProjects.filter((p) => {
     const matchesCategory = selectedCategory === 'All' || p.category === selectedCategory;
     const matchesSearch =
       p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -139,7 +139,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ searchTerm }) => {
           </h2>
 
           <div className="flex flex-wrap justify-center gap-2 mb-10" data-aos="fade-up">
-            {categories.map(cat => (
+            {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => {

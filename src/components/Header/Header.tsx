@@ -58,7 +58,7 @@ const Header: React.FC = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-6 font-semibold text-gray-800">
-          {navbarConfig.map(item => (
+          {navbarConfig.map((item) => (
             <Link
               key={item.link}
               href={item.link}
@@ -107,7 +107,7 @@ const Header: React.FC = () => {
         </button>
 
         <ul className="flex flex-col space-y-6 mt-12 text-lg font-semibold text-[#1e3a8a]">
-          {navbarConfig.map(item => (
+          {navbarConfig.map((item) => (
             <li key={item.link} className="border-b border-gray-300 pb-2">
               <Link
                 href={item.link}

@@ -155,7 +155,7 @@ const blocks: TechBlock[] = [
   },
 ];
 
-const faqData = [
+const faqData: FAQItem[] = [
   {
     question: 'What web development services does UpLadoMyr Digital offer?',
     answer:
@@ -455,7 +455,6 @@ const HomePage: React.FC = () => {
                   >
                     <button
                       className={`flex justify-between items-center w-full text-left font-semibold transition-transform hover:scale-[1.02] ${isOpen ? 'text-yellow-700' : 'text-gray-800'}`}
-
                       onClick={() => toggleItem(idx)}
                     >
                       <span className={`flex gap-2 ${isOpen ? 'text-yellow-700' : ''}`}>
@@ -482,7 +481,7 @@ const HomePage: React.FC = () => {
               {/* Show More / Less */}
               <div className="text-center mt-6" data-aos="zoom-in">
                 <button
-                  onClick={() => setVisibleCount(prev => (prev === 5 ? faqData.length : 5))}
+                  onClick={() => setVisibleCount((prev) => (prev === 5 ? faqData.length : 5))}
                   className="group relative font-bold text-sm text-stone-800 bg-stone-800 rounded-full transform -translate-x-1 -translate-y-1 shadow-[0.5px_0.5px_0_0_#292524,1px_1px_0_0_#292524,1.5px_1.5px_0_0_#292524,2px_2px_0_0_#292524,2.5px_2.5px_0_0_#292524,3px_3px_0_0_#292524,0_0_0_2px_#fafaf9,0.5px_0.5px_0_2px_#fafaf9,1px_1px_0_2px_#fafaf9,1.5px_1.5px_0_2px_#fafaf9,2px_2px_0_2px_#fafaf9,2.5px_2.5px_0_2px_#fafaf9,3px_3px_0_2px_#fafaf9,3.5px_3.5px_0_2px_#fafaf9,4px_4px_0_2px_#fafaf9] hover:translate-x-0 hover:translate-y-0 hover:shadow-[0_0_0_2px_#fafaf9] outline-offset-[5px] outline-2 focus-visible:outline-yellow-400 focus-visible:outline-dashed transition-all duration-150 ease-in-out"
                 >
                   <div className="relative rounded-full bg-yellow-500 border-2 border-white/30 before:content-[''] before:absolute before:inset-0 before:rounded-full before:opacity-50 before:bg-[radial-gradient(rgb(255_255_255_/_0.8)_20%,transparent_20%),radial-gradient(rgb(255_255_255)_20%,transparent_20%)] before:bg-[0_0,4px_4px] before:bg-[8px_8px] before:animate-[dots_0.5s_linear_infinite] before:mix-blend-hard-light">

@@ -204,7 +204,7 @@ const Footer: React.FC = () => {
                 SITEMAP
               </h4>
               <ul className="space-y-3 text-gray-800 flex flex-col items-center md:items-start">
-                {navItems.map(item => (
+                {navItems.map((item) => (
                   <li key={item.href} className="w-fit flex items-center gap-2 group">
                     <FaChevronRight
                       className={`text-xs transition-transform duration-300 group-hover:translate-x-1 ${
