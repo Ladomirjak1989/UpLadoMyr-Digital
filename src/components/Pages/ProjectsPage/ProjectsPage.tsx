@@ -97,9 +97,14 @@ const ProjectsPage: React.FC = () => {
   }, []);
 
   // ✅ мемоізований debounce-хендлер
-  const handleSearch = useMemo(() => debounce((val: string) => {
-    setDebouncedSearchTerm(val);
-  }, 300), []);
+  const handleSearch = useMemo(
+    () =>
+      debounce((val: string): void => {
+        setDebouncedSearchTerm(val);
+      }, 300),
+    []
+  );
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

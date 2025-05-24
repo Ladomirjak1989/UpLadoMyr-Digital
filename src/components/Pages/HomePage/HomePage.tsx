@@ -454,8 +454,8 @@ const HomePage: React.FC = () => {
                     data-aos-delay={idx * 100}
                   >
                     <button
-                      className={`flex justify-between items-center w-full text-left font-semibold transition-transform hover:scale-[1.02] ${isOpen ? 'text-yellow-700' : 'text-gray-800'
-                        }`}
+                      className={`flex justify-between items-center w-full text-left font-semibold transition-transform hover:scale-[1.02] ${isOpen ? 'text-yellow-700' : 'text-gray-800'}`}
+
                       onClick={() => toggleItem(idx)}
                     >
                       <span className={`flex gap-2 ${isOpen ? 'text-yellow-700' : ''}`}>
