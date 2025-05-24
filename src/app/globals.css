@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 html {
   scroll-behavior: smooth;
@@ -17,7 +17,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 /* === Списки === */
 ul,
 ol {
@@ -35,7 +34,6 @@ button {
     --foreground: #ededed;
   }
 }
-
 
 .container {
   max-width: 1200px;
@@ -71,7 +69,6 @@ html {
 
 .swiper-button-prev,
 .swiper-button-next {
-
   color: #14532d !important;
   /* Tailwind green-600 */
   top: 40% !important;
@@ -79,7 +76,6 @@ html {
 }
 
 @keyframes customBounce {
-
   0%,
   100% {
     transform: translateY(0);
@@ -96,26 +92,18 @@ html {
 }
 
 .clip-hexagon {
-  clip-path: polygon(25% 6.7%,
-      75% 6.7%,
-      100% 50%,
-      75% 93.3%,
-      25% 93.3%,
-      0% 50%);
+  clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
 }
-
 
 .clip-custom {
   clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
 }
-
 
 .clip-skew-right {
   clip-path: polygon(0 0, 100% 0, 87% 100%, 0% 100%);
 }
 
 @keyframes wave {
-
   0%,
   100% {
     transform: translateY(0);
@@ -183,9 +171,6 @@ html {
   left: -6px;
 }
 
-
-
-
 .font-dmserif {
   font-family: 'DM Serif Text', serif;
 }
@@ -194,9 +179,7 @@ html {
   font-family: 'Tangerine', cursive;
 }
 
-
 @keyframes wave-shine {
-
   0%,
   100% {
     filter: brightness(1);

@@ -19,9 +19,7 @@ const Footer: React.FC = () => {
   const pathname = usePathname();
   const isActive = (path: string) => pathname === path;
   const [formData, setFormData] = useState({
-
     email: '',
-
   });
 
   const [successMessage, setSuccessMessage] = useState('');
@@ -136,7 +134,6 @@ const Footer: React.FC = () => {
               <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
             </svg>
           </Link>
-
         </div>
       </div>
 
@@ -210,15 +207,17 @@ const Footer: React.FC = () => {
                 {navItems.map(item => (
                   <li key={item.href} className="w-fit flex items-center gap-2 group">
                     <FaChevronRight
-                      className={`text-xs transition-transform duration-300 group-hover:translate-x-1 ${isActive(item.href) ? 'text-[#1e3a8a]' : 'text-gray-500'
-                        }`}
+                      className={`text-xs transition-transform duration-300 group-hover:translate-x-1 ${
+                        isActive(item.href) ? 'text-[#1e3a8a]' : 'text-gray-500'
+                      }`}
                     />
                     <Link
                       href={item.href}
-                      className={`relative transition-all duration-200 font-bold text-sm sm:text-base ${isActive(item.href)
-                        ? 'text-[#1e3a8a] underline underline-offset-4'
-                        : 'hover:text-[#1e3a8a]'
-                        }`}
+                      className={`relative transition-all duration-200 font-bold text-sm sm:text-base ${
+                        isActive(item.href)
+                          ? 'text-[#1e3a8a] underline underline-offset-4'
+                          : 'hover:text-[#1e3a8a]'
+                      }`}
                     >
                       {item.label}
                       <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#1e3a8a] transition-all group-hover:w-full"></span>
@@ -240,12 +239,12 @@ const Footer: React.FC = () => {
             </p>
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col sm:flex-row gap-3 w-full justify-center md:justify-start">
+              className="flex flex-col sm:flex-row gap-3 w-full justify-center md:justify-start"
+            >
               <input
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-
                 placeholder="Your E-mail"
                 required
                 className="w-full sm:max-w-[220px] px-4 py-2 rounded-md bg-white text-gray-900 text-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300"
@@ -276,7 +275,6 @@ const Footer: React.FC = () => {
                   {successMessage}
                 </p>
               )}
-
             </form>
           </div>
         </div>

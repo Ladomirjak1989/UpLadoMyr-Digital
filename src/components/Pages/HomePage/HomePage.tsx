@@ -8,7 +8,16 @@ import {
   FaClipboardCheck,
   FaLaptopCode,
 } from 'react-icons/fa';
-import { FaCogs, FaCode, FaPalette, FaNetworkWired, FaBug, FaWrench, FaPlus, FaMinus } from 'react-icons/fa';
+import {
+  FaCogs,
+  FaCode,
+  FaPalette,
+  FaNetworkWired,
+  FaBug,
+  FaWrench,
+  FaPlus,
+  FaMinus,
+} from 'react-icons/fa';
 
 import 'animate.css';
 import AOS from 'aos';
@@ -39,9 +48,6 @@ interface FAQItem {
   question: string;
   answer: string;
 }
-
-
-
 
 const services: Services[] = [
   {
@@ -148,19 +154,21 @@ const blocks: TechBlock[] = [
   },
 ];
 
-
 const faqData = [
   {
     question: 'What web development services does UpLadoMyr Digital offer?',
-    answer: 'We offer full-cycle web development: design, frontend, backend, maintenance, and deployment using modern tech.',
+    answer:
+      'We offer full-cycle web development: design, frontend, backend, maintenance, and deployment using modern tech.',
   },
   {
     question: 'How do you ensure mobile responsiveness in development?',
-    answer: 'All projects follow mobile-first design with responsive layouts tested on multiple screen sizes and devices.',
+    answer:
+      'All projects follow mobile-first design with responsive layouts tested on multiple screen sizes and devices.',
   },
   {
     question: 'Can you build custom web applications for niche industries?',
-    answer: 'Yes, we specialize in tailored digital solutions for unique business needs — no templates, fully customized.',
+    answer:
+      'Yes, we specialize in tailored digital solutions for unique business needs — no templates, fully customized.',
   },
   {
     question: 'What technologies do you use for web development?',
@@ -168,52 +176,60 @@ const faqData = [
   },
   {
     question: 'How does your QA & testing process work?',
-    answer: 'We apply both manual and automated testing across devices and browsers to ensure flawless functionality.',
+    answer:
+      'We apply both manual and automated testing across devices and browsers to ensure flawless functionality.',
   },
   {
     question: 'Do you offer ongoing website maintenance services?',
-    answer: 'Yes. We provide continuous maintenance, security updates, performance monitoring, and content support.',
+    answer:
+      'Yes. We provide continuous maintenance, security updates, performance monitoring, and content support.',
   },
   {
     question: 'How do you approach user experience design in web projects?',
-    answer: 'We follow UX best practices with user flow mapping, wireframes, prototyping, and iterative feedback sessions.',
+    answer:
+      'We follow UX best practices with user flow mapping, wireframes, prototyping, and iterative feedback sessions.',
   },
   {
     question: 'What industries have you served with web development solutions?',
-    answer: 'We’ve served travel, real estate, construction, healthcare, retail, and startup industries with tailored solutions.',
+    answer:
+      'We’ve served travel, real estate, construction, healthcare, retail, and startup industries with tailored solutions.',
   },
   {
     question: 'How long does a typical web development project take?',
-    answer: 'Most custom projects take between 4 to 12 weeks, depending on scope, complexity, and feedback cycles.',
+    answer:
+      'Most custom projects take between 4 to 12 weeks, depending on scope, complexity, and feedback cycles.',
   },
   {
     question: 'Can you migrate my existing site to a new platform?',
-    answer: 'Absolutely. We handle full-site migrations with URL structure preservation, SEO settings, and zero-downtime strategies.',
+    answer:
+      'Absolutely. We handle full-site migrations with URL structure preservation, SEO settings, and zero-downtime strategies.',
   },
   {
     question: 'What security measures do you implement in web development?',
-    answer: 'We use HTTPS, content security policies, input validation, secure authentication, and regular audits.',
+    answer:
+      'We use HTTPS, content security policies, input validation, secure authentication, and regular audits.',
   },
   {
     question: 'Do you provide dedicated solution architects for projects?',
-    answer: 'Yes. For large or technical builds, we assign dedicated architects to ensure scalable and efficient architecture.',
+    answer:
+      'Yes. For large or technical builds, we assign dedicated architects to ensure scalable and efficient architecture.',
   },
   {
     question: 'How do you optimize websites for SEO during development?',
-    answer: 'We implement semantic HTML, performance optimization, meta tags, schema, accessibility, and mobile-first design.',
+    answer:
+      'We implement semantic HTML, performance optimization, meta tags, schema, accessibility, and mobile-first design.',
   },
   {
     question: "What's included in your web maintenance and support plans?",
-    answer: 'Plans include uptime monitoring, backups, bug fixes, performance audits, and regular CMS/security updates.',
+    answer:
+      'Plans include uptime monitoring, backups, bug fixes, performance audits, and regular CMS/security updates.',
   },
   {
     question: 'How do you price custom web development projects?',
-    answer: 'Pricing depends on project size, complexity, timeline, and technologies. We offer fixed-price or hourly models.',
+    answer:
+      'Pricing depends on project size, complexity, timeline, and technologies. We offer fixed-price or hourly models.',
   },
 ];
-
-
-
 
 const HomePage: React.FC = () => {
   const [expanded, setExpanded] = useState<number | null>(null);
@@ -221,8 +237,6 @@ const HomePage: React.FC = () => {
 
   const toggleItem = (index: number) => {
     setExpanded(expanded === index ? null : index);
-
-
   };
   useEffect(() => {
     AOS.init({
@@ -407,7 +421,6 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-
       {/* FAQ content */}
       <div className="bg-gray-100 py-20 px-4 lg:px-16">
         <div className="max-w-6xl mx-auto">
@@ -438,8 +451,9 @@ const HomePage: React.FC = () => {
                     data-aos-delay={idx * 100}
                   >
                     <button
-                      className={`flex justify-between items-center w-full text-left font-semibold transition-transform hover:scale-[1.02] ${isOpen ? 'text-yellow-700' : 'text-gray-800'
-                        }`}
+                      className={`flex justify-between items-center w-full text-left font-semibold transition-transform hover:scale-[1.02] ${
+                        isOpen ? 'text-yellow-700' : 'text-gray-800'
+                      }`}
                       onClick={() => toggleItem(idx)}
                     >
                       <span className={`flex gap-2 ${isOpen ? 'text-yellow-700' : ''}`}>
@@ -463,13 +477,10 @@ const HomePage: React.FC = () => {
                 );
               })}
 
-
               {/* Show More / Less */}
               <div className="text-center mt-6" data-aos="zoom-in">
                 <button
-                  onClick={() =>
-                    setVisibleCount((prev) => (prev === 5 ? faqData.length : 5))
-                  }
+                  onClick={() => setVisibleCount(prev => (prev === 5 ? faqData.length : 5))}
                   className="group relative font-bold text-sm text-stone-800 bg-stone-800 rounded-full transform -translate-x-1 -translate-y-1 shadow-[0.5px_0.5px_0_0_#292524,1px_1px_0_0_#292524,1.5px_1.5px_0_0_#292524,2px_2px_0_0_#292524,2.5px_2.5px_0_0_#292524,3px_3px_0_0_#292524,0_0_0_2px_#fafaf9,0.5px_0.5px_0_2px_#fafaf9,1px_1px_0_2px_#fafaf9,1.5px_1.5px_0_2px_#fafaf9,2px_2px_0_2px_#fafaf9,2.5px_2.5px_0_2px_#fafaf9,3px_3px_0_2px_#fafaf9,3.5px_3.5px_0_2px_#fafaf9,4px_4px_0_2px_#fafaf9] hover:translate-x-0 hover:translate-y-0 hover:shadow-[0_0_0_2px_#fafaf9] outline-offset-[5px] outline-2 focus-visible:outline-yellow-400 focus-visible:outline-dashed transition-all duration-150 ease-in-out"
                 >
                   <div className="relative rounded-full bg-yellow-500 border-2 border-white/30 before:content-[''] before:absolute before:inset-0 before:rounded-full before:opacity-50 before:bg-[radial-gradient(rgb(255_255_255_/_0.8)_20%,transparent_20%),radial-gradient(rgb(255_255_255)_20%,transparent_20%)] before:bg-[0_0,4px_4px] before:bg-[8px_8px] before:animate-[dots_0.5s_linear_infinite] before:mix-blend-hard-light">
@@ -478,15 +489,11 @@ const HomePage: React.FC = () => {
                     </span>
                   </div>
                 </button>
-
               </div>
             </div>
           </div>
         </div>
       </div>
-
-
-
     </>
   );
 };
