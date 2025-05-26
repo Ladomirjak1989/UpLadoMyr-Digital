@@ -4,7 +4,8 @@ import './globals.css';
 import StoreProvider from '@/store/StoreProvider';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
-import Head from 'next/head'; // ✅ Додати
+import Head from 'next/head';
+import ScrollToTopButton from '@/components/ScrollToTopButton/ScrollToTopButton';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -45,6 +46,7 @@ export default function RootLayout({
           <StoreProvider>{children}</StoreProvider>
         </main>
         <Footer />
+        <ScrollToTopButton />
       </body>
     </html>
   );
