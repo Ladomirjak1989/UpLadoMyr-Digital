@@ -1,20 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Script from 'next/script';
-import { useRouter } from 'next/navigation';
+
 
 const LanguageSwitcher = () => {
-  const router = useRouter();
-  const [selected, setSelected] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const langPath = e.target.value;
-    setSelected(langPath);
-    if (langPath) {
-      router.push(langPath);
-    }
-  };
+
 
   useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).Weglot) {
