@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Script from 'next/script';
+import { useRouter } from 'next/navigation';
 
 const LanguageSwitcher = () => {
     const router = useRouter();
@@ -11,33 +11,27 @@ const LanguageSwitcher = () => {
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const langPath = e.target.value;
         setSelected(langPath);
-        if (langPath) router.push(langPath);
+        if (langPath) {
+            router.push(langPath);
+        }
     };
+
+    useEffect(() => {
+        if (typeof window !== 'undefined' && (window as any).Weglot) {
+            (window as any).Weglot.initialize({
+                api_key: process.env.NEXT_PUBLIC_WEGLOT_API_KEY,
+            });
+        }
+    }, []);
 
     return (
         <>
-            {/* 📦 Підключення Weglot CDN */}
+            {/* Load Weglot script dynamically */}
             <Script
                 src="https://cdn.weglot.com/weglot.min.js"
                 strategy="afterInteractive"
             />
 
-            {/* 🔑 Ініціалізація Weglot з ключем з .env */}
-            <Script
-                id="weglot-init"
-                strategy="afterInteractive"
-                dangerouslySetInnerHTML={{
-                    __html: `
-            if (typeof Weglot !== 'undefined') {
-              Weglot.initialize({
-                api_key: "${process.env.NEXT_PUBLIC_WEGLOT_API_KEY}"
-              });
-            }
-          `,
-                }}
-            />
-
-            {/* 🌐 Dropdown з мовами */}
             <div className="fixed top-5 right-5 z-50 bg-white border border-gray-300 rounded-md shadow-md px-3 py-1 md:px-4 md:py-2 text-sm md:text-base">
                 <select
                     value={selected}
