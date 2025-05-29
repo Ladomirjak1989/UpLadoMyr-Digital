@@ -6,6 +6,7 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import Head from 'next/head';
 import ScrollToTopButton from '@/components/ScrollToTopButton/ScrollToTopButton';
+import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -27,6 +28,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const weglotKey = process.env.NEXT_PUBLIC_WEGLOT_API_KEY;
+
   return (
     <html lang="en">
       <Head>
@@ -47,6 +51,8 @@ export default function RootLayout({
         </main>
         <Footer />
         <ScrollToTopButton />
+        <LanguageSwitcher />
+
       </body>
     </html>
   );

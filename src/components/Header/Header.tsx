@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { usePathname } from 'next/navigation';
+import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 
 const navbarConfig = [
   { link: '/', text: 'HOME' },
@@ -30,11 +31,10 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${
-        isScrolled
+      className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${isScrolled
           ? 'bg-white/90 backdrop-blur-md shadow-lg py-2'
           : 'bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] py-4'
-      }`}
+        }`}
     >
       <div className="flex justify-between items-center px-4 lg:px-16">
         {/* Logo & Text */}
@@ -62,17 +62,22 @@ const Header: React.FC = () => {
             <Link
               key={item.link}
               href={item.link}
-              className={`relative group transition-all duration-200 ${
-                isActive(item.link)
+              className={`relative group transition-all duration-200 ${isActive(item.link)
                   ? 'text-[#1e3a8a] underline underline-offset-4'
                   : 'hover:text-[#1e3a8a]'
-              }`}
+                }`}
             >
               {item.text}
               <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-[#1e3a8a] transition-all group-hover:w-full"></span>
             </Link>
           ))}
         </nav>
+
+
+        <div>
+          <LanguageSwitcher />
+        </div>
+
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden">
@@ -87,17 +92,15 @@ const Header: React.FC = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-40 md:hidden transition-opacity ${
-          isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}
+        className={`fixed inset-0 bg-black bg-opacity-40 md:hidden transition-opacity ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+          }`}
         onClick={() => setIsOpen(false)}
       ></div>
 
       {/* Mobile Nav */}
       <nav
-        className={`md:hidden fixed top-0 right-0 h-full w-2/3 max-w-[280px] bg-[#f7f4ea] shadow-lg transform ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        } transition-transform duration-300 ease-in-out z-50 p-6`}
+        className={`md:hidden fixed top-0 right-0 h-full w-2/3 max-w-[280px] bg-[#f7f4ea] shadow-lg transform ${isOpen ? 'translate-x-0' : 'translate-x-full'
+          } transition-transform duration-300 ease-in-out z-50 p-6`}
       >
         <button
           onClick={() => setIsOpen(false)}
@@ -111,9 +114,8 @@ const Header: React.FC = () => {
             <li key={item.link} className="border-b border-gray-300 pb-2">
               <Link
                 href={item.link}
-                className={`block transition ${
-                  isActive(item.link) ? 'text-[#374151] font-bold' : 'hover:text-[#374151]'
-                }`}
+                className={`block transition ${isActive(item.link) ? 'text-[#374151] font-bold' : 'hover:text-[#374151]'
+                  }`}
               >
                 {item.text}
               </Link>
