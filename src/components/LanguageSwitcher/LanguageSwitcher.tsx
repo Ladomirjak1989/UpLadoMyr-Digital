@@ -3,11 +3,7 @@
 import { useEffect } from 'react';
 import Script from 'next/script';
 
-
 const LanguageSwitcher = () => {
-
-
-
   useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).Weglot) {
       (window as any).Weglot.initialize({
@@ -21,9 +17,7 @@ const LanguageSwitcher = () => {
       {/* Load Weglot script dynamically */}
       <Script src="https://cdn.weglot.com/weglot.min.js" strategy="afterInteractive" />
 
-      <div>
-
-      </div>
+      <div></div>
     </>
   );
 };
