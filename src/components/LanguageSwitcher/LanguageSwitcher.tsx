@@ -29,18 +29,8 @@ const LanguageSwitcher = () => {
       {/* Load Weglot script dynamically */}
       <Script src="https://cdn.weglot.com/weglot.min.js" strategy="afterInteractive" />
 
-      <div className="fixed top-5 right-5 z-50 bg-white border border-gray-300 rounded-md shadow-md px-3 py-1 md:px-4 md:py-2 text-sm md:text-base">
-        <select
-          value={selected}
-          onChange={handleChange}
-          className="appearance-none bg-transparent text-gray-800 font-medium focus:outline-none"
-        >
-          <option value="">🌐 Choose Language</option>
-          <option value="/uk">🇬🇧 English (UK)</option>
-          <option value="/nl">🇳🇱 Nederlands</option>
-          <option value="/uk">🇺🇦 Українська</option>
-          <option value="/hu">🇭🇺 Magyar</option>
-        </select>
+      <div>
+
       </div>
     </>
   );
