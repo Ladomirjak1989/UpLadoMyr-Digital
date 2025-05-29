@@ -212,6 +212,8 @@ const Header: React.FC = () => {
           ))}
         </nav>
 
+        <div className="country-selector" />
+
         {/* Mobile Menu Toggle */}
         <div className="md:hidden">
           <button
