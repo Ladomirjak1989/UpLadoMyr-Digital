@@ -4,7 +4,8 @@ import './globals.css';
 import StoreProvider from '@/store/StoreProvider';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
-import Head from 'next/head';
+// import Head from 'next/head';
+import Script from 'next/script';
 import ScrollToTopButton from '@/components/ScrollToTopButton/ScrollToTopButton';
 import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher';
 
@@ -28,14 +29,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const weglotKey = process.env.NEXT_PUBLIC_WEGLOT_API_KEY;
-
   return (
     <html lang="en">
-      <Head>
+      <head>
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+        <Script src="https://cdn.weglot.com/weglot.min.js" strategy="afterInteractive" />
+        <Script
+          id="weglot-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `Weglot.initialize({ api_key: "${process.env.NEXT_PUBLIC_WEGLOT_API_KEY}" });`,
+          }}
+        />
+      </head>
+      {/* <Head>
+        <link rel="icon" href="/favicon.ico" />
+      </Head> */}
 
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -52,7 +61,6 @@ export default function RootLayout({
         <Footer />
         <ScrollToTopButton />
         <LanguageSwitcher />
-
       </body>
     </html>
   );
