@@ -5,7 +5,7 @@ import StoreProvider from '@/store/StoreProvider';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 // import Head from 'next/head';
-import Script from 'next/script';
+// import Script from 'next/script';
 import ScrollToTopButton from '@/components/ScrollToTopButton/ScrollToTopButton';
 
 const geistSans = Geist({
@@ -32,14 +32,14 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" />
-        <Script src="https://cdn.weglot.com/weglot.min.js" strategy="afterInteractive" />
+        {/* <Script src="https://cdn.weglot.com/weglot.min.js" strategy="afterInteractive" />
         <Script
           id="weglot-init"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `Weglot.initialize({ api_key: "${process.env.NEXT_PUBLIC_WEGLOT_API_KEY}" });`,
           }}
-        />
+        /> */}
       </head>
       {/* <Head>
         <link rel="icon" href="/favicon.ico" />
