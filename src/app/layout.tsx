@@ -4,9 +4,9 @@ import './globals.css';
 import StoreProvider from '@/store/StoreProvider';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
-// import Head from 'next/head';
 // import Script from 'next/script';
 import ScrollToTopButton from '@/components/ScrollToTopButton/ScrollToTopButton';
+import WeglotInitializer from '@/components/WeglotInitializer/WeglotInitializer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -41,9 +41,6 @@ export default function RootLayout({
           }}
         /> */}
       </head>
-      {/* <Head>
-        <link rel="icon" href="/favicon.ico" />
-      </Head> */}
 
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -58,6 +55,7 @@ export default function RootLayout({
           <StoreProvider>{children}</StoreProvider>
         </main>
         <Footer />
+        <WeglotInitializer />
         <ScrollToTopButton />
       </body>
     </html>
