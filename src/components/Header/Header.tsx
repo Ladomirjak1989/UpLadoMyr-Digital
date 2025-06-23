@@ -143,7 +143,7 @@ import { usePathname } from 'next/navigation';
 const navbarConfig = [
   { link: '/', text: 'HOME' },
   { link: '/projects', text: 'PROJECTS' },
-  { link: '/about', text: 'ABOUT' },
+  { link: '/about', text: 'ABOUT US' },
   { link: '/contacts', text: 'CONTACT' },
 ];
 
