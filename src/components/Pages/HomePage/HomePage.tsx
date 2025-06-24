@@ -248,6 +248,19 @@ const HomePage: React.FC = () => {
 
   return (
     <>
+      <div className="bg-gradient-to-r from-white via-purple-50 to-white py-12 px-6 md:px-20">
+        <div
+          className="max-w-4xl mx-auto text-center border-l-4 border-purple-900 pl-6"
+          data-aos="fade-up"
+          data-aos-duration="800"
+        >
+          <p className="text-2xl md:text-3xl font-medium italic text-gray-800 leading-relaxed">
+            “If we don’t put the internet into our business, our business will have problems.”
+          </p>
+          <p className="mt-4 text-lg font-semibold text-gray-600">— Jack Ma</p>
+        </div>
+      </div>
+
       <div className="bg-white py-20 px-6 lg:px-16">
         <div className="max-w-7xl mx-auto">
           <h2
