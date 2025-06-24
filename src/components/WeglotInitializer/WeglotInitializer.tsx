@@ -82,7 +82,7 @@ const WeglotInitializer = () => {
     return () => {
       clearTimeout(timer);
       observer.disconnect();
-      console.warn('[Weglot] Cleanup: Timer cleared and observer disconnected');
+      console.warn('[Weglot] Cleanup: Timer cleared and observer disconnected.');
     };
   }, []);
 
