@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { FaUser, FaEnvelope, FaCommentDots } from 'react-icons/fa';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -176,6 +177,18 @@ const ContactPage: React.FC = () => {
                   required
                   className="pl-12 w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-yellow-500"
                 />
+              </div>
+
+              {/* Privacy Policy Agreement */}
+              <div className="flex items-start gap-2 text-sm text-gray-800">
+                <input type="checkbox" required className="mt-1 accent-yellow-500" />
+                <label>
+                  By submitting the form, you agree to the processing of your{' '}
+                  <Link href="/privacy" className="underline hover:text-yellow-600 transition">
+                    personal data
+                  </Link>
+                  .
+                </label>
               </div>
 
               {/* Verzenden */}
