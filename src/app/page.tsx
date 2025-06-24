@@ -1,5 +1,6 @@
 import Banner from '@/components/Banner/HomeBanner';
 import HomePage from '@/components/Pages/HomePage/HomePage';
+import PaymentSteps from '@/components/PaymentSteps/PaymentSteps';
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
       <main>
         <Banner />
         <HomePage />
+        <PaymentSteps />
       </main>
     </div>
   );
