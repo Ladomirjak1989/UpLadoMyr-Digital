@@ -25,6 +25,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 import Image from 'next/image';
+import PaymentSteps from '@/components/PaymentSteps/PaymentSteps';
+import ServicePricing from '@/components/ServicesPricing/ServicesPricing';
 
 interface Services {
   title: string;
@@ -233,12 +235,13 @@ const faqData: FAQItem[] = [
 ];
 
 const HomePage: React.FC = () => {
-  const [expanded, setExpanded] = useState<number | null>(null);
   const [visibleCount, setVisibleCount] = useState(5);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleItem = (index: number) => {
-    setExpanded(expanded === index ? null : index);
+    setOpenIndex((prev) => (prev === index ? null : index));
   };
+
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -305,6 +308,9 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <PaymentSteps />
+      <ServicePricing />
 
       <div className="relative w-full py-20 overflow-hidden">
         <svg
@@ -436,7 +442,7 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* FAQ content */}
-      <div className="bg-gray-100 py-20 px-4 lg:px-16">
+      <div className="bg-gradient-to-t from-white to-gray-300 py-20 px-4 lg:px-16">
         <div className="max-w-6xl mx-auto">
           <h2 data-aos="fade-down" className="text-4xl font-bold text-center text-black mb-10">
             Frequently Asked Questions
@@ -457,7 +463,7 @@ const HomePage: React.FC = () => {
             {/* Права частина з FAQ */}
             <div className="space-y-6">
               {faqData.slice(0, visibleCount).map((item, idx) => {
-                const isOpen = expanded === idx;
+                const isOpen = openIndex === idx;
 
                 return (
                   <div
@@ -467,8 +473,10 @@ const HomePage: React.FC = () => {
                     data-aos-delay={idx * 100}
                   >
                     <button
-                      className={`flex justify-between items-center w-full text-left font-semibold transition-transform hover:scale-[1.02] ${isOpen ? 'text-yellow-700' : 'text-gray-800'}`}
                       onClick={() => toggleItem(idx)}
+                      className={`flex justify-between items-center w-full text-left font-semibold transition-transform hover:scale-[1.02] cursor-pointer ${
+                        isOpen ? 'text-yellow-700' : 'text-gray-800'
+                      }`}
                     >
                       <span className={`flex gap-2 ${isOpen ? 'text-yellow-700' : ''}`}>
                         <span className="text-gray-900">{idx + 1}.</span>
@@ -476,12 +484,16 @@ const HomePage: React.FC = () => {
                           {item.question}
                         </span>
                       </span>
-                      {isOpen ? (
-                        <FaMinus className="text-yellow-700" />
-                      ) : (
-                        <FaPlus className="text-gray-600 hover:text-yellow-700" />
-                      )}
+
+                      <span className="ml-2">
+                        {isOpen ? (
+                          <FaMinus className="text-yellow-700 cursor-pointer" />
+                        ) : (
+                          <FaPlus className="text-gray-600 hover:text-yellow-700 cursor-pointer" />
+                        )}
+                      </span>
                     </button>
+
                     {isOpen && (
                       <p className="mt-2 text-sm text-gray-700" data-aos="fade-in">
                         {item.answer}
