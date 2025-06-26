@@ -4,43 +4,53 @@ import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Image from 'next/image';
-import { FaCode, FaServer, FaDatabase, FaGithub, FaLightbulb } from 'react-icons/fa';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/autoplay';
+import { Autoplay } from 'swiper/modules';
+import {
+  FaReact,
+  FaHtml5,
+  FaCss3Alt,
+  FaNodeJs,
+  FaGitAlt,
+  FaGithub,
+  FaLightbulb,
+} from 'react-icons/fa';
+import {
+  SiJavascript,
+  SiTypescript,
+  SiRedux,
+  SiTailwindcss,
+  SiMongodb,
+  SiMysql,
+  SiPostgresql,
+} from 'react-icons/si';
 import Link from 'next/link';
-import { IoMdCheckmark } from 'react-icons/io';
 
-// 🔵 Інтерфейс для Tech Stack
-interface TechStackItem {
-  icon: React.ReactNode;
-  title: string;
-  items: string[];
-}
-
-const techStack: TechStackItem[] = [
-  {
-    icon: <FaCode className="text-blue-600 text-3xl" />,
-    title: 'Language/Frameworks',
-    items: ['JavaScript', 'TypeScript', 'MERN', 'Express.js', 'Node.js'],
-  },
-  {
-    icon: <FaServer className="text-green-600 text-3xl" />,
-    title: 'Frontend',
-    items: ['HTML', 'CSS', 'Tailwind CSS', 'Bootstrap', 'React.js', 'Redux Toolkit', 'Next.js'],
-  },
-  {
-    icon: <FaDatabase className="text-purple-600 text-3xl" />,
-    title: 'Databases',
-    items: ['MongoDB', 'MySQL', 'PostgreSQL'],
-  },
-  {
-    icon: <FaGithub className="text-gray-700 text-3xl" />,
-    title: 'Version Control',
-    items: ['GitLab', 'GitHub'],
-  },
+const techItems = [
+  { icon: <FaHtml5 size={40} color="#E44D26" />, name: 'HTML' },
+  { icon: <FaCss3Alt size={40} color="#1572B6" />, name: 'CSS' },
+  { icon: <SiJavascript size={40} color="#F7DF1E" />, name: 'JavaScript' },
+  { icon: <SiTypescript size={40} color="#3178C6" />, name: 'TypeScript' },
+  { icon: <FaReact size={40} color="#61DAFB" />, name: 'React' },
+  { icon: <SiRedux size={40} color="#764ABC" />, name: 'Redux Toolkit' },
+  { icon: <SiTailwindcss size={40} color="#38BDF8" />, name: 'Tailwind CSS' },
+  { icon: <FaNodeJs size={40} color="#68A063" />, name: 'Node.js' },
+  { icon: <SiMongodb size={40} color="#47A248" />, name: 'MongoDB' },
+  { icon: <SiMysql size={40} color="#00758F" />, name: 'MySQL' },
+  { icon: <SiPostgresql size={40} color="#336791" />, name: 'PostgreSQL' },
+  { icon: <FaGitAlt size={40} color="#F05032" />, name: 'GitLab' },
+  { icon: <FaGithub size={40} color="#181717" />, name: 'GitHub' },
 ];
 
 const AboutPage: React.FC = () => {
   useEffect(() => {
-    AOS.init({ duration: 1000 });
+    AOS.init({
+      duration: 1200,
+      easing: 'ease-in-out',
+      once: true,
+    });
   }, []);
 
   return (
@@ -97,38 +107,40 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Technologies */}
-      <h2 className="text-3xl font-tangerine font-bold text-yellow-600 mb-8 text-center">
-        Tech Stack
-      </h2>
-      <div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12"
-        data-aos="fade-up"
-      >
-        {techStack.map((stack, idx) => (
-          <div
-            key={idx}
-            className="bg-blue-50 border-b-2 border-blue-900 shadow-md rounded-2xl p-6 flex flex-col items-start gap-4 hover:scale-[1.02] transition"
-          >
-            {stack.icon}
-            <h3 className="text-lg font-semibold underline underline-offset-2 text-blue-950">
-              {stack.title}
-            </h3>
-            <ul className="text-xs sm:text-sm text-gray-700 space-y-2 w-full">
-              {stack.items.map((item, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-2 group hover:text-yellow-600 transition"
-                >
-                  <IoMdCheckmark className="text-black group-hover:text-yellow-600 hover:scale-[1.02]  transition-colors duration-300" />
-                  <span className="group-hover:text-yellow-600 underline hover:scale-[1.02]  transition">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      <div className="py-12 rounded-2xl shadow-sm  text-white">
+        <h2
+          className="text-center text-3xl font-tangerine font-bold text-yellow-600 mb-8"
+          data-aos="fade-up"
+        >
+          Tech Stack
+        </h2>
+        <Swiper
+          modules={[Autoplay]}
+          autoplay={{ delay: 2000, disableOnInteraction: false }}
+          spaceBetween={20}
+          loop={true}
+          slidesPerView={2}
+          breakpoints={{
+            320: { slidesPerView: 2 },
+            640: { slidesPerView: 3 },
+            1024: { slidesPerView: 5 },
+          }}
+          className="px-6"
+        >
+          {techItems.map((item, idx) => (
+            <SwiperSlide key={idx}>
+              <div
+                data-aos="fade-left"
+                data-aos-duration="1200"
+                data-aos-easing="ease-in-out"
+                className="flex flex-col items-center justify-center bg-[#444] rounded-md p-6 h-32 w-full hover:bg-[#666] transition"
+              >
+                <div className="mb-2">{item.icon}</div>
+                <p className="text-sm">{item.name}</p>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
 
       {/*Mission & Vision*/}
@@ -228,7 +240,7 @@ const AboutPage: React.FC = () => {
         </div>
 
         {/* Розділювач - хвиля */}
-        <div className="absolute bottom-[-1px] left-0 w-full">
+        <div className="absolute bottom-[-1px] left-0 w-full hidden sm:block">
           <svg viewBox="0 0 1440 100" className="w-full h-[70px]" preserveAspectRatio="none">
             <path fill="#f3f4f6" d="M0,0 C360,100 1080,0 1440,100 L1440,100 L0,100 Z" />
           </svg>

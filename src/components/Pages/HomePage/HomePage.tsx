@@ -27,6 +27,7 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import PaymentSteps from '@/components/PaymentSteps/PaymentSteps';
 import ServicePricing from '@/components/ServicesPricing/ServicesPricing';
+import Testimonials from '@/components/Testimonials/Testimonials';
 
 interface Services {
   title: string;
@@ -519,6 +520,8 @@ const HomePage: React.FC = () => {
             </div>
           </div>
         </div>
+
+        <Testimonials />
       </div>
     </>
   );

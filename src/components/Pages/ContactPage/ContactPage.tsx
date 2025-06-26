@@ -128,7 +128,7 @@ const ContactPage: React.FC = () => {
               {/* Naam + Achternaam */}
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="relative group">
-                  <FaUser className="absolute top-3.5 left-4 text-gray-400" />
+                  <FaUser className="absolute top-3.5 left-4 text-gray-700" />
                   <input
                     name="name"
                     value={formData.name}
@@ -139,7 +139,7 @@ const ContactPage: React.FC = () => {
                   />
                 </div>
                 <div className="relative group">
-                  <FaUser className="absolute top-3.5 left-4 text-gray-400" />
+                  <FaUser className="absolute top-3.5 left-4 text-gray-700" />
                   <input
                     name="lastName"
                     value={formData.lastName}
@@ -153,7 +153,7 @@ const ContactPage: React.FC = () => {
 
               {/* Email */}
               <div className="relative group">
-                <FaEnvelope className="absolute top-3.5 left-4 text-gray-400" />
+                <FaEnvelope className="absolute top-3.5 left-4 text-gray-700" />
                 <input
                   name="email"
                   type="email"
@@ -167,7 +167,7 @@ const ContactPage: React.FC = () => {
 
               {/* Bericht */}
               <div className="relative group">
-                <FaCommentDots className="absolute top-3.5 left-4 text-gray-400" />
+                <FaCommentDots className="absolute top-3.5 left-4 text-gray-700" />
                 <textarea
                   name="message"
                   rows={4}

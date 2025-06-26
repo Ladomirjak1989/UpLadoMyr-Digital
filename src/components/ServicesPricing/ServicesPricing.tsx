@@ -100,7 +100,7 @@ function ServicePricing() {
                 <p className="text-base sm:text-lg text-blue-900">
                   From <span className="text-yellow-700">{service.price}</span>
                 </p>
-                <Link href={service.link}>
+                <Link href="/projects">
                   <span className="px-4 py-2 rounded-lg border border-white transition-colors duration-300 cursor-pointer text-yellow-500 bg-blue-900 hover:bg-[#c7a23f] hover:text-blue-900 text-sm">
                     Learn More
                   </span>
