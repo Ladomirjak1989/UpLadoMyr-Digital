@@ -107,7 +107,7 @@ const ContactPage: React.FC = () => {
               <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                 Let us know how we can best serve you. Use the contact form to email us or select
                 from the topics below that best fit your needs. It's an honor to support you in your
-                journey towards better health
+                journey towards better health.
               </p>
             </div>
           </div>
