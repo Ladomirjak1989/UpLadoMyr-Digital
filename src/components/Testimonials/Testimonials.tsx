@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { FaStar, FaArrowRight, FaUserCircle } from 'react-icons/fa';
-import { IoIosPerson } from 'react-icons/io';
+import { FaStar, FaStarHalfAlt, FaArrowRight, FaUserCircle } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -38,19 +37,19 @@ const Testimonials: React.FC = () => {
         {
           name: 'Liam V.',
           text: 'Timely delivery and smooth communication throughout the project. Excellent work!',
-          rating: 4,
+          rating: 4.5,
         },
         { name: 'Noah S.', text: 'Impressive attention to detail. Will hire again.', rating: 5 },
         { name: 'Olivia M.', text: 'Professional and creative team. Loved the result.', rating: 5 },
-        { name: 'Ava L.', text: 'Solid experience overall. Good price and delivery.', rating: 4 },
+        { name: 'Ava L.', text: 'Solid experience overall. Good price and delivery.', rating: 4.5 },
         {
           name: 'Isabella J.',
           text: 'Perfect execution of all my requirements. Thank you!',
           rating: 5,
         },
-        { name: 'Sophia K.', text: 'Helpful support and great layout suggestions.', rating: 4 },
+        { name: 'Sophia K.', text: 'Helpful support and great layout suggestions.', rating: 4.5 },
         { name: 'Mason D.', text: 'Modern, responsive, and elegant design.', rating: 5 },
-        { name: 'Ethan B.', text: 'Good communication and final product quality.', rating: 4 },
+        { name: 'Ethan B.', text: 'Good communication and final product quality.', rating: 4.5 },
         { name: 'Mia N.', text: 'Everything went smoothly and on time.', rating: 5 },
       ];
 
@@ -63,6 +62,8 @@ const Testimonials: React.FC = () => {
   const indexOfFirst = indexOfLast - testimonialsPerPage;
   const currentTestimonials = testimonials.slice(indexOfFirst, indexOfLast);
   const totalPages = Math.ceil(testimonials.length / testimonialsPerPage);
+
+  const averageRating = 4.9;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -99,13 +100,37 @@ const Testimonials: React.FC = () => {
         Client Testimonials
       </h2>
 
+      <div
+        className="w-full max-w-md mx-auto mb-10 ml-1 border border-gray-500 rounded-lg px-4 py-3 flex items-center justify-between text-white bg-gray-700"
+        data-aos="fade-up"
+      >
+        <p className="text-sm md:text-base">
+          Overall rating{' '}
+          <span className="font-semibold text-yellow-400">{averageRating.toFixed(1)}</span> out of 5
+        </p>
+        <div className="flex items-center gap-1 text-yellow-500">
+          {[...Array(5)].map((_, i) => {
+            if (i < Math.floor(averageRating)) {
+              return <FaStar key={i} />;
+            } else if (i === Math.floor(averageRating) && averageRating % 1 >= 0.5) {
+              return <FaStarHalfAlt key={i} />;
+            } else {
+              return <FaStar key={i} className="opacity-20" />;
+            }
+          })}
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         {currentTestimonials.map((item, i) => (
           <div
             key={i}
-            className="bg-gray-50 shadow-md rounded-xl p-6 space-y-4 transition-transform duration-300 hover:scale-105"
+            className="relative bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] shadow-md rounded-xl p-6 space-y-4 transition-transform duration-300 hover:scale-105 overflow-hidden"
             data-aos="fade-left"
           >
+            {/* Left gradient border */}
+            <div className="absolute top-0 left-0 h-full w-1 rounded-l-xl bg-gradient-to-b from-blue-400 to-blue-600" />
+
             <div className="flex items-center gap-2">
               <FaUserCircle className="text-gray-800 text-xl" />
               <h4 className="text-lg font-semibold italic underline text-blue-900">{item.name}</h4>
@@ -119,7 +144,6 @@ const Testimonials: React.FC = () => {
                   <FaStar key={idx} className={idx < item.rating ? 'opacity-100' : 'opacity-30'} />
                 ))}
               </div>
-
               <span className="ml-2 bg-yellow-500 text-black text-sm font-bold px-2 py-0.5 rounded">
                 {item.rating.toFixed(1)}
               </span>
