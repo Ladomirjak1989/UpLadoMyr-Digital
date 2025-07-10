@@ -551,7 +551,7 @@ const HomePage: React.FC = () => {
             All-in-One Web Development for Entrepreneurs
           </h2>
           <p
-            className="font-tangerine text-center text-lg sm:text-xl text-yellow-600 italic mb-12"
+            className="font-tangerine text-center text-lg text-yellow-800 sm:text-yellow-600 italic mb-12"
             data-aos="fade-down"
           >
             Design <span className="text-blue-700">|</span> Develop{' '}
@@ -608,17 +608,23 @@ const HomePage: React.FC = () => {
             Web Development Methodology
           </h2>
           <p
-            className="font-tangerine text-center text-base sm:text-lg text-yellow-600 italic mb-12 max-w-3xl mx-auto"
+            className="font-tangerine text-center text-sm text-yellow-800 sm:text-yellow-600 italic mb-12 max-w-3xl mx-auto"
             data-aos="fade-in"
           >
             We focus on transparent processes and a structured approach...
           </p>
 
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-12 relative">
+          <div className="flex flex-wrap justify-center items-start gap-10 sm:gap-12 relative">
             {steps.map((step, index) => (
-              <div key={index} className="relative flex flex-col items-center">
+              <div
+                key={index}
+                className="relative flex flex-col items-center w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto"
+              >
                 <div
-                  className={`hexagon w-full max-w-xs md:w-64 lg:w-72 h-72 border-[6px] ${step.color} flex items-center justify-center p-2 bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] shadow-lg hover:shadow-2xl transition-all duration-300 group`}
+                  className={`hexagon w-full h-72 border-[6px] ${step.color}
+        flex items-center justify-center
+        p-2 bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa]
+        shadow-lg hover:shadow-2xl transition-all duration-300 group`}
                   style={{
                     clipPath: 'polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%)',
                   }}
@@ -640,21 +646,37 @@ const HomePage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Стрілка */}
+                {/* Стрілки: вниз на моб, справа на десктопі */}
                 {index < steps.length - 1 && (
-                  <div className="hidden sm:block">
-                    <svg
-                      data-aos="zoom-in"
-                      data-aos-delay={index * 100}
-                      className="absolute left-[calc(100%+12px)] top-1/2 transform -translate-y-1/2 text-deep w-6 h-6"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
+                  <>
+                    {/* Down arrow (мобілки) */}
+                    <div className="block sm:hidden mt-4">
+                      <svg
+                        className="text-deep w-5 h-5 animate-bounce"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+
+                    {/* Right arrow (десктоп) */}
+                    <div className="hidden sm:block">
+                      <svg
+                        data-aos="zoom-in"
+                        data-aos-delay={index * 100}
+                        className="absolute left-[calc(100%+12px)] top-1/2 transform -translate-y-1/2 text-deep w-6 h-6 animate-pulse"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </>
                 )}
               </div>
             ))}
@@ -680,7 +702,7 @@ const HomePage: React.FC = () => {
             Technical Expertise
           </h2>
           <p
-            className="font-tangerine text-base sm:text-lg text-yellow-600 italic max-w-4xl mx-auto mb-12"
+            className="font-tangerine text-lg text-yellow-800 sm:text-yellow-600 italic max-w-4xl mx-auto mb-12"
             data-aos="fade-in"
           >
             We help businesses grow by delivering...

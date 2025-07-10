@@ -233,7 +233,7 @@ const Footer: React.FC = () => {
             <h4 className="text-lg font-semibold mb-4 text-blue-950">
               WANT INSIGHTS IN YOUR INBOX?
             </h4>
-            <p className="font-tangerine text-sm text-gray-500 mb-4 leading-relaxed">
+            <p className="font-tangerine text-sm text-gray-800 sm:text-gray-500 mb-4 leading-relaxed">
               Looking to grow your business online? Leave your email — we’ll support you with expert
               tips and practical solutions.
             </p>
@@ -280,7 +280,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-400 mt-8 pt-4 px-4 md:px-16 flex flex-col md:flex-row justify-between items-center text-xs text-gray-700 gap-4">
+        <div className="border-t border-gray-400 mt-2 pt-6 px-4 md:px-16 flex flex-col md:flex-row justify-between items-center text-xs text-gray-700 gap-4">
           <div className="flex flex-col md:flex-row items-center gap-2 text-center md:text-left">
             <p>
               &copy; 2025{' '}
@@ -301,7 +301,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Right: Icons */}
-          <div className="flex gap-4 justify-center">
+          {/* <div className="flex gap-4 justify-center">
             {[FaFacebookF, FaInstagram, FaTelegramPlane, FaYoutube].map((Icon, i) => (
               <div
                 key={i}
@@ -310,7 +310,7 @@ const Footer: React.FC = () => {
                 <Icon size={14} />
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </>
