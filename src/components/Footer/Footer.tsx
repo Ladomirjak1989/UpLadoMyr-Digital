@@ -169,7 +169,7 @@ const Footer: React.FC = () => {
               </div>
               <p className="text-2xl sm:text-lg font-medium tracking-wide text-gray-300">
                 <span className="font-bold text-blue-950 font-dmserif">UpLadoMyr</span>{' '}
-                <span className="text-yellow-500 font-dmserif">Digital</span>{' '}
+                <span className="text-yellow-700 font-dmserif">Digital</span>{' '}
                 <span className="font-tangerine italic text-gray-500 hidden sm:inline">
                   — driving digital success
                 </span>

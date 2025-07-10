@@ -62,7 +62,7 @@ const HomeBanner: React.FC = () => {
       </div>
 
       {/* Інформаційний блок у правому нижньому куті */}
-      <div className="absolute bottom-6 right-20 bg-deep/90 backdrop-blur-md text-white p-5 sm:p-6 max-w-md rounded-tl-2xl shadow-lg z-10 animate__animated animate__fadeInRight">
+      <div className="absolute bottom-6 right-4 sm:right-20 bg-deep/90 backdrop-blur-md text-white p-5 sm:p-6 max-w-md rounded-tl-2xl shadow-lg z-10 animate__animated animate__fadeInRight">
         <p className="font-tangerine text-sm sm:text-base leading-relaxed">
           Get a complete website from A to Z – from design to launch, fast and professional.
         </p>
