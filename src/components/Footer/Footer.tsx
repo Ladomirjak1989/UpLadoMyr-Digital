@@ -233,7 +233,7 @@ const Footer: React.FC = () => {
             <h4 className="text-lg font-semibold mb-4 text-blue-950">
               WANT INSIGHTS IN YOUR INBOX?
             </h4>
-            <p className="font-tangerine text-sm text-gray-800 sm:text-gray-500 mb-4 leading-relaxed">
+            <p className="font-tangerine text-lg sm:text-sm text-gray-800 sm:text-gray-500 mb-4 leading-relaxed">
               Looking to grow your business online? Leave your email — we’ll support you with expert
               tips and practical solutions.
             </p>

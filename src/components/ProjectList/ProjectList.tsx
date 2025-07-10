@@ -132,7 +132,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ searchTerm }) => {
           <h2 className="text-center text-gray-800 mb-8" data-aos="fade-down">
             <span className="font-bold text-4xl sm:text-5xl">100% Custom Design.</span>
             <div>
-              <span className="font-tangerine text-lg text-yellow-800 sm:text-yellow-600 italic">
+              <span className="font-tangerine text-2xl sm:text-xl text-yellow-800 sm:text-yellow-600 italic">
                 We never use pre-made templates.
               </span>
             </div>
