@@ -7,7 +7,6 @@ import Footer from '@/components/Footer/Footer';
 // import Script from 'next/script';
 import ScrollToTopButton from '@/components/ScrollToTopButton/ScrollToTopButton';
 import WeglotInitializer from '@/components/WeglotInitializer/WeglotInitializer';
-import FloatingSocialButtons from '@/components/FloatingSocialButtons/FloatingSocialButtons';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -58,7 +57,6 @@ export default function RootLayout({
         <Footer />
         <WeglotInitializer />
         <ScrollToTopButton />
-        <FloatingSocialButtons />
       </body>
     </html>
   );

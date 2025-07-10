@@ -20,13 +20,13 @@ const HomeBanner: React.FC = () => {
 
       {/* Основний текстовий блок */}
       <div className="relative z-10 text-white max-w-xl space-y-6 animate__animated animate__fadeInLeft">
-        <h1 className="text-4xl sm:text-5xl font-bold leading-tight drop-shadow-md">
-          Professional websites for freelancers (ZZP) & small businesses
+        <h1 className="text-xl sm:text-2xl font-bold text-white drop-shadow-md">
+          Custom Websites & WebApps for Self-Employed Professionals (ZZP) and Small Businesses
         </h1>
-
-        <p className="text-lg sm:text-xl leading-relaxed text-white/90 drop-shadow-sm">
-          At <span className="text-accent font-semibold text-yellow-500">UpLadoMyr Digital</span>{' '}
-          build modern, fast, and stylish landing pages to strengthen your online presence.
+        <p className="mt-2 text-base sm:text-lg text-white/90 leading-relaxed">
+          At <span className="text-accent font-semibold text-yellow-500">UpLadoMyr Digital</span>,
+          we craft stylish, high-performing online solutions to help your business grow online —
+          fast, responsive, and built to convert.
         </p>
 
         {/* Кнопка з анімацією */}
@@ -62,7 +62,7 @@ const HomeBanner: React.FC = () => {
       </div>
 
       {/* Інформаційний блок у правому нижньому куті */}
-      <div className="absolute bottom-6 right-6 bg-deep/90 backdrop-blur-md text-white p-5 sm:p-6 max-w-md rounded-tl-2xl shadow-lg z-10 animate__animated animate__fadeInRight">
+      <div className="absolute bottom-6 right-20 bg-deep/90 backdrop-blur-md text-white p-5 sm:p-6 max-w-md rounded-tl-2xl shadow-lg z-10 animate__animated animate__fadeInRight">
         <p className="font-tangerine text-sm sm:text-base leading-relaxed">
           Get a complete website from A to Z – from design to launch, fast and professional.
         </p>
