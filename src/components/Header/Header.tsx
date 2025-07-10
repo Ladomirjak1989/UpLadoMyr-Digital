@@ -328,10 +328,10 @@ const Header: React.FC = () => {
               sizes="(max-width: 768px) 40px, 64px"
             />
           </div>
-          <p className="text-xs sm:text-sm md:text-base lg:text-lg font-medium tracking-wide text-gray-800">
+          <p className="text-xl sm:text-sm md:text-base lg:text-lg font-medium tracking-wide text-gray-800">
             <span className="font-bold text-blue-950 font-dmserif">UpLadoMyr</span>{' '}
             <span className="text-[#deb40a] font-dmserif">Digital</span>{' '}
-            <span className="font-tangerine hidden sm:inline italic text-gray-500">
+            <span className="font-tangerine italic text-gray-500 hidden sm:inline">
               — where ideas come to life in code
             </span>
           </p>

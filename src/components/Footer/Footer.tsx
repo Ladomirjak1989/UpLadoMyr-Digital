@@ -167,10 +167,10 @@ const Footer: React.FC = () => {
                   className="object-contain rounded-full ring-2 ring-yellow-400 bg-white"
                 />
               </div>
-              <p className="text-sm sm:text-base font-medium tracking-wide text-gray-300">
-                <span className="font-bold text-blue-950 font-dmserif ">UpLadoMyr</span>{' '}
+              <p className="text-2xl sm:text-lg font-medium tracking-wide text-gray-300">
+                <span className="font-bold text-blue-950 font-dmserif">UpLadoMyr</span>{' '}
                 <span className="text-yellow-500 font-dmserif">Digital</span>{' '}
-                <span className="font-tangerine hidden sm:inline italic text-gray-500">
+                <span className="font-tangerine italic text-gray-500 hidden sm:inline">
                   — driving digital success
                 </span>
               </p>
@@ -280,7 +280,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-400 mt-2 pt-6 px-4 md:px-16 flex flex-col md:flex-row justify-between items-center text-xs text-gray-700 gap-4">
+        <div className="border-t border-gray-400 mt-2 pt-6 px-4 md:px-16 flex flex-col md:flex-row justify-between items-center text-xs text-gray-800 gap-4">
           <div className="flex flex-col md:flex-row items-center gap-2 text-center md:text-left">
             <p>
               &copy; 2025{' '}
