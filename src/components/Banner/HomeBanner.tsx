@@ -160,7 +160,7 @@ const HomeBanner: React.FC = () => {
       </div>
 
       {/* Контактний блок у правому нижньому куті */}
-      <div className="absolute bottom-4 right-2 sm:bottom-6 sm:right-20 bg-deep/90 backdrop-blur-md text-white p-4 sm:p-6 max-w-sm sm:max-w-lg rounded-tl-2xl shadow-lg z-10 animate__animated animate__fadeInRight">
+      {/* <div className="absolute bottom-4 right-2 sm:bottom-6 sm:right-20 bg-deep/90 backdrop-blur-md text-white p-4 sm:p-6 max-w-sm sm:max-w-lg rounded-tl-2xl shadow-lg z-10 animate__animated animate__fadeInRight">
         <p className="font-tangerine text-2xl sm:text-lg md:text-xl leading-relaxed">
           Get a complete website from A to Z – from design to launch, fast and professional.
         </p>
@@ -169,6 +169,16 @@ const HomeBanner: React.FC = () => {
           +31 (06) 19 - 38 - 88 - 95
         </p>
         <hr className="mt-3 sm:mt-4 w-52 text-white border-accent" />
+      </div> */}
+      <div className="absolute bottom-1 right-4 sm:right-20 bg-deep/90 backdrop-blur-md text-white p-2 sm:p-8 max-w-lg rounded-tl-2xl shadow-lg z-10 animate__animated animate__fadeInRight mt-6">
+        <p className="font-tangerine text-2xl sm:text-xl leading-relaxed text-white/90">
+          Get a complete website from A to Z – from design to launch, fast and professional.
+        </p>
+        <p className="font-tangerine mt-4 text-yellow-400 flex items-center gap-2 font-bold text-accent animate__animated animate__pulse animate__infinite text-lg sm:text-xl">
+          <FaPhoneAlt className="text-accent bg-white rounded-full p-3 w-12 h-12 shadow-md border border-yellow-500 hover:shadow-lg transition-transform duration-300 hover:scale-110" />
+          +31 (06) 19 - 38 - 88 - 95
+        </p>
+        <hr className="mt-4 w-52 text-white border-accent" />
       </div>
     </section>
   );
