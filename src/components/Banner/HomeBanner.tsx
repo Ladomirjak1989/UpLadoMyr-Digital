@@ -12,11 +12,11 @@ const HomeBanner: React.FC = () => {
 
   return (
     <section
-      className="relative w-full h-[100vh] bg-cover bg-center flex items-center justify-start px-4 sm:px-6 lg:px-16 rounded-b-[20px]"
+      className="relative w-full h-[100vh] bg-cover bg-center flex items-center justify-start px-4 sm:px-6 lg:px-16 rounded-b-[10px]"
       style={{ backgroundImage: "url('/img/bannerhome/bannerhome.png')" }}
     >
       {/* Затемнення фону */}
-      <div className="absolute inset-0 bg-black/40 rounded-b-[20px] z-0" />
+      <div className="absolute inset-0 bg-black/40 rounded-b-[10px] z-0" />
 
       {/* Основний текстовий блок */}
       <div className="relative z-10 text-white max-w-2xl space-y-6 sm:space-y-8 animate__animated animate__fadeInLeft">
