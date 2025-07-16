@@ -170,7 +170,7 @@ const HomeBanner: React.FC = () => {
         </p>
         <hr className="mt-3 sm:mt-4 w-52 text-white border-accent" />
       </div> */}
-      <div className="absolute bottom-1 right-4 sm:right-20 bg-deep/90 backdrop-blur-md text-white p-2 sm:p-8 max-w-lg rounded-tl-2xl shadow-lg z-10 animate__animated animate__fadeInRight mt-6">
+      <div className="absolute bottom-3 right-3 sm:right-20 bg-deep/90 backdrop-blur-md text-white p-2 sm:p-8 max-w-lg rounded-tl-2xl shadow-lg z-10 animate__animated animate__fadeInRight mt-6">
         <p className="font-tangerine text-2xl sm:text-xl leading-relaxed text-white/90">
           Get a complete website from A to Z – from design to launch, fast and professional.
         </p>
