@@ -9,7 +9,6 @@ const page = () => {
       {/* <Header /> */}
       <AboutBanner />
       <AboutUsPage />
-      
     </div>
   );
 };
