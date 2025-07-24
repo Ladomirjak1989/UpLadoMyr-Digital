@@ -1,3 +1,4 @@
+'use client';
 import ContactBanner from '@/components/Banner/ContactBanner';
 import ContactPage from '@/components/Pages/ContactPage/ContactPage';
 import React from 'react';
