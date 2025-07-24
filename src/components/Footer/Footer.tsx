@@ -298,6 +298,10 @@ const Footer: React.FC = () => {
             <Link href="/privacy" className="underline hover:text-blue-500">
               Privacy
             </Link>
+            <span className="hidden md:inline">/</span>
+            <Link href="/terms" className="underline hover:text-blue-500">
+              Terms and Conditions
+            </Link>
           </div>
 
           {/* Right: Icons */}

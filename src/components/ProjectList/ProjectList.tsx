@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Project {
   title: string;
@@ -217,6 +218,9 @@ const ProjectList: React.FC<ProjectListProps> = ({ searchTerm }) => {
                 >
                   {expandedIndex === i ? 'Show Less' : 'Show More...'}
                 </button>
+                <Link href="/projectdetails">
+                  <button className="text-blue-700 hover:underline text-sm">Show Details</button>
+                </Link>
               </div>
             </div>
           ))}

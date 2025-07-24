@@ -1,7 +1,5 @@
 import Banner from '@/components/Banner/HomeBanner';
 import HomePage from '@/components/Pages/HomePage/HomePage';
-import PaymentSteps from '@/components/PaymentSteps/PaymentSteps';
-import ServicesPricing from '@/components/ServicesPricing/ServicesPricing';
 
 export default function Home() {
   return (
