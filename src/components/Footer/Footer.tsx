@@ -7,11 +7,11 @@ import emailjs from '@emailjs/browser';
 import {
   FaBriefcase,
   FaChevronRight,
-  FaFacebookF,
-  FaInstagram,
+  // FaFacebookF,
+  // FaInstagram,
   FaPhone,
-  FaTelegramPlane,
-  FaYoutube,
+  // FaTelegramPlane,
+  // FaYoutube,
 } from 'react-icons/fa';
 import { useState } from 'react';
 
