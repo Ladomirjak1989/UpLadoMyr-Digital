@@ -152,7 +152,7 @@ import Image from 'next/image';
 import { FiMenu, FiX, FiUser } from 'react-icons/fi';
 import { usePathname, useRouter } from 'next/navigation';
 import FloatingSocialButtons from '@/components/FloatingSocialButtons/FloatingSocialButtons';
-import { supabase } from '@/app/lib/supabaseClient';
+import { supabase } from '@/app/(site)/lib/supabaseClient';
 
 const navbarConfig = [
   { link: '/', text: 'HOME' },

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { supabase } from '@/app/lib/supabaseClient';
+import { supabase } from '@/app/(site)/lib/supabaseClient';
 import { useRouter } from 'next/navigation';
 import { FaUser, FaLock, FaLockOpen } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
