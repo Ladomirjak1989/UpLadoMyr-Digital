@@ -1,0 +1,266 @@
+@import 'tailwindcss';
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+/* === Базові стилі === */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Списки === */
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* === Підтримка темної теми === */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+html {
+  font-size: 100%;
+}
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 95%;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 85%;
+  }
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #14532d !important;
+  /* Tailwind green-600 */
+  top: 40% !important;
+  /* Підняти стрілки вище */
+}
+
+@keyframes customBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+    /* Менша амплітуда */
+  }
+}
+
+.custom-bounce {
+  animation: customBounce 1s infinite;
+}
+
+.clip-hexagon {
+  clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
+}
+
+.clip-custom {
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.clip-skew-right {
+  clip-path: polygon(0 0, 100% 0, 87% 100%, 0% 100%);
+}
+
+@keyframes wave {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+.animate-wave {
+  animation: wave 4s ease-in-out infinite;
+}
+
+.reverse {
+  transform: rotate(180deg);
+}
+
+.hexagon {
+  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.hexagon:hover {
+  transform: scale(1.05);
+}
+
+.hex-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: currentColor;
+  transition: transform 0.3s;
+}
+
+/* Позиції кутів */
+.hex-corner.top-left {
+  top: 6%;
+  left: 22%;
+}
+
+.hex-corner.top-right {
+  top: 6%;
+  right: 22%;
+}
+
+.hex-corner.middle-right {
+  top: 48%;
+  right: -6px;
+}
+
+.hex-corner.bottom-right {
+  bottom: 6%;
+  right: 22%;
+}
+
+.hex-corner.bottom-left {
+  bottom: 6%;
+  left: 22%;
+}
+
+.hex-corner.middle-left {
+  top: 48%;
+  left: -6px;
+}
+
+.font-dmserif {
+  font-family: 'DM Serif Text', serif;
+}
+
+.font-tangerine {
+  font-family: 'Tangerine', cursive;
+}
+
+@keyframes wave-shine {
+
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.08);
+    /* або 1.07 — як тобі більше подобається */
+  }
+}
+
+.animate-wave-shine {
+  animation: wave-shine 6s ease-in-out infinite;
+}
+
+
+/* === Градієнтна кнопка з адаптивною підтримкою === */
+.btn {
+  @apply relative inline-grid place-content-center text-sm md:text-base lg:text-lg uppercase cursor-pointer font-semibold text-[#afffff] px-4 md:px-6 py-2 md:py-3 transition-colors shadow-xl;
+  background: #080312;
+  isolation: isolate;
+  border: none;
+  clip-path: polygon(0% 0.5em,
+      0.5em 0,
+      100% 0,
+      100% calc(100% - 0.5em),
+      calc(100% - 0.5em) 100%,
+      0 100%);
+}
+
+.btn::before {
+  content: "";
+  @apply absolute inset-0 z-[-2];
+  background: linear-gradient(-45deg, #ffae00, #7e03aa, #00fffb);
+  background-size: 300% 300%;
+  animation: btn-glow 5s ease infinite;
+}
+
+.btn::after {
+  content: "";
+  @apply absolute inset-0 z-[-1];
+  background: #080312;
+  clip-path: polygon(0.125em calc(0.5em + 0.0625em),
+      calc(0.5em + 0.0625em) 0.125em,
+      calc(100% - 0.125em) 0.125em,
+      calc(100% - 0.125em) calc(100% - calc(0.5em + 0.0625em)),
+      calc(100% - calc(0.5em + 0.0625em)) calc(100% - 0.125em),
+      0.125em calc(100% - 0.125em));
+  transition: clip-path 0.5s;
+}
+
+.btn:hover::after,
+.btn:focus::after {
+  clip-path: polygon(calc(100% - 0.125em) calc(100% - calc(0.5em + 0.0625em)),
+      calc(100% - 0.125em) 0.125em,
+      calc(100% - 0.125em) 0.125em,
+      calc(100% - 0.125em) calc(100% - calc(0.5em + 0.0625em)),
+      calc(100% - calc(0.5em + 0.0625em)) calc(100% - 0.125em),
+      calc(100% - calc(0.5em + 0.0625em)) calc(100% - 0.125em));
+  transition: 200ms;
+}
+
+.btn:hover,
+.btn:focus {
+  color: #ffffff;
+}
+
+/* === Анімація градієнтного фону === */
+@keyframes btn-glow {
+  0% {
+    background-position: 31% 0%;
+  }
+
+  50% {
+    background-position: 70% 100%;
+  }
+
+  100% {
+    background-position: 31% 0%;
+  }
+}
