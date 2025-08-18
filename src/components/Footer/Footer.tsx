@@ -14,6 +14,7 @@ import {
   // FaYoutube,
 } from 'react-icons/fa';
 import { useState } from 'react';
+import { FiArrowUp } from 'react-icons/fi';
 
 const Footer: React.FC = () => {
   const pathname = usePathname();
@@ -245,7 +246,7 @@ const Footer: React.FC = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Your E-mail"
+                placeholder="e-mail"
                 required
                 className="w-full sm:max-w-[220px] px-4 py-2 rounded-md bg-white text-gray-900 text-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-300"
               />
@@ -276,6 +277,42 @@ const Footer: React.FC = () => {
                 </p>
               )}
             </form>
+
+            {/* 🔐 Info-callout: need to sign in */}
+            <div className="relative mt-8 w-full max-w-xl">
+              <div className="flex items-start gap-3 rounded-xl border border-yellow-300 bg-yellow-50 px-4 py-3 text-sm text-yellow-900 shadow-sm">
+                <span className="inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-yellow-200 font-semibold">
+                  i
+                </span>
+
+                {/* робимо рядок «токенами», що можуть переноситись між собою,
+       але окремі фрази тримаємо нерозривно */}
+                <p className="leading-6 flex flex-wrap items-center gap-x-1">
+                  <span>To send us an email, please</span>
+
+                  <span className="whitespace-nowrap">
+                    <Link href="/signin" className="underline font-semibold hover:text-yellow-700">
+                      sign in
+                    </Link>
+                  </span>
+
+                  <span>or</span>
+
+                  {/* фраза + стрілка тримаються разом */}
+                  <span className="inline-flex items-center gap-1 whitespace-nowrap align-middle">
+                    <Link href="/signup" className="underline font-semibold hover:text-yellow-700">
+                      create an account
+                    </Link>
+                    <span>.</span>
+                    <FiArrowUp
+                      className="text-yellow-600 text-sm sm:text-base translate-y-[-1px] motion-safe:animate-bounce"
+                      aria-hidden
+                      title="Login is at the top"
+                    />
+                  </span>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 

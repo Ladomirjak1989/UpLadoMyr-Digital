@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx}\"",
     "test": "jest --coverage",
-    "testm": "mocha"
+    "testm": "mocha",
+    "typecheck": "tsc --noEmit"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,md,css,scss}": [
@@ -26,9 +27,12 @@
     "@supabase/supabase-js": "^2.52.0",
     "animate.css": "^4.1.1",
     "aos": "^2.3.4",
+    "axios": "^1.11.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.2.3",
     "framer-motion": "^12.5.0",
+    "jose": "^6.0.12",
+    "jwt-decode": "^4.0.0",
     "next": "15.2.2",
     "prettier": "^3.5.3",
     "react": "^19.0.0",
@@ -45,6 +49,7 @@
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/jest": "^29.5.14",
+    "@types/jwt-decode": "^2.2.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

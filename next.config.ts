@@ -36,12 +36,32 @@ const nextConfig = {
       },
     ],
   },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/api/:path*',
+  //       destination: 'http://localhost:5000/api/:path*', // 🔁 Проксі до бекенду Nest.js
+  //     },
+  //   ];
+  // },
+
+  // next.config.js
   async rewrites() {
+    const backend =
+      process.env.NEXT_PUBLIC_BACKEND_URL ||
+      (process.env.NODE_ENV === 'development'
+        ? process.env.NEXT_PUBLIC_BACKEND_LOCALHOST_URL
+        : process.env.NEXT_PUBLIC_RENDER_URL);
+
+    if (!backend) {
+      console.warn('⚠️ No backend URL set for rewrites()');
+      return [];
+    }
+
+    const target = backend.replace(/\/$/, ''); // прибираємо трейлінг-слеш
+
     return [
-      {
-        source: '/api/:path*',
-        destination: 'http://localhost:4000/api/:path*', // 🔁 Проксі до бекенду Nest.js
-      },
+      { source: '/api/:path*', destination: `${target}/api/:path*` },
     ];
   },
 };

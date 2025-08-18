@@ -1,228 +1,231 @@
 // 'use client';
 
-// import { createContext, useContext, useEffect, useState } from 'react';
-// import { supabase } from '@/app/(site)/lib/supabaseClient';
-// import { Session, User } from '@supabase/supabase-js';
-// import toast from 'react-hot-toast';
+// import React, {
+//   createContext,
+//   useContext,
+//   useEffect,
+//   useState,
+//   useCallback,
+//   useMemo,
+//   type ReactNode,
+// } from 'react';
+// import { useRouter } from 'next/navigation';
+// import axios from '@/lib/axios';
 
-// interface AuthContextType {
-//     session: Session | null;
-//     user: User | null;
-//     setSession: (session: Session | null) => void;
-//     signUp: (email: string, password: string, username: string) => Promise<void>;
-//     signIn: (email: string, password: string) => Promise<void>;
-//     signOut: () => Promise<void>;
+// type Role = 'user' | 'admin' | null;
+
+// interface User {
+//   userId: number;
+//   email: string;
+//   role: Role;
 // }
 
-// const AuthContext = createContext<AuthContextType>({
-//     session: null,
-//     user: null,
-//     setSession: () => { },
-//     signUp: async () => { },
-//     signIn: async () => { },
-//     signOut: async () => { },
-// });
+// interface AuthContextType {
+//   user: User | null;
+//   isLoading: boolean;
+//   login: (email: string, password: string, remember: boolean) => Promise<User>;
+//   logout: () => Promise<void>;
+//   refreshMe: () => Promise<void>;
+// }
 
-// export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-//     const [session, setSession] = useState<Session | null>(null);
+// const Ctx = createContext<AuthContextType | undefined>(undefined);
 
-//     useEffect(() => {
-//         const getSession = async () => {
-//             const { data } = await supabase.auth.getSession();
-//             setSession(data.session);
-//         };
+// export function AuthProvider({ children }: { children: ReactNode }) {
+//   const router = useRouter();
 
-//         getSession();
+//   // ⬇️ всі хуки оголошені топ-рівнем і завжди в одному порядку
+//   const [user, setUser] = useState<User | null>(null);
+//   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-//         const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-//             setSession(session);
-//         });
+//   const fetchMe = useCallback(async () => {
+//     try {
+//       const res = await axios.get<User>('/api/auth/me');
+//       setUser(res.data);
+//     } catch {
+//       setUser(null);
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   }, []);
 
-//         return () => {
-//             listener.subscription.unsubscribe();
-//         };
-//     }, []);
+//   const refreshMe = useCallback(async () => {
+//     setIsLoading(true);
+//     await fetchMe();
+//   }, [fetchMe]);
 
-//     // ✅ signUp
-//     const signUp = async (email: string, password: string, username: string) => {
-//         const { data, error } = await supabase.auth.signUp({
-//             email,
-//             password,
-//             options: {
-//                 data: { username },
-//             },
-//         });
+//   const login = useCallback(
+//     async (email: string, password: string, remember: boolean) => {
+//       await axios.post('/api/auth/login', { email, password });
+//       const res = await axios.get<User>('/api/auth/me');
+//       const data = res.data;
+//       setUser(data);
+//       if (remember) localStorage.setItem('rememberMe', 'true');
+//       else localStorage.removeItem('rememberMe');
 
-//         if (error) {
-//             toast.error(`Sign up error: ${error.message}`);
-//             throw error;
-//         } else {
-//             toast.success('Account created! Check your email to confirm.');
-//         }
+//       const target = data.role === 'admin' ? '/admin' : '/';
+//       router.replace(target);
+//       router.refresh()
+//       return data;
+//     },
+//     [router]
+//   );
+
+//   const logout = useCallback(async () => {
+//     try {
+//       await axios.post('/api/auth/logout');
+//     } catch {
+//       // ignore
+//     } finally {
+//       setUser(null);
+//       localStorage.removeItem('rememberMe');
+//       router.replace('/signin');
+//       router.refresh()
+//     }
+//   }, [router]);
+
+//   useEffect(() => {
+//     // без умовних викликів хуків; “софт” скасування без AbortController
+//     let ignore = false;
+//     (async () => {
+//       try {
+//         const res = await axios.get<User>('/api/auth/me');
+//         if (!ignore) setUser(res.data);
+//       } catch {
+//         if (!ignore) setUser(null);
+//       } finally {
+//         if (!ignore) setIsLoading(false);
+//       }
+//     })();
+//     return () => {
+//       ignore = true;
 //     };
+//   }, []);
 
-//     // ✅ signIn
-//     const signIn = async (email: string, password: string) => {
-//         const { data, error } = await supabase.auth.signInWithPassword({
-//             email,
-//             password,
-//         });
+//   // значення контексту мемоізуємо
+//   const value = useMemo<AuthContextType>(
+//     () => ({ user, isLoading, login, logout, refreshMe }),
+//     [user, isLoading, login, logout, refreshMe]
+//   );
 
-//         if (error) {
-//             toast.error(`Sign in failed: ${error.message}`);
-//             throw error;
-//         } else {
-//             setSession(data.session);
-//             toast.success('Signed in successfully!');
-//         }
-//     };
+//   // ❗ ВАЖЛИВО: провайдер завжди рендериться. Ніяких ранніх `return null`.
+//   // Щоб уникнути мерехтіння — просто не показуємо дітей поки іде первинна перевірка.
+//   return (
+//     <Ctx.Provider value={value}>
+//       {isLoading ? null : children}
+//     </Ctx.Provider>
+//   );
+// }
 
-//     // ✅ signOut
-//     const signOut = async () => {
-//         const { error } = await supabase.auth.signOut();
-
-//         if (error) {
-//             toast.error(`Sign out failed: ${error.message}`);
-//         } else {
-//             setSession(null);
-//             toast.success('Signed out successfully!');
-//         }
-//     };
-
-//     return (
-//         <AuthContext.Provider
-//             value={{
-//                 session,
-//                 user: session?.user || null,
-//                 setSession,
-//                 signUp,
-//                 signIn,
-//                 signOut,
-//             }}
-//         >
-//             {children}
-//         </AuthContext.Provider>
-//     );
-// };
-
-// export const useAuth = () => useContext(AuthContext);
+// export function useAuth(): AuthContextType {
+//   const ctx = useContext(Ctx);
+//   if (!ctx) throw new Error('useAuth must be used within an AuthProvider');
+//   return ctx;
+// }
 
 'use client';
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { supabase } from '../app/(site)/lib/supabaseClient';
-import { Session, User } from '@supabase/supabase-js';
-import toast from 'react-hot-toast';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+  type ReactNode,
+} from 'react';
+import { useRouter } from 'next/navigation';
+import axios from '@/lib/axios';
 
-type AuthContextType = {
-  session: Session | null;
+type Role = 'user' | 'admin' | null;
+
+interface User {
+  userId: number;
+  email: string;
+  role: Role;
+}
+
+interface AuthContextType {
   user: User | null;
-  setSession: (session: Session | null) => void;
-  signUp: (email: string, password: string, username: string) => Promise<void>;
-  signIn: (email: string, password: string, remember?: boolean) => Promise<void>;
-  signOut: () => Promise<void>;
-};
+  isLoading: boolean;
+  login: (email: string, password: string, remember: boolean) => Promise<User>;
+  logout: () => Promise<void>;
+  refreshMe: () => Promise<void>;
+}
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const Ctx = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-  const [session, setSession] = useState<Session | null>(null);
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const router = useRouter();
 
-  useEffect(() => {
-    const initSession = async () => {
-      const { data } = await supabase.auth.getSession();
-      setSession(data.session ?? null);
-    };
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    initSession();
-
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      if (session) {
-        localStorage.setItem('rememberedSession', JSON.stringify(session));
-      } else {
-        localStorage.removeItem('rememberedSession');
-      }
-    });
-
-    return () => {
-      listener.subscription.unsubscribe();
-    };
+  const fetchMe = useCallback(async () => {
+    try {
+      const res = await axios.get<User>('/api/auth/me');
+      setUser(res.data);
+    } catch {
+      setUser(null);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
-  // ✅ Реєстрація
-  const signUp = async (email: string, password: string, username: string): Promise<void> => {
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { username },
-      },
-    });
+  const refreshMe = useCallback(async () => {
+    setIsLoading(true);
+    await fetchMe();
+  }, [fetchMe]);
 
-    if (error) {
-      toast.error(`Sign up error: ${error.message}`);
-      throw error;
-    }
+  const login = useCallback(
+    async (email: string, password: string, remember: boolean) => {
+      // ⬇️ обов'язково передаємо remember на бекенд
+      await axios.post('/api/auth/login', { email, password, remember });
+      const res = await axios.get<User>('/api/auth/me');
+      const data = res.data;
+      setUser(data);
 
-    toast.success('Account created! Check your email to confirm.');
-  };
+      // зберігаємо лише прапорець, НЕ пароль/токен
+      if (remember) {
+        localStorage.setItem('rememberMe', 'true');
+      } else {
+        localStorage.removeItem('rememberMe');
+      }
 
-  // ✅ Вхід
-  const signIn = async (email: string, password: string, remember = false): Promise<void> => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+      const target = data.role === 'admin' ? '/admin' : '/';
+      router.replace(target);
 
-    if (error) {
-      toast.error(`Sign in failed: ${error.message}`);
-      throw error;
-    }
-
-    setSession(data.session);
-
-    if (remember) {
-      localStorage.setItem('rememberedSession', JSON.stringify(data.session));
-    }
-
-    toast.success('Signed in successfully!');
-  };
-
-  // ✅ Вихід
-  const signOut = async (): Promise<void> => {
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-      toast.error(`Sign out failed: ${error.message}`);
-      throw error;
-    }
-
-    setSession(null);
-    localStorage.removeItem('rememberedSession');
-    toast.success('Signed out successfully!');
-  };
-
-  return (
-    <AuthContext.Provider
-      value={{
-        session,
-        user: session?.user ?? null,
-        setSession,
-        signUp,
-        signIn,
-        signOut,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+      return data;
+    },
+    [router]
   );
-};
 
-export const useAuth = (): AuthContextType => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthContextProvider');
-  }
-  return context;
-};
+  const logout = useCallback(async () => {
+    try {
+      await axios.post('/api/auth/logout');
+    } catch {
+      // ignore
+    } finally {
+      setUser(null);
+
+      localStorage.removeItem('rememberMe');
+      router.replace('/'); // після виходу ведемо на головну
+    }
+  }, [router]);
+
+  useEffect(() => {
+    fetchMe();
+  }, [fetchMe]);
+
+  const value = useMemo<AuthContextType>(
+    () => ({ user, isLoading, login, logout, refreshMe }),
+    [user, isLoading, login, logout, refreshMe]
+  );
+
+  return <Ctx.Provider value={value}>{isLoading ? null : children}</Ctx.Provider>;
+}
+
+export function useAuth(): AuthContextType {
+  const ctx = useContext(Ctx);
+  if (!ctx) throw new Error('useAuth must be used within an AuthProvider');
+  return ctx;
+}

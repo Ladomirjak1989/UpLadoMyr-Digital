@@ -5,6 +5,7 @@ import emailjs from '@emailjs/browser';
 import { FaUser, FaEnvelope, FaCommentDots } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
+import { FiArrowUp } from 'react-icons/fi';
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -180,11 +181,14 @@ const ContactPage: React.FC = () => {
               </div>
 
               {/* Privacy Policy Agreement */}
-              <div className="flex items-start gap-2 text-sm text-gray-800">
+              <div className="flex items-start gap-2 text-sm text-gray-900">
                 <input type="checkbox" required className="mt-1 accent-yellow-500" />
                 <label>
                   By submitting the form, you agree to the processing of your{' '}
-                  <Link href="/privacy" className="underline hover:text-yellow-600 transition">
+                  <Link
+                    href="/privacy"
+                    className="underline text-blue-800 hover:text-yellow-600 transition"
+                  >
                     personal data
                   </Link>
                   .
@@ -219,6 +223,42 @@ const ContactPage: React.FC = () => {
                 </p>
               )}
             </form>
+
+            {/* 🔐 Info-callout: need to sign in */}
+            <div className="relative mt-8 w-full max-w-xl">
+              <div className="flex items-start gap-3 rounded-xl border border-yellow-300 bg-yellow-50 px-4 py-3 text-sm text-yellow-900 shadow-sm">
+                <span className="inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-yellow-200 font-semibold">
+                  i
+                </span>
+
+                {/* робимо рядок «токенами», що можуть переноситись між собою,
+                але окремі фрази тримаємо нерозривно */}
+                <p className="leading-6 flex flex-wrap items-center gap-x-1">
+                  <span>To send us an email, please</span>
+
+                  <span className="whitespace-nowrap">
+                    <Link href="/signin" className="underline font-semibold hover:text-yellow-700">
+                      sign in
+                    </Link>
+                  </span>
+
+                  <span>or</span>
+
+                  {/* фраза + стрілка тримаються разом */}
+                  <span className="inline-flex items-center gap-1 whitespace-nowrap align-middle">
+                    <Link href="/signup" className="underline font-semibold hover:text-yellow-700">
+                      create an account
+                    </Link>
+                    <span>.</span>
+                    <FiArrowUp
+                      className="text-yellow-600 text-sm sm:text-base translate-y-[-1px] motion-safe:animate-bounce"
+                      aria-hidden
+                      title="Login is at the top"
+                    />
+                  </span>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

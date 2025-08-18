@@ -1,12 +1,11 @@
-import { AuthContextProvider } from '../../context/AuthContext';
-import '../globals.css';
+'use client';
+
+import { AuthProvider } from '@/context/AuthContext';
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <AuthContextProvider>
-        <body>{children}</body>
-      </AuthContextProvider>
-    </html>
+    <AuthProvider>
+      <div className="min-h-screen flex items-center justify-center bg-white">{children}</div>
+    </AuthProvider>
   );
 }
