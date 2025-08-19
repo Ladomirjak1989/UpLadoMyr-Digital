@@ -16,7 +16,7 @@ const AdminMain = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <aside className="hidden md:block w-64 bg-gray-900 text-white p-6">
+      <aside className="hidden md:block w-64 bg-gray-900 text-white p-7">
         <h2 className="text-xl font-bold mb-8">Admin Panel</h2>
         <nav className="flex flex-col gap-4">
           {navItems.map(({ label, href }) => (
