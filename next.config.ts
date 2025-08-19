@@ -36,14 +36,7 @@ const nextConfig = {
       },
     ],
   },
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/api/:path*',
-  //       destination: 'http://localhost:5000/api/:path*', // 🔁 Проксі до бекенду Nest.js
-  //     },
-  //   ];
-  // },
+ 
 
   // next.config.js
   async rewrites() {
