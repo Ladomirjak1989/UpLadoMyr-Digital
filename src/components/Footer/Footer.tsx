@@ -305,7 +305,7 @@ const Footer: React.FC = () => {
                     </Link>
                     <span>.</span>
                     <FiArrowUp
-                      className="text-yellow-600 text-sm sm:text-base translate-y-[-1px] motion-safe:animate-bounce"
+                      className="text-yellow-600 text-sm sm:text-base translate-y-[-1px] motion-safe:animate-ping"
                       aria-hidden
                       title="Login is at the top"
                     />
