@@ -1,259 +1,3 @@
-// 'use client';
-
-// import React, { useState } from 'react';
-// import { useRouter } from 'next/navigation';
-// import { FaUser, FaLock, FaLockOpen } from 'react-icons/fa';
-// import { MdEmail } from 'react-icons/md';
-// import Image from 'next/image';
-// import Link from 'next/link';
-// import toast from 'react-hot-toast';
-// import axios from '@/lib/axios';
-// import { useAuth } from '@/context/AuthContext';
-
-// const SignUp: React.FC = () => {
-//   const router = useRouter();
-//   const { login } = useAuth(); // автологін після успішної реєстрації
-
-//   const [form, setForm] = useState({
-//     username: '',
-//     email: '',
-//     password: '',
-//     confirm: '',
-//   });
-//   const [agreed, setAgreed] = useState(false);
-//   const [show, setShow] = useState({ password: false, confirm: false });
-//   const [submitting, setSubmitting] = useState(false);
-
-//   const onChange = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setForm((s) => ({ ...s, [key]: e.target.value }));
-//   };
-
-//   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-//     e.preventDefault();
-
-//     const email = form.email.trim().toLowerCase();
-//     const username = form.username.trim();
-
-//     if (!agreed) {
-//       toast.error('You must agree to the Terms & Conditions.');
-//       return;
-//     }
-//     if (!username || !email || !form.password || !form.confirm) {
-//       toast.error('Please fill in all fields.');
-//       return;
-//     }
-//     if (form.password.length < 6) {
-//       toast.error('Password must be at least 6 characters.');
-//       return;
-//     }
-//     if (form.password !== form.confirm) {
-//       toast.error('Passwords do not match.');
-//       return;
-//     }
-
-//     setSubmitting(true);
-//     try {
-//       await axios.post('/api/auth/signup', {
-//         email,
-//         password: form.password,
-//         username,
-//       });
-
-//       toast.success('Account created successfully!');
-
-//       // автологін (без remember під час реєстрації)
-//       try {
-//         await login(email, form.password, false);
-//       } catch {
-//         router.replace('/signin');
-//       }
-//     } catch (err: any) {
-//       const message = err?.response?.data?.message ?? err?.message ?? 'Sign up failed.';
-//       toast.error(Array.isArray(message) ? message.join(', ') : message);
-//     } finally {
-//       setSubmitting(false);
-//     }
-//   };
-
-//   return (
-//     <div className="flex min-h-screen flex-col lg:flex-row p-6 sm:p-10 lg:p-16">
-//       {/* LEFT PANEL */}
-//       <div className="hidden w-full flex-col items-center justify-center space-y-6 bg-gradient-to-br from-orange-200 to-blue-300 p-6 text-amber-900 lg:flex lg:w-1/2">
-//         <p className="mt-6 max-w-sm text-center text-lg italic">
-//           <span className="animate-pulse text-3xl font-semibold text-yellow-700">
-//             UpLadoMyr Digital
-//           </span>
-//           <br />
-//           Turning ideas into scalable websites and smart digital solutions.
-//           <br />
-//           Let’s build your future — pixel by pixel, line by line.
-//         </p>
-//         <Image
-//           src="/img/signup/welkom2.avif"
-//           alt="Welcome"
-//           width={300}
-//           height={300}
-//           className="rounded-md shadow-lg"
-//           priority
-//         />
-//       </div>
-
-//       {/* RIGHT PANEL */}
-//       <div className="flex w-full items-center justify-center bg-white p-6 sm:p-10 lg:w-1/2">
-//         <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4" noValidate>
-//           <h2 className="pt-8 text-center text-2xl font-bold text-yellow-900">Welcome</h2>
-//           <p className="text-center text-xl font-bold text-yellow-700">Create your account</p>
-
-//           {/* Username */}
-//           <div className="relative">
-//             <input
-//               type="text"
-//               name="username"
-//               placeholder="Username"
-//               value={form.username}
-//               onChange={onChange('username')}
-//               autoComplete="username"
-//               required
-//               className="w-full rounded-lg border px-4 py-2"
-//             />
-//             <FaUser className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600" />
-//           </div>
-
-//           {/* Email */}
-//           <div className="relative">
-//             <input
-//               type="email"
-//               name="email"
-//               placeholder="Email"
-//               value={form.email}
-//               onChange={onChange('email')}
-//               autoComplete="email"
-//               required
-//               className="w-full rounded-lg border px-4 py-2"
-//             />
-//             <MdEmail className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600" />
-//           </div>
-
-//           {/* Password */}
-//           <div className="relative">
-//             <input
-//               type={show.password ? 'text' : 'password'}
-//               name="new-password"
-//               placeholder="Password"
-//               value={form.password}
-//               onChange={onChange('password')}
-//               autoComplete="new-password"
-//               required
-//               className="w-full rounded-lg border px-4 py-2"
-//             />
-//             {show.password ? (
-//               <FaLockOpen
-//                 onClick={() => setShow((s) => ({ ...s, password: false }))}
-//                 className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-600"
-//                 aria-label="Hide password"
-//               />
-//             ) : (
-//               <FaLock
-//                 onClick={() => setShow((s) => ({ ...s, password: true }))}
-//                 className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-600"
-//                 aria-label="Show password"
-//               />
-//             )}
-//           </div>
-
-//           {/* Confirm Password */}
-//           <div className="relative">
-//             <input
-//               type={show.confirm ? 'text' : 'password'}
-//               name="confirm-password"
-//               placeholder="Confirm Password"
-//               value={form.confirm}
-//               onChange={onChange('confirm')}
-//               autoComplete="new-password"
-//               required
-//               className="w-full rounded-lg border px-4 py-2"
-//             />
-//             {show.confirm ? (
-//               <FaLockOpen
-//                 onClick={() => setShow((s) => ({ ...s, confirm: false }))}
-//                 className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-600"
-//                 aria-label="Hide confirm password"
-//               />
-//             ) : (
-//               <FaLock
-//                 onClick={() => setShow((s) => ({ ...s, confirm: true }))}
-//                 className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-600"
-//                 aria-label="Show confirm password"
-//               />
-//             )}
-//           </div>
-
-//           {/* Terms */}
-//           <label className="flex items-center gap-2 text-sm">
-//             <input
-//               type="checkbox"
-//               checked={agreed}
-//               onChange={() => setAgreed((v) => !v)}
-//               className="accent-blue-600"
-//               required
-//             />
-//             <span>
-//               I agree to the{' '}
-//               <Link href="/terms" className="text-blue-600 underline">
-//                 Terms &amp; Conditions
-//               </Link>
-//               .
-//             </span>
-//           </label>
-
-//           {/* Submit */}
-//           <button
-//             type="submit"
-//             disabled={submitting || !agreed}
-//             aria-busy={submitting}
-//             className="btn mx-auto w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg disabled:cursor-not-allowed disabled:opacity-60"
-//           >
-//             {submitting ? 'Creating…' : 'Sign Up'}
-//           </button>
-
-//           {/* Switch to Sign In */}
-//           <p className="text-center text-sm">
-//             Already have an account?
-//             <Link href="/signin" className="ml-1 text-blue-600 hover:underline">
-//               Sign In
-//             </Link>
-//           </p>
-
-//           {/* OAuth placeholders */}
-//           <div className="mt-4 flex items-center justify-center gap-4">
-//             <button
-//               type="button"
-//               className="flex items-center gap-2 rounded-xl bg-gray-100 px-4 py-2 transition-transform hover:scale-105 hover:bg-gray-200"
-//             >
-//               <Image src="/img/signup/search.png" alt="Google" width={20} height={20} />
-//               Google
-//             </button>
-//             <button
-//               type="button"
-//               className="flex items-center gap-2 rounded-xl bg-red-500 px-4 py-2 text-white transition-transform hover:scale-105 hover:bg-red-600"
-//             >
-//               <Image
-//                 src="/img/signup/icons8-facebook-50.png"
-//                 alt="Facebook"
-//                 width={20}
-//                 height={20}
-//               />
-//               Facebook
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SignUp;
-
 'use client';
 
 import React, { useRef, useState } from 'react';
@@ -268,6 +12,7 @@ import { useAuth } from '@/context/AuthContext';
 
 type Form = { username: string; email: string; password: string; confirm: string };
 type Errors = Partial<Record<keyof Form | 'terms', string>>;
+type Field = keyof Form | 'terms';
 
 /** Дозволяємо будь-які коректні домени (включно з .ua, .de, .co, .me і т.д.) */
 const emailRe = /^(?!.*\.\.)[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}$/;
@@ -327,7 +72,13 @@ const SignUp: React.FC = () => {
 
   const [form, setForm] = useState<Form>({ username: '', email: '', password: '', confirm: '' });
   const [errors, setErrors] = useState<Errors>({});
-  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [touched, setTouched] = useState<Record<Field, boolean>>({
+    username: false,
+    email: false,
+    password: false,
+    confirm: false,
+    terms: false,
+  });
   const [agreed, setAgreed] = useState(false);
   const [show, setShow] = useState({ password: false, confirm: false });
   const [submitting, setSubmitting] = useState(false);
@@ -377,6 +128,19 @@ const SignUp: React.FC = () => {
         suggestion && suggestion.toLowerCase() !== value.toLowerCase() ? suggestion : null
       );
     }
+  };
+
+  // ✅ FIX: миттєво прибираємо/ставимо помилку при зміні чекбокса
+  const onTermsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    setAgreed(checked);
+    setTouched((t) => ({ ...t, terms: true }));
+    setErrors((prev) => {
+      const next = { ...prev };
+      if (checked) delete next.terms;
+      else next.terms = 'You must agree to the Terms & Conditions.';
+      return next;
+    });
   };
 
   function validateField(key: keyof Form, value: string, all: Form): string | undefined {
@@ -431,7 +195,7 @@ const SignUp: React.FC = () => {
 
     const nextErrors = validateAll(form, agreed);
     setErrors(nextErrors);
-    setTouched({ username: true, email: true, password: true, confirm: true, terms: true as any });
+    setTouched({ username: true, email: true, password: true, confirm: true, terms: true });
 
     if (Object.keys(nextErrors).length) {
       toast.error('Please fix the errors in the form.');
@@ -480,7 +244,7 @@ const SignUp: React.FC = () => {
 
   const ErrorText = ({ id, msg }: { id: string; msg?: string }) =>
     msg ? (
-      <p id={id} role="alert" className="mt-1 text-xs text-red-600">
+      <p id={id} role="alert" aria-live="polite" className="mt-1 text-xs text-red-600">
         {msg}
       </p>
     ) : null;
@@ -661,7 +425,7 @@ const SignUp: React.FC = () => {
                 ref={refs.terms}
                 type="checkbox"
                 checked={agreed}
-                onChange={() => setAgreed((v) => !v)}
+                onChange={onTermsChange}
                 className={`accent-blue-600`}
                 aria-invalid={!!errors.terms}
                 aria-describedby={errors.terms ? 'terms-error' : undefined}
