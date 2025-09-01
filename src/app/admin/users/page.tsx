@@ -49,7 +49,6 @@ const AdminUsersPage: React.FC = () => {
     setError(null);
     try {
       const { data } = await axios.get<User[]>('/api/users', {
-        headers: { 'Cache-Control': 'no-store' },
       });
       setRows(data);
     } catch (e: any) {
