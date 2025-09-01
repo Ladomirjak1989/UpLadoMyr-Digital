@@ -24,10 +24,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
     cache: 'no-store',
   });
 
-  // if (meRes.status === 401) redirect('/signin'); // не залогінений
-  // if (meRes.status === 403) redirect('/unauthorized'); // роль не підходить
-
-  if (!meRes.ok) redirect('/unauthorized');
+  if (!meRes.ok) redirect('/signin');
 
   const me = await meRes.json();
   const role = me?.role ?? me?.user?.role ?? me?.data?.role ?? null;
