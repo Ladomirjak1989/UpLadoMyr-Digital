@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import api from '@/lib/axios';
+import axios from '@/lib/axios';
 import { useAuth } from '@/context/AuthContext';
 import { cn } from '@/lib/cn';
 
@@ -48,7 +48,7 @@ const AdminUsersPage: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const { data } = await api.get<User[]>('/api/users', {
+      const { data } = await axios.get<User[]>('/api/users', {
         headers: { 'Cache-Control': 'no-store' },
       });
       setRows(data);
@@ -68,7 +68,7 @@ const AdminUsersPage: React.FC = () => {
     setBusyId(-1);
     setError(null);
     try {
-      await api.post('/api/users', {
+      await axios.post('/api/users', {
         email: cEmail.trim().toLowerCase(),
         username: cUsername.trim(),
         password: cPassword,
@@ -97,7 +97,7 @@ const AdminUsersPage: React.FC = () => {
     setBusyId(editId);
     setError(null);
     try {
-      await api.patch(`/api/users/${editId}`, {
+      await axios.patch(`/api/users/${editId}`, {
         email: eEmail.trim().toLowerCase(),
         username: eUsername.trim(),
       });
@@ -115,7 +115,7 @@ const AdminUsersPage: React.FC = () => {
     setBusyId(id);
     setError(null);
     try {
-      await api.delete(`/api/users/${id}`);
+      await axios.delete(`/api/users/${id}`);
       await fetchUsers();
     } catch (e: any) {
       setError(e?.response?.data?.message ?? e?.message ?? 'Delete failed');
@@ -128,7 +128,7 @@ const AdminUsersPage: React.FC = () => {
     setBusyId(id);
     setError(null);
     try {
-      await api.patch(`/api/users/${id}/role`, { role });
+      await axios.patch(`/api/users/${id}/role`, { role });
       await fetchUsers();
     } catch (e: any) {
       setError(e?.response?.data?.message ?? e?.message ?? 'Role change failed');
