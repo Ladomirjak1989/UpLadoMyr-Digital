@@ -49,7 +49,6 @@ const AdminUsersPage: React.FC = () => {
     setError(null);
     try {
       const { data } = await axios.get<User[]>('/api/users', {});
-      console.log('USERS:', data);
       setRows(data);
     } catch (e: any) {
       setError(e?.response?.data?.message ?? e?.message ?? 'Failed to load users');
