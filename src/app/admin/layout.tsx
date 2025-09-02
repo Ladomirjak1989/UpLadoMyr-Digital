@@ -4,10 +4,12 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import '../globals.css';
 
+const COOKIE_NAME = process.env.NEXT_PUBLIC_COOKIE_NAME ?? 'token';
+
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   // 1) токен з куки
   const cookieStore = await cookies();
-  const token = cookieStore.get('token')?.value;
+  const token = cookieStore.get(COOKIE_NAME)?.value;
   if (!token) redirect('/signin');
 
   // 2) базовий домен фронта
@@ -20,7 +22,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
 
   // 3) перевіряємо роль через власний /api (rewrite → бекенд)
   const meRes = await fetch(`${base}/api/auth/me`, {
-    headers: { cookie: `token=${token}` },
+    headers: { cookie: `${COOKIE_NAME}=${token}` },
     cache: 'no-store',
   });
 
