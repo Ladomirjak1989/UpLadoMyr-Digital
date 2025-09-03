@@ -36,23 +36,27 @@
 //   return <div className="bg-gray-100 min-h-screen">{children}</div>;
 // }
 
-/// src/app/admin/layout.tsx — БЕЗ "use client"
+// src/app/admin/layout.tsx  — БЕЗ "use client"
 import type { ReactNode } from 'react';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import '../globals.css';
 
-export const dynamic = 'force-dynamic'; // щоб SSR не кешував
-
 const COOKIE_NAME = process.env.NEXT_PUBLIC_COOKIE_NAME ?? 'token';
 
-async function AdminLayout({ children }: { children: ReactNode }) {
-  // 1) швидкий гейт по наявності токена
-  const hasToken = (await cookies()).get(COOKIE_NAME)?.value;
-  if (!hasToken) redirect('/signin');
+type Props = { children: ReactNode };
 
-  // 2) same-origin запит → Next сам прокине HttpOnly-cookie в бек завдяки rewrite
-  const meRes = await fetch('/api/auth/me', { cache: 'no-store' });
+export default async function AdminLayout({ children }: Props) {
+  // 1) Якщо немає токена — на /signin
+  const token = (await cookies()).get(COOKIE_NAME)?.value;
+  if (!token) redirect('/signin');
+
+  // 2) SAME-ORIGIN запит (через next.config.js -> rewrites до бекенду)
+  const meRes = await fetch('/api/auth/me', {
+    cache: 'no-store',
+    // next: { revalidate: 0 }, // (необов’язково) щоб гарантовано не кешувалось
+  });
+
   if (!meRes.ok) redirect('/signin');
 
   const me = await meRes.json();
@@ -62,5 +66,3 @@ async function AdminLayout({ children }: { children: ReactNode }) {
 
   return <div className="bg-gray-100 min-h-screen">{children}</div>;
 }
-
-export default AdminLayout;
