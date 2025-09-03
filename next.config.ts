@@ -42,10 +42,10 @@ const nextConfig = {
   async rewrites() {
     // бекенд: локально → http://localhost:5000, на проді → Render URL
     const backend =
-      process.env.NEXT_PUBLIC_BACKEND_URL ||
+      process.env.BACKEND_URL ||
       (process.env.NODE_ENV === 'development'
-        ? process.env.NEXT_PUBLIC_BACKEND_LOCALHOST_URL
-        : process.env.NEXT_PUBLIC_RENDER_URL);
+        ? process.env.BACKEND_LOCALHOST_URL
+        : process.env.RENDER_URL);
 
     if (!backend) {
       console.warn('⚠️ No backend URL set for rewrites()');
