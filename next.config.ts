@@ -68,8 +68,8 @@ const nextConfig = {
       'http://localhost:5000';
 
     const PROD_BACKEND =
-      process.env.BACKEND_LOCALHOST_URL ||
-      process.env.RENDER_URL || // запасний
+      process.env.RENDER_URL ||             // ✅ основна назва у тебе
+      process.env.NEXT_PUBLIC_RENDER_URL || // залишаємо як fallback
       '';
 
     const backend =
