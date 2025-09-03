@@ -36,10 +36,11 @@ const nextConfig = {
       },
     ],
   },
- 
+
 
   // next.config.js
   async rewrites() {
+    // бекенд: локально → http://localhost:5000, на проді → Render URL
     const backend =
       process.env.NEXT_PUBLIC_BACKEND_URL ||
       (process.env.NODE_ENV === 'development'
@@ -52,7 +53,7 @@ const nextConfig = {
     }
 
     const target = backend.replace(/\/$/, ''); // прибираємо трейлінг-слеш
-
+    // важливо: бек уже має префікс /api → прокидуємо як є
     return [
       { source: '/api/:path*', destination: `${target}/api/:path*` },
     ];
