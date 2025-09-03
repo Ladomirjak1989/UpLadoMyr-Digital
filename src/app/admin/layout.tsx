@@ -50,7 +50,7 @@ async function AdminLayout({ children }: { children: ReactNode }) {
   if (!hasToken) redirect('/signin');
 
   // 2) SAME-ORIGIN запит — кука прийде автоматично (через rewrite)
-  const meRes = await fetch('/api/auth/me', { cache: 'no-store' });
+  const meRes = await fetch('/auth/me', { cache: 'no-store' });
   if (!meRes.ok) redirect('/signin');
 
   const me = await meRes.json();

@@ -208,7 +208,7 @@ const SignUp: React.FC = () => {
       const email = form.email.trim().toLowerCase();
       const username = form.username.trim();
 
-      await axios.post('/api/auth/signup', { email, password: form.password, username });
+      await axios.post('/auth/signup', { email, password: form.password, username });
 
       toast.success('Account created successfully!');
       try {

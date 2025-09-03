@@ -38,7 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const fetchMe = useCallback(async () => {
     try {
-      const res = await axios.get<User>('/api/auth/me');
+      const res = await axios.get<User>('/auth/me');
       setUser(res.data);
     } catch {
       setUser(null);
@@ -55,8 +55,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = useCallback(
     async (email: string, password: string, remember: boolean) => {
       // ⬇️ обов'язково передаємо remember на бекенд
-      await axios.post('/api/auth/login', { email, password, remember });
-      const res = await axios.get<User>('/api/auth/me');
+      await axios.post('/auth/login', { email, password, remember });
+      const res = await axios.get<User>('/auth/me');
       const data = res.data;
       setUser(data);
 
@@ -77,7 +77,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = useCallback(async () => {
     try {
-      await axios.post('/api/auth/logout');
+      await axios.post('/auth/logout');
     } catch {
       // ignore
     } finally {
