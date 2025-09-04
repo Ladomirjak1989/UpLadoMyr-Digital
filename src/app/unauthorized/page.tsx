@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FaLock } from 'react-icons/fa';
@@ -10,13 +10,22 @@ export default function UnauthorizedPage() {
   const { user } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      router.replace('/signin');
-    }, 10000);
+  const [seconds, setSeconds] = useState(10);
 
-    return () => clearTimeout(timer);
-  }, [router]);
+  // Тік кожну секунду, зупиняємося на 0
+  useEffect(() => {
+    const id = setInterval(() => {
+      setSeconds((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  // Коли дійшли до 0 — робимо редірект (побічний ефект окремо!)
+  useEffect(() => {
+    if (seconds === 0) {
+      router.replace('/signin');
+    }
+  }, [seconds, router]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 text-gray-800 p-6">
@@ -25,19 +34,20 @@ export default function UnauthorizedPage() {
 
       <p className="text-center text-lg max-w-md mb-6">
         {user
-          ? `Hi, your role does not have access to this page.`
+          ? 'Hi, your role does not have access to this page.'
           : 'Only admins can access this page.'}
       </p>
 
-      <p className="text-sm text-gray-500 mb-6">
-        Redirecting to <span className="underline">Sign In</span> in 10 seconds...
+      <p className="text-sm text-gray-800 mb-6">
+        Redirecting to <span className="underline">Sign In</span> in{' '}
+        <span className="font-semibold">{seconds}</span> second{seconds === 1 ? '' : 's'}…
       </p>
 
       <Link
         href="/signin"
         className="px-6 py-3 bg-yellow-600 text-white rounded-lg shadow hover:bg-yellow-700 transition"
       >
-        Go to Sign In
+        Go to Sign In now
       </Link>
     </div>
   );

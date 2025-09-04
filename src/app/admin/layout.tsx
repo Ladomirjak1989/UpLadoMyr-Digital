@@ -37,10 +37,6 @@ export default async function AdminLayout({ children }: Props) {
   const meAdmin: Me = await meRes.json();
   if (meAdmin.role !== 'admin') redirect('/unauthorized');
 
-  // const me = await meRes.json();
-  // const role: string | null = me?.role ?? me?.user?.role ?? me?.data?.role ?? null;
-  // if (role !== 'admin') redirect('/unauthorized');
-
   return (
     <div className="min-h-screen bg-gray-100">
       {/* ✅ Передаємо me в хедер як проп — ніяких клієнтських очікувань */}
@@ -48,5 +44,4 @@ export default async function AdminLayout({ children }: Props) {
       {children}
     </div>
   );
-  // return <div className="bg-gray-100 min-h-screen">{children}</div>;
 }
