@@ -56,6 +56,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     async (email: string, password: string, remember: boolean) => {
       // ⬇️ обов'язково передаємо remember на бекенд
       await axios.post('/auth/login', { email, password, remember });
+      // ⭐ інвалідовуємо кеш поточного маршруту (signin), щоб не тягнувся префетчений редірект
+      router.refresh();
       const res = await axios.get<User>('/auth/me');
       const data = res.data;
       setUser(data);
@@ -84,6 +86,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(null);
 
       localStorage.removeItem('rememberMe');
+      // ⭐ інвалідовуємо кеш після виходу, щоб серверні компоненти не бачили старий стан
+      router.refresh();
       router.replace('/'); // після виходу ведемо на головну
     }
   }, [router]);

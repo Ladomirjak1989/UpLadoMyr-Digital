@@ -1,14 +1,3 @@
-// import AdminMain from '@/components/Admin/AdminMain';
-
-// export default function AdminPage() {
-//   return (
-//     <AdminMain>
-//       <h1 className="text-2xl font-bold text-gray-800 mb-4">Welcome, Admin!</h1>
-//       <p className="text-gray-600">This is your dashboard.</p>
-//     </AdminMain>
-//   );
-// }
-
 'use client';
 
 import React from 'react';
@@ -24,6 +13,7 @@ const AdminPage = () => {
       <div className="flex gap-3">
         <Link
           href="/admin/users"
+          prefetch={false}
           className="rounded-lg bg-emerald-600 px-4 py-2 text-white hover:bg-emerald-700"
         >
           Manage users
