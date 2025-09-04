@@ -15,7 +15,7 @@ import axios from '@/lib/axios';
 type Role = 'user' | 'admin' | null;
 
 interface User {
-  userId: number;
+  id: number;
   email: string;
   role: Role;
 }

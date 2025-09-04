@@ -3,6 +3,8 @@ import type { ReactNode } from 'react';
 import { headers, cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import '../globals.css';
+import type { Me } from '@/types/me';
+import AdminHeader from '@/components/Admin/AdminHeader';
 
 export const dynamic = 'force-dynamic';
 
@@ -32,9 +34,19 @@ export default async function AdminLayout({ children }: Props) {
   });
   if (!meRes.ok) redirect('/signin');
 
-  const me = await meRes.json();
-  const role: string | null = me?.role ?? me?.user?.role ?? me?.data?.role ?? null;
-  if (role !== 'admin') redirect('/unauthorized');
+  const meAdmin: Me = await meRes.json();
+  if (meAdmin.role !== 'admin') redirect('/unauthorized');
 
-  return <div className="bg-gray-100 min-h-screen">{children}</div>;
+  // const me = await meRes.json();
+  // const role: string | null = me?.role ?? me?.user?.role ?? me?.data?.role ?? null;
+  // if (role !== 'admin') redirect('/unauthorized');
+
+  return (
+    <div className="min-h-screen bg-gray-100">
+      {/* ✅ Передаємо me в хедер як проп — ніяких клієнтських очікувань */}
+      <AdminHeader me={meAdmin} />
+      {children}
+    </div>
+  );
+  // return <div className="bg-gray-100 min-h-screen">{children}</div>;
 }

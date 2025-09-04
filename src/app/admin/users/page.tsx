@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
-// import { useRouter } from 'next/navigation';
 import axios from '@/lib/axios';
 import { useAuth } from '@/context/AuthContext';
 import { cn } from '@/lib/cn';
@@ -17,7 +16,6 @@ type User = {
 };
 
 const AdminUsersPage: React.FC = () => {
-  // const router = useRouter();
   const { user, isLoading } = useAuth();
 
   const [rows, setRows] = useState<User[]>([]);
@@ -35,14 +33,6 @@ const AdminUsersPage: React.FC = () => {
   const [editId, setEditId] = useState<number | null>(null);
   const [eEmail, setEEmail] = useState('');
   const [eUsername, setEUsername] = useState('');
-
-  // Access control
-  // useEffect(() => {
-  //   if (!isLoading) {
-  //     if (!user) router.replace('/signin');
-  //     else if (user.role !== 'admin') router.replace('/unauthorized');
-  //   }
-  // }, [isLoading, user, router]);
 
   // взагалі прибираємо редірект; на доступ відповідає app/admin/layout.tsx
   // сторінка просто вантажить дані
