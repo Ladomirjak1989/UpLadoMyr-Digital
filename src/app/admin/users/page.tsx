@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import axios from '@/lib/axios';
 import { useAuth } from '@/context/AuthContext';
 import { cn } from '@/lib/cn';
@@ -17,7 +17,7 @@ type User = {
 };
 
 const AdminUsersPage: React.FC = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const { user, isLoading } = useAuth();
 
   const [rows, setRows] = useState<User[]>([]);
@@ -37,12 +37,18 @@ const AdminUsersPage: React.FC = () => {
   const [eUsername, setEUsername] = useState('');
 
   // Access control
+  // useEffect(() => {
+  //   if (!isLoading) {
+  //     if (!user) router.replace('/signin');
+  //     else if (user.role !== 'admin') router.replace('/unauthorized');
+  //   }
+  // }, [isLoading, user, router]);
+
+  // взагалі прибираємо редірект; на доступ відповідає app/admin/layout.tsx
+  // сторінка просто вантажить дані
   useEffect(() => {
-    if (!isLoading) {
-      if (!user) router.replace('/signin');
-      else if (user.role !== 'admin') router.replace('/unauthorized');
-    }
-  }, [isLoading, user, router]);
+    fetchUsers();
+  }, []); // або залежність від якогось локального стану
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -137,9 +143,11 @@ const AdminUsersPage: React.FC = () => {
 
   const isDisabled = useMemo(() => loading || busyId !== null, [loading, busyId]);
 
-  if (isLoading || (user && user.role !== 'admin')) {
-    return <div className="p-8">Loading…</div>;
-  }
+  // if (isLoading || (user && user.role !== 'admin')) {
+  //   return <div className="p-8">Loading…</div>;
+  // }
+
+  if (isLoading) return <div className="p-8">Loading…</div>;
 
   return (
     <div className="mx-auto max-w-5xl p-4 sm:p-8">

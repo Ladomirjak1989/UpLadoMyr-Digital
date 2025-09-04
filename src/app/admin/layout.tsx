@@ -5,8 +5,6 @@ import { redirect } from 'next/navigation';
 import '../globals.css';
 
 export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-export const fetchCache = 'force-no-store';
 
 const COOKIE_NAME = process.env.COOKIE_NAME ?? 'token';
 const SITE_URL_FROM_ENV = process.env.FRONTEND_URL_PROD; // https://upladomyr.com
