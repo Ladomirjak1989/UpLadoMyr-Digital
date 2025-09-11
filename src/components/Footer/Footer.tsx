@@ -15,6 +15,8 @@ import {
 } from 'react-icons/fa';
 import { useState } from 'react';
 import { FiArrowUp } from 'react-icons/fi';
+// зверху файлу
+import CookieSettingsButton from '@/components/CookieConsent/CookieSettingsButton';
 
 const Footer: React.FC = () => {
   const pathname = usePathname();
@@ -97,6 +99,7 @@ const Footer: React.FC = () => {
 
   return (
     <>
+      {/* Hero footer block */}
       <div
         className="relative bg-cover bg-center text-white py-16 px-4 sm:px-8 lg:py-24"
         style={{ backgroundImage: "url('/img/bannerhome/imgfooter.jpg')" }}
@@ -339,6 +342,9 @@ const Footer: React.FC = () => {
             <Link href="/terms" className="underline hover:text-blue-500">
               Terms and Conditions
             </Link>
+            {/* ⬇️ нове кнопка cookie settings (без перезавантаження) */}
+            <span className="hidden md:inline">/</span>
+            <CookieSettingsButton />
           </div>
 
           {/* Right: Icons */}
