@@ -9,6 +9,7 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 import axios from '@/lib/axios';
 import { useAuth } from '@/context/AuthContext';
+import GoogleButton from './GoogleButton';
 
 type Form = { username: string; email: string; password: string; confirm: string };
 type Errors = Partial<Record<keyof Form | 'terms', string>>;
@@ -462,13 +463,9 @@ const SignUp: React.FC = () => {
 
           {/* OAuth placeholders */}
           <div className="mt-4 flex items-center justify-center gap-4">
-            <button
-              type="button"
-              className="flex items-center gap-2 rounded-xl bg-gray-100 px-4 py-2 transition-transform hover:scale-105 hover:bg-gray-200"
-            >
-              <Image src="/img/signup/search.png" alt="Google" width={20} height={20} /> Google
-            </button>
-            <button
+            <GoogleButton label="Continue with Google" />
+
+            {/* <button
               type="button"
               className="flex items-center gap-2 rounded-xl bg-red-500 px-4 py-2 text-white transition-transform hover:scale-105 hover:bg-red-600"
             >
@@ -479,7 +476,7 @@ const SignUp: React.FC = () => {
                 height={20}
               />{' '}
               Facebook
-            </button>
+            </button> */}
           </div>
         </form>
       </div>

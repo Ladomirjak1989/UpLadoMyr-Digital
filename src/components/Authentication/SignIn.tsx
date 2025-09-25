@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { useAuth } from '@/context/AuthContext';
+import GoogleButton from './GoogleButton';
 
 /** Дозволяємо будь-які коректні домени (.ua, .de, .co, .me тощо) */
 const emailRe = /^(?!.*\.\.)[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}$/;
@@ -367,16 +368,10 @@ export default function SignIn() {
           </div>
 
           {/* OAuth (заглушки) */}
-          <div className="flex gap-4">
-            <button
-              type="button"
-              className="p-5 flex items-center justify-center gap-2 w-full py-2 border border-gray-300 rounded-xl hover:bg-gray-100 transition-transform hover:scale-105"
-            >
-              <Image src="/img/signup/search.png" alt="Google" width={20} height={20} />
-              Google
-            </button>
+          <div className="mt-4 flex items-center justify-center gap-4">
+            <GoogleButton label="Sign in with Google" />
 
-            <button
+            {/* <button
               type="button"
               className="p-5 flex items-center justify-center gap-2 w-full py-2 bg-red-500 text-white rounded-xl hover:bg-red-600 transition-transform hover:scale-105"
             >
@@ -387,7 +382,7 @@ export default function SignIn() {
                 height={20}
               />
               Facebook
-            </button>
+            </button> */}
           </div>
         </form>
 
