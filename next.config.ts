@@ -38,27 +38,6 @@ const nextConfig = {
   },
 
 
-  // next.config.js
-  // async rewrites() {
-  //   // бекенд: локально → http://localhost:5000, на проді → Render URL
-  //   const backend =
-  //     process.env.BACKEND_URL ||
-  //     (process.env.NODE_ENV === 'development'
-  //       ? process.env.BACKEND_LOCALHOST_URL
-  //       : process.env.RENDER_URL);
-
-  //   if (!backend) {
-  //     console.warn('⚠️ No backend URL set for rewrites()');
-  //     return [];
-  //   }
-
-  //   const target = backend.replace(/\/$/, ''); // прибираємо трейлінг-слеш
-  //   // важливо: бек уже має префікс /api → прокидуємо як є
-  //   return [
-  //     { source: '/api/:path*', destination: `${target}/api/:path*` },
-  //   ];
-  // },
-
 
 
   async rewrites() {
@@ -81,7 +60,7 @@ const nextConfig = {
     }
 
     const target = backend.replace(/\/$/, '');
-    // фронт /api/* → бек {target}/api/*
+    // // фронт /api/* → бек {target}/api/*
     return [{ source: '/api/:path*', destination: `${target}/api/:path*` }];
   }
 };
