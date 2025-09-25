@@ -29,16 +29,16 @@ export default function GoogleButton({ label = 'Continue with Google' }: { label
 
   const handleClick = () => {
     // [LOG] старт натискання
-    console.log('[GoogleButton] click, loading:', loading);
+    console.warn('[GoogleButton] click, loading:', loading);
 
     // [LOG] куди редіректимо
     const url = '/api/auth/google';
-    console.log('[GoogleButton] redirect to:', url);
+    console.warn('[GoogleButton] redirect to:', url);
 
     setLoading(true);
 
     // [LOG] перед самим переходом
-    console.log('[GoogleButton] navigating now…');
+    console.warn('[GoogleButton] navigating now…');
     window.location.href = url;
   };
 
