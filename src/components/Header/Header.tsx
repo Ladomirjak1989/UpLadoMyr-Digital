@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 import FloatingSocialButtons from '../FloatingSocialButtons/FloatingSocialButtons';
 import { useAuth } from '@/context/AuthContext';
 import toast from 'react-hot-toast';
+import ScrollProgressBar from '../ScrollProgressBar/ScrollProgressBar';
 
 const navbarConfig = [
   { link: '/', text: 'HOME' },
@@ -271,8 +272,16 @@ const Header: React.FC = () => {
           </div>
         </div>
       </nav>
-
       <FloatingSocialButtons isMenuOpen={isOpen} />
+
+      <ScrollProgressBar
+        placement="header" // всередині хедера
+        height="4px" // зроби товщою, щоб точно побачити
+        barClassName="bg-gradient-to-r from-[#1e3a8a] via-[#3b82f6]/30 to-[#c99700]"
+        zIndex={999}
+        debug // ← УВІМКНЕНО діагностику
+        initialMin={0.03} // 3% ширини на старті
+      />
     </header>
   );
 };
