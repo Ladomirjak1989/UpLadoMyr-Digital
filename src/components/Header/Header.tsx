@@ -307,7 +307,6 @@ const navbarConfig = [
   { link: '/contacts', text: 'CONTACT' },
 ];
 
-/** ---------- Спільний стиль для кнопок ---------- */
 const btnBase = `relative inline-flex items-center justify-center gap-2
    px-4 py-2 md:px-5 md:py-2.5 rounded-md font-semibold text-sm md:text-base
    shadow-[inset_0_1px_0_rgba(255,255,255,.7),0_1px_0_rgba(255,255,255,.5),0_2px_4px_rgba(0,0,0,.35)]
@@ -322,7 +321,6 @@ const btnLogin = `${btnBase} text-black border border-[#7a5a00]
 const btnLogout = `${btnBase} text-white border border-[#0a1c33]
    [background-image:linear-gradient(#d8dde6,#8ea0b8_48%,#1e3a5f_48%,#0a1c33)]`;
 
-/** Кнопка авторизації з однаковим стилем для desktop & mobile */
 function AuthAction({
   variant,
   full = false,
@@ -360,13 +358,13 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const handleLogout = async () => {
     try {
-      await logout(); // твій AuthContext вже робить router.replace('/')
+      await logout();
       toast.success('Logged out successfully');
     } catch (e: any) {
       const msg =
@@ -379,22 +377,15 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'backdrop-blur-md shadow-lg py-2' : 'py-4'
-      }`}
-      // ✅ safe-area для iOS notch
+      className={[
+        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
+        isScrolled
+          ? 'bg-gradient-to-br from-[#f9f8f4] via-[#d9d6ce] to-[#beb7b2] backdrop-blur-md shadow-lg py-2'
+          : 'bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] py-4',
+      ].join(' ')}
+      // фон тепер на самому header + safe-area (це покриє виріз/ноуч на iOS)
       style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
-      {/* ✅ full-bleed фон, який завжди перекриває весь header */}
-      <div
-        className={
-          `absolute inset-0 -z-10 bg-gradient-to-br ` +
-          (isScrolled
-            ? 'from-[#f9f8f4] via-[#d9d6ce] to-[#beb7b2]'
-            : 'from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa]')
-        }
-      />
-
       <div className="flex justify-between items-center px-4 sm:px-6 md:px-10 lg:px-16">
         {/* Logo & Text */}
         <div className="flex items-center space-x-3 sm:space-x-4">
@@ -434,7 +425,6 @@ const Header: React.FC = () => {
             </Link>
           ))}
 
-          {/* Auth actions */}
           {isLoading ? (
             <span className="px-3 py-2 text-sm text-gray-500">Loading…</span>
           ) : user ? (
@@ -457,7 +447,7 @@ const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile overlay — нижче хедера за контентом меню */}
+      {/* Mobile overlay */}
       <div
         className={`fixed inset-0 z-40 bg-black/40 md:hidden transition-opacity duration-300 ${
           isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
@@ -468,18 +458,15 @@ const Header: React.FC = () => {
 
       {/* Mobile Nav */}
       <nav
-        className={`md:hidden fixed inset-y-0 right-0 z-50
-          w-[86%] max-w-[340px]
+        className={`md:hidden fixed inset-y-0 right-0 z-50 w-[86%] max-w-[340px]
           transform transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)]
           ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
         aria-label="Mobile navigation"
       >
-        {/* background */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#f7f4ea] via-[#efe8d9] to-[#e0d5bf]" />
         <div className="absolute inset-0 -z-10 backdrop-blur-[2px]" />
 
         <div className="h-full flex flex-col rounded-l-2xl border-l border-[#e6dcc8] shadow-2xl px-6 pt-6 pb-6">
-          {/* Close */}
           <button
             onClick={() => setIsOpen(false)}
             className="text-[#1e3a8a] text-3xl absolute top-4 right-4"
@@ -488,7 +475,6 @@ const Header: React.FC = () => {
             <FiX />
           </button>
 
-          {/* Brand / user hint */}
           <div className="flex items-center gap-3 mb-6">
             <div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-[#ffcd00] bg-white">
               <Image
@@ -509,24 +495,23 @@ const Header: React.FC = () => {
             </div>
           </div>
 
-          {/* Links */}
           <ul className="flex flex-col gap-2 mt-2 text-[#1e3a8a] font-semibold">
             {navbarConfig.map((item) => (
               <li key={item.link}>
                 <Link
                   href={item.link}
                   onClick={() => setIsOpen(false)}
-                  className={`group relative flex items-center justify-between rounded-lg px-3 py-3 transition-all
-                    ${
-                      isActive(item.link)
-                        ? 'bg-white/80 text-[#1e3a8a] shadow'
-                        : 'hover:bg-white/70 hover:shadow'
-                    }`}
+                  className={`group relative flex items-center justify-between rounded-lg px-3 py-3 transition-all ${
+                    isActive(item.link)
+                      ? 'bg-white/80 text-[#1e3a8a] shadow'
+                      : 'hover:bg-white/70 hover:shadow'
+                  }`}
                 >
                   <span className="flex items-center gap-3">
                     <span
-                      className={`h-2 w-2 rounded-full bg-[#1e3a8a] transition-opacity
-                        ${isActive(item.link) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                      className={`h-2 w-2 rounded-full bg-[#1e3a8a] transition-opacity ${
+                        isActive(item.link) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                      }`}
                     />
                     {item.text}
                   </span>
@@ -538,15 +523,14 @@ const Header: React.FC = () => {
                   />
 
                   <span
-                    className={`absolute left-0 top-1/2 -translate-y-1/2 h-8 w-1 rounded-r
-                      bg-[#1e3a8a] transition-opacity
-                      ${isActive(item.link) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                    className={`absolute left-0 top-1/2 -translate-y-1/2 h-8 w-1 rounded-r bg-[#1e3a8a] transition-opacity ${
+                      isActive(item.link) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                    }`}
                   />
                 </Link>
               </li>
             ))}
 
-            {/* Auth card */}
             <li className="pt-3">
               <div className="rounded-xl border border-[#e7dcc9] bg-white/75 p-3 shadow">
                 {isLoading ? (
@@ -560,7 +544,6 @@ const Header: React.FC = () => {
             </li>
           </ul>
 
-          {/* Footer note */}
           <div className="mt-auto pt-6 text-[11px] text-gray-500">
             © {new Date().getFullYear()} UpLadoMyr Digital
           </div>
@@ -569,14 +552,13 @@ const Header: React.FC = () => {
 
       <FloatingSocialButtons isMenuOpen={isOpen} />
 
-      {/* Scroll progress, пришитий до низу хедера */}
+      {/* прогрес-бар по низу хедера */}
       <ScrollProgressBar
         placement="header"
         height="4px"
         barClassName="bg-gradient-to-r from-[#1e3a8a] via-[#3b82f6]/30 to-[#c99700]"
         zIndex={999}
         initialMin={0.03}
-        // debug
       />
     </header>
   );
