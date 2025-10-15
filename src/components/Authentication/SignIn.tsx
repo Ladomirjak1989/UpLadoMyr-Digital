@@ -216,7 +216,7 @@ export default function SignIn() {
     ) : null;
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen p-16">
+    <div className="flex flex-col lg:flex-row min-h-screen px-8 py-8 sm:px-6 sm:py-10 lg:p-16">
       {/* LEFT PANEL */}
       <div className="space-y-6 hidden lg:flex flex-col justify-center items-center bg-gradient-to-br from-orange-200 to-blue-300 text-amber-900 w-full lg:w-1/2 p-6">
         <h2 className="text-3xl text-yellow-700 font-semibold animate-pulse">UpLadoMyr Digital</h2>
@@ -233,7 +233,7 @@ export default function SignIn() {
       </div>
 
       {/* RIGHT PANEL */}
-      <div className="flex flex-col pt-10 justify-center items-center w-full lg:w-1/2 bg-white p-10 sm:p-12">
+      <div className="flex flex-col pt-10 justify-center items-center w-full lg:w-1/2 bg-white p-8 sm:p-12">
         <h2 className="text-2xl pt-10 font-bold mb-4 text-yellow-900">Welcome Back!</h2>
 
         {/* Якщо вже залогінений — НЕ редіректимо автоматом */}
