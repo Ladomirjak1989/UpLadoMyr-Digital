@@ -175,7 +175,8 @@ const Footer: React.FC = () => {
                 <span className="font-bold text-blue-950 font-dmserif">UpLadoMyr</span>{' '}
                 <span className="text-yellow-700 font-dmserif">Digital</span>{' '}
                 <span className="font-tangerine italic text-gray-500 hidden sm:inline">
-                  — driving digital success
+                  — The diligent hand makes rich
+                  {/* Proverbs 10:4 */}
                 </span>
               </p>
             </div>

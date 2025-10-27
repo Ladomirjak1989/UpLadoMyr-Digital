@@ -254,14 +254,21 @@ const HomePage: React.FC = () => {
     <>
       {/* Цитата */}
       <div className="bg-gradient-to-r from-white via-purple-50 to-white py-12">
-        <div
-          className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center border-l-4 border-purple-900 pl-6"
-          data-aos="fade-up"
-        >
-          <p className="text-xl sm:text-2xl md:text-3xl font-medium italic text-gray-800 leading-relaxed">
-            “If we don’t put the internet into our business, our business will have problems.”
-          </p>
-          <p className="mt-4 text-base sm:text-lg font-semibold text-gray-600">— Jack Ma</p>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pl-6" data-aos="fade-up">
+          <section className="relative my-16">
+            <div className="relative pl-6">
+              <span
+                className="absolute left-0 top-1 bottom-1 w-[3px] rounded-full bg-gradient-to-b from-violet-700 to-fuchsia-500"
+                data-aos="fade-up"
+              />
+              <p className="text-2xl sm:text-3xl md:text-4xl font-medium italic leading-relaxed text-slate-900">
+                “Whoever sows generously will also reap generously.”
+              </p>
+              <p className="mt-3 text-sm sm:text-base font-semibold text-slate-600">
+                — 2 Corinthians 9:6
+              </p>
+            </div>
+          </section>
         </div>
       </div>
 

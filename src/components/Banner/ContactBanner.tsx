@@ -48,7 +48,7 @@ function ContactBanner() {
       icon: <SiTelegram size={20} />,
       label: 'Telegram',
       info: '@upladomyr_support',
-      href: 'https://t.me/upladomyr_support',
+      href: 'https://t.me/bettinaladomirjak',
     },
     {
       icon: <SiWhatsapp size={20} />,

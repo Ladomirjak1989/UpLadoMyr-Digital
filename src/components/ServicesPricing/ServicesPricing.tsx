@@ -14,7 +14,7 @@ const services = [
     title: 'Landing Page',
     duration: '20–30 days',
     desc: '1 page, up to 4 blocks',
-    price: '€650',
+    price: '€500',
     link: '/services/landing',
     icon: '/img/servicespricing/landing-page.png',
   },
