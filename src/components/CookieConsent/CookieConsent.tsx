@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { LiaCookieSolid } from 'react-icons/lia';
 
 type ConsentState = { analytics: boolean; marketing: boolean };
@@ -83,6 +83,13 @@ export default function CookieConsent() {
   }, []);
 
   // Esc — закриття без змін (якщо згода була раніше)
+
+  const onClose = useCallback(() => {
+    setAnalytics(initial.analytics);
+    setMarketing(initial.marketing);
+    setOpen(false);
+  }, [initial]); // або [initial.analytics, initial.marketing]
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -91,12 +98,6 @@ export default function CookieConsent() {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [open, hasSaved]);
-
-  const onClose = () => {
-    setAnalytics(initial.analytics);
-    setMarketing(initial.marketing);
-    setOpen(false);
-  };
 
   const acceptAll = () => {
     writeConsent({ analytics: true, marketing: true });

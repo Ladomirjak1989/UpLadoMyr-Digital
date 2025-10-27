@@ -23,6 +23,7 @@ import {
 
 import Link from 'next/link';
 import { Globe, ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Types
@@ -354,7 +355,7 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
       {/* Cover */}
       <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-2xl shadow">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={cover} alt={`${p.title} cover`} className="h-full w-full object-cover" />
+        <Image src={cover} alt={`${p.title} cover`} className="h-full w-full object-cover" />
       </div>
 
       {/* Content */}

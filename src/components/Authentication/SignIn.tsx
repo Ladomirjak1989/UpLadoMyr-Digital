@@ -278,10 +278,7 @@ export default function SignIn() {
                     setEmail(emailSuggestion!);
                     setEmailSuggestion(null);
                     setIgnoreSuggestion(true);
-                    setErrors((p) => {
-                      const { email: _e, ...rest } = p;
-                      return rest as Errors;
-                    });
+                    setErrors((p) => (({ email, ...o }) => o as Errors)(p));
                   }}
                 >
                   {emailSuggestion}
@@ -293,10 +290,7 @@ export default function SignIn() {
                   onClick={() => {
                     setIgnoreSuggestion(true);
                     setEmailSuggestion(null);
-                    setErrors((p) => {
-                      const { email: _e, ...rest } = p;
-                      return rest as Errors;
-                    });
+                    setErrors((p) => (({ email, ...o }) => o as Errors)(p));
                   }}
                 >
                   Use anyway
