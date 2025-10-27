@@ -354,8 +354,14 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
 
       {/* Cover */}
       <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-2xl shadow">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <Image src={cover} alt={`${p.title} cover`} className="h-full w-full object-cover" />
+        <Image
+          src={cover}
+          alt={`${p.title} cover`}
+          fill
+          sizes="(max-width: 768px) 100vw, 1000px"
+          className="object-cover"
+          priority
+        />
       </div>
 
       {/* Content */}
