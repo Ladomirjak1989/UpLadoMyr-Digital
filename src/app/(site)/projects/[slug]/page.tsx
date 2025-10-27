@@ -288,13 +288,13 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
 
       {/* Breadcrumb */}
       <nav aria-label="Breadcrumb" className="mb-6 text-sm text-slate-600">
-        <a href="/" className="hover:underline">
+        <Link href="/" className="hover:underline">
           Home
-        </a>
+        </Link>
         <span className="mx-2">/</span>
-        <a href="/projects" className="hover:underline">
+        <Link href="/projects" className="hover:underline">
           Projects
-        </a>
+        </Link>
         <span className="mx-2">/</span>
         <span className="text-slate-900">{p.title}</span>
       </nav>
