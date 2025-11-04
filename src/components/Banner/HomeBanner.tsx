@@ -21,11 +21,35 @@ const HomeBanner: React.FC = () => {
       {/* Основний текстовий блок */}
       <div className="relative z-10 text-white max-w-2xl space-y-6 sm:space-y-8 animate__animated animate__fadeInLeft">
         <h1 className="text-3xl sm:text-3xl md:text-4xl font-bold text-white drop-shadow-md leading-tight">
-          Custom Websites & WebApps for Self-Employed Professionals (ZZP) and Small Businesses
+          <span
+            className="bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
+               bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
+          >
+            Websites
+          </span>{' '}
+          &{' '}
+          <span
+            className="bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
+               bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
+          >
+            WebApps
+          </span>{' '}
+          for Self-Employed Professionals (ZZP) and Small Businesses
         </h1>
+
         <p className="mt-2 text-2xl sm:text-lg md:text-2xl text-white/90 leading-relaxed">
-          At <span className="text-accent font-semibold text-yellow-500">UpLadoMyr Digital</span>,
-          we craft stylish, high-performing online solutions to help your business grow online —
+          At{' '}
+          <span
+            className="font-semibold
+             bg-gradient-to-r from-[#debe57] via-[#dad0a0] to-[#eedf7cdb]
+             bg-clip-text text-transparent
+             drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)]
+             hover:from-[#cfd5ff] hover:via-[#ffd54a] hover:to-[#b75a14]
+             transition-colors"
+          >
+            UpLadoMyr Digital
+          </span>
+          , we craft stylish, high-performing online solutions to help your business grow online —
           fast, responsive, and built to convert.
         </p>
 
