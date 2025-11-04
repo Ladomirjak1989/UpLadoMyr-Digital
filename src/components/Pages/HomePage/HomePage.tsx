@@ -368,7 +368,7 @@ const HomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">Transparent cooperation terms</h3>
-                    <p className="mt-2 text-slate-800">
+                    <p className="mt-2 text-slate-800 italic">
                       Clear scope, milestones and pricing — no surprises.
                     </p>
                   </div>
@@ -387,7 +387,7 @@ const HomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">Ongoing feedback</h3>
-                    <p className="mt-2 text-slate-800">
+                    <p className="mt-2 text-slate-800 italic">
                       Structured check-ins, fast responses, one channel for all updates.
                     </p>
                   </div>
@@ -406,7 +406,7 @@ const HomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">Stage-by-stage reporting</h3>
-                    <p className="mt-2 text-slate-800">
+                    <p className="mt-2 text-slate-800 italic">
                       Progress visible at every phase — design, build, launch.
                     </p>
                   </div>
@@ -425,7 +425,7 @@ const HomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">Training to manage the site</h3>
-                    <p className="mt-2 text-slate-800">
+                    <p className="mt-2 text-slate-800 italic">
                       Short handover session + notes so your team can self-serve.
                     </p>
                   </div>
@@ -444,7 +444,7 @@ const HomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">Tech support</h3>
-                    <p className="mt-2 text-slate-800">
+                    <p className="mt-2 text-slate-800 italic">
                       Post-launch fixes and tuning to keep everything running smoothly.
                     </p>
                   </div>
@@ -463,7 +463,7 @@ const HomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">Individual approach</h3>
-                    <p className="mt-2 text-slate-800">
+                    <p className="mt-2 text-slate-800 italic">
                       Solutions tailored to your niche, goals and budget — no templates.
                     </p>
                   </div>
@@ -471,7 +471,6 @@ const HomePage: React.FC = () => {
               </div>
             </div>
 
-            {/* Right: supporting copy */}
             {/* Right: supporting copy (message bubble) */}
             <div className="lg:pl-8" data-aos="fade-left">
               <div className="relative inline-block max-w-xl">

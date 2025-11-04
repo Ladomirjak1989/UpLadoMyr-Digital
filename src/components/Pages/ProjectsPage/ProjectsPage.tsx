@@ -118,7 +118,7 @@ const ProjectsPage: React.FC = () => {
                 </span>
               </h1>
 
-              <p className="mt-6 text-slate-700 max-w-2xl">
+              <p className="mt-6 text-slate-800 italic max-w-2xl">
                 Imagine a landing page that actually attracts new clients and looks sharp. We build
                 adaptive solutions that help your business hit goals and stand out from competitors.
               </p>
@@ -148,8 +148,8 @@ const ProjectsPage: React.FC = () => {
 
       {/* ====== NEW SECTION: Why do you need a landing page? ====== */}
       <section
-        className="mb-7 relative w-full rounded-3xl text-white
-             bg-gradient-to-br from-[#0b0b0c] via-[#24114a] to-[#0b0b0c]"
+        className="mb-7 relative w-full rounded-3xl text-black
+             bg-gradient-to-br from-[#fdfdfb] via-[#f6f2e3] to-[#c4bdb7]"
         data-aos="fade-up"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
@@ -157,8 +157,8 @@ const ProjectsPage: React.FC = () => {
             Why do you need a
             <br />
             <span
-              className="bg-gradient-to-r from-violet-300 via-fuchsia-300 to-cyan-300
-                   bg-clip-text text-transparent"
+              className="bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
+             bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
             >
               WEBSITE
             </span>
@@ -180,7 +180,7 @@ const ProjectsPage: React.FC = () => {
               </div>
               <div>
                 <h3 className="text-2xl font-semibold">Increase sales</h3>
-                <p className="mt-3 text-slate-300">
+                <p className="mt-3 text-slate-800 italic">
                   A focused landing page persuades visitors to act. We craft conversion-driven pages
                   with modern design and solid marketing fundamentals.
                 </p>
@@ -201,7 +201,7 @@ const ProjectsPage: React.FC = () => {
               </div>
               <div>
                 <h3 className="text-2xl font-semibold">Optimize costs</h3>
-                <p className="mt-3 text-slate-300">
+                <p className="mt-3 text-slate-800 italic">
                   A one-page site is faster to build, easier to maintain, and laser-focused on what
                   your customers actually need — without waste.
                 </p>
@@ -213,16 +213,16 @@ const ProjectsPage: React.FC = () => {
               <div className="shrink-0">
                 <div
                   className="h-16 w-16 rounded-2xl
-                          bg-gradient-to-br from-rose-300/25 via-pink-300/25 to-amber-300/25
+                          bg-gradient-to-br from-rose-600/25 via-pink-900/25 to-amber-300/25
                           ring-1 ring-white/10 backdrop-blur-sm
                           flex items-center justify-center"
                 >
-                  <FiShoppingCart className="h-8 w-8 text-rose-300" />
+                  <FiShoppingCart className="h-8 w-8 text-rose-800" />
                 </div>
               </div>
               <div>
                 <h3 className="text-2xl font-semibold">Attract customers</h3>
-                <p className="mt-3 text-slate-300">
+                <p className="mt-3 text-slate-800 italic">
                   Catch attention and turn it into loyalty with clear copy, striking visuals, and a
                   frictionless journey tailored to your audience.
                 </p>
