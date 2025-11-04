@@ -24,6 +24,7 @@ import {
 import Link from 'next/link';
 import { Globe, ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
+import BackButton from '@/components/Button/BackButton';
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Types
@@ -280,241 +281,248 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 py-8 md:py-10">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+    <>
+      <div className="mt-28 ml-7">
+        <BackButton />
+      </div>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 py-8 md:py-10">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
 
-      {/* Breadcrumb */}
-      <nav aria-label="Breadcrumb" className="mb-6 text-sm text-slate-600">
-        <Link href="/" className="hover:underline">
-          Home
-        </Link>
-        <span className="mx-2">/</span>
-        <Link href="/projects" className="hover:underline">
-          Projects
-        </Link>
-        <span className="mx-2">/</span>
-        <span className="text-slate-900">{p.title}</span>
-      </nav>
+        {/* Breadcrumb + Back */}
+        <div className="mb-6 flex items-center justify-between">
+          <nav aria-label="Breadcrumb" className="text-sm text-slate-600">
+            <Link href="/" className="hover:underline">
+              Home
+            </Link>
+            <span className="mx-2">/</span>
+            <Link href="/projects" className="hover:underline">
+              Projects
+            </Link>
+            <span className="mx-2">/</span>
+            <span className="text-slate-900">{p.title}</span>
+          </nav>
+        </div>
 
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-          <span className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
-            {p.title}
-          </span>
-        </h1>
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+            <span className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
+              {p.title}
+            </span>
+          </h1>
 
-        <div className="mt-3 flex flex-wrap items-center gap-2 text-sm">
-          <Badge variant="outline" icon={<CategoryIcon name={p.category} className="h-4 w-4" />}>
-            {p.category}
-          </Badge>
-
-          {p.industry && (
-            <Badge variant="soft" icon={<Briefcase className="h-4 w-4" />}>
-              {p.industry}
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-sm">
+            <Badge variant="outline" icon={<CategoryIcon name={p.category} className="h-4 w-4" />}>
+              {p.category}
             </Badge>
-          )}
 
-          {p.location && (
-            <Badge variant="soft" icon={<MapPin className="h-4 w-4" />}>
-              {p.location}
-            </Badge>
-          )}
+            {p.industry && (
+              <Badge variant="soft" icon={<Briefcase className="h-4 w-4" />}>
+                {p.industry}
+              </Badge>
+            )}
 
-          {p.isFeatured && (
-            <Badge variant="warn" icon={<Star className="h-4 w-4" />}>
-              Featured
-            </Badge>
-          )}
+            {p.location && (
+              <Badge variant="soft" icon={<MapPin className="h-4 w-4" />}>
+                {p.location}
+              </Badge>
+            )}
 
-          {p.websiteUrl && (
-            <Link
-              href={p.websiteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Open project website: ${p.websiteUrl}`}
-              title="Open website (opens in a new tab)"
-              className="group inline-flex items-center gap-2 rounded-2xl
+            {p.isFeatured && (
+              <Badge variant="warn" icon={<Star className="h-4 w-4" />}>
+                Featured
+              </Badge>
+            )}
+
+            {p.websiteUrl && (
+              <Link
+                href={p.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open project website: ${p.websiteUrl}`}
+                title="Open website (opens in a new tab)"
+                className="group inline-flex items-center gap-2 rounded-2xl
                bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500
                px-5 py-2.5 text-white shadow-md ring-1 ring-black/10
                hover:from-amber-600 hover:via-orange-600 hover:to-rose-600 hover:shadow-lg
                focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300
                transition"
-            >
-              <Globe className="h-4 w-4 opacity-95" />
-              <span className="font-medium">Visit website</span>
-              <ArrowUpRight className="h-4 w-4 translate-x-0 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-          )}
-        </div>
-      </div>
-
-      {/* Cover */}
-      <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-2xl shadow">
-        <Image
-          src={cover}
-          alt={`${p.title} cover`}
-          fill
-          sizes="(max-width: 768px) 100vw, 1000px"
-          className="object-cover"
-          priority
-        />
-      </div>
-
-      {/* Content */}
-      <div className="grid gap-6 lg:grid-cols-3">
-        <div className="space-y-6 lg:col-span-2">
-          <Section title="Overview">
-            {intro && (
-              <p className="text-lg leading-relaxed text-slate-900/90 font-medium">
-                <HighlightBrand text={intro} brand={BRAND} />
-              </p>
+              >
+                <Globe className="h-4 w-4 opacity-95" />
+                <span className="font-medium">Visit website</span>
+                <ArrowUpRight className="h-4 w-4 translate-x-0 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
             )}
-
-            {howTitle && (
-              <h3 className="mt-5 text-lg font-semibold text-slate-900 tracking-tight">
-                <HighlightBrand text={howTitle} brand={BRAND} />
-              </h3>
-            )}
-
-            {/* Якщо є нумеровані пункти — показуємо впорядкований список */}
-            {!!ordered.length && (
-              <ol className="mt-3 list-decimal pl-6 space-y-2 text-slate-700">
-                {ordered.map((line, i) => (
-                  <li key={i}>
-                    <HighlightBrand text={line} brand={BRAND} />
-                  </li>
-                ))}
-              </ol>
-            )}
-
-            {/* Інакше, якщо є буліти — показуємо крапки (без дефісів) */}
-            {!ordered.length && !!bullets.length && (
-              <ul className="mt-3 space-y-2">
-                {bullets.map((line, i) => (
-                  <li
-                    key={i}
-                    className="relative pl-6 text-slate-700 before:absolute before:left-0 before:top-0.5 before:content-['•'] before:text-slate-500"
-                  >
-                    <HighlightBrand text={line} brand={BRAND} />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </Section>
-
-          {!!p.features?.length && (
-            <Section title="Key features">
-              <ul className="space-y-2">
-                {p.features.map((f, i) => (
-                  <li
-                    key={i}
-                    className="relative pl-6 text-slate-700 before:absolute before:left-0 before:top-0.5 before:content-['•'] before:text-slate-400"
-                  >
-                    {f}
-                  </li>
-                ))}
-              </ul>
-            </Section>
-          )}
-
-          {!!p.services?.length && (
-            <Section title="Services provided">
-              <div className="flex flex-wrap gap-2">
-                {p.services.map((s, i) => (
-                  <span key={i} className="rounded-full bg-slate-100 px-3 py-1 text-sm">
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </Section>
-          )}
-
-          {!!p.gallery?.length && (
-            <Section title="Gallery">
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {p.gallery.map((src, i) => (
-                  <a
-                    key={i}
-                    href={src}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative block overflow-hidden rounded-lg ring-1 ring-slate-200"
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={src}
-                      alt={`Gallery ${i + 1}`}
-                      className="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.02] group-hover:brightness-95"
-                    />
-                  </a>
-                ))}
-              </div>
-            </Section>
-          )}
+          </div>
         </div>
 
-        {/* Sidebar */}
-        <aside className="space-y-6">
-          <Section title="Tech stack">
-            {p.techStack?.length ? (
-              <ul className="flex flex-wrap gap-2">
-                {p.techStack.map((t, i) => (
-                  <li key={i} className="rounded-full border px-3 py-1 text-sm bg-white">
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-sm text-slate-500">—</p>
-            )}
-          </Section>
+        {/* Cover */}
+        <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-2xl shadow">
+          <Image
+            src={cover}
+            alt={`${p.title} cover`}
+            fill
+            sizes="(max-width: 768px) 100vw, 1000px"
+            className="object-cover"
+            priority
+          />
+        </div>
 
-          <Section title="Project meta">
-            <dl className="grid grid-cols-3 gap-2 text-sm">
-              <dt className="col-span-1 text-slate-500">Category</dt>
-              <dd className="col-span-2">{p.category}</dd>
-              {p.industry && (
-                <>
-                  <dt className="col-span-1 text-slate-500">Industry</dt>
-                  <dd className="col-span-2">{p.industry}</dd>
-                </>
+        {/* Content */}
+        <div className="grid gap-6 lg:grid-cols-3">
+          <div className="space-y-6 lg:col-span-2">
+            <Section title="Overview">
+              {intro && (
+                <p className="text-lg leading-relaxed text-slate-900/90 font-medium">
+                  <HighlightBrand text={intro} brand={BRAND} />
+                </p>
               )}
-              {p.location && (
-                <>
-                  <dt className="col-span-1 text-slate-500">Location</dt>
-                  <dd className="col-span-2">{p.location}</dd>
-                </>
+
+              {howTitle && (
+                <h3 className="mt-5 text-lg font-semibold text-slate-900 tracking-tight">
+                  <HighlightBrand text={howTitle} brand={BRAND} />
+                </h3>
               )}
-              {p.websiteUrl && (
-                <>
-                  <dt className="col-span-1 text-slate-500">Website</dt>
-                  <dd className="col-span-2">
+
+              {/* Якщо є нумеровані пункти — показуємо впорядкований список */}
+              {!!ordered.length && (
+                <ol className="mt-3 list-decimal pl-6 space-y-2 text-slate-700">
+                  {ordered.map((line, i) => (
+                    <li key={i}>
+                      <HighlightBrand text={line} brand={BRAND} />
+                    </li>
+                  ))}
+                </ol>
+              )}
+
+              {/* Інакше, якщо є буліти — показуємо крапки (без дефісів) */}
+              {!ordered.length && !!bullets.length && (
+                <ul className="mt-3 space-y-2">
+                  {bullets.map((line, i) => (
+                    <li
+                      key={i}
+                      className="relative pl-6 text-slate-700 before:absolute before:left-0 before:top-0.5 before:content-['•'] before:text-slate-500"
+                    >
+                      <HighlightBrand text={line} brand={BRAND} />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </Section>
+
+            {!!p.features?.length && (
+              <Section title="Key features">
+                <ul className="space-y-2">
+                  {p.features.map((f, i) => (
+                    <li
+                      key={i}
+                      className="relative pl-6 text-slate-700 before:absolute before:left-0 before:top-0.5 before:content-['•'] before:text-slate-400"
+                    >
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </Section>
+            )}
+
+            {!!p.services?.length && (
+              <Section title="Services provided">
+                <div className="flex flex-wrap gap-2">
+                  {p.services.map((s, i) => (
+                    <span key={i} className="rounded-full bg-slate-100 px-3 py-1 text-sm">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </Section>
+            )}
+
+            {!!p.gallery?.length && (
+              <Section title="Gallery">
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                  {p.gallery.map((src, i) => (
                     <a
-                      href={p.websiteUrl}
-                      className="text-slate-900 underline"
+                      key={i}
+                      href={src}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="group relative block overflow-hidden rounded-lg ring-1 ring-slate-200"
                     >
-                      {p.websiteUrl}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={src}
+                        alt={`Gallery ${i + 1}`}
+                        className="h-40 w-full object-cover transition duration-300 group-hover:scale-[1.02] group-hover:brightness-95"
+                      />
                     </a>
-                  </dd>
-                </>
-              )}
-            </dl>
-          </Section>
+                  ))}
+                </div>
+              </Section>
+            )}
+          </div>
 
-          {p.isFeatured && (
-            <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
-              ⭐ Featured case — highlighted on the homepage
-            </div>
-          )}
-        </aside>
+          {/* Sidebar */}
+          <aside className="space-y-6">
+            <Section title="Tech stack">
+              {p.techStack?.length ? (
+                <ul className="flex flex-wrap gap-2">
+                  {p.techStack.map((t, i) => (
+                    <li key={i} className="rounded-full border px-3 py-1 text-sm bg-white">
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-sm text-slate-500">—</p>
+              )}
+            </Section>
+
+            <Section title="Project meta">
+              <dl className="grid grid-cols-3 gap-2 text-sm">
+                <dt className="col-span-1 text-slate-500">Category</dt>
+                <dd className="col-span-2">{p.category}</dd>
+                {p.industry && (
+                  <>
+                    <dt className="col-span-1 text-slate-500">Industry</dt>
+                    <dd className="col-span-2">{p.industry}</dd>
+                  </>
+                )}
+                {p.location && (
+                  <>
+                    <dt className="col-span-1 text-slate-500">Location</dt>
+                    <dd className="col-span-2">{p.location}</dd>
+                  </>
+                )}
+                {p.websiteUrl && (
+                  <>
+                    <dt className="col-span-1 text-slate-500">Website</dt>
+                    <dd className="col-span-2">
+                      <a
+                        href={p.websiteUrl}
+                        className="text-slate-900 underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {p.websiteUrl}
+                      </a>
+                    </dd>
+                  </>
+                )}
+              </dl>
+            </Section>
+
+            {p.isFeatured && (
+              <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
+                ⭐ Featured case — highlighted on the homepage
+              </div>
+            )}
+          </aside>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

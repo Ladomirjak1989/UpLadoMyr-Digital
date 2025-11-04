@@ -8,6 +8,7 @@ import {
   FaUserCog,
   FaClipboardCheck,
   FaLaptopCode,
+  FaICursor,
 } from 'react-icons/fa';
 import {
   FaCogs,
@@ -19,6 +20,14 @@ import {
   FaPlus,
   FaMinus,
 } from 'react-icons/fa';
+
+import {
+  FiFileText, // Transparent terms
+  FiMessageCircle, // Ongoing feedback
+  FiCheckSquare, // Stage reporting
+  FiMonitor, // Tech support
+  FiStar, // Individual approach
+} from 'react-icons/fi';
 
 import 'animate.css';
 import AOS from 'aos';
@@ -253,17 +262,22 @@ const HomePage: React.FC = () => {
   return (
     <>
       {/* Цитата */}
-      <div className="bg-gradient-to-r from-white via-purple-50 to-white py-12">
+      <div className="bg-gradient-to-r from-white via-amber-50 to-white py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pl-6" data-aos="fade-up">
           <section className="relative my-16">
             <div className="relative pl-6">
               <span
-                className="absolute left-0 top-1 bottom-1 w-[3px] rounded-full bg-gradient-to-b from-violet-700 to-fuchsia-500"
+                className="absolute left-0 top-1 bottom-1 w-[3px] rounded-full bg-gradient-to-b from-amber-700 to-amber-500"
                 data-aos="fade-up"
               />
-              <p className="text-2xl sm:text-3xl md:text-4xl font-medium italic leading-relaxed text-slate-900">
+              <p
+                className="text-2xl sm:text-3xl md:text-4xl font-medium italic leading-relaxed
+             bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
+             bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
+              >
                 “Whoever sows generously will also reap generously.”
               </p>
+
               <p className="mt-3 text-sm sm:text-base font-semibold text-slate-600">
                 — 2 Corinthians 9:6
               </p>
@@ -317,6 +331,172 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* ===== Why choose us ===== */}
+      <section
+        className="relative w-full overflow-hidden rounded-3xl bg-gradient-to-br from-[#fdfdfb] via-[#f6f2e3] to-[#c4bdb7] text-black mt-16"
+        data-aos="fade-up"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-16 py-12 md:py-16 lg:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            {/* Left: big heading */}
+            <div className="lg:col-span-2">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+                Why order a{' '}
+                <span
+                  className="bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
+             bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
+                >
+                  WEBSITE
+                </span>
+                <br />
+                from us?
+              </h2>
+
+              {/* Feature grid */}
+              <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10">
+                {/* 1 */}
+                <div className="flex items-start gap-5" data-aos="fade-up" data-aos-delay="50">
+                  <div className="shrink-0">
+                    <div
+                      className="h-14 w-14 rounded-2xl ring-1 ring-white/10
+                              bg-gradient-to-br from-violet-300/25 via-fuchsia-300/25 to-cyan-300/25
+                              backdrop-blur-sm flex items-center justify-center"
+                    >
+                      <FiFileText className="h-7 w-7 text-violet-300" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold">Transparent cooperation terms</h3>
+                    <p className="mt-2 text-slate-800">
+                      Clear scope, milestones and pricing — no surprises.
+                    </p>
+                  </div>
+                </div>
+
+                {/* 2 */}
+                <div className="flex items-start gap-5" data-aos="fade-up" data-aos-delay="100">
+                  <div className="shrink-0">
+                    <div
+                      className="h-14 w-14 rounded-2xl ring-1 ring-white/10
+                              bg-gradient-to-br from-cyan-300/25 via-sky-300/25 to-teal-300/25
+                              backdrop-blur-sm flex items-center justify-center"
+                    >
+                      <FiMessageCircle className="h-7 w-7 text-cyan-300" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold">Ongoing feedback</h3>
+                    <p className="mt-2 text-slate-800">
+                      Structured check-ins, fast responses, one channel for all updates.
+                    </p>
+                  </div>
+                </div>
+
+                {/* 3 */}
+                <div className="flex items-start gap-5" data-aos="fade-up" data-aos-delay="150">
+                  <div className="shrink-0">
+                    <div
+                      className="h-14 w-14 rounded-2xl ring-1 ring-white/10
+                              bg-gradient-to-br from-amber-300/25 via-orange-300/25 to-rose-300/25
+                              backdrop-blur-sm flex items-center justify-center"
+                    >
+                      <FiCheckSquare className="h-7 w-7 text-amber-300" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold">Stage-by-stage reporting</h3>
+                    <p className="mt-2 text-slate-800">
+                      Progress visible at every phase — design, build, launch.
+                    </p>
+                  </div>
+                </div>
+
+                {/* 4 */}
+                <div className="flex items-start gap-5" data-aos="fade-up" data-aos-delay="200">
+                  <div className="shrink-0">
+                    <div
+                      className="h-14 w-14 rounded-2xl ring-1 ring-white/10
+                              bg-gradient-to-br from-fuchsia-300/25 via-pink-300/25 to-rose-300/25
+                              backdrop-blur-sm flex items-center justify-center"
+                    >
+                      <FaICursor className="h-7 w-7 text-rose-300" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold">Training to manage the site</h3>
+                    <p className="mt-2 text-slate-800">
+                      Short handover session + notes so your team can self-serve.
+                    </p>
+                  </div>
+                </div>
+
+                {/* 5 */}
+                <div className="flex items-start gap-5" data-aos="fade-up" data-aos-delay="250">
+                  <div className="shrink-0">
+                    <div
+                      className="h-14 w-14 rounded-2xl ring-1 ring-white/10
+                              bg-gradient-to-br from-indigo-300/25 via-blue-300/25 to-cyan-300/25
+                              backdrop-blur-sm flex items-center justify-center"
+                    >
+                      <FiMonitor className="h-7 w-7 text-blue-300" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold">Tech support</h3>
+                    <p className="mt-2 text-slate-800">
+                      Post-launch fixes and tuning to keep everything running smoothly.
+                    </p>
+                  </div>
+                </div>
+
+                {/* 6 */}
+                <div className="flex items-start gap-5" data-aos="fade-up" data-aos-delay="300">
+                  <div className="shrink-0">
+                    <div
+                      className="h-14 w-14 rounded-2xl ring-1 ring-white/10
+                              bg-gradient-to-br from-emerald-300/25 via-teal-300/25 to-cyan-300/25
+                              backdrop-blur-sm flex items-center justify-center"
+                    >
+                      <FiStar className="h-7 w-7 text-emerald-300" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold">Individual approach</h3>
+                    <p className="mt-2 text-slate-800">
+                      Solutions tailored to your niche, goals and budget — no templates.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: supporting copy */}
+            {/* Right: supporting copy (message bubble) */}
+            <div className="lg:pl-8" data-aos="fade-left">
+              <div className="relative inline-block max-w-xl">
+                {/* Балон із градієнтом та скругленнями */}
+                <div
+                  className="relative rounded-3xl px-6 py-5 italic text-[17px] leading-relaxed
+                 text-black/90 shadow-lg ring-1 ring-black/10
+                 bg-gradient-to-br from-[#5a5a5a] via-[#ffd659] to-[#8c4a12]"
+                >
+                  We ensure a truly individual approach for every project — factoring in client
+                  needs and current market trends. You get a modern, fast and conversion-focused
+                  website without the agency fluff.
+                  {/* Хвостик балончика */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -bottom-3 left-10 h-6 w-6 rotate-45
+                   bg-gradient-to-br from-[#5a5a5a] via-[#ffd659] to-[#8c4a12]
+                   shadow-lg ring-1 ring-black/10 rounded-sm"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <PaymentSteps />
       <ServicePricing />
