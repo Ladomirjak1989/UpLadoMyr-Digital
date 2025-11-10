@@ -321,8 +321,8 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-400 mt-2 pt-6 px-4 md:px-16 flex flex-col md:flex-row justify-between items-center text-xs text-gray-800 gap-4">
-          <div className="flex flex-col md:flex-row items-center gap-2 text-center md:text-left">
+        <div className="border-t border-gray-400 mt-2 pt-4 px-4 md:px-16 flex flex-col md:flex-row justify-between items-center text-xs text-gray-800 gap-4">
+          <div className="flex flex-col md:flex-row items-center gap-2 text-center md:text-left mb-7">
             <p>
               &copy; 2025{' '}
               <Link
