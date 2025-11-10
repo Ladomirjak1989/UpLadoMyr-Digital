@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const ProjectBanner = () => {
   return (
-    <section className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-b-[120px]">
+    <section className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-b-[40px]">
       <Image
         src="/img/bannerproject/project-banner-img.jpg"
         alt="Projects Banner"

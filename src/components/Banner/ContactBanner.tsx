@@ -60,7 +60,7 @@ function ContactBanner() {
 
   return (
     <div
-      className="relative w-full min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] overflow-hidden  rounded-b-[120px]"
+      className="relative w-full min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] overflow-hidden  rounded-b-[40px]"
       style={{
         backgroundImage: "url('/img/bannercontact/contact-banner1.jpg')",
         backgroundSize: 'cover',

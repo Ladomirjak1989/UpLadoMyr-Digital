@@ -51,13 +51,14 @@ const ProjectsPage: React.FC = () => {
 
   return (
     <>
-      {/* ====== Toolbar: кнопка ліворуч, пошук праворуч ====== */}
-      <div className="w-full mt-4 ml-7">
+      {/* ====== Toolbar ====== */}
+      <div className="w-full mt-4 px-4 sm:px-6 lg:px-0">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
+          {/* маленька кругла кнопка — НЕ розтягується завдяки shrink-0 */}
           <BackButton />
 
-          {/* Search (твоя логіка не змінена) */}
-          <div className="relative w-full sm:w-64 md:w-80 lg:w-[400px] sm:mr-6 lg:mr-12">
+          {/* Search */}
+          <div className="relative w-full sm:w-64 md:w-80 lg:w-[400px] sm:ml-auto">
             <label htmlFor="project-search" className="sr-only">
               Search project
             </label>
@@ -68,7 +69,6 @@ const ProjectsPage: React.FC = () => {
                 stroke="currentColor"
                 strokeWidth={2}
                 viewBox="0 0 24 24"
-                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
@@ -83,8 +83,7 @@ const ProjectsPage: React.FC = () => {
               placeholder="Search project by name…"
               value={searchTerm}
               onChange={handleChange}
-              className="my-6 w-full border border-yellow-400 rounded px-4 py-2 text-sm pl-10 
-                         focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="my-3 w-full border border-yellow-400 rounded px-4 py-2 text-sm pl-10 focus:outline-none focus:ring-2 focus:ring-yellow-500"
               autoComplete="off"
             />
           </div>

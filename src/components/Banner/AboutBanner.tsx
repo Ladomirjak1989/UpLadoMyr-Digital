@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const AboutBanner = () => {
   return (
-    <section className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-b-[120px]">
+    <section className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden rounded-b-[40px]">
       <Image
         src="/img/bannerabout/about-banner.webp"
         alt="About Us Banner"
