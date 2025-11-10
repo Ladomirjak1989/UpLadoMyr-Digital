@@ -149,7 +149,7 @@ export default function CookieConsent() {
       >
         <div
           className="
-            mx-auto m-3 w-full max-w-4xl
+            mx-auto m-3 w-full max-w-4xl mb-12 
             rounded-2xl border border-yellow-300 bg-white shadow-2xl
             md:m-6
           "
