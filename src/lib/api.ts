@@ -18,7 +18,8 @@ export function apiUrl(path: string) {
  */
 export const FRONTEND_BASE_URL =
   (process.env.NODE_ENV === 'development'
-    ? process.env.NEXT_PUBLIC_FRONTEND_LOCALHOST_URL
-    : process.env.NEXT_PUBLIC_FRONTEND_URL || process.env.NEXT_PUBLIC_FRONTEND_LOCALHOST_URL
-  ) // запасний варіант
-    ?.replace(/\/$/, '') || '';
+    ? process.env.NEXT_PUBLIC_FRONTEND_LOCALHOST_URL || 'http://localhost:3000'
+    : process.env.NEXT_PUBLIC_FRONTEND_URL ||
+      process.env.FRONTEND_URL_PROD || // ← твоя існуюча змінна
+      process.env.FRONTEND_URL
+  )?.replace(/\/$/, '') || '';
