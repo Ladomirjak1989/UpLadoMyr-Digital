@@ -264,3 +264,78 @@ html {
     background-position: 31% 0%;
   }
 }
+
+
+/* ==== UpLadoMyr Digital scrollbar (desktop Chrome/Edge/Safari + Firefox) ==== */
+:root {
+  /* Палітра сайту */
+  --sb-track: #efe8d9;
+  /* теплий беж (фон доріжки) */
+  --sb-track-grad-a: #f7f4ea;
+  /* верх доріжки */
+  --sb-track-grad-b: #e5dfd0;
+  /* середина */
+  --sb-track-grad-c: #d4bfaa;
+  /* низ */
+  --sb-thumb: #1e3a8a;
+  /* темно-синій повзунок */
+  --sb-thumb-hover: #15316b;
+  /* ховер */
+  --sb-border: #d4bfaa;
+  /* тонка золота “окантовка” */
+  --sb-size: 10px;
+  /* товщина */
+  --sb-radius: 999px;
+  /* круглість */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sb-thumb) var(--sb-track);
+}
+
+
+/*  Scrollbar боковий   WebKit-сімейство (Chrome/Edge/Safari/Opera) */ 
+@supports selector(::-webkit-scrollbar) {
+  body::-webkit-scrollbar {
+    width: var(--sb-size);
+    height: var(--sb-size);
+  }
+
+  body::-webkit-scrollbar-track {
+    background: linear-gradient(180deg,
+        var(--sb-track-grad-a),
+        var(--sb-track-grad-b) 45%,
+        var(--sb-track-grad-c));
+    border-radius: var(--sb-radius);
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #1e3a8a, #102a6b);
+    border-radius: var(--sb-radius);
+    border: 2px solid var(--sb-border);
+    /* золота окантовка */
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .15);
+  }
+
+  body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #2547ad, var(--sb-thumb-hover));
+  }
+
+  body::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+/* щоб ширина сторінки не “стриба́ла” */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* (опціонально) тонший на вузьких екранах */
+@media (max-width: 640px) {
+  :root {
+    --sb-size: 8px;
+  }
+}

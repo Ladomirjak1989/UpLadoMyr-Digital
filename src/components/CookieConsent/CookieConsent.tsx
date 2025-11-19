@@ -282,7 +282,7 @@ export default function CookieConsent() {
                       </td>
                       <td className="px-3 py-2">Essential (first-party)</td>
                       <td className="px-3 py-2">Keeps you signed in (JWT), secures routes</td>
-                      <td className="px-3 py-2">Session / 1h / up to 30d</td>
+                      <td className="px-3 py-2">Session / 12h / up to 30d</td>
                       <td className="px-3 py-2">HttpOnly; Secure+SameSite=None in prod</td>
                     </tr>
                     <tr className="bg-white">

@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import '../globals.css';
 import type { Me } from '@/types/me';
 import AdminHeader from '@/components/Admin/AdminHeader';
+import ToasterMessage from '@/components/Toaster/Toaster';
 
 export const dynamic = 'force-dynamic';
 
@@ -41,6 +42,7 @@ export default async function AdminLayout({ children }: Props) {
     <div className="min-h-screen bg-gray-100">
       {/* ✅ Передаємо me в хедер як проп — ніяких клієнтських очікувань */}
       <AdminHeader me={meAdmin} />
+      <ToasterMessage />
       {children}
     </div>
   );

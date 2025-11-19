@@ -194,7 +194,7 @@ const Testimonials: React.FC = () => {
       <div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="mb-6 bg-blue-900 hover:bg-yellow-600 text-white px-6 py-2 rounded-4xl transition flex items-center gap-2 group"
+          className="mb-6  bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d] border-1 border-amber-950 text-black  shadow-lg hover:scale-110 transition-transform px-6 py-2 rounded-4xl  flex items-center gap-2 group"
         >
           {showForm ? 'Hide Form' : 'Leave a Review'}
           <FaArrowRight

@@ -1,28 +1,3 @@
-// 'use client';
-
-// import StoreProvider from '../../store/StoreProvider';
-// import Header from '../../components/Header/Header';
-// import Footer from '../../components/Footer/Footer';
-// import ScrollToTopButton from '../../components/ScrollToTopButton/ScrollToTopButton';
-// import WeglotInitializer from '../../components/WeglotInitializer/WeglotInitializer';
-// import { Toaster } from 'react-hot-toast';
-// import { AuthProvider } from '@/context/AuthContext';
-
-// export default function SiteLayout({ children }: { children: React.ReactNode }) {
-//   return (
-//     <AuthProvider>
-//       <StoreProvider>
-//         <Header />
-//         <main style={{ flex: 1 }}>{children}</main>
-//         <Footer />
-//         <Toaster position="top-right" toastOptions={{ duration: 4000 }} />
-//         <WeglotInitializer />
-//         <ScrollToTopButton />
-//       </StoreProvider>
-//     </AuthProvider>
-//   );
-// }
-
 'use client';
 
 import StoreProvider from '../../store/StoreProvider';
@@ -30,8 +5,8 @@ import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import ScrollToTopButton from '../../components/ScrollToTopButton/ScrollToTopButton';
 import WeglotInitializer from '../../components/WeglotInitializer/WeglotInitializer';
-import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from '@/context/AuthContext';
+import ToasterMessage from '@/components/Toaster/Toaster';
 
 const CONTAINER_CLASS = 'app-container mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8';
 
@@ -58,7 +33,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
 
           <Footer />
 
-          <Toaster position="top-right" toastOptions={{ duration: 4000 }} />
+          <ToasterMessage />
           <WeglotInitializer />
           <ScrollToTopButton />
         </div>

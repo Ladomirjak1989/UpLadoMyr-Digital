@@ -25,6 +25,7 @@ import Link from 'next/link';
 import { Globe, ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import BackButton from '@/components/Button/BackButton';
+import { API_BASE } from '@/lib/api';
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Types
@@ -53,12 +54,6 @@ type Project = {
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Backend base
-// ──────────────────────────────────────────────────────────────────────────────
-const API_BASE =
-  (process.env.NODE_ENV === 'development'
-    ? process.env.NEXT_PUBLIC_BACKEND_LOCALHOST_URL || process.env.BACKEND_LOCALHOST_URL
-    : process.env.NEXT_PUBLIC_RENDER_URL || process.env.RENDER_URL
-  )?.replace(/\/$/, '') || '';
 
 async function getProject(slug: string): Promise<Project | null> {
   if (!API_BASE) return null;
@@ -212,11 +207,7 @@ function Badge({
 }
 
 // URL фронта (canonical/OG/JSON-LD)
-const SITE = (
-  process.env.NEXT_PUBLIC_FRONTEND_LOCALHOST_URL ||
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  ''
-).replace(/\/$/, '');
+const SITE = (process.env.NEXT_PUBLIC_FRONTEND_LOCALHOST_URL || '').replace(/\/$/, '');
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -293,16 +284,31 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
 
         {/* Breadcrumb + Back */}
         <div className="mb-6 flex items-center justify-between">
-          <nav aria-label="Breadcrumb" className="text-sm text-slate-600">
-            <Link href="/" className="hover:underline">
+          <nav
+            aria-label="Breadcrumb"
+            className="mb-6 flex flex-wrap items-center gap-1 text-sm text-slate-600"
+          >
+            <Link
+              href="/"
+              className="relative px-0.5 text-slate-600 hover:text-amber-700 transition
+               after:absolute after:left-0 after:-bottom-0.5 after:h-[2px] after:w-full
+               after:origin-left after:scale-x-0 after:bg-amber-700 after:transition-transform
+               after:duration-200 hover:after:scale-x-100"
+            >
               Home
             </Link>
             <span className="mx-2">/</span>
-            <Link href="/projects" className="hover:underline">
+            <Link
+              href="/projects"
+              className="relative px-0.5 text-slate-600 hover:text-amber-700 transition
+               after:absolute after:left-0 after:-bottom-0.5 after:h-[2px] after:w-full
+               after:origin-left after:scale-x-0 after:bg-amber-700 after:transition-transform
+               after:duration-200 hover:after:scale-x-100"
+            >
               Projects
             </Link>
-            <span className="mx-2">/</span>
-            <span className="text-slate-900">{p.title}</span>
+            <span className="text-slate-600">/</span>
+            <span className="font-medium text-amber-700 line-clamp-1">{p.title}</span>
           </nav>
         </div>
 

@@ -1,9 +1,63 @@
+// {
+//   "editor.formatOnSave": true,
+//   "[typescriptreact]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "[typescript]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   }
+// }
 {
   "editor.formatOnSave": true,
+  // Використовуй Prettier для всіх основних мов
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // Авто-фікси ESLint при збереженні (якщо ESLint підключений)
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  // Tailwind v4: увімкнути підказки в рядках класів і Emmet
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html",
+    "javascript": "javascript",
+    "javascriptreact": "javascript",
+    "typescript": "typescript",
+    "typescriptreact": "typescript"
+  },
+  // Прибрати фальшиве попередження про @tailwind/@apply у v4
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "less.lint.unknownAtRules": "ignore",
+  // VSCode використовує локальну версію TypeScript із node_modules
+  "typescript.tsdk": "node_modules/typescript/lib",
+  // Менше сміття в пошуку
+  "files.exclude": {
+    "**/.next": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/node_modules": true
+  },
+  "search.exclude": {
+    "**/.next": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/node_modules": true
   }
 }

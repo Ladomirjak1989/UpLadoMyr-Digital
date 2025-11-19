@@ -30,7 +30,7 @@ const rows: Row[] = [
     provider: `${BRAND} (first-party)`,
     type: 'Essential',
     purpose: 'JWT session cookie used to keep you signed in and protect admin/api routes.',
-    lifetime: 'Session / ~1h / up to 30 days (if "remember me")',
+    lifetime: 'Session / ~12h / up to 30 days (if "remember me")',
     notes: 'HttpOnly. In production set with Secure + SameSite=None.',
   },
   {

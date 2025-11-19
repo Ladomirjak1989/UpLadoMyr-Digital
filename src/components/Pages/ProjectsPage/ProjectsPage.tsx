@@ -83,7 +83,7 @@ const ProjectsPage: React.FC = () => {
               placeholder="Search project by name…"
               value={searchTerm}
               onChange={handleChange}
-              className="my-3 w-full border border-yellow-400 rounded px-4 py-2 text-sm pl-10 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="my-3 w-full border border-yellow-400 rounded px-4 py-2 text-sm pl-10 focus:outline-none focus:ring-1 focus:ring-yellow-500"
               autoComplete="off"
             />
           </div>
