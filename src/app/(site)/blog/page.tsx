@@ -30,7 +30,7 @@ function buildListQuery(spObj: SearchParams) {
   const page = getParam(spObj, 'page') ?? '1';
 
   sp.set('status', 'published');
-  sp.set('limit', '9');
+  sp.set('limit', '6');
   sp.set('page', page);
 
   if (q) sp.set('q', q);
