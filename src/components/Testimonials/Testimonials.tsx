@@ -158,7 +158,7 @@ const Testimonials: React.FC = () => {
             key={i}
             onClick={() => setCurrentPage(i + 1)}
             className={`px-3 py-1 border rounded ${
-              currentPage === i + 1 ? 'bg-yellow-700 text-white' : 'text-gray-800 border-gray-400'
+              currentPage === i + 1 ? 'bg-blue-900 text-white' : 'text-gray-800 border-gray-400'
             }`}
           >
             {i + 1}

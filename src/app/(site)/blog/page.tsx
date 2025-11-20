@@ -233,7 +233,7 @@ export default async function BlogPage({
 
             {/* ⭐ NEW: The best articles */}
             {bestArticles.length > 0 && (
-              <section className="mt-10 rounded-2xl bg-gradient-to-b from-blue-50 via-amber-50 border border-slate-200/70 p-5 shadow-sm">
+              <section className="mt-10 rounded-2xl bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] border border-slate-200/70 p-5 shadow-sm">
                 <h3 className="text-lg font-semibold text-slate-900">The best articles</h3>
 
                 <div className="mt-4 space-y-5">
@@ -249,7 +249,7 @@ export default async function BlogPage({
                     return (
                       <div
                         key={post.id}
-                        className="border-b border-slate-200 pb-4 last:border-b-0 last:pb-0"
+                        className="border-b border-slate-400 pb-4 last:border-b-0 last:pb-0"
                       >
                         <div className="inline-flex items-center rounded-full bg-slate-900 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-amber-300">
                           {post.category}
@@ -298,7 +298,7 @@ export default async function BlogPage({
                     })}
                     className={`px-3 py-1 rounded-full text-sm ${
                       n === page
-                        ? 'bg-slate-900 text-white'
+                        ? 'bg-blue-900 text-white'
                         : 'border border-slate-300 text-slate-700 hover:bg-slate-50'
                     }`}
                   >

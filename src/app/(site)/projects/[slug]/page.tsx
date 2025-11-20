@@ -74,8 +74,8 @@ async function getProject(slug: string): Promise<Project | null> {
 // ──────────────────────────────────────────────────────────────────────────────
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="rounded-2xl bg-white p-0 shadow-sm ring-1 ring-slate-200 overflow-hidden">
-      <div className="h-1 w-full bg-gradient-to-r from-sky-500 via-emerald-500 to-amber-500" />
+    <section className="rounded-2xl bg-gray-50 p-0 shadow-sm ring-1 ring-slate-200 overflow-hidden">
+      <div className="h-1 w-full bg-gradient-to-r from-sky-500 via-sky-700 to-sky-500" />
       <div className="p-6">
         <h2 className="mb-3 text-xl font-semibold tracking-tight text-slate-900">{title}</h2>
         <div className="prose prose-slate max-w-none">{children}</div>
@@ -350,12 +350,16 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
                 rel="noopener noreferrer"
                 aria-label={`Open project website: ${p.websiteUrl}`}
                 title="Open website (opens in a new tab)"
-                className="group inline-flex items-center gap-2 rounded-2xl
-               bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500
-               px-5 py-2.5 text-white shadow-md ring-1 ring-black/10
-               hover:from-amber-600 hover:via-orange-600 hover:to-rose-600 hover:shadow-lg
-               focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-300
-               transition"
+                className="group inline-flex items-center justify-center gap-2
+  rounded-2xl px-5 py-2.5 text-sm font-semibold
+  text-slate-900
+  bg-gradient-to-r from-[#f6d365] via-[#efc741] to-[#c58a1b]
+  shadow-md ring-1 ring-amber-900/15
+  hover:from-[#ffd777] hover:via-[#f3cf55] hover:to-[#d79a2b]
+  hover:shadow-lg hover:-translate-y-[1px]
+  active:translate-y-0 active:shadow-sm
+  focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/70
+  transition-all duration-200"
               >
                 <Globe className="h-4 w-4 opacity-95" />
                 <span className="font-medium">Visit website</span>
@@ -438,7 +442,7 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
               <Section title="Services provided">
                 <div className="flex flex-wrap gap-2">
                   {p.services.map((s, i) => (
-                    <span key={i} className="rounded-full bg-slate-100 px-3 py-1 text-sm">
+                    <span key={i} className="rounded-full bg-slate-200 px-3 py-1 text-sm">
                       {s}
                     </span>
                   ))}
@@ -532,5 +536,4 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
   );
 }
 
-// ВАЖЛИВО: export default в самому низу файлу
 export default ProjectDetailsPage;
