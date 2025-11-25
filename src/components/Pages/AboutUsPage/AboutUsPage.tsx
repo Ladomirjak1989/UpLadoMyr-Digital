@@ -59,12 +59,13 @@ const AboutPage: React.FC = () => {
       <section className="grid md:grid-cols-2 gap-10 items-center mb-16">
         <div data-aos="fade-right">
           <h1 className="text-4xl md:text-5xl font-bold text-blue-950 mb-4">
-            Crafting Custom Code, Not Templates.
+            Modern Websites Tailored to Your Business.
           </h1>
           <p className="text-lg text-gray-700">
-            We are a web development company specializing in creating sleek, high-performance
-            websites for freelancers (ZZP) and small businesses. All our projects are 100%
-            hand-coded — no Webflow, no drag-and-drop builders.
+            We are a web development company creating sleek, high-performance websites for
+            freelancers (ZZP) and small businesses. Depending on your goals and budget, we customize
+            high-quality templates or build from scratch — always with clean code, fast loading, and
+            mobile-first design.
           </p>
 
           <Link
