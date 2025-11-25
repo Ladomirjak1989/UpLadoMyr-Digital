@@ -10,6 +10,16 @@ import Link from 'next/link';
 
 const services = [
   {
+    label: 'Business Card Website',
+    title: 'Template-based website',
+    duration: '5–7 days',
+    desc: '1 page, 3-4 blocks',
+    price: '€100',
+    link: '/services/visit-card',
+    icon: '/img/servicespricing/one-page-site.png',
+  },
+
+  {
     label: 'Landing',
     title: 'Landing Page',
     duration: '20–30 days',

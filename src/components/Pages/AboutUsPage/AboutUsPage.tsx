@@ -54,7 +54,7 @@ const AboutPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-white text-gray-800 px-4 py-10 max-w-6xl mx-auto">
+    <div className=" text-gray-800 px-4 py-10 max-w-6xl mx-auto">
       {/* Hero Section */}
       <section className="grid md:grid-cols-2 gap-10 items-center mb-16">
         <div data-aos="fade-right">
@@ -107,7 +107,7 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      <div className="py-12 rounded-2xl shadow-sm  text-white">
+      <div className="py-12 rounded-2xl shadow-sm  bg-gradient-to-br from-[#93b7e6] via-[#dcdedf] to-[#797a7c]  text-white">
         <h2
           className="text-center text-3xl font-tangerine font-bold text-yellow-600 mb-8"
           data-aos="fade-up"
