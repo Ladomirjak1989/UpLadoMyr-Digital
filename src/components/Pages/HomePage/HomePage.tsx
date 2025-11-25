@@ -171,7 +171,7 @@ const faqData: FAQItem[] = [
   {
     question: 'What web development services does UpLadoMyr Digital offer?',
     answer:
-      'We offer full-cycle web development: design, frontend, backend, maintenance, and deployment using modern tech.',
+      'We offer full-cycle web development: design, frontend, backend, maintenance, deployment using modern tech, as well as customizable website templates tailored for small businesses and local services.',
   },
   {
     question: 'How do you ensure mobile responsiveness in development?',
@@ -181,7 +181,7 @@ const faqData: FAQItem[] = [
   {
     question: 'Can you build custom web applications for niche industries?',
     answer:
-      'Yes, we specialize in tailored digital solutions for unique business needs — no templates, fully customized.',
+      'Yes, we specialize in tailored digital solutions for unique business needs. We can build fully custom applications from scratch or adapt our professional templates to fit your niche.',
   },
   {
     question: 'What technologies do you use for web development?',

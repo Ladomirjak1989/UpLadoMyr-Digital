@@ -14,7 +14,7 @@ const services = [
     title: 'Template-based website',
     duration: '5–7 days',
     desc: '1 page, 3-4 blocks',
-    price: '€100',
+    price: '€150',
     link: '/services/visit-card',
     icon: '/img/servicespricing/one-page-site.png',
   },
