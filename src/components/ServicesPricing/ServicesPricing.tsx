@@ -97,7 +97,7 @@ function ServicePricing() {
                 </div>
 
                 {/* Content remains the same */}
-                <h3 className="text-xl sm:text-2xl text-blue-900 font-semibold mb-2">
+                <h3 className="text-xl sm:text-xl text-blue-900 font-semibold mb-2 font-tangerine">
                   {service.title}
                 </h3>
                 <p className="text-gray-700 mb-1 text-sm sm:text-base">

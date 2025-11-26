@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
+
 
 html {
   scroll-behavior: smooth;
@@ -10,7 +12,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+ font-family: var(--font-sans, Arial, Helvetica, sans-serif);;
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -32,6 +34,7 @@ button {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+
   }
 }
 
@@ -268,6 +271,9 @@ html {
 
 /* ==== UpLadoMyr Digital scrollbar (desktop Chrome/Edge/Safari + Firefox) ==== */
 :root {
+   /* шрифт сайту */
+  --font-sans: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
   /* Палітра сайту */
   --sb-track: #efe8d9;
   /* теплий беж (фон доріжки) */
