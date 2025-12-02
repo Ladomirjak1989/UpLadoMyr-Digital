@@ -391,7 +391,7 @@ const Header: React.FC = () => {
       ].join(' ')}
       style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
-      <div className="flex justify-between items-center px-4 sm:px-6 md:px-10 lg:px-16">
+      <div className="flex mt-3 justify-between items-center px-4 sm:px-6 md:px-10 lg:px-16">
         {/* Logo & Text */}
         <div className="flex items-center space-x-3 sm:space-x-4">
           <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14">
