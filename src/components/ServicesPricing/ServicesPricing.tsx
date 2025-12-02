@@ -8,54 +8,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const services = [
-  {
-    label: 'Business Card Website',
-    title: 'Template-based website',
-    duration: '5–7 days',
-    desc: '1 page, 3-4 blocks',
-    price: '€150',
-    link: '/services/visit-card',
-    icon: '/img/servicespricing/one-page-site.png',
-  },
-
-  {
-    label: 'Landing',
-    title: 'Landing Page',
-    duration: '20–30 days',
-    desc: '1 page, up to 4 blocks',
-    price: '€500',
-    link: '/services/landing',
-    icon: '/img/servicespricing/landing-page.png',
-  },
-  {
-    label: 'Business site',
-    title: 'Business Website',
-    duration: '30–40 days',
-    desc: 'Up to 4 pages',
-    price: '€2.300',
-    link: '/services/business',
-    icon: '/img/servicespricing/business-page.png',
-  },
-  {
-    label: 'E-commerce',
-    title: 'Online Store',
-    duration: '30–50 days',
-    desc: 'Catalog, cart, payment, delivery',
-    price: '€3.300',
-    link: '/services/ecommerce',
-    icon: '/img/servicespricing/mobile-shopping.png',
-  },
-  {
-    label: 'CRM systems',
-    title: 'CRM Systems',
-    duration: '40–60 days',
-    desc: 'Custom approach, service integration',
-    price: '€7.500',
-    link: '/services/crm',
-    icon: '/img/servicespricing/crm.png',
-  },
-];
+// ✅ НОВЕ: беремо дані з конфіга
+import { SERVICES } from '@/lib/services.config';
 
 function ServicePricing() {
   return (
@@ -66,6 +20,7 @@ function ServicePricing() {
       >
         Our Services
       </h2>
+
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
@@ -78,8 +33,9 @@ function ServicePricing() {
         modules={[Pagination]}
         className="pb-12"
       >
-        {services.map((service, i) => (
-          <SwiperSlide key={i}>
+        {/* ✅ замість локального services.map → SERVICES.map */}
+        {SERVICES.map((service) => (
+          <SwiperSlide key={service.slug}>
             <motion.div
               whileHover={{ scale: 1.03 }}
               data-aos="zoom-in"
@@ -96,7 +52,6 @@ function ServicePricing() {
                   </span>
                 </div>
 
-                {/* Content remains the same */}
                 <h3 className="text-xl sm:text-xl text-blue-900 font-semibold mb-2 font-tangerine">
                   {service.title}
                 </h3>
@@ -110,7 +65,9 @@ function ServicePricing() {
                 <p className="text-base sm:text-lg text-blue-900">
                   From <span className="text-yellow-700">{service.price}</span>
                 </p>
-                <Link href="/projects">
+
+                {/* ✅ НОВЕ: веде на конкретну сторінку сервісу */}
+                <Link href={service.link}>
                   <span className="px-4 py-2 rounded-lg border border-white transition-colors duration-300 cursor-pointer text-yellow-500 bg-blue-900 hover:bg-[#c7a23f] hover:text-blue-900 text-sm">
                     Learn More
                   </span>
