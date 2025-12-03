@@ -273,7 +273,7 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
 
   return (
     <>
-      <div className="mt-28 ml-7">
+      <div className="mt-24 ml-7">
         <BackButton />
       </div>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 py-8 md:py-10">
@@ -286,7 +286,7 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
         <div className="mb-6 flex items-center justify-between">
           <nav
             aria-label="Breadcrumb"
-            className="mb-6 flex flex-wrap items-center gap-1 text-sm text-slate-600"
+            className="mb-1 flex flex-wrap items-center gap-1 text-sm text-slate-600"
           >
             <Link
               href="/"
@@ -313,7 +313,7 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
         </div>
 
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-2">
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
             <span className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
               {p.title}

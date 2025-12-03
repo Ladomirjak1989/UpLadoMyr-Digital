@@ -152,7 +152,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     <>
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         {/* Breadcrumb */}
-        <nav className="mb-6 flex flex-wrap items-center gap-1 text-sm text-slate-600">
+        <nav className="mb-6 mt-5 flex flex-wrap items-center gap-1 text-sm text-slate-600">
           <Link
             href="/"
             className="relative px-0.5 text-slate-600 hover:text-amber-700 transition
