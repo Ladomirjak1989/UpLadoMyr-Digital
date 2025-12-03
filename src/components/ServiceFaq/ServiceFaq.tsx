@@ -40,20 +40,26 @@ export default function ServiceFaq({ items }: ServiceFaqProps) {
             <button
               type="button"
               onClick={() => toggle(index)}
-              className="group flex w-full items-center justify-between px-4 py-3 text-left"
+              className="group flex w-full items-center justify-between gap-3
+                         px-3 py-3 sm:px-4 sm:py-3 text-left"
             >
-              <span className="font-semibold text-slate-900 group-hover:text-slate-950">
+              <span
+                className="flex-1 font-semibold text-slate-900 group-hover:text-slate-950
+                           text-[0.95rem] sm:text-base leading-snug"
+              >
                 {item.question}
               </span>
 
               <span
-                className={`ml-3 flex h-7 w-7 items-center justify-center rounded-full text-sm font-bold
-                transition-colors
-                ${
-                  isOpen
-                    ? 'bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d] text-black'
-                    : 'bg-slate-300 text-slate-800 group-hover:bg-slate-400'
-                }`}
+                className={`flex shrink-0 items-center justify-center
+                            h-7 w-7 sm:h-8 sm:w-8
+                            rounded-full text-xs sm:text-sm font-bold
+                            transition-colors
+                            ${
+                              isOpen
+                                ? 'bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d] text-black'
+                                : 'bg-slate-200 text-slate-800 group-hover:bg-slate-300'
+                            }`}
                 aria-hidden="true"
               >
                 {isOpen ? '−' : '+'}
@@ -66,7 +72,9 @@ export default function ServiceFaq({ items }: ServiceFaqProps) {
                 isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
               }`}
             >
-              <div className="overflow-hidden px-4 pb-4 text-sm text-slate-700">{item.answer}</div>
+              <div className="overflow-hidden px-3 pb-3 sm:px-4 sm:pb-4 text-sm text-slate-700 leading-relaxed">
+                {item.answer}
+              </div>
             </div>
           </div>
         );

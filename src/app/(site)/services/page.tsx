@@ -1,7 +1,12 @@
+import ServiceBanner from '@/components/Banner/ServiceBanner';
 import React from 'react';
 
 const page = () => {
-  return <div></div>;
+  return (
+    <div>
+      <ServiceBanner />
+    </div>
+  );
 };
 
 export default page;
