@@ -54,7 +54,7 @@ function ContactBanner() {
       icon: <SiWhatsapp size={20} />,
       label: 'WhatsApp',
       info: 'Chat on WhatsApp',
-      href: 'https://wa.me/380507252223',
+      href: 'https://wa.me/+31619388895',
     },
   ];
 

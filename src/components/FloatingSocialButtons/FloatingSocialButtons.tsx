@@ -142,7 +142,7 @@ const FloatingSocialButtons: React.FC<FloatingSocialButtonsProps> = ({ isMenuOpe
 
         {/* WhatsApp */}
         <a
-          href="https://wa.me/+380507252223"
+          href="https://wa.me/+31619388895"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-[#25d366] hover:bg-[#1ebc57] p-3 rounded-full shadow-md transition duration-300"

@@ -460,21 +460,21 @@ const Header: React.FC = () => {
 
                 {/* DROPDOWN: тільки назви сервісів */}
                 <div
-                  className={`absolute left-0 top-full mt-2 w-60 rounded-2xl border border-slate-200
-                              bg-white shadow-xl shadow-slate-900/10 overflow-hidden
-                              transition-all duration-200 origin-top
-                              ${
-                                isServicesOpen
-                                  ? 'opacity-100 translate-y-0 pointer-events-auto'
-                                  : 'opacity-0 translate-y-1 pointer-events-none'
-                              }`}
+                  className={`absolute left-0 top-full w-60 rounded-md border border-slate-200
+                bg-white shadow-xl shadow-slate-900/10 overflow-hidden
+                transition-all duration-200 origin-top
+                ${
+                  isServicesOpen
+                    ? 'opacity-100 translate-y-0 pointer-events-auto'
+                    : 'opacity-0 translate-y-1 pointer-events-none'
+                }`}
                 >
                   {SERVICES.map((service) => (
                     <Link
                       key={service.slug}
                       href={service.link}
                       className="block px-4 py-2.5 text-sm
-                                 text-slate-800 hover:bg-amber-50 hover:text-blue-900"
+                   text-slate-800 hover:bg-amber-50 hover:text-blue-900"
                     >
                       {service.title}
                     </Link>

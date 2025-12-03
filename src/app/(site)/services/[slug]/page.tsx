@@ -447,7 +447,7 @@ async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
     <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
       {/* Breadcrumb */}
       <nav
-        className="mb-6 flex flex-wrap items-center gap-1 text-sm text-slate-600"
+        className="mb-6 mt-3 flex flex-wrap items-center gap-1 text-sm text-slate-600"
         data-aos="fade-down"
       >
         <Link
