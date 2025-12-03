@@ -16,8 +16,8 @@ const navbarConfig = [
   { link: '/services', text: 'SERVICES' },
   { link: '/projects', text: 'PROJECTS' },
   { link: '/about', text: 'ABOUT US' },
-  { link: '/contacts', text: 'CONTACT' },
   { link: '/blog', text: 'BLOG' },
+  { link: '/contacts', text: 'CONTACT' },
 ];
 
 const btnBase = `relative inline-flex items-center justify-center gap-2

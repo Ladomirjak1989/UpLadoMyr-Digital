@@ -92,8 +92,10 @@ const Footer: React.FC = () => {
 
   const navItems = [
     { href: '/', label: 'HOME' },
+    { href: '/services', label: 'SERVICES' },
     { href: '/projects', label: 'PROJECTS' },
     { href: '/about', label: 'ABOUT' },
+    { href: '/blog', label: 'BLOG' },
     { href: '/contacts', label: 'CONTACT' },
   ];
 
@@ -165,7 +167,7 @@ const Footer: React.FC = () => {
             <div className="flex items-center space-x-4 mb-4">
               <div className="relative w-16 h-16">
                 <Image
-                  src="/img/header/logo1.jpg"
+                  src="/img/header/logo4.png"
                   alt="UpLadoMyr Logo"
                   fill
                   className="object-contain rounded-full ring-2 ring-yellow-400 bg-white"
