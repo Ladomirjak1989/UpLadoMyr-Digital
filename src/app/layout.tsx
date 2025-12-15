@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     images: [
       {
-        url: '/img/metaimage/meta-img.png',
+        url: '/img/metaimage/meta-img1.png',
         width: 1200,
         height: 630,
         alt: 'UpLadoMyr Digital – modern business website on laptop and phone',
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'UpLadoMyr Digital',
     description: 'Modern, fast websites for entrepreneurs and small businesses.',
-    images: ['/img/metaimage/meta-img.png'],
+    images: ['/img/metaimage/meta-img1.png'],
   },
 };
 
