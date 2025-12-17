@@ -172,10 +172,12 @@ const ProjectList: React.FC<ProjectListProps> = ({ searchTerm }) => {
       <div className="py-5 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 max-w-7xl mx-auto">
         <div>
           <h2 className="text-center text-gray-800 mb-8" data-aos="fade-down">
-            <span className="font-bold text-4xl sm:text-5xl">100% Custom Design.</span>
+            <span className="font-bold text-4xl sm:text-5xl">
+              Custom & Template-based Websites.
+            </span>
             <div>
               <span className="font-tangerine text-2xl sm:text-xl text-yellow-800 sm:text-yellow-600 italic">
-                We also use pre-made templates.
+                Choose what fits your budget – we make both look professional.
               </span>
             </div>
           </h2>
