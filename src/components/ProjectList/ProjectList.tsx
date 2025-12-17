@@ -175,7 +175,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ searchTerm }) => {
             <span className="font-bold text-4xl sm:text-5xl">100% Custom Design.</span>
             <div>
               <span className="font-tangerine text-2xl sm:text-xl text-yellow-800 sm:text-yellow-600 italic">
-                We never use pre-made templates.
+                We also use pre-made templates.
               </span>
             </div>
           </h2>
