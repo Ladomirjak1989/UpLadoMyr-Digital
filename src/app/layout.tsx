@@ -116,7 +116,6 @@
 //   );
 // }
 
-
 import { AuthProvider } from '@/context/AuthContext';
 import './globals.css';
 import CookieConsent from '@/components/CookieConsent/CookieConsent';
@@ -158,24 +157,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     // 🔹 added bg color на html – одразу задаємо світлий фон
     <html lang="en" className="h-full bg-[#f7f4ea]">
       <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
         {/* 🔹 added: кажемо браузеру, що сайт лише в light-режимі */}
-        <meta name="color-scheme" content="light" />{/* 🔹 added */}
+        <meta name="color-scheme" content="light" />
+        {/* 🔹 added */}
 
-        <meta
-          name="theme-color"
-          content="#ffffff"
-          media="(prefers-color-scheme: light)"
-        />
-        <meta
-          name="theme-color"
-          content="#0b0b0b"
-          media="(prefers-color-scheme: dark)"
-        />
+        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)" />
       </head>
 
       <body
@@ -199,9 +188,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <CookieConsent />
         </AuthProvider>
 
-        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <noscript>You need to enable JavaScript to run this app. Thank you.</noscript>
       </body>
     </html>
   );
 }
-

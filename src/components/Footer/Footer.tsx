@@ -352,7 +352,7 @@ const Footer: React.FC = () => {
 
           {/* Right: Icons */}
           <div className="flex gap-4 justify-center">
-            {[FaFacebookF, FaInstagram ].map((Icon, i) => (
+            {[FaFacebookF, FaInstagram].map((Icon, i) => (
               <div
                 key={i}
                 className="w-8 h-8 flex items-center justify-center rounded-full bg-white text-[#042d5d] border border-yellow-500 hover:bg-yellow-200 transition hover:scale-110"
