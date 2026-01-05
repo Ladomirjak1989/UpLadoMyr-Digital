@@ -7,8 +7,8 @@ import emailjs from '@emailjs/browser';
 import {
   FaBriefcase,
   FaChevronRight,
-  // FaFacebookF,
-  // FaInstagram,
+  FaFacebookF,
+  FaInstagram,
   FaPhone,
   // FaTelegramPlane,
   // FaYoutube,
@@ -326,7 +326,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-400 mt-2 pt-4 px-4 md:px-16 flex flex-col md:flex-row justify-between items-center text-xs text-gray-800 gap-4">
           <div className="flex flex-col md:flex-row items-center gap-2 text-center md:text-left mb-7">
             <p>
-              &copy; 2025{' '}
+              &copy; 2025-2026{' '}
               <Link
                 href="https://www.upladomyr.com"
                 target="_blank"
@@ -351,16 +351,16 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Right: Icons */}
-          {/* <div className="flex gap-4 justify-center">
-            {[FaFacebookF, FaInstagram, FaTelegramPlane, FaYoutube].map((Icon, i) => (
+          <div className="flex gap-4 justify-center">
+            {[FaFacebookF, FaInstagram ].map((Icon, i) => (
               <div
                 key={i}
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-white text-[#042d5d] border border-yellow-500 hover:bg-yellow-100 transition hover:scale-110"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-white text-[#042d5d] border border-yellow-500 hover:bg-yellow-200 transition hover:scale-110"
               >
                 <Icon size={14} />
               </div>
             ))}
-          </div> */}
+          </div>
         </div>
       </div>
     </>
