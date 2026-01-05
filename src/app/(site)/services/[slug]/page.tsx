@@ -548,11 +548,18 @@ async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
             ))}
           </ul>
         </div>
+      </section>
 
-        {/* Deliverables card */}
-        <div className="rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm">
+      {/* Deliverables card */}
+      <section className="mt-10">
+        <div
+          className="
+      rounded-2xl border border-slate-200
+      bg-white/80 p-6 shadow-sm
+    "
+        >
           <h3 className="text-lg font-semibold text-slate-900">What&apos;s included</h3>
-          <ul className="mt-3 space-y-2 text-sm text-slate-700">
+          <ul className="mt-3 space-y-2 text-sm text-slate-700 grid gap-4 sm:grid-cols-2">
             {details.deliverables.map((d) => (
               <li key={d} className="flex items-start gap-2">
                 <span className="mt-1 text-amber-500">✓</span>
