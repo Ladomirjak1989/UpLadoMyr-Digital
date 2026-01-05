@@ -165,39 +165,41 @@ export default async function BlogPage({
               <span className="font-medium text-amber-700">Blog</span>
             </div>
 
-            <ul className="space-y-2 text-sm">
-              {/* All articles – повністю скидає і q, і category */}
-              <li>
-                <Link
-                  href={buildHref({})}
-                  className={`flex items-baseline gap-1 ${
-                    !activeCategory && !q
-                      ? 'font-semibold text-slate-900'
-                      : 'text-slate-600 hover:text-slate-900'
-                  }`}
-                >
-                  <span>All articles</span>
-                  <span className="text-slate-400">/{allTotal}</span>
-                </Link>
-              </li>
-
-              {categories.map((cat) => (
-                <li key={cat}>
+            <div className="rounded-2xl border border-gray-100 bg-gradient-to-b from-gray-50 via-gray-100 to-white p-5 shadow-sm">
+              <ul className="space-y-2 text-sm">
+                {/* All articles – повністю скидає і q, і category */}
+                <li>
                   <Link
-                    // категорія теж скидає q – окремий фільтр
-                    href={buildHref({ category: cat })}
+                    href={buildHref({})}
                     className={`flex items-baseline gap-1 ${
-                      activeCategory === cat && !q
+                      !activeCategory && !q
                         ? 'font-semibold text-slate-900'
                         : 'text-slate-600 hover:text-slate-900'
                     }`}
                   >
-                    <span>{cat}</span>
-                    <span className="text-slate-400">/{counts[cat] ?? 0}</span>
+                    <span>All articles</span>
+                    <span className="text-slate-400">/{allTotal}</span>
                   </Link>
                 </li>
-              ))}
-            </ul>
+
+                {categories.map((cat) => (
+                  <li key={cat}>
+                    <Link
+                      // категорія теж скидає q – окремий фільтр
+                      href={buildHref({ category: cat })}
+                      className={`flex items-baseline gap-1 ${
+                        activeCategory === cat && !q
+                          ? 'font-semibold text-slate-900'
+                          : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      <span>{cat}</span>
+                      <span className="text-slate-400">/{counts[cat] ?? 0}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             {/* Subscribe to newsletter */}
             <section className="mt-10 rounded-2xl border border-gray-100 bg-gradient-to-b from-amber-50 via-amber-50 to-white p-5 shadow-sm">
