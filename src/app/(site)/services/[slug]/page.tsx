@@ -533,7 +533,7 @@ async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
         className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1.4fr)]"
         data-aos="fade-up"
       >
-        <div>
+        <div className="rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm">
           <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
             What this service gives you
           </h2>
