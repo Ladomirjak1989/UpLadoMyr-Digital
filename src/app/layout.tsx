@@ -154,14 +154,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // 🔹 added bg color на html – одразу задаємо світлий фон
-    <html lang="en" className="h-full bg-[#f7f4ea]">
+    // ⬇️ було bg-[#f7f4ea], тепер чисто білий
+    <html lang="en" className="h-full bg-white">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-        {/* 🔹 added: кажемо браузеру, що сайт лише в light-режимі */}
+        {/* фіксуємо light-режим */}
         <meta name="color-scheme" content="light" />
-        {/* 🔹 added */}
 
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)" />
@@ -171,7 +170,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className="
           min-h-screen h-full antialiased overflow-x-hidden
           selection:bg-yellow-500 selection:text-slate-900
-          bg-[#f7f4ea] text-slate-900   /* 🔹 added: фон і колір тексту */
+          bg-slate-50 text-slate-900   /* ⬅️ дуже світло-сірий фон замість bg-[#f7f4ea] */
         "
         style={{
           ['--container-w' as any]: '80rem',
@@ -188,7 +187,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <CookieConsent />
         </AuthProvider>
 
-        <noscript>You need to enable JavaScript to run this app. Thank you.</noscript>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
       </body>
     </html>
   );
