@@ -633,9 +633,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                           setIsServicesOpenMobile(false);
                         }}
                         className="block rounded-md px-2 py-1 text-slate-800 hover:bg-white/80"
-                      >
-                        All services
-                      </Link>
+                      ></Link>
                       {SERVICES.map((service) => (
                         <Link
                           key={service.slug}
@@ -738,12 +736,11 @@ const Header: React.FC = () => {
   return (
     <header
       className={[
-        'fixed inset-x-0 top-0 z-[120] transition-all duration-300', // ⬅︎ CHANGED z-index
+        'sticky top-0 z-[120] w-full transition-all duration-300', // ⬅︎ CHANGED z-index
         isScrolled
           ? 'bg-gradient-to-br from-[#f9f8f4] via-[#d9d6ce] to-[#beb7b2] backdrop-blur-md shadow-lg py-2'
           : 'bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] py-4',
       ].join(' ')}
-      style={{ paddingTop: 'env(safe-area-inset-top)' }}
     >
       <div className="flex mt-3 justify-between items-center px-4 sm:px-6 md:px-10 lg:px-16">
         {/* Logo & Text */}
