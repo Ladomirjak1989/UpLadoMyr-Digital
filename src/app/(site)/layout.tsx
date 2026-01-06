@@ -3,7 +3,6 @@
 import StoreProvider from '../../store/StoreProvider';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
-import ScrollToTopButton from '../../components/ScrollToTopButton/ScrollToTopButton';
 import WeglotInitializer from '../../components/WeglotInitializer/WeglotInitializer';
 import { AuthProvider } from '@/context/AuthContext';
 import ToasterMessage from '@/components/Toaster/Toaster';
@@ -35,7 +34,6 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
 
           <ToasterMessage />
           <WeglotInitializer />
-          <ScrollToTopButton />
         </div>
       </StoreProvider>
     </AuthProvider>

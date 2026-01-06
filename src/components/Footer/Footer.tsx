@@ -17,6 +17,7 @@ import { useState } from 'react';
 import { FiArrowUp } from 'react-icons/fi';
 // зверху файлу
 import CookieSettingsButton from '@/components/CookieConsent/CookieSettingsButton';
+import ScrollToTopButton from '../ScrollToTopButton/ScrollToTopButton';
 
 const Footer: React.FC = () => {
   const pathname = usePathname();
@@ -361,6 +362,7 @@ const Footer: React.FC = () => {
               </div>
             ))}
           </div>
+          <ScrollToTopButton />
         </div>
       </div>
     </>
