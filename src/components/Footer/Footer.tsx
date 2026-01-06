@@ -352,17 +352,24 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Right: Icons */}
-          <div className="flex gap-4 justify-center">
-            {[FaFacebookF, FaInstagram].map((Icon, i) => (
-              <div
-                key={i}
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-white text-[#042d5d] border border-yellow-500 hover:bg-yellow-200 transition hover:scale-110"
-              >
-                <Icon size={14} />
-              </div>
-            ))}
+          <div className="flex flex-col items-center gap-4 mb-7">
+            {/* соцмережі */}
+            <div className="flex gap-4 justify-center">
+              {[FaFacebookF, FaInstagram].map((Icon, i) => (
+                <div
+                  key={i}
+                  className="w-8 h-8 flex items-center justify-center rounded-full
+                   bg-white text-[#042d5d] border border-yellow-500
+                   hover:bg-yellow-200 transition hover:scale-110"
+                >
+                  <Icon size={14} />
+                </div>
+              ))}
+            </div>
+
+            {/* тут з’явиться ТІЛЬКИ мобільна кнопка; десктопна – fixed зверху */}
+            <ScrollToTopButton />
           </div>
-          <ScrollToTopButton />
         </div>
       </div>
     </>

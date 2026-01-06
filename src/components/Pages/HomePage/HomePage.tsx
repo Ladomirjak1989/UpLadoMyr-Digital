@@ -334,7 +334,7 @@ const HomePage: React.FC = () => {
 
       {/* ===== Why choose us ===== */}
       <section
-        className="relative w-full overflow-hidden rounded-3xl bg-gradient-to-br from-[#fdfdfb] via-[#f6f2e3] to-[#c4bdb7] text-black mt-16"
+        className="relative w-full overflow-hidden rounded-3xl bg-gradient-to-br from-[#fdfdfb] via-[#f6f2e3] to-[#c4bdb7] text-gray-950 mt-16"
         data-aos="fade-up"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-16 py-12 md:py-16 lg:py-20">
@@ -512,7 +512,7 @@ const HomePage: React.FC = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
           <h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-deep mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl  font-bold text-center text-deep mb-6"
             data-aos="fade-down"
           >
             Web Development Methodology

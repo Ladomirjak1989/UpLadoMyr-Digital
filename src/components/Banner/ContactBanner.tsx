@@ -97,7 +97,7 @@ function ContactBanner() {
               <span className="text-xs sm:text-sm text-white/80">{contact.label}</span>
 
               {hovered === index && (
-                <span className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white text-black text-xs px-3 py-1 rounded-full shadow-md whitespace-nowrap z-10">
+                <span className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white text-gray-950 text-xs px-3 py-1 rounded-full shadow-md whitespace-nowrap z-10">
                   {contact.info}
                 </span>
               )}
