@@ -27,6 +27,7 @@ import {
   SiPostgresql,
 } from 'react-icons/si';
 import Link from 'next/link';
+import FounderBanner from '@/components/Banner/FounderBanner';
 
 const techItems = [
   { icon: <FaHtml5 size={40} color="#E44D26" />, name: 'HTML' },
@@ -55,8 +56,10 @@ const AboutPage: React.FC = () => {
 
   return (
     <div className=" text-gray-800 px-4 py-10 max-w-6xl mx-auto">
+      <FounderBanner />
+
       {/* Hero Section */}
-      <section className="grid md:grid-cols-2 gap-10 items-center mb-16">
+      <section className="grid md:grid-cols-2 gap-10 items-center mb-16 mt-10">
         <div data-aos="fade-right">
           <h1 className="text-4xl md:text-5xl font-bold text-blue-950 mb-4">
             Modern Websites Tailored to Your Business.
