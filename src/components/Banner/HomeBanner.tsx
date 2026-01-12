@@ -52,8 +52,9 @@ const HomeBanner: React.FC = () => {
           >
             UpLadoMyr Digital
           </span>
-          , we craft stylish, high-performing online solutions to help your business grow online —
-          fast, responsive, and built to convert.
+          , we create websites and online solutions that help you attract clients and grow your
+          business online. We work fast, communicate clearly, and focus on making sure your website
+          actually works — not just looks good.
         </p>
 
         {/* CTA — високий z-index і окремий простір для торкання */}

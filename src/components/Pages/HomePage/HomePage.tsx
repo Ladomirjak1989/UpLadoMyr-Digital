@@ -261,30 +261,54 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      {/* Цитата */}
-      <div className="bg-gradient-to-r from-white via-amber-50 to-white py-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pl-6" data-aos="fade-up">
-          <section className="relative my-16">
-            <div className="relative pl-6">
-              <span
-                className="absolute left-0 top-1 bottom-1 w-[3px] rounded-full bg-gradient-to-b from-amber-700 to-amber-500"
-                data-aos="fade-up"
-              />
-              <p
-                className="text-2xl sm:text-3xl md:text-4xl font-medium italic leading-relaxed
-             bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
-             bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
-              >
-                “Whoever sows generously will also reap generously.”
+      {/* Message + Quote (ONE SECTION) */}
+      <section className="bg-gradient-to-r from-white via-amber-50 to-white py-14">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
+          <div className="relative">
+            {/* Main centered message */}
+            <div className="text-center max-w-4xl mx-auto">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 leading-tight">
+                We believe that investing in a quality website is an investment that pays off.
+              </h3>
+
+              <p className="mt-4 text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed">
+                A well-built website works for you every day — attracting clients, building trust,
+                and helping your business grow.
               </p>
 
-              <p className="mt-3 text-sm sm:text-base font-semibold text-slate-600">
-                — 2 Corinthians 9:6
+              <p className="mt-5 text-base sm:text-lg md:text-xl font-semibold text-slate-900">
+                If you’re ready to take the next step, we’re here to help.
               </p>
             </div>
-          </section>
+
+            {/* Quote on the right (smaller) */}
+            <div className="mt-10 flex justify-center lg:justify-end">
+              <div className="relative w-full max-w-xl lg:max-w-lg text-center lg:text-right">
+                {/* Right accent line */}
+                <span
+                  className="hidden lg:block absolute -right-4 top-1 bottom-1 w-[3px] rounded-full
+                       bg-gradient-to-b from-amber-700 to-amber-500"
+                  aria-hidden="true"
+                />
+
+                <div className="lg:pr-6">
+                  <p
+                    className="text-md sm:text-sm md:text-xl font-medium italic leading-relaxed
+              bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
+              bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
+                  >
+                    “Whoever sows generously will also reap generously.”
+                  </p>
+
+                  <p className="mt-2 text-xs sm:text-sm font-semibold text-slate-600">
+                    — 2 Corinthians 9:6
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* Services Section */}
       <div className="bg-white py-20">
