@@ -100,6 +100,19 @@ const Footer: React.FC = () => {
     { href: '/contacts', label: 'CONTACT' },
   ];
 
+  const socialLinks = [
+    {
+      Icon: FaFacebookF,
+      href: 'https://www.facebook.com/profile.php?id=61584336012665',
+      label: 'Facebook – UpLadoMyr Digital',
+    },
+    {
+      Icon: FaInstagram,
+      href: 'https://www.instagram.com/upladomyrdigital',
+      label: 'Instagram – UpLadoMyr Digital',
+    },
+  ];
+
   return (
     <>
       {/* Hero footer block */}
@@ -189,7 +202,7 @@ const Footer: React.FC = () => {
                   className=" bg-white rounded-full p-3 w-10 h-10 shadow-md 
            border border-yellow-500 hover:shadow-lg transition-transform duration-300 hover:scale-110"
                 />
-                <a href="tel:+310619388895" className="hover:underline cursor-pointer">
+                <a href="tel:+31619388895" className="hover:underline cursor-pointer">
                   +31 619 - 38 - 88 - 95
                 </a>
               </li>
@@ -353,17 +366,23 @@ const Footer: React.FC = () => {
 
           {/* Right: Icons */}
           <div className="flex flex-col items-center gap-4 mb-7">
-            {/* соцмережі */}
+            {/* соцмережі з реальними посиланнями */}
             <div className="flex gap-4 justify-center">
-              {[FaFacebookF, FaInstagram].map((Icon, i) => (
-                <div
-                  key={i}
-                  className="w-8 h-8 flex items-center justify-center rounded-full
-                   bg-white text-[#042d5d] border border-yellow-500
-                   hover:bg-yellow-200 transition hover:scale-110"
+              {socialLinks.map(({ Icon, href, label }) => (
+                <a
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-8 h-8 flex items-center justify-center
+                             rounded-full bg-white text-[#042d5d]
+                             border border-yellow-500
+                             hover:bg-yellow-200 transition
+                             hover:scale-110"
                 >
                   <Icon size={14} />
-                </div>
+                </a>
               ))}
             </div>
 

@@ -35,8 +35,8 @@ function ContactBanner() {
     {
       icon: <FaAt size={20} />,
       label: 'Website',
-      info: 'www.upladomyr.com',
-      href: 'https://www.upladomyr.com',
+      info: 'upladomyr.com',
+      href: 'https://upladomyr.com',
     },
     {
       icon: <SiViber size={20} />,
