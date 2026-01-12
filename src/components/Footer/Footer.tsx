@@ -190,7 +190,7 @@ const Footer: React.FC = () => {
            border border-yellow-500 hover:shadow-lg transition-transform duration-300 hover:scale-110"
                 />
                 <a href="tel:+310619388895" className="hover:underline cursor-pointer">
-                  +31 (06) 19 - 38 - 88 - 95
+                  +31 619 - 38 - 88 - 95
                 </a>
               </li>
               <li className="flex items-center space-x-2 font-bold text-black">

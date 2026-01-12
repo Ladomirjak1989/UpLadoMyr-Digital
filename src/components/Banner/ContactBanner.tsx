@@ -23,8 +23,8 @@ function ContactBanner() {
     {
       icon: <FaPhone size={20} />,
       label: 'Phone',
-      info: '+31 (06) 19-38-88-95',
-      href: 'tel:+31 (06) 19-38-88-95',
+      info: '+31 619-38-88-95',
+      href: 'tel:+31 619-38-88-95',
     },
     {
       icon: <FaEnvelope size={20} />,

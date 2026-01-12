@@ -97,7 +97,7 @@ const HomeBanner: React.FC = () => {
         </p>
         <p className="font-tangerine mt-4 text-yellow-400 flex items-center gap-2 font-bold text-accent animate__animated animate__pulse animate__infinite text-xl">
           <FaPhoneAlt className="text-accent bg-white rounded-full p-3 w-12 h-12 shadow-md border border-yellow-500" />
-          +31 (06) 19 - 38 - 88 - 95
+          +31 619 - 38 - 88 - 95
         </p>
         <hr className="mt-4 w-52 border-accent/80" />
       </aside>
