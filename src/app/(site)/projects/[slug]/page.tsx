@@ -610,24 +610,67 @@ async function getProject(slug: string): Promise<Project | null> {
 }
 
 // ──────────────────────────────────────────────────────────────────────────────
-// ✅ ADDED (PRO): Cloudinary optimizer for cover/gallery/og
+// ✅ LUXURY (PRO): Cloudinary optimizer + smart media fit
 // ──────────────────────────────────────────────────────────────────────────────
 const cloudinaryOptimize = (url: string, mode: 'cover' | 'gallery' | 'og' = 'cover') => {
   if (!url) return url;
   if (!url.includes('res.cloudinary.com')) return url;
 
   if (mode === 'cover') {
-    // ✅ PRO: big hero image, but still optimized (auto format/quality + DPR)
-    return url.replace('/image/upload/', '/image/upload/f_auto,q_auto,w_2000,dpr_auto/');
+    // big hero image but optimized (format/quality + DPR)
+    return url.replace('/image/upload/', '/image/upload/f_auto,q_auto,w_2200,dpr_auto/');
   }
 
   if (mode === 'gallery') {
-    // ✅ PRO: smaller tiles
+    // smaller tiles
     return url.replace('/image/upload/', '/image/upload/f_auto,q_auto,w_900,dpr_auto/');
   }
 
-  // ✅ PRO: stable OG image size
+  // stable OG image size
   return url.replace('/image/upload/', '/image/upload/f_auto,q_auto,w_1200,h_630,c_fill,g_auto/');
+};
+
+// ✅ LUXURY: heuristic — decide if we should use contain (screenshots) or cover (photos)
+// Works well in real portfolios without adding new DB fields.
+const shouldContainCover = (url: string) => {
+  const u = (url || '').toLowerCase();
+
+  // If you store screenshots with these keywords (common), we never crop
+  const looksLikeScreenshot =
+    u.includes('screenshot') ||
+    u.includes('screen') ||
+    u.includes('preview') ||
+    u.includes('mockup') ||
+    u.includes('portfolio') ||
+    u.includes('case') ||
+    u.includes('high_quality') ||
+    u.includes('serenity') ||
+    u.includes('renovatie') ||
+    u.includes('werk');
+
+  // PNG screenshots are often UI — better to show full frame
+  const isPng = u.endsWith('.png') || u.includes('.png?') || u.includes('/png');
+
+  // If it's from Cloudinary and name suggests UI, contain
+  return looksLikeScreenshot || isPng;
+};
+
+// ✅ LUXURY: returns Tailwind classes for <Image /> and wrapper background
+const getCoverPresentation = (coverRaw: string) => {
+  const contain = shouldContainCover(coverRaw);
+
+  return {
+    wrapperClass: contain
+      ? // clean letterbox for screenshots
+        'bg-white'
+      : // subtle background for photos; still safe
+        'bg-slate-100',
+    imageClass: contain
+      ? // no cropping
+        'object-contain'
+      : // photos: fill the frame nicely
+        'object-cover object-center',
+  };
 };
 
 // ──────────────────────────────────────────────────────────────────────────────
@@ -645,7 +688,6 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
   );
 }
 
-// Підсвітити бренд у тексті (всі входження) — помаранчевим
 function HighlightBrand({ text, brand }: { text: string; brand: string }) {
   const re = new RegExp(brand.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
   const parts = text.split(re);
@@ -662,16 +704,9 @@ function HighlightBrand({ text, brand }: { text: string; brand: string }) {
   );
 }
 
-/**
- * РОБАСТНИЙ ПАРСЕР Overview
- * - Визнає різні заголовки "How … work?"
- * - Витягує нумеровані пункти навіть якщо вони в одному абзаці: "1. …; 2. …; 3. …"
- * - Дефіси ігнорує (жодних "-" у виводі)
- */
 function splitOverview(text?: string | null) {
   if (!text) return { intro: '', howTitle: '', ordered: [] as string[], bullets: [] as string[] };
 
-  // 1) Знаходимо заголовок "HOW ... WORK?"
   const howRe = /(how\s+(?:the\s+)?[^\n]*?\swork[s]?\s*\?)/i;
   const m = text.match(howRe);
 
@@ -687,7 +722,6 @@ function splitOverview(text?: string | null) {
     after = text.trim();
   }
 
-  // 2) Спочатку пробуємо нумерацію, включно з "1. ...; 2. ...;"
   const ordered: string[] = [];
   const orderedGlobal = after.matchAll(/\b(\d+)[.)-]\s+([^;]+?)(?=(?:\s*;|\s+\d+[.)-]|$))/g);
   for (const mm of orderedGlobal) {
@@ -695,7 +729,6 @@ function splitOverview(text?: string | null) {
     if (item) ordered.push(item);
   }
 
-  // 3) Якщо немає нумерованих — шукаємо «рядкові» буліти, але дефіси не рендеримо
   const bullets: string[] = [];
   if (ordered.length === 0) {
     const lines = after.split(/\r?\n/);
@@ -769,7 +802,6 @@ function Badge({
 // URL фронта (canonical/OG/JSON-LD)
 const SITE = (process.env.NEXT_PUBLIC_FRONTEND_LOCALHOST_URL || '').replace(/\/$/, '');
 
-// ✅ CHANGED: generateMetadata now uses optimized OG image when Cloudinary
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const p = await getProject(slug);
@@ -779,7 +811,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const title = `${p.title} — Case Study`;
   const desc = p.longDescription || p.description || '';
 
-  // ✅ CHANGED (PRO): optimize OG image
+  // ✅ LUXURY: optimized OG image
   const imgRaw = p.imageUrl || p.gallery?.[0] || (SITE ? `${SITE}/og-default.jpg` : undefined);
   const img = imgRaw ? cloudinaryOptimize(imgRaw, 'og') : undefined;
 
@@ -811,16 +843,15 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
   const p = await getProject(slug);
   if (!p || p.status !== 'published') notFound();
 
-  // ✅ CHANGED: cover optimized for hero
   const coverRaw = p.imageUrl || p.gallery?.[0] || '/placeholder.png';
   const cover = cloudinaryOptimize(coverRaw, 'cover');
 
-  // ВАЖЛИВО: виділяємо саме назву поточного проєкту помаранчевим
-  const BRAND = p.title;
+  // ✅ LUXURY: decide contain vs cover automatically
+  const coverPresentation = getCoverPresentation(coverRaw);
 
+  const BRAND = p.title;
   const { intro, howTitle, ordered, bullets } = splitOverview(p.longDescription || p.description);
 
-  // JSON-LD
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
@@ -828,7 +859,6 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
     about: p.description,
     description: p.longDescription || p.description,
     url: p.websiteUrl || (SITE ? `${SITE}/projects/${p.slug}` : undefined),
-    // ✅ CHANGED (PRO): use raw URLs for schema (ok), but cover is already optimized in UI
     image: [coverRaw, ...(p.gallery || [])].filter(Boolean),
     genre: p.category,
     keywords: [...(p.techStack || []), ...(p.features || [])].join(', '),
@@ -843,13 +873,13 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
       <div className="mt-24 ml-7">
         <BackButton />
       </div>
+
       <div className="mx-auto max-w-6xl px-4 sm:px-6 md:px-8 py-8 md:py-10">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        {/* Breadcrumb + Back */}
         <div className="mb-6 flex items-center justify-between">
           <nav
             aria-label="Breadcrumb"
@@ -879,7 +909,6 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
           </nav>
         </div>
 
-        {/* Header */}
         <div className="mb-2">
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
             <span className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent">
@@ -936,20 +965,20 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
           </div>
         </div>
 
-        {/* Cover */}
-        <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-2xl shadow">
+        {/* ✅ LUXURY Cover: auto contain for screenshots / cover for photos */}
+        <div
+          className={`relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-2xl shadow ${coverPresentation.wrapperClass}`}
+        >
           <Image
-            // ✅ CHANGED (PRO): optimized Cloudinary cover
             src={cover}
             alt={`${p.title} cover`}
             fill
             sizes="(max-width: 768px) 100vw, 1000px"
-            className="object-cover"
+            className={coverPresentation.imageClass}
             priority
           />
         </div>
 
-        {/* Content */}
         <div className="grid gap-6 lg:grid-cols-3">
           <div className="space-y-6 lg:col-span-2">
             <Section title="Overview">
@@ -1027,7 +1056,6 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
                       rel="noopener noreferrer"
                       className="group relative block overflow-hidden rounded-lg ring-1 ring-slate-200"
                     >
-                      {/* ✅ CHANGED (PRO): use next/image + optimized Cloudinary URL */}
                       <div className="relative h-40 w-full">
                         <Image
                           src={cloudinaryOptimize(src, 'gallery')}
@@ -1044,7 +1072,6 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
             )}
           </div>
 
-          {/* Sidebar */}
           <aside className="space-y-6">
             <Section title="Tech stack">
               {p.techStack?.length ? (
