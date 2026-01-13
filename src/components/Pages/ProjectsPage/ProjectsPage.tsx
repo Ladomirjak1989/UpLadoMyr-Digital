@@ -124,7 +124,7 @@ const ProjectsPage: React.FC = () => {
                 data-aos-delay="150"
               >
                 <Image
-                  src="/img/homeprojects/imgP.jpg"
+                  src="/img/project/screenshot-203004.avif"
                   alt="Project showcase mockup"
                   width={1200}
                   height={850}
