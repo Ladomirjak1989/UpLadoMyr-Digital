@@ -29,7 +29,6 @@ import {
   FiStar, // Individual approach
 } from 'react-icons/fi';
 
-import 'animate.css';
 import Image from 'next/image';
 import PaymentSteps from '../../PaymentSteps/PaymentSteps';
 import ServicePricing from '../../ServicesPricing/ServicesPricing';
