@@ -11,7 +11,7 @@ function ensureAosCssLoaded() {
   const link = document.createElement('link');
   link.id = AOS_CSS_ID;
   link.rel = 'stylesheet';
-  link.href = '/vendor/aos.css'; // ✅ public/vendor/aos.css
+  link.href = '/vendor/aos.css'; // public/vendor/aos.css
   document.head.appendChild(link);
 }
 
@@ -20,7 +20,7 @@ function removeAosCss() {
 }
 
 function stripAosAttributesAndStyles() {
-  // прибираємо атрибути
+  // remove AOS data attributes
   document.querySelectorAll<HTMLElement>('[data-aos]').forEach((el) => {
     el.removeAttribute('data-aos');
     el.removeAttribute('data-aos-delay');
@@ -31,7 +31,7 @@ function stripAosAttributesAndStyles() {
     el.removeAttribute('data-aos-anchor-placement');
   });
 
-  // прибираємо класи/стилі, які AOS міг накласти
+  // remove AOS classes + inline styles that may remain
   document.querySelectorAll<HTMLElement>('.aos-init, .aos-animate').forEach((el) => {
     el.classList.remove('aos-init', 'aos-animate');
     el.style.removeProperty('opacity');
@@ -44,37 +44,47 @@ export default function AOSProvider() {
   useEffect(() => {
     const mq = window.matchMedia(DESKTOP_MQ);
 
-    let aosInstance: any = null;
+    let disposed = false;
+    let aos: any = null;
 
     const enableAos = async () => {
-      // ✅ грузимо CSS тільки для tablet/desktop
+      if (disposed) return;
+
       ensureAosCssLoaded();
 
-      // ✅ грузимо JS тільки для tablet/desktop
+      // load JS only on tablet/desktop
       const mod = await import('aos');
-      const AOS = mod.default;
+      if (disposed) return;
 
-      AOS.init({
+      aos = mod.default;
+
+      aos.init({
         duration: 600,
-        once: true, // ✅ менше навантаження
+        once: true,
         mirror: false,
       });
 
-      AOS.refreshHard();
-      aosInstance = AOS;
+      // safe call (no empty catch)
+      try {
+        aos.refreshHard?.();
+      } catch (err) {
+        // ignore: AOS may fail in edge cases during hydration/navigation
+        void err;
+      }
     };
 
     const disableAos = () => {
-      // ✅ мобіла: прибираємо ефекти повністю
-      if (aosInstance?.refreshHard) {
-        try {
-          aosInstance.refreshHard();
-        } catch {}
-      }
+      // remove visual effects + CSS for mobile
       stripAosAttributesAndStyles();
-
-      // ✅ і найважливіше — не тягнемо CSS на мобілці
       removeAosCss();
+
+      // also try to refresh/reset internal state if available
+      try {
+        aos?.refreshHard?.();
+      } catch (err) {
+        // ignore
+        void err;
+      }
     };
 
     const handle = () => {
@@ -86,9 +96,11 @@ export default function AOSProvider() {
     };
 
     handle();
+
     mq.addEventListener('change', handle);
 
     return () => {
+      disposed = true;
       mq.removeEventListener('change', handle);
     };
   }, []);
