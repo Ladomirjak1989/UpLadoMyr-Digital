@@ -2,7 +2,6 @@
 
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import 'aos/dist/aos.css';
 import AOS from 'aos';
 import { FaArrowRight, FaArrowDown } from 'react-icons/fa';
 

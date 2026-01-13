@@ -12,7 +12,8 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
- font-family: var(--font-sans, Arial, Helvetica, sans-serif);;
+  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+  ;
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -271,9 +272,9 @@ html {
 
 /* ==== UpLadoMyr Digital scrollbar (desktop Chrome/Edge/Safari + Firefox) ==== */
 :root {
-   /* шрифт сайту */
+  /* шрифт сайту */
   --font-sans: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  
+
   /* Палітра сайту */
   --sb-track: #efe8d9;
   /* теплий беж (фон доріжки) */
@@ -302,7 +303,7 @@ html {
 }
 
 
-/*  Scrollbar боковий   WebKit-сімейство (Chrome/Edge/Safari/Opera) */ 
+/*  Scrollbar боковий   WebKit-сімейство (Chrome/Edge/Safari/Opera) */
 @supports selector(::-webkit-scrollbar) {
   body::-webkit-scrollbar {
     width: var(--sb-size);
@@ -343,5 +344,23 @@ html {
 @media (max-width: 640px) {
   :root {
     --sb-size: 8px;
+  }
+}
+
+/* ✅ Disable ONLY AOS animations on mobile (keep all other animations) */
+@media (max-width: 767px) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .aos-init,
+  .aos-animate {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
   }
 }
