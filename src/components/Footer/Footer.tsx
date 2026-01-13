@@ -181,7 +181,7 @@ const Footer: React.FC = () => {
             <div className="flex items-center space-x-4 mb-4">
               <div className="relative w-16 h-16">
                 <Image
-                  src="/img/header/logo4.png"
+                  src="/img/header/logo4.avif"
                   alt="UpLadoMyr Logo"
                   fill
                   className="object-contain rounded-full ring-2 ring-yellow-400 bg-white"

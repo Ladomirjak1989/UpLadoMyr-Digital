@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useEffect, useMemo, useCallback, useState } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import Image from 'next/image';
 import ProjectList from '../../ProjectList/ProjectList';
 import { FiTrendingUp, FiClock, FiShoppingCart } from 'react-icons/fi';
@@ -23,11 +21,6 @@ function debounce<T extends (...args: any[]) => void>(fn: T, delay: number) {
 const ProjectsPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
-
-  // ініціалізація AOS один раз
-  useEffect(() => {
-    AOS.init({ duration: 800 });
-  }, []);
 
   // стабільний debounced setter
   const debouncedSet = useMemo(

@@ -1,8 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import { useState } from 'react';
 
 type FaqItem = {
   question: string;
@@ -15,11 +13,6 @@ type ServiceFaqProps = {
 
 export default function ServiceFaq({ items }: ServiceFaqProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  useEffect(() => {
-    AOS.init({ once: true });
-    AOS.refresh();
-  }, []);
 
   const toggle = (index: number) => {
     setOpenIndex((current) => (current === index ? null : index));

@@ -70,7 +70,7 @@ const TermsPage: React.FC = () => {
     <div className="relative min-h-[100svh] w-full overflow-hidden">
       {/* Background image позаду всього */}
       <Image
-        src="/img/privacy/privacybg1.jpg"
+        src="/img/privacy/privacybg1.avif"
         alt="Soft abstract background"
         fill
         priority

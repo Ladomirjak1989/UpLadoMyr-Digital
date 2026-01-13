@@ -21,7 +21,7 @@ const HomeBanner: React.FC = () => {
         pt-24 md:pt-0     /* запас під фіксований header на мобі */
         pb-28             /* запас знизу щоб CTA не перекривали float-и */
       "
-      style={{ backgroundImage: "url('/img/bannerhome/bannerhome.png')" }}
+      style={{ backgroundImage: "url('/img/bannerhome/bannerhome.avif')" }}
       aria-label="UpLadoMyr Digital — Websites & WebApps"
     >
       {/* затемнення */}

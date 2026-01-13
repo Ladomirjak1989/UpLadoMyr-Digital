@@ -28,7 +28,7 @@ export default function GoogleButton({ label = 'Continue with Google' }: { label
       disabled={loading}
       className="flex items-center gap-2 rounded-xl bg-gray-100 px-4 py-2 transition hover:bg-gray-200 disabled:opacity-60"
     >
-      <Image src="/img/signup/search.png" alt="" width={20} height={20} />
+      <Image src="/img/signup/search-256.avif" alt="" width={20} height={20} />
       {loading ? 'Redirecting…' : label}
     </button>
   );

@@ -1,8 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -46,14 +44,6 @@ const techItems = [
 ];
 
 const AboutPage: React.FC = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 1200,
-      easing: 'ease-in-out',
-      once: true,
-    });
-  }, []);
-
   return (
     <div className=" text-gray-800 px-4 py-10 max-w-6xl mx-auto">
       <FounderBanner />

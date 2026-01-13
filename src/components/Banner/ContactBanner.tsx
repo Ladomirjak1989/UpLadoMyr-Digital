@@ -1,7 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import { useState } from 'react';
 import { FaPhone, FaEnvelope, FaAt } from 'react-icons/fa';
 import { SiViber, SiTelegram, SiWhatsapp } from 'react-icons/si';
 
@@ -14,10 +12,6 @@ interface ContactItem {
 
 function ContactBanner() {
   const [hovered, setHovered] = useState<number | null>(null);
-
-  useEffect(() => {
-    AOS.init({ duration: 800 });
-  }, []);
 
   const contactList: ContactItem[] = [
     {

@@ -22,7 +22,7 @@ export const SERVICES: ServiceConfig[] = [
     duration: '5–7 days',
     desc: '1 page, 3–4 blocks',
     price: '€150',
-    icon: '/img/servicespricing/one-page-site.png',
+    icon: '/img/servicespricing/one-page-site.avif',
     link: '/services/visit-card',
     seoTitle: 'Template-based Business Card Website | UpLadoMyr Digital',
     seoDescription:
@@ -35,7 +35,7 @@ export const SERVICES: ServiceConfig[] = [
     duration: '20–30 days',
     desc: '1 page, up to 4 blocks',
     price: '€500',
-    icon: '/img/servicespricing/landing-page.png',
+    icon: '/img/servicespricing/landing-page.avif',
     link: '/services/landing',
   },
   {
@@ -45,7 +45,7 @@ export const SERVICES: ServiceConfig[] = [
     duration: '30–40 days',
     desc: 'Up to 4 pages',
     price: '€2.300',
-    icon: '/img/servicespricing/business-page.png',
+    icon: '/img/servicespricing/business-page.avif',
     link: '/services/business',
   },
   {
@@ -55,7 +55,7 @@ export const SERVICES: ServiceConfig[] = [
     duration: '30–50 days',
     desc: 'Catalog, cart, payment, delivery',
     price: '€3.300',
-    icon: '/img/servicespricing/mobile-shopping.png',
+    icon: '/img/servicespricing/mobile-shopping.avif',
     link: '/services/ecommerce',
   },
   {
@@ -65,7 +65,7 @@ export const SERVICES: ServiceConfig[] = [
     duration: '40–60 days',
     desc: 'Custom approach, service integration',
     price: '€7.500',
-    icon: '/img/servicespricing/crm.png',
+    icon: '/img/servicespricing/crm.avif',
     link: '/services/crm',
   },
 ];

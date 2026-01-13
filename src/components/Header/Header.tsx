@@ -122,7 +122,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           <div className="flex items-center gap-3 mb-6">
             <div className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-[#ffcd00] bg-white">
               <Image
-                src="/img/header/logo4.png"
+                src="/img/header/logo4.avif"
                 alt="Logo"
                 fill
                 className="object-contain"
@@ -328,7 +328,7 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-3 sm:gap-4">
           <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14">
             <Image
-              src="/img/header/logo4.png"
+              src="/img/header/logo4.avif"
               alt="UpLadoMyr Logo"
               fill
               className="object-contain rounded-full ring-2 ring-[#f5d03f] shadow-sm"

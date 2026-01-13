@@ -30,9 +30,6 @@ import {
 } from 'react-icons/fi';
 
 import 'animate.css';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { useEffect } from 'react';
 import Image from 'next/image';
 import PaymentSteps from '../../PaymentSteps/PaymentSteps';
 import ServicePricing from '../../ServicesPricing/ServicesPricing';
@@ -251,13 +248,6 @@ const HomePage: React.FC = () => {
   const toggleItem = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
-
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-    });
-  }, []);
 
   return (
     <>

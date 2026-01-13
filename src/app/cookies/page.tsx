@@ -95,7 +95,7 @@ export default function CookiePolicyPage() {
     <div className="relative min-h-screen w-full overflow-hidden">
       {/* Background Image */}
       <Image
-        src="/img/privacy/privacybg1.jpg"
+        src="/img/privacy/privacybg1.avif"
         alt="Privacy background"
         fill
         className="absolute inset-0 object-cover -z-10"
