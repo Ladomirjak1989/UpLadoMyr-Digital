@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { FaTelegramPlane, FaViber, FaWhatsapp, FaLinkedin, FaTimes } from 'react-icons/fa';
+import { FaTelegramPlane, FaViber, FaWhatsapp, FaTimes } from 'react-icons/fa';
 
 interface FloatingSocialButtonsProps {
   isMenuOpen?: boolean;
@@ -225,41 +225,6 @@ const FloatingSocialButtons: React.FC<FloatingSocialButtonsProps> = ({ isMenuOpe
                          group-hover:h-full"
             />
             <FaWhatsapp className="relative z-10 w-6 h-6 text-white" />
-          </a>
-        </div>
-
-        {/* LINKEDIN */}
-        <div className="relative group" data-aos="fade-up" data-aos-once="true">
-          <span
-            className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2
-                       rounded-md bg-slate-900 px-2 py-1 text-[10px] font-medium text-white
-                       opacity-0 invisible
-                       shadow-lg shadow-slate-900/40
-                       transition-all duration-300
-                       group-hover:opacity-100 group-hover:visible group-hover:-top-10"
-          >
-            LinkedIn
-          </span>
-
-          <a
-            href="https://www.linkedin.com/company/upladomyr-digital/?viewAsMember=true"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open LinkedIn"
-            className="relative flex h-12 w-12 items-center justify-center
-                       rounded-full overflow-hidden
-                       shadow-[0_6px_18px_rgba(15,23,42,0.45)]
-                       transition-all duration-300
-                       hover:-translate-y-0.5"
-            style={{ backgroundColor: '#0077B5' }}
-          >
-            <span
-              className="absolute inset-x-0 bottom-0 h-0 rounded-full
-                         bg-black/20
-                         transition-all duration-300
-                         group-hover:h-full"
-            />
-            <FaLinkedin className="relative z-10 w-6 h-6 text-white" />
           </a>
         </div>
       </div>

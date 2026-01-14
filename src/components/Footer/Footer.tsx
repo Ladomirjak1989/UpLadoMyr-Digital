@@ -8,7 +8,8 @@ import {
   FaBriefcase,
   FaChevronRight,
   FaFacebookF,
-  FaInstagram,
+  // FaInstagram,
+  FaLinkedin,
   FaPhone,
   // FaTelegramPlane,
   // FaYoutube,
@@ -102,15 +103,20 @@ const Footer: React.FC = () => {
 
   const socialLinks = [
     {
+      Icon: FaLinkedin,
+      href: 'https://www.linkedin.com/company/upladomyr-digital/?viewAsMember=true',
+      label: 'Linkedin – UpLadoMyr Digital',
+    },
+    {
       Icon: FaFacebookF,
       href: 'https://www.facebook.com/profile.php?id=61584336012665',
       label: 'Facebook – UpLadoMyr Digital',
     },
-    {
-      Icon: FaInstagram,
-      href: 'https://www.instagram.com/upladomyrdigital',
-      label: 'Instagram – UpLadoMyr Digital',
-    },
+    // {
+    //   Icon: FaInstagram,
+    //   href: 'https://www.instagram.com/upladomyrdigital',
+    //   label: 'Instagram – UpLadoMyr Digital',
+    // },
   ];
 
   return (
@@ -375,11 +381,26 @@ const Footer: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-8 h-8 flex items-center justify-center
-                             rounded-full bg-white text-[#042d5d]
-                             border border-yellow-500
-                             hover:bg-yellow-200 transition
-                             hover:scale-110"
+                  className="
+  w-8 h-8 flex items-center justify-center
+  rounded-full
+  bg-white text-[#042d5d]
+  border border-amber-900/80
+  text-xl
+
+  transition-all duration-200 ease-out
+  hover:scale-110
+  hover:text-[#042d5d]
+  hover:shadow-md
+
+  hover:bg-gradient-to-br
+  hover:from-[#f6d365]
+  hover:via-[#efc741]
+  hover:to-[#c58a1b]
+
+  active:scale-100
+  active:shadow-sm
+"
                 >
                   <Icon size={14} />
                 </a>
