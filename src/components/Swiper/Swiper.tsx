@@ -167,16 +167,30 @@ function ServicePricingCarousel() {
           prevEl: '.service-swiper-prev',
           nextEl: '.service-swiper-next',
         }}
-        className="pb-12"
         resistanceRatio={0}
         longSwipes={false}
+        className="pb-12"
       >
         {SERVICES.map((service) => (
           <SwiperSlide key={service.slug}>
+            {/* ✅ WHOLE CARD CLICKABLE */}
             <motion.div
+              role="button"
+              tabIndex={0}
               whileHover={{ scale: 1.03 }}
               data-aos="zoom-in"
-              className="relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-gray-300 bg-gradient-to-br from-gray-100 to-gray-200 p-6 shadow-xl"
+              className="swiper-no-swiping relative flex h-full cursor-pointer flex-col justify-between
+                         overflow-hidden rounded-2xl border border-gray-300
+                         bg-gradient-to-br from-gray-100 to-gray-200
+                         p-6 shadow-xl focus:outline-none"
+              style={{ touchAction: 'manipulation' }}
+              onClick={() => router.push(service.link)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  router.push(service.link);
+                }
+              }}
             >
               <div>
                 <div className="mb-4 flex items-center justify-between">
@@ -209,16 +223,13 @@ function ServicePricingCarousel() {
                   From <span className="text-yellow-700">{service.price}</span>
                 </p>
 
-                {/* ✅ ANDROID-SAFE CTA */}
-                <button
-                  type="button"
-                  className="swiper-no-swiping inline-flex items-center justify-center rounded-lg border border-white bg-blue-900 px-4 py-2 text-sm text-yellow-500
-                             transition-colors duration-300 hover:bg-[#c7a23f] hover:text-blue-900"
-                  style={{ touchAction: 'manipulation' }}
-                  onClick={() => router.push(service.link)}
+                {/* CTA — purely visual */}
+                <span
+                  className="pointer-events-none inline-flex items-center justify-center rounded-lg
+                             border border-white bg-blue-900 px-4 py-2 text-sm text-yellow-500"
                 >
                   Learn More
-                </button>
+                </span>
               </div>
             </motion.div>
           </SwiperSlide>
@@ -227,25 +238,23 @@ function ServicePricingCarousel() {
 
       {/* Navigation buttons */}
       <button
-        className="service-swiper-prev group absolute left-0 top-1/2 z-20 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center
-                   rounded-full border border-slate-300 bg-white/95 text-slate-400
-                   shadow-[0_4px_20px_rgba(15,23,42,0.12)]
-                   transition-all duration-200 hover:border-slate-400 hover:bg-white hover:text-slate-700 sm:h-12 sm:w-12"
-        aria-label="Previous service"
         type="button"
+        className="service-swiper-prev absolute left-0 top-1/2 z-20 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2
+                   items-center justify-center rounded-full border border-slate-300 bg-white/95
+                   text-slate-400 shadow-md hover:text-slate-700"
+        aria-label="Previous service"
       >
-        <FiChevronLeft className="h-5 w-5" />
+        <FiChevronLeft />
       </button>
 
       <button
-        className="service-swiper-next group absolute right-0 top-1/2 z-20 flex h-10 w-10 translate-x-1/2 -translate-y-1/2 items-center justify-center
-                   rounded-full border border-slate-300 bg-white/95 text-slate-400
-                   shadow-[0_4px_20px_rgba(15,23,42,0.12)]
-                   transition-all duration-200 hover:border-slate-400 hover:bg-white hover:text-slate-700 sm:h-12 sm:w-12"
-        aria-label="Next service"
         type="button"
+        className="service-swiper-next absolute right-0 top-1/2 z-20 flex h-10 w-10 translate-x-1/2 -translate-y-1/2
+                   items-center justify-center rounded-full border border-slate-300 bg-white/95
+                   text-slate-400 shadow-md hover:text-slate-700"
+        aria-label="Next service"
       >
-        <FiChevronRight className="h-5 w-5" />
+        <FiChevronRight />
       </button>
     </div>
   );
