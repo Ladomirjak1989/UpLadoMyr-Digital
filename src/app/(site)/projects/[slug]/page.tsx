@@ -26,6 +26,7 @@ import { Globe, ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import BackButton from '@/components/Button/BackButton';
 import { API_BASE } from '@/lib/api';
+import GalleryPhotoSwipe from '@/components/GalleryPhotoSwipe/GalleryPhotoSwipe';
 
 // ──────────────────────────────────────────────────────────────────────────────
 // Types
@@ -507,27 +508,7 @@ async function ProjectDetailsPage({ params }: { params: Promise<{ slug: string }
 
             {!!p.gallery?.length && (
               <Section title="Gallery">
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                  {p.gallery.map((src, i) => (
-                    <a
-                      key={i}
-                      href={src}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative block overflow-hidden rounded-lg ring-1 ring-slate-200"
-                    >
-                      <div className="relative h-40 w-full">
-                        <Image
-                          src={cloudinaryOptimize(src, 'gallery')}
-                          alt={`Gallery ${i + 1}`}
-                          fill
-                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 300px"
-                          className="object-cover transition duration-300 group-hover:scale-[1.02] group-hover:brightness-95"
-                        />
-                      </div>
-                    </a>
-                  ))}
-                </div>
+                <GalleryPhotoSwipe title={p.title} images={p.gallery} />
               </Section>
             )}
           </div>
