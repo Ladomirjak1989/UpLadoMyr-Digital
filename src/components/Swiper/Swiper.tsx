@@ -143,12 +143,14 @@ import { Pagination, Navigation } from 'swiper/modules';
 import { motion } from 'framer-motion';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 import { SERVICES } from '@/lib/services.config';
 
 function ServicePricingCarousel() {
+  const router = useRouter();
+
   return (
     <div className="relative">
       <Swiper
@@ -166,25 +168,8 @@ function ServicePricingCarousel() {
           nextEl: '.service-swiper-next',
         }}
         className="pb-12"
-        // ✅ LUX: keep taps clickable
-        preventClicks={false}
-        preventClicksPropagation={false}
-        // ✅ LUX: Android often needs a bit higher threshold
-        threshold={16}
-        // ✅ LUX: stop move events from bubbling weirdly
-        touchMoveStopPropagation={true}
-        // ✅ LUX: do NOT aggressively prevent default touch
-        touchStartPreventDefault={false}
-        touchStartForcePreventDefault={false as any}
-        // ✅ LUX: Swiper must NOT hijack gestures starting on the button
-        noSwiping={true}
-        noSwipingClass="swiper-no-swiping"
-        noSwipingSelector=".swiper-no-swiping"
-        // ✅ LUX: less “rubber band” resistance
         resistanceRatio={0}
-        // ✅ LUX: reduce long-swipe mis-detections
         longSwipes={false}
-        longSwipesRatio={0.25}
       >
         {SERVICES.map((service) => (
           <SwiperSlide key={service.slug}>
@@ -210,45 +195,44 @@ function ServicePricingCarousel() {
                   </span>
                 </div>
 
-                <h3 className="mb-2 font-tangerine text-xl font-semibold text-blue-900 sm:text-xl">
+                <h3 className="mb-2 font-tangerine text-xl font-semibold text-blue-900">
                   {service.title}
                 </h3>
 
-                <p className="mb-1 text-sm text-gray-700 sm:text-base">
-                  Duration: {service.duration}
-                </p>
+                <p className="mb-1 text-sm text-gray-700">Duration: {service.duration}</p>
 
                 <p className="mb-4 text-sm text-gray-600">{service.desc}</p>
               </div>
 
               <div className="flex items-center justify-between gap-4">
-                <p className="text-base text-blue-900 sm:text-lg">
+                <p className="text-base text-blue-900">
                   From <span className="text-yellow-700">{service.price}</span>
                 </p>
 
-                {/* ✅ LUX: Android-proof clickable area */}
-                <Link
-                  href={service.link}
+                {/* ✅ ANDROID-SAFE CTA */}
+                <button
+                  type="button"
                   className="swiper-no-swiping inline-flex items-center justify-center rounded-lg border border-white bg-blue-900 px-4 py-2 text-sm text-yellow-500
                              transition-colors duration-300 hover:bg-[#c7a23f] hover:text-blue-900"
                   style={{ touchAction: 'manipulation' }}
-                  onPointerDown={(e) => e.stopPropagation()}
-                  onTouchStart={(e) => e.stopPropagation()}
+                  onClick={() => router.push(service.link)}
                 >
                   Learn More
-                </Link>
+                </button>
               </div>
             </motion.div>
           </SwiperSlide>
         ))}
       </Swiper>
 
+      {/* Navigation buttons */}
       <button
         className="service-swiper-prev group absolute left-0 top-1/2 z-20 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center
                    rounded-full border border-slate-300 bg-white/95 text-slate-400
                    shadow-[0_4px_20px_rgba(15,23,42,0.12)]
                    transition-all duration-200 hover:border-slate-400 hover:bg-white hover:text-slate-700 sm:h-12 sm:w-12"
         aria-label="Previous service"
+        type="button"
       >
         <FiChevronLeft className="h-5 w-5" />
       </button>
@@ -259,6 +243,7 @@ function ServicePricingCarousel() {
                    shadow-[0_4px_20px_rgba(15,23,42,0.12)]
                    transition-all duration-200 hover:border-slate-400 hover:bg-white hover:text-slate-700 sm:h-12 sm:w-12"
         aria-label="Next service"
+        type="button"
       >
         <FiChevronRight className="h-5 w-5" />
       </button>
