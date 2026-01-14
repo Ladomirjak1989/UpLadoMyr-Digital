@@ -91,23 +91,29 @@ function ServicePricingCarousel() {
                   From <span className="text-yellow-700">{service.price}</span>
                 </p>
 
-                {/* CTA: mobile = text, desktop = button */}
+                {/* MOBILE HINT */}
+                <div className="flex items-center gap-1 text-sm text-blue-700 sm:hidden opacity-90">
+                  <span>View details</span>
+                  <span aria-hidden className="inline-block animate-bounce">
+                    →
+                  </span>
+                </div>
+
+                {/* DESKTOP CTA */}
                 <span
                   className="
-                    pointer-events-none
-                    text-sm font-medium text-blue-900
+      pointer-events-none hidden
+      sm:inline-flex sm:items-center sm:justify-center
+      sm:rounded-lg sm:border sm:border-white
+      sm:bg-blue-900 sm:px-4 sm:py-2
+      sm:text-sm sm:text-yellow-500
 
-                    sm:inline-flex sm:items-center sm:justify-center
-                    sm:rounded-lg sm:border sm:border-white
-                    sm:bg-blue-900 sm:px-4 sm:py-2
-                    sm:text-yellow-500
-
-                    sm:transition-colors sm:duration-300
-                    sm:group-hover:bg-[#c7a23f]
-                    sm:group-hover:text-blue-900
-                  "
+      sm:transition-colors sm:duration-300
+      sm:group-hover:bg-[#c7a23f]
+      sm:group-hover:text-blue-900
+    "
                 >
-                  Learn more →
+                  Learn more
                 </span>
               </div>
             </motion.div>
