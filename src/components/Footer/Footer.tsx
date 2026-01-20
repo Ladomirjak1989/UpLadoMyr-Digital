@@ -8,7 +8,7 @@ import {
   FaBriefcase,
   FaChevronRight,
   FaFacebookF,
-  // FaInstagram,
+  FaInstagram,
   FaLinkedin,
   FaPhone,
   // FaTelegramPlane,
@@ -112,11 +112,11 @@ const Footer: React.FC = () => {
       href: 'https://www.facebook.com/profile.php?id=61584336012665',
       label: 'Facebook – UpLadoMyr Digital',
     },
-    // {
-    //   Icon: FaInstagram,
-    //   href: 'https://www.instagram.com/upladomyrdigital',
-    //   label: 'Instagram – UpLadoMyr Digital',
-    // },
+    {
+      Icon: FaInstagram,
+      href: 'https://www.instagram.com/upladomyr.digital',
+      label: 'Instagram – UpLadoMyr Digital',
+    },
   ];
 
   return (
