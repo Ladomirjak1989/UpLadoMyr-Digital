@@ -14,6 +14,7 @@ import {
   // FaTelegramPlane,
   // FaYoutube,
 } from 'react-icons/fa';
+import { FaThreads } from 'react-icons/fa6';
 import { useState } from 'react';
 import { FiArrowUp } from 'react-icons/fi';
 // зверху файлу
@@ -114,8 +115,13 @@ const Footer: React.FC = () => {
     },
     {
       Icon: FaInstagram,
-      href: 'https://www.instagram.com/upladomyr.digital',
+      href: 'https://www.instagram.com/upladomyr/',
       label: 'Instagram – UpLadoMyr Digital',
+    },
+    {
+      Icon: FaThreads,
+      href: 'https://www.threads.com/@upladomyr',
+      label: 'Threads – UpLadoMyr Digital',
     },
   ];
 
