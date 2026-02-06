@@ -145,7 +145,7 @@ const ContactPage: React.FC = () => {
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleChange}
-                    placeholder="Lastname"
+                    placeholder="Last name"
                     required
                     className="pl-12 w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-yellow-500"
                   />
@@ -182,14 +182,22 @@ const ContactPage: React.FC = () => {
 
               {/* Privacy Policy Agreement */}
               <div className="flex items-start gap-2 text-sm text-gray-900">
-                <input type="checkbox" required className="mt-1 accent-yellow-500" />
-                <label>
-                  By submitting the form, you agree to the processing of your{' '}
+                <input
+                  id="privacyConsent"
+                  name="privacyConsent"
+                  type="checkbox"
+                  required
+                  className="mt-1 accent-yellow-500"
+                />
+
+                <label htmlFor="privacyConsent" className="leading-snug">
+                  By submitting this form, you agree to the processing of your personal data in
+                  accordance with our{' '}
                   <Link
                     href="/privacy"
                     className="underline text-blue-800 hover:text-yellow-600 transition"
                   >
-                    personal data
+                    Privacy Policy
                   </Link>
                   .
                 </label>
