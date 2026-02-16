@@ -257,16 +257,16 @@ const HomePage: React.FC = () => {
             {/* Main centered message */}
             <div className="text-center max-w-4xl mx-auto">
               <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 leading-tight">
-                We believe that investing in a quality website is an investment that pays off.
+                Digital infrastructure is a strategic decision — not an expense.
               </h3>
 
               <p className="mt-4 text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed">
-                A well-built website works for you every day — attracting clients, building trust,
-                and helping your business grow.
+                A well-structured website or platform strengthens your brand, supports operations,
+                and creates long-term value for your business.
               </p>
 
               <p className="mt-5 text-base sm:text-lg md:text-xl font-semibold text-slate-900">
-                If you’re ready to take the next step, we’re here to help.
+                We build systems designed for stability, clarity, and growth.
               </p>
             </div>
 
@@ -276,15 +276,15 @@ const HomePage: React.FC = () => {
                 {/* Right accent line */}
                 <span
                   className="hidden lg:block absolute -right-4 top-1 bottom-1 w-[3px] rounded-full
-                       bg-gradient-to-b from-amber-700 to-amber-500"
+                 bg-gradient-to-b from-amber-700 to-amber-500"
                   aria-hidden="true"
                 />
 
                 <div className="lg:pr-6">
                   <p
                     className="text-md sm:text-sm md:text-xl font-medium italic leading-relaxed
-              bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
-              bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
+                bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
+                bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
                   >
                     “Whoever sows generously will also reap generously.”
                   </p>
@@ -355,16 +355,22 @@ const HomePage: React.FC = () => {
             {/* Left: big heading */}
             <div className="lg:col-span-2">
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-                Why order a{' '}
+                Why{' '}
                 <span
                   className="bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
              bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
                 >
-                  WEBSITE
-                </span>
+                  choose
+                </span>{' '}
+                us
                 <br />
-                from us?
+                for your project?
               </h2>
+
+              <p className="mt-5 text-base sm:text-lg md:text-xl text-slate-800 leading-relaxed max-w-2xl">
+                From a high-quality business website to a scalable web platform — we deliver
+                structured development, clear communication, and production-ready results.
+              </p>
 
               {/* Feature grid */}
               <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10">
@@ -373,16 +379,16 @@ const HomePage: React.FC = () => {
                   <div className="shrink-0">
                     <div
                       className="h-14 w-14 rounded-2xl ring-1 ring-white/10
-                              bg-gradient-to-br from-violet-300/25 via-fuchsia-300/25 to-cyan-300/25
-                              backdrop-blur-sm flex items-center justify-center"
+                          bg-gradient-to-br from-violet-300/25 via-fuchsia-300/25 to-cyan-300/25
+                          backdrop-blur-sm flex items-center justify-center"
                     >
                       <FiFileText className="h-7 w-7 text-violet-300" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">Transparent cooperation terms</h3>
+                    <h3 className="text-xl font-semibold">Clear scope & deliverables</h3>
                     <p className="mt-2 text-slate-800 italic">
-                      Clear scope, milestones and pricing — no surprises.
+                      Defined work, timelines and milestones — aligned before we start.
                     </p>
                   </div>
                 </div>
@@ -392,16 +398,16 @@ const HomePage: React.FC = () => {
                   <div className="shrink-0">
                     <div
                       className="h-14 w-14 rounded-2xl ring-1 ring-white/10
-                              bg-gradient-to-br from-cyan-300/25 via-sky-300/25 to-teal-300/25
-                              backdrop-blur-sm flex items-center justify-center"
+                          bg-gradient-to-br from-cyan-300/25 via-sky-300/25 to-teal-300/25
+                          backdrop-blur-sm flex items-center justify-center"
                     >
                       <FiMessageCircle className="h-7 w-7 text-cyan-300" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">Ongoing feedback</h3>
+                    <h3 className="text-xl font-semibold">Communication that works</h3>
                     <p className="mt-2 text-slate-800 italic">
-                      Structured check-ins, fast responses, one channel for all updates.
+                      Fast responses, structured check-ins, one channel for all updates.
                     </p>
                   </div>
                 </div>
@@ -411,16 +417,16 @@ const HomePage: React.FC = () => {
                   <div className="shrink-0">
                     <div
                       className="h-14 w-14 rounded-2xl ring-1 ring-white/10
-                              bg-gradient-to-br from-amber-300/25 via-orange-300/25 to-rose-300/25
-                              backdrop-blur-sm flex items-center justify-center"
+                          bg-gradient-to-br from-amber-300/25 via-orange-300/25 to-rose-300/25
+                          backdrop-blur-sm flex items-center justify-center"
                     >
                       <FiCheckSquare className="h-7 w-7 text-amber-300" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">Stage-by-stage reporting</h3>
+                    <h3 className="text-xl font-semibold">Full visibility of progress</h3>
                     <p className="mt-2 text-slate-800 italic">
-                      Progress visible at every phase — design, build, launch.
+                      You always know what’s done, what’s next, and what’s being shipped.
                     </p>
                   </div>
                 </div>
@@ -430,16 +436,16 @@ const HomePage: React.FC = () => {
                   <div className="shrink-0">
                     <div
                       className="h-14 w-14 rounded-2xl ring-1 ring-white/10
-                              bg-gradient-to-br from-fuchsia-300/25 via-pink-300/25 to-rose-300/25
-                              backdrop-blur-sm flex items-center justify-center"
+                          bg-gradient-to-br from-fuchsia-300/25 via-pink-300/25 to-rose-300/25
+                          backdrop-blur-sm flex items-center justify-center"
                     >
                       <FaICursor className="h-7 w-7 text-rose-300" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">Training to manage the site</h3>
+                    <h3 className="text-xl font-semibold">Smooth handover</h3>
                     <p className="mt-2 text-slate-800 italic">
-                      Short handover session + notes so your team can self-serve.
+                      Training + documentation so your team can manage confidently.
                     </p>
                   </div>
                 </div>
@@ -449,16 +455,16 @@ const HomePage: React.FC = () => {
                   <div className="shrink-0">
                     <div
                       className="h-14 w-14 rounded-2xl ring-1 ring-white/10
-                              bg-gradient-to-br from-indigo-300/25 via-blue-300/25 to-cyan-300/25
-                              backdrop-blur-sm flex items-center justify-center"
+                          bg-gradient-to-br from-indigo-300/25 via-blue-300/25 to-cyan-300/25
+                          backdrop-blur-sm flex items-center justify-center"
                     >
                       <FiMonitor className="h-7 w-7 text-blue-300" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">Tech support</h3>
+                    <h3 className="text-xl font-semibold">Post-launch support</h3>
                     <p className="mt-2 text-slate-800 italic">
-                      Post-launch fixes and tuning to keep everything running smoothly.
+                      Fixes and improvements to keep your product stable and fast.
                     </p>
                   </div>
                 </div>
@@ -468,16 +474,16 @@ const HomePage: React.FC = () => {
                   <div className="shrink-0">
                     <div
                       className="h-14 w-14 rounded-2xl ring-1 ring-white/10
-                              bg-gradient-to-br from-emerald-300/25 via-teal-300/25 to-cyan-300/25
-                              backdrop-blur-sm flex items-center justify-center"
+                          bg-gradient-to-br from-emerald-300/25 via-teal-300/25 to-cyan-300/25
+                          backdrop-blur-sm flex items-center justify-center"
                     >
                       <FiStar className="h-7 w-7 text-emerald-300" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">Individual approach</h3>
+                    <h3 className="text-xl font-semibold">Tailored — not templated</h3>
                     <p className="mt-2 text-slate-800 italic">
-                      Solutions tailored to your niche, goals and budget — no templates.
+                      Built around your goals, requirements and real business needs.
                     </p>
                   </div>
                 </div>
@@ -487,16 +493,14 @@ const HomePage: React.FC = () => {
             {/* Right: supporting copy (message bubble) */}
             <div className="lg:pl-8" data-aos="fade-left">
               <div className="relative inline-block max-w-xl">
-                {/* Балон із градієнтом та скругленнями */}
                 <div
                   className="relative rounded-3xl px-6 py-5 italic text-[17px] leading-relaxed
                  text-black/90 shadow-lg ring-1 ring-black/10
                  bg-gradient-to-br from-[#5a5a5a] via-[#ffd659] to-[#8c4a12]"
                 >
-                  We ensure a truly individual approach for every project — factoring in client
-                  needs and current market trends. You get a modern, fast and conversion-focused
-                  website without the agency fluff.
-                  {/* Хвостик балончика */}
+                  We don’t just “build a website.” We take ownership of the result. You get a clean,
+                  maintainable product with strong structure, reliable delivery, and the kind of
+                  quality that still works months after launch — not only on day one.
                   <span
                     aria-hidden="true"
                     className="pointer-events-none absolute -bottom-3 left-10 h-6 w-6 rotate-45
