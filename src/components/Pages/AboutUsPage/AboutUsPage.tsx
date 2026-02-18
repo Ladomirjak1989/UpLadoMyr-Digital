@@ -202,9 +202,18 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Philosophy */}
-      <section className="mt-20 max-w-7xl mx-auto px-4 relative" data-aos="fade-up">
-        <div className="grid md:grid-cols-2 gap-10 items-center">
-          {/* Зображення зліва */}
+      <section
+        className="
+    mt-20 max-w-7xl mx-auto px-4
+    relative overflow-hidden
+    bg-transparent
+    pb-[84px] sm:pb-[96px] md:pb-[110px]
+  "
+        data-aos="fade-up"
+      >
+        {/* CONTENT layer (always above wave) */}
+        <div className="relative z-10 grid md:grid-cols-2 gap-10 items-center">
+          {/* Image left */}
           <div data-aos="zoom-in">
             <Image
               src="/img/bannerabout/web-design.avif"
@@ -215,9 +224,8 @@ const AboutPage: React.FC = () => {
             />
           </div>
 
-          {/* Текст + іконка */}
-          <div data-aos="fade-left" className="flex flex-col justify-center relative">
-            {/* Декоративна іконка */}
+          {/* Text + icon */}
+          <div data-aos="fade-left" className="flex flex-col justify-center">
             <div className="text-4xl text-yellow-600 mb-2 text-center md:text-left">
               <FaLightbulb />
             </div>
@@ -225,6 +233,7 @@ const AboutPage: React.FC = () => {
             <h2 className="text-3xl font-tangerine font-bold text-yellow-600 mb-4 text-center md:text-left">
               Our Approach
             </h2>
+
             <p className="text-gray-700 text-lg leading-relaxed text-center md:text-left">
               Every project we build is aligned with your business goals. Whether we develop a
               solution from scratch or use a carefully selected foundation, we always customize and
@@ -234,9 +243,13 @@ const AboutPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Розділювач - хвиля */}
-        <div className="absolute bottom-[-1px] left-0 w-full hidden sm:block">
-          <svg viewBox="0 0 1440 100" className="w-full h-[70px]" preserveAspectRatio="none">
+        {/* WAVE layer (never overlaps content) */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 hidden sm:block">
+          <svg
+            viewBox="0 0 1440 100"
+            className="w-full h-[56px] md:h-[70px]"
+            preserveAspectRatio="none"
+          >
             <path fill="#f3f4f6" d="M0,0 C360,100 1080,0 1440,100 L1440,100 L0,100 Z" />
           </svg>
         </div>
