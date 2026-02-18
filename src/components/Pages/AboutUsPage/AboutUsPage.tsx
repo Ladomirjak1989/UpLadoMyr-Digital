@@ -55,10 +55,10 @@ const AboutPage: React.FC = () => {
             Modern Websites Tailored to Your Business.
           </h1>
           <p className="text-lg text-gray-700">
-            We are a web development company creating sleek, high-performance websites for
-            freelancers (ZZP) and small businesses. Depending on your goals and budget, we customize
-            high-quality templates or build from scratch — always with clean code, fast loading, and
-            mobile-first design.
+            We build modern, high-performance websites and scalable digital platforms for
+            freelancers, small businesses, and established companies. Whether leveraging proven
+            frameworks or developing fully custom solutions, we focus on performance, security, and
+            long-term scalability — ensuring your digital presence grows with your business.
           </p>
 
           <Link
