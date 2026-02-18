@@ -226,9 +226,10 @@ const AboutPage: React.FC = () => {
               Our Approach
             </h2>
             <p className="text-gray-700 text-lg leading-relaxed text-center md:text-left">
-              Every line of code our company writes is tailored to your business. We care deeply
-              about performance, mobile-first design, and crafting unique experiences that truly
-              reflect your brand — never relying on generic templates.
+              Every project we build is aligned with your business goals. Whether we develop a
+              solution from scratch or use a carefully selected foundation, we always customize and
+              optimize it for performance, mobile-first experience, and long-term scalability —
+              ensuring it truly represents your brand.
             </p>
           </div>
         </div>

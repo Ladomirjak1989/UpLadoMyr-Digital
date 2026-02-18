@@ -135,7 +135,7 @@ const Footer: React.FC = () => {
         {/* Контент по центру */}
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <h2 className="font-dmserif text-xl sm:text-2xl md:text-3xl font-bold mb-6 leading-snug">
-            Want a high-converting landing page or a sleek small website for your business?
+            Let’s build a website that works as hard as you do.
           </h2>
 
           <Link

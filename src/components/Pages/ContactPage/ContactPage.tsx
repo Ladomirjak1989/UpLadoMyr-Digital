@@ -103,12 +103,12 @@ const ContactPage: React.FC = () => {
             {/* Text Section */}
             <div className="text-center lg:text-left">
               <h2 className="text-center text-2xl sm:text-3xl font-semibold text-blue-950 mb-4">
-                We are here to help!
+                Let’s Discuss Your Project
               </h2>
               <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
-                Let us know how we can best serve you. Use the contact form to email us or select
-                from the topics below that best fit your needs. It's an honor to support you in your
-                journey towards better health.
+                Tell us about your business goals, timeline, and technical needs. Whether you’re
+                planning a new website, a scalable web platform, or need expert guidance — we’re
+                here to provide clear direction and practical solutions.
               </p>
             </div>
           </div>
