@@ -364,3 +364,18 @@ html {
     animation: none !important;
   }
 }
+
+/* === Toast progress bar (5s) === */
+@keyframes toastProgress {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
+.animate-toast-progress {
+  animation: toastProgress 5s linear forwards;
+}

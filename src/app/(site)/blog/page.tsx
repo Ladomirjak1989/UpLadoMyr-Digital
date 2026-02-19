@@ -5,6 +5,7 @@ import { BLOG } from '@/lib/blog.constants';
 import BlogList, { type BlogListPost } from '@/components/BlogList/BlogList';
 import BlogSearch from '@/components/BlogSearch/BlogSearch';
 import BlogBanner from '@/components/Banner/BlogBanner';
+import NewsletterSubscribe from '@/components/NewsletterSubscribe/NewsletterSubscribe';
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
@@ -209,28 +210,7 @@ export default async function BlogPage({
                 inbox.
               </p>
 
-              <form
-                className="mt-4 flex flex-col gap-3"
-                action="/api/newsletter" // TODO: підʼєднаєш свій endpoint, коли буде готовий
-                method="post"
-              >
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="Your email"
-                  className="w-full rounded-full border border-slate-200 bg-white px-4 py-2 text-sm
-                   text-slate-900 shadow-sm placeholder:text-slate-400
-                   focus:outline-none focus:ring-1 focus:ring-amber-400"
-                />
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center px-6 py-2 text-sm font-semibold
-                   bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d] border-1 border-amber-950 text-black rounded-full shadow-lg hover:scale-110 transition-transform"
-                >
-                  Subscribe
-                </button>
-              </form>
+              <NewsletterSubscribe />
             </section>
 
             {/* ⭐ NEW: The best articles */}
