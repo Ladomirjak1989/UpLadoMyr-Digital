@@ -63,7 +63,8 @@ const ContactPage: React.FC = () => {
         {
           name: formData.name,
           email: formData.email,
-          reply_to: process.env.EMAIL_USER,
+          // reply_to: process.env.EMAIL_USER,
+          reply_to: 'info@upladomyr.com',
           message: formData.message,
           time: time,
         },
@@ -77,8 +78,13 @@ const ContactPage: React.FC = () => {
       } else {
         throw new Error('Failed to send message.');
       }
-    } catch (error) {
-      console.error('Email sending error:', error);
+    } catch (err: any) {
+      console.error('Email sending error:', {
+        status: err?.status,
+        text: err?.text,
+        message: err?.message,
+        raw: err,
+      });
       setSuccessMessage('❌ Something went wrong. Please try again.');
     }
   };

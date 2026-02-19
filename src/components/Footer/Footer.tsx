@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
         {
           email: formData.email,
           name: formData.email,
-          reply_to: process.env.EMAIL_USER,
+          reply_to: 'info@upladomyr.com',
           time: time,
         },
         userId
@@ -92,6 +92,44 @@ const Footer: React.FC = () => {
       setSuccessMessage('❌ Something went wrong. Please try again.');
     }
   };
+
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+  //   const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+  //   const userId = process.env.NEXT_PUBLIC_EMAILJS_KEY;
+
+  //   if (!serviceId || !templateId || !userId) {
+  //     setSuccessMessage("❌ Configuration error. Please contact support.");
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await emailjs.send(
+  //       serviceId,
+  //       templateId,
+  //       {
+  //         email: formData.email,
+  //         name: formData.email,
+  //         message: "Newsletter signup (Footer)",
+  //         time,
+  //       },
+  //       userId
+  //     );
+
+  //     if (response.status === 200) {
+  //       setSuccessMessage("✅ Your message has been sent successfully!");
+  //       setFormData({ email: "" });
+  //       setTimeout(() => setSuccessMessage(""), 5000);
+  //     } else {
+  //       throw new Error("Failed to send message.");
+  //     }
+  //   } catch (err: any) {
+  //     console.error("Email sending error:", err);
+  //     setSuccessMessage("❌ Something went wrong. Please try again.");
+  //   }
+  // };
 
   const navItems = [
     { href: '/', label: 'HOME' },
