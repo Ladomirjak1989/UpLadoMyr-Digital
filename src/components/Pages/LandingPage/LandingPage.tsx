@@ -1071,7 +1071,8 @@ const LandingPage: React.FC = () => {
               </p>
 
               <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight">
-                Why a website or web application is not optional anymore
+                Why a website or web application is no longer optional, but a necessity and a
+                standard for business
               </h2>
 
               <p className="mt-4 text-slate-700 text-base sm:text-lg leading-relaxed max-w-2xl">
