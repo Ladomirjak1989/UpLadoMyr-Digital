@@ -715,14 +715,27 @@ const LandingPage: React.FC = () => {
                 }}
               >
                 {clientLogos.map((logo, i) => (
-                  <SwiperSlide key={`${logo.name}-${i}`}>
-                    <div className="h-16 sm:h-18 rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 flex items-center justify-center px-3 shadow-sm hover:shadow transition">
-                      <div className="text-center">
-                        <div className="text-slate-900 font-extrabold tracking-wide">
+                  <SwiperSlide key={`${logo.name}-${i}`} className="h-auto">
+                    <div
+                      className={[
+                        // ✅ однакова геометрія
+                        'h-16 sm:h-18',
+                        'rounded-2xl border border-slate-200',
+                        'bg-gradient-to-br from-white to-slate-50',
+                        'shadow-sm hover:shadow transition',
+                        'px-3 py-2',
+                        'flex items-center justify-center',
+                      ].join(' ')}
+                    >
+                      <div className="min-w-0 text-center leading-tight">
+                        <div className="text-slate-900 font-extrabold tracking-wide text-sm sm:text-base truncate">
                           {logo.name}
                         </div>
+
                         {logo.tagline ? (
-                          <div className="text-xs text-slate-500">{logo.tagline}</div>
+                          <div className="text-[11px] sm:text-xs text-slate-500 truncate">
+                            {logo.tagline}
+                          </div>
                         ) : null}
                       </div>
                     </div>
@@ -1420,42 +1433,70 @@ const LandingPage: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => toggleItem(idx)}
-                      className="w-full flex items-center justify-between px-6 py-5 text-left"
                       aria-expanded={isOpen}
+                      className={[
+                        // ✅ мобільна: компактніше + стабільна висота
+                        'w-full text-left',
+                        'px-4 py-4 sm:px-6 sm:py-5',
+                        'flex items-center gap-3',
+                      ].join(' ')}
                     >
-                      <div className="flex items-start gap-3">
-                        <span className="text-sm font-bold text-slate-500 mt-1">{idx + 1}.</span>
-                        <span
-                          className={[
-                            'font-semibold leading-snug transition-colors',
-                            isOpen ? 'text-amber-800' : 'text-slate-900',
-                          ].join(' ')}
-                        >
-                          {item.question}
+                      {/* ✅ Ліва частина (номер + питання) */}
+                      <div className="flex items-start gap-3 min-w-0 flex-1">
+                        {/* номер — не стискається */}
+                        <span className="shrink-0 text-sm font-bold text-slate-500 leading-none pt-1">
+                          {idx + 1}.
+                        </span>
+
+                        {/* текст — дозволяємо нормально ламатися, але без “з’їдання” */}
+                        <span className="min-w-0">
+                          <span
+                            className={[
+                              'block font-semibold leading-snug transition-colors',
+                              // ✅ мобільна типографіка
+                              'text-[15px] sm:text-base',
+                              isOpen ? 'text-amber-800' : 'text-slate-900',
+                            ].join(' ')}
+                            // якщо хочеш щоб не було 3-4 рядків на мобілці:
+                            // className + "line-clamp-2"
+                          >
+                            {item.question}
+                          </span>
                         </span>
                       </div>
 
-                      <div
+                      {/* ✅ Права кнопка +/- — завжди однакова форма */}
+                      <span
                         className={[
-                          'h-10 w-10 flex items-center justify-center rounded-full border transition',
+                          'shrink-0',
+                          'grid place-items-center',
+                          // ✅ фіксуємо розмір
+                          'h-10 w-10 sm:h-11 sm:w-11',
+                          'rounded-full border',
+                          'transition',
                           isOpen
                             ? 'bg-amber-50 border-amber-300 text-amber-800'
-                            : 'bg-white border-slate-200 text-slate-600',
+                            : 'bg-white border-slate-200 text-slate-700',
                         ].join(' ')}
+                        aria-hidden="true"
                       >
-                        {isOpen ? <FaMinus /> : <FaPlus />}
-                      </div>
+                        {/* ✅ іконки однакового розміру */}
+                        {isOpen ? <FaMinus className="h-4 w-4" /> : <FaPlus className="h-4 w-4" />}
+                      </span>
                     </button>
 
+                    {/* ✅ Відкриття/закриття без “жування” */}
                     <div
                       className={[
-                        'overflow-hidden transition-all duration-300 ease-in-out',
-                        isOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0',
+                        'overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out',
+                        isOpen ? 'max-h-[260px] opacity-100' : 'max-h-0 opacity-0',
                       ].join(' ')}
                     >
-                      <p className="px-6 pb-6 text-sm text-slate-700 leading-relaxed">
-                        {item.answer}
-                      </p>
+                      <div className="px-4 pb-5 sm:px-6 sm:pb-6">
+                        <p className="text-sm sm:text-[15px] text-slate-700 leading-relaxed">
+                          {item.answer}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 );
