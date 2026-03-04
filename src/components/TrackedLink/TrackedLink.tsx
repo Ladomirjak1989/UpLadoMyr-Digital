@@ -14,12 +14,13 @@ export default function TrackedLink({ eventName, payload, onClick, ...props }: P
     <Link
       {...props}
       onClick={(e) => {
-        // fire pixel first
         try {
           track(eventName, payload || {});
-        } catch {}
+        } catch (err) {
+          // eslint-disable-next-line no-console
+          console.warn('[TrackedLink] track failed:', err);
+        }
 
-        // keep existing onClick if someone passes it later
         onClick?.(e);
       }}
     />

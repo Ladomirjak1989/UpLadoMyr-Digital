@@ -43,9 +43,12 @@ export default function MetaPixel() {
   // PageView на кожен client navigation
   useEffect(() => {
     if (!enabled) return;
-    // @ts-ignore
+
+    // ✅✅✅ CHANGED: ts-ignore -> ts-expect-error (fbq comes from Meta script)
+    // @ts-expect-error - fbq is injected by Meta Pixel script at runtime
     if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-      // @ts-ignore
+      // ✅✅✅ CHANGED: ts-ignore -> ts-expect-error (fbq comes from Meta script)
+      // @ts-expect-error - fbq is injected by Meta Pixel script at runtime
       window.fbq('track', 'PageView');
     }
   }, [enabled, pathname, searchParams]);
@@ -69,13 +72,14 @@ export default function MetaPixel() {
         `}
       </Script>
 
+      {/* ✅✅✅ CHANGED: avoid <img> in JSX (next/no-img-element). Use Script in noscript. */}
       <noscript>
-        <img
-          height="1"
-          width="1"
-          style={{ display: 'none' }}
-          src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`}
-          alt=""
+        <Script
+          id="meta-pixel-noscript"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1" alt="" />`,
+          }}
         />
       </noscript>
     </>
