@@ -3,6 +3,7 @@ import './globals.css';
 import CookieConsent from '@/components/CookieConsent/CookieConsent';
 import type { Metadata } from 'next';
 import AOSProvider from '@/components/AOSProvider';
+import MetaPixel from '@/components/MetaPixel/MetaPixel';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://upladomyr.com'),
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           paddingRight: 'env(safe-area-inset-right, 0)',
         }}
       >
+        <MetaPixel />
         <AuthProvider>
           <AOSProvider /> {/* ✅ ADDED: AOS loads only on >=768px */}
           {children}

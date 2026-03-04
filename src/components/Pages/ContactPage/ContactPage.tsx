@@ -7,6 +7,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FiArrowUp } from 'react-icons/fi';
 
+// ✅✅✅ ADDED
+import { track } from '@/lib/pixel';
+
 type ToastState = { type: 'success' | 'error'; text: string } | null;
 
 const ContactPage: React.FC = () => {
@@ -20,6 +23,9 @@ const ContactPage: React.FC = () => {
   const [toast, setToast] = useState<ToastState>(null);
   const [toastKey, setToastKey] = useState(0); // ✅ to restart progress animation
   const [isSending, setIsSending] = useState(false);
+
+  // ✅✅✅ ADDED (щоб не слати Contact 10 разів при даблкліку/лагу)
+  const [contactFired, setContactFired] = useState(false);
 
   const time = useMemo(
     () =>
@@ -46,6 +52,16 @@ const ContactPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSending) return;
+
+    // ✅✅✅ ADDED: Contact на натискання SEND (це “клік по кнопці” / intent)
+    if (!contactFired) {
+      track('Contact', {
+        content_name: 'Contact form',
+        action_source: 'website',
+        page: 'Contact',
+      });
+      setContactFired(true);
+    }
 
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -89,8 +105,18 @@ const ContactPage: React.FC = () => {
       );
 
       if (response.status === 200) {
+        // ✅✅✅ ADDED: Lead тільки коли реально успішно відправлено
+        track('Lead', {
+          content_name: 'Contact form submitted',
+          lead_type: 'emailjs_form',
+          page: 'Contact',
+        });
+
         showToast({ type: 'success', text: 'Your message has been sent successfully!' });
         setFormData({ name: '', lastName: '', email: '', message: '' });
+
+        // ✅✅✅ ADDED: скидаємо флаг, щоб наступний лід теж трекнувся
+        setContactFired(false);
       } else {
         throw new Error('Failed to send message.');
       }
@@ -102,6 +128,9 @@ const ContactPage: React.FC = () => {
         raw: err,
       });
       showToast({ type: 'error', text: 'Something went wrong. Please try again.' });
+
+      // ✅✅✅ ADDED: якщо впало — дозволяємо ще раз “Contact” при наступній спробі
+      setContactFired(false);
     } finally {
       setIsSending(false);
     }

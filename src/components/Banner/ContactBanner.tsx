@@ -3,11 +3,19 @@ import { useState } from 'react';
 import { FaPhone, FaEnvelope, FaAt } from 'react-icons/fa';
 import { SiViber, SiTelegram, SiWhatsapp } from 'react-icons/si';
 
+/* ✅✅✅ ADDED START */
+import { track } from '@/lib/pixel';
+/* ✅✅✅ ADDED END */
+
 interface ContactItem {
   icon: React.ReactNode;
   label: string;
   info: string;
   href: string;
+
+  /* ✅✅✅ ADDED START */
+  channel?: 'phone' | 'email' | 'website' | 'viber' | 'telegram' | 'whatsapp';
+  /* ✅✅✅ ADDED END */
 }
 
 function ContactBanner() {
@@ -19,36 +27,60 @@ function ContactBanner() {
       label: 'Phone',
       info: '+31 619-38-88-95',
       href: 'tel:+31 619-38-88-95',
+
+      /* ✅✅✅ ADDED START */
+      channel: 'phone',
+      /* ✅✅✅ ADDED END */
     },
     {
       icon: <FaEnvelope size={20} />,
       label: 'Email',
       info: 'info@upladomyr.com',
       href: 'mailto:info@upladomyr.com',
+
+      /* ✅✅✅ ADDED START */
+      channel: 'email',
+      /* ✅✅✅ ADDED END */
     },
     {
       icon: <FaAt size={20} />,
       label: 'Website',
       info: 'upladomyr.com',
       href: 'https://upladomyr.com',
+
+      /* ✅✅✅ ADDED START */
+      channel: 'website',
+      /* ✅✅✅ ADDED END */
     },
     {
       icon: <SiViber size={20} />,
       label: 'Viber',
       info: 'Viber Chat',
       href: 'viber://chat?number=+380507252223',
+
+      /* ✅✅✅ ADDED START */
+      channel: 'viber',
+      /* ✅✅✅ ADDED END */
     },
     {
       icon: <SiTelegram size={20} />,
       label: 'Telegram',
       info: '@upladomyr_support',
       href: 'https://t.me/bettinaladomirjak',
+
+      /* ✅✅✅ ADDED START */
+      channel: 'telegram',
+      /* ✅✅✅ ADDED END */
     },
     {
       icon: <SiWhatsapp size={20} />,
       label: 'WhatsApp',
       info: 'Chat on WhatsApp',
       href: 'https://wa.me/+31619388895',
+
+      /* ✅✅✅ ADDED START */
+      channel: 'whatsapp',
+      /* ✅✅✅ ADDED END */
     },
   ];
 
@@ -81,6 +113,19 @@ function ContactBanner() {
               onMouseLeave={() => setHovered(null)}
               onFocus={() => setHovered(index)}
               onBlur={() => setHovered(null)}
+              /* ✅✅✅ ADDED START: Meta Pixel event on every CTA click */
+              onClick={() => {
+                track('Contact', {
+                  source: 'contact_banner',
+                  page: 'Contact',
+                  channel: contact.channel ?? contact.label.toLowerCase(),
+                  label: contact.label,
+                  href: contact.href,
+                  position: index + 1,
+                });
+              }}
+              /* ✅✅✅ ADDED END */
+
               data-aos="fade-up"
               data-aos-delay={index * 100}
               className="relative flex items-center gap-3 group transition-transform duration-300 transform hover:scale-105 focus:outline-none"

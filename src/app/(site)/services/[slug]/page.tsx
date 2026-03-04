@@ -7,6 +7,10 @@ import { FRONTEND_BASE_URL } from '@/lib/api';
 import { type ServiceSlug, SERVICES, getServiceBySlug } from '@/lib/services.config';
 import ServiceFaq from '@/components/ServiceFaq/ServiceFaq';
 
+/* ✅✅✅ ADDED: client CTA tracker link */
+import TrackedLink from '@/components/TrackedLink/TrackedLink';
+/* ✅✅✅ END */
+
 // ───────────────────────── helpers ─────────────────────────
 
 function isServiceSlug(slug: string): slug is ServiceSlug {
@@ -514,8 +518,18 @@ async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
               <p>{service.desc}</p>
             </div>
 
-            <Link
+            {/* ✅✅✅ CHANGED: CTA Link -> TrackedLink */}
+            <TrackedLink
               href="/contacts"
+              eventName="Contact"
+              payload={{
+                source: 'service_highlight_card',
+                cta: 'request_a_quote',
+                service_slug: slug,
+                service_label: service.label,
+                service_title: service.title,
+                destination: '/contacts',
+              }}
               className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl
                          bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
                          px-4 py-2.5 text-sm font-semibold text-black shadow-lg
@@ -523,7 +537,8 @@ async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
             >
               Request a quote
               <span aria-hidden>→</span>
-            </Link>
+            </TrackedLink>
+            {/* ✅✅✅ END */}
           </div>
         </div>
       </section>
@@ -687,9 +702,19 @@ async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
             </p>
             <div className="mt-4 space-y-3">
               {otherServices.map((s) => (
-                <Link
+                /* ✅✅✅ CHANGED: Link -> TrackedLink (CTA to other services) */
+                <TrackedLink
                   key={s.slug}
                   href={s.link}
+                  eventName="ViewContent"
+                  payload={{
+                    source: 'service_quick_pricing_overview',
+                    action: 'open_other_service',
+                    from_service_slug: slug,
+                    to_service_slug: s.slug,
+                    to_service_title: s.title,
+                    destination: s.link,
+                  }}
                   className="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm hover:border-amber-400 hover:bg-amber-50 transition-colors"
                 >
                   <div>
@@ -699,7 +724,8 @@ async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
                     </p>
                   </div>
                   <span className="text-xs font-semibold text-amber-700">View →</span>
-                </Link>
+                </TrackedLink>
+                /* ✅✅✅ END */
               ))}
             </div>
           </div>
@@ -734,22 +760,43 @@ async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <Link
+          {/* ✅✅✅ CHANGED: CTA Link -> TrackedLink */}
+          <TrackedLink
             href="/contacts"
+            eventName="Contact"
+            payload={{
+              source: 'service_final_cta',
+              cta: 'request_a_proposal',
+              service_slug: slug,
+              service_label: service.label,
+              service_title: service.title,
+              destination: '/contacts',
+            }}
             className="inline-flex items-center justify-center rounded-2xl
                        bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
                        px-6 py-2.5 text-sm font-semibold text-black shadow-lg
                        hover:scale-[1.03] hover:shadow-xl transition-transform"
           >
             Request a proposal
-          </Link>
-          <Link
+          </TrackedLink>
+          {/* ✅✅✅ END */}
+
+          {/* ✅✅✅ CHANGED: CTA Link -> TrackedLink */}
+          <TrackedLink
             href="/projects"
+            eventName="ViewContent"
+            payload={{
+              source: 'service_final_cta',
+              cta: 'view_recent_projects',
+              service_slug: slug,
+              destination: '/projects',
+            }}
             className="inline-flex items-center justify-center rounded-2xl border border-slate-600
                        px-6 py-2.5 text-sm font-semibold text-slate-100 hover:bg-slate-800 transition-colors"
           >
             View recent projects
-          </Link>
+          </TrackedLink>
+          {/* ✅✅✅ END */}
         </div>
       </section>
     </div>

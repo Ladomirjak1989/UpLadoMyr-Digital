@@ -19,6 +19,10 @@ import { FiArrowUp } from 'react-icons/fi';
 import CookieSettingsButton from '@/components/CookieConsent/CookieSettingsButton';
 import ScrollToTopButton from '../ScrollToTopButton/ScrollToTopButton';
 
+/* ✅✅✅ ADDED START */
+import { track } from '@/lib/pixel';
+/* ✅✅✅ ADDED END */
+
 const Footer: React.FC = () => {
   const pathname = usePathname();
   const isActive = (path: string) => pathname === path;
@@ -45,6 +49,14 @@ const Footer: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    /* ✅✅✅ ADDED START: optional "submit started" event (NOT Lead) */
+    track('SubmitApplication', {
+      source: 'footer_newsletter_form',
+      action: 'submit',
+      content_name: 'FooterEmailSubscribe',
+    });
+    /* ✅✅✅ ADDED END */
 
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -82,6 +94,15 @@ const Footer: React.FC = () => {
       );
 
       if (response.status === 200) {
+        /* ✅✅✅ ADDED START: REAL Lead (success only) */
+        track('Lead', {
+          source: 'footer_newsletter_form',
+          method: 'email',
+          content_name: 'FooterEmailSubscribe',
+          email_domain: formData.email.split('@')[1] || undefined,
+        });
+        /* ✅✅✅ ADDED END */
+
         setToast({ type: 'success', text: 'Your message has been sent successfully!' });
         setFormData({ email: '' });
         setTimeout(() => setToast(null), 5000);
@@ -90,6 +111,15 @@ const Footer: React.FC = () => {
       }
     } catch (error) {
       console.error('Email sending error:', error);
+
+      /* ✅✅✅ ADDED START: failure signal (optional) */
+      track('Contact', {
+        source: 'footer_newsletter_form',
+        action: 'error',
+        content_name: 'FooterEmailSubscribe',
+      });
+      /* ✅✅✅ ADDED END */
+
       setToast({ type: 'error', text: 'Something went wrong. Please try again.' });
       setTimeout(() => setToast(null), 5000);
     }
@@ -141,6 +171,15 @@ const Footer: React.FC = () => {
 
           <Link
             href="/contacts"
+            /* ✅✅✅ ADDED START: CTA click tracking */
+            onClick={() =>
+              track('Contact', {
+                source: 'footer_hero_cta',
+                cta: 'free_consultation',
+                destination: '/contacts',
+              })
+            }
+            /* ✅✅✅ ADDED END */
             className="group relative inline-flex items-center gap-2 px-9 py-4 border-4 border-transparent text-base font-semibold rounded-full text-white bg-blue-900 shadow-[0_0_0_2px_#c7a23f] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-xl hover:shadow-[0_0_0_12px_transparent] hover:text-neutral-900 active:scale-95"
           >
             <span className="absolute top-1/2 left-1/2 w-5 h-5 bg-[#c7a23f] rounded-full opacity-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-[220px] group-hover:h-[220px] group-hover:opacity-100 transform -translate-x-1/2 -translate-y-1/2" />
@@ -208,14 +247,38 @@ const Footer: React.FC = () => {
             <ul className="space-y-2 mt-2 text-sm">
               <li className="mt-3 text-black flex items-center gap-2 font-bold text-accent">
                 <FaPhone className="bg-white rounded-full p-3 w-10 h-10 shadow-md border border-yellow-500 hover:shadow-lg transition-transform duration-300 hover:scale-110" />
-                <a href="tel:+31619388895" className="hover:underline cursor-pointer">
+                <a
+                  href="tel:+31619388895"
+                  /* ✅✅✅ ADDED START: phone click */
+                  onClick={() =>
+                    track('Contact', {
+                      source: 'footer_contact_list',
+                      channel: 'phone',
+                      value: '+31619388895',
+                    })
+                  }
+                  /* ✅✅✅ ADDED END */
+                  className="hover:underline cursor-pointer"
+                >
                   +31 619 - 38 - 88 - 95
                 </a>
               </li>
 
               <li className="flex items-center space-x-2 font-bold text-black">
                 <FaBriefcase className="text-accent bg-white rounded-full p-3 w-10 h-10 shadow-md border border-yellow-500 hover:shadow-lg transition-transform duration-300 hover:scale-110" />
-                <a href="mailto:info@upladomyr.com" className="hover:underline cursor-pointer">
+                <a
+                  href="mailto:info@upladomyr.com"
+                  /* ✅✅✅ ADDED START: email click */
+                  onClick={() =>
+                    track('Contact', {
+                      source: 'footer_contact_list',
+                      channel: 'email',
+                      value: 'info@upladomyr.com',
+                    })
+                  }
+                  /* ✅✅✅ ADDED END */
+                  className="hover:underline cursor-pointer"
+                >
                   info@upladomyr.com
                 </a>
               </li>
@@ -238,6 +301,15 @@ const Footer: React.FC = () => {
                     />
                     <Link
                       href={item.href}
+                      /* ✅✅✅ ADDED START: nav click */
+                      onClick={() =>
+                        track('ViewContent', {
+                          source: 'footer_sitemap',
+                          content_name: item.label,
+                          destination: item.href,
+                        })
+                      }
+                      /* ✅✅✅ ADDED END */
                       className={`relative transition-all duration-200 font-bold text-sm sm:text-base ${
                         isActive(item.href)
                           ? 'text-[#1e3a8a] underline underline-offset-4'
@@ -279,6 +351,15 @@ const Footer: React.FC = () => {
 
               <button
                 type="submit"
+                /* ✅✅✅ ADDED START: click on SEND */
+                onClick={() =>
+                  track('Contact', {
+                    source: 'footer_newsletter_form',
+                    action: 'click_send',
+                    content_name: 'FooterEmailSubscribe',
+                  })
+                }
+                /* ✅✅✅ ADDED END */
                 className="relative overflow-hidden border border-[#c7a23f] text-[#c7a23f] inline-block text-[15px] leading-[15px] py-[18px] px-[24px] bg-white cursor-pointer select-none transition duration-[600ms] ease-[cubic-bezier(0.48,0,0.12,1)] group"
               >
                 <span className="relative z-10 transition-colors duration-[600ms] ease-[cubic-bezier(0.48,0,0.12,1)]">
@@ -305,7 +386,19 @@ const Footer: React.FC = () => {
                   <span className="whitespace-nowrap">For faster support, please</span>
 
                   <span className="whitespace-nowrap">
-                    <Link href="/signin" className="underline font-semibold hover:text-yellow-700">
+                    <Link
+                      href="/signin"
+                      className="underline font-semibold hover:text-yellow-700"
+                      /* ✅✅✅ ADDED START */
+                      onClick={() =>
+                        track('ViewContent', {
+                          source: 'footer_info_callout',
+                          content_name: 'signin',
+                          destination: '/signin',
+                        })
+                      }
+                      /* ✅✅✅ ADDED END */
+                    >
                       sign in
                     </Link>
                   </span>
@@ -313,7 +406,19 @@ const Footer: React.FC = () => {
                   <span>or</span>
 
                   <span className="inline-flex items-center gap-1 whitespace-nowrap align-middle">
-                    <Link href="/signup" className="underline font-semibold hover:text-yellow-700">
+                    <Link
+                      href="/signup"
+                      className="underline font-semibold hover:text-yellow-700"
+                      /* ✅✅✅ ADDED START */
+                      onClick={() =>
+                        track('ViewContent', {
+                          source: 'footer_info_callout',
+                          content_name: 'signup',
+                          destination: '/signup',
+                        })
+                      }
+                      /* ✅✅✅ ADDED END */
+                    >
                       create an account
                     </Link>
                     <span>.</span>
@@ -337,6 +442,15 @@ const Footer: React.FC = () => {
                 href="https://www.upladomyr.com"
                 target="_blank"
                 rel="noopener noreferrer"
+                /* ✅✅✅ ADDED START */
+                onClick={() =>
+                  track('ViewContent', {
+                    source: 'footer_copyright',
+                    content_name: 'upladomyr.com',
+                    destination: 'https://www.upladomyr.com',
+                  })
+                }
+                /* ✅✅✅ ADDED END */
                 className="text-blue-950 font-semibold font-dmserif hover:underline"
               >
                 UpLadoMyr Digital
@@ -344,11 +458,35 @@ const Footer: React.FC = () => {
               . All rights reserved.
             </p>
             <span className="hidden md:inline">/</span>
-            <Link href="/privacy" className="underline hover:text-blue-500">
+            <Link
+              href="/privacy"
+              /* ✅✅✅ ADDED START */
+              onClick={() =>
+                track('ViewContent', {
+                  source: 'footer_links',
+                  content_name: 'privacy',
+                  destination: '/privacy',
+                })
+              }
+              /* ✅✅✅ ADDED END */
+              className="underline hover:text-blue-500"
+            >
               Privacy
             </Link>
             <span className="hidden md:inline">/</span>
-            <Link href="/terms" className="underline hover:text-blue-500">
+            <Link
+              href="/terms"
+              /* ✅✅✅ ADDED START */
+              onClick={() =>
+                track('ViewContent', {
+                  source: 'footer_links',
+                  content_name: 'terms',
+                  destination: '/terms',
+                })
+              }
+              /* ✅✅✅ ADDED END */
+              className="underline hover:text-blue-500"
+            >
               Terms and Conditions
             </Link>
             <span className="hidden md:inline">/</span>
@@ -365,6 +503,16 @@ const Footer: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
+                  /* ✅✅✅ ADDED START: social click tracking */
+                  onClick={() =>
+                    track('Contact', {
+                      source: 'footer_social_icons',
+                      channel: 'social',
+                      label,
+                      href,
+                    })
+                  }
+                  /* ✅✅✅ ADDED END */
                   className="
                     w-8 h-8 flex items-center justify-center
                     rounded-full

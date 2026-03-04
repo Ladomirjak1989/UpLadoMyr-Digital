@@ -27,6 +27,10 @@ import {
 import Link from 'next/link';
 import FounderBanner from '@/components/Banner/FounderBanner';
 
+/* ✅✅✅ ADDED START */
+import { track } from '@/lib/pixel';
+/* ✅✅✅ ADDED END */
+
 const techItems = [
   { icon: <FaHtml5 size={40} color="#E44D26" />, name: 'HTML' },
   { icon: <FaCss3Alt size={40} color="#1572B6" />, name: 'CSS' },
@@ -63,6 +67,15 @@ const AboutPage: React.FC = () => {
 
           <Link
             href="/contacts"
+            /* ✅✅✅ ADDED START: CTA click -> Contact event */
+            onClick={() =>
+              track('Contact', {
+                source: 'about_page',
+                cta: 'lets_work_together',
+                page: 'About',
+              })
+            }
+            /* ✅✅✅ ADDED END */
             className=" mt-4 group relative inline-flex items-center gap-2 px-9 py-4 border-4 border-transparent text-base font-semibold rounded-full text-white bg-blue-900 shadow-[0_0_0_2px_#c7a23f] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-xl hover:shadow-[0_0_0_12px_transparent] hover:text-neutral-900 active:scale-95"
           >
             {/* Circle animation */}
@@ -240,6 +253,10 @@ const AboutPage: React.FC = () => {
               optimize it for performance, mobile-first experience, and long-term scalability —
               ensuring it truly represents your brand.
             </p>
+
+            {/* ✅✅✅ ADDED START: якщо хочеш CTA тут теж (бо ти сказала “всі CTA”) */}
+            {/* Якщо у тебе на AboutPage реально є ще CTA — встав сюди або в інші місця. */}
+            {/* ✅✅✅ ADDED END */}
           </div>
         </div>
 

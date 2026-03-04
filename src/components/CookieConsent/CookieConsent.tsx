@@ -31,6 +31,37 @@ function writeConsent(value: ConsentState) {
     `Path=/; Expires=${expires.toUTCString()}; SameSite=Lax${secure}`;
 }
 
+/* ---------- Notify other components (MetaPixel/GA etc.) ---------- */
+function notifyConsentUpdated() {
+  window.dispatchEvent(new Event('cookie-consent-updated'));
+}
+
+/* ---------- Optional: try to delete marketing cookies after reject ---------- */
+function deleteCookieEverywhere(name: string) {
+  const secure =
+    typeof window !== 'undefined' && window.location.protocol === 'https:' ? '; Secure' : '';
+
+  // root path
+  document.cookie = `${name}=; Path=/; Max-Age=0; SameSite=Lax${secure}`;
+
+  const host = window.location.hostname;
+
+  // try parent domain (e.g. .example.com)
+  const parts = host.split('.');
+  if (parts.length >= 2) {
+    const parent = `.${parts.slice(-2).join('.')}`;
+    document.cookie = `${name}=; Path=/; Domain=${parent}; Max-Age=0; SameSite=Lax${secure}`;
+  }
+
+  // try exact host
+  document.cookie = `${name}=; Path=/; Domain=${host}; Max-Age=0; SameSite=Lax${secure}`;
+}
+
+function clearMarketingCookies() {
+  deleteCookieEverywhere('_fbp');
+  deleteCookieEverywhere('_fbc');
+}
+
 /* ---------- Hook: lock page scroll while dialog is open ---------- */
 function useLockScroll(lock: boolean) {
   useEffect(() => {
@@ -83,12 +114,11 @@ export default function CookieConsent() {
   }, []);
 
   // Esc — закриття без змін (якщо згода була раніше)
-
   const onClose = useCallback(() => {
     setAnalytics(initial.analytics);
     setMarketing(initial.marketing);
     setOpen(false);
-  }, [initial]); // або [initial.analytics, initial.marketing]
+  }, [initial]);
 
   useEffect(() => {
     if (!open) return;
@@ -97,25 +127,32 @@ export default function CookieConsent() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [open, hasSaved]);
+  }, [open, hasSaved, onClose]);
 
   const acceptAll = () => {
     writeConsent({ analytics: true, marketing: true });
     setHasSaved(true);
     setOpen(false);
-    // TODO: ініціалізуй GA/Meta тут за потреби
+
+    notifyConsentUpdated();
   };
 
   const rejectAll = () => {
     writeConsent({ analytics: false, marketing: false });
     setHasSaved(true);
     setOpen(false);
+
+    clearMarketingCookies();
+    notifyConsentUpdated();
   };
 
   const save = () => {
     writeConsent({ analytics, marketing });
     setHasSaved(true);
     setOpen(false);
+
+    if (!marketing) clearMarketingCookies();
+    notifyConsentUpdated();
   };
 
   if (!open) return null;
@@ -149,7 +186,7 @@ export default function CookieConsent() {
       >
         <div
           className="
-            mx-auto m-3 w-full max-w-4xl mb-12 
+            mx-auto m-3 w-full max-w-4xl mb-12
             rounded-2xl border border-yellow-300 bg-white shadow-2xl
             md:m-6
           "

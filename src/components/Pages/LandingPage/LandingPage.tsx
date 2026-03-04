@@ -32,6 +32,7 @@ import 'swiper/css/navigation';
 
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { motion } from 'framer-motion';
+import { track } from '@/lib/pixel';
 
 // якщо є — лишай. Якщо нема — заміниш на свій масив.А
 import { SERVICES } from '@/lib/services.config';
@@ -258,6 +259,8 @@ function SectionCTA({ contacts }: { contacts: Record<string, string> }) {
     <div className="mt-8 flex flex-wrap gap-3">
       <Link
         href={contacts.phoneHref}
+        // ✅ ADDED
+        onClick={() => track('Contact', { channel: 'phone', source: 'landing_cta' })}
         className="rounded-full bg-slate-900 text-white px-5 py-3 font-extrabold shadow hover:shadow-lg hover:-translate-y-[1px] transition inline-flex items-center gap-2"
       >
         <FaPhone /> Call me
@@ -266,6 +269,8 @@ function SectionCTA({ contacts }: { contacts: Record<string, string> }) {
       <Link
         href={contacts.whatsappHref}
         target="_blank"
+        // ✅ ADDED
+        onClick={() => track('Contact', { channel: 'whatsapp', source: 'landing_cta' })}
         className="rounded-full bg-green-600 text-white px-5 py-3 font-extrabold shadow hover:shadow-lg hover:-translate-y-[1px] transition inline-flex items-center gap-2"
       >
         <FaWhatsapp /> WhatsApp
@@ -274,6 +279,8 @@ function SectionCTA({ contacts }: { contacts: Record<string, string> }) {
       <Link
         href={contacts.telegramHref}
         target="_blank"
+        // ✅ ADDED
+        onClick={() => track('Contact', { channel: 'telegram', source: 'landing_cta' })}
         className="rounded-full bg-sky-500 text-white px-5 py-3 font-extrabold shadow hover:shadow-lg hover:-translate-y-[1px] transition inline-flex items-center gap-2"
       >
         <FaTelegramPlane /> Telegram
@@ -317,10 +324,29 @@ function ServicePricingCarousel() {
                          bg-gradient-to-br from-gray-100 to-gray-200
                          p-6 shadow-xl focus:outline-none"
               style={{ touchAction: 'manipulation' }}
-              onClick={() => router.push(service.link)}
+              onClick={() => {
+                // ✅ ADDED: service click tracking
+                track('ViewContent', {
+                  content_name: service.title,
+                  content_category: service.label,
+                  content_ids: [service.slug],
+                  content_type: 'service',
+                  source: 'landing_service_carousel',
+                });
+
+                router.push(service.link);
+              }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
+                  track('ViewContent', {
+                    content_name: service.title,
+                    content_category: service.label,
+                    content_ids: [service.slug],
+                    content_type: 'service',
+                    source: 'landing_service_carousel_keyboard',
+                  });
+
                   router.push(service.link);
                 }
               }}
@@ -505,6 +531,7 @@ function StatsGrid({
 }
 
 const LandingPage: React.FC = () => {
+  const firedLandingView = useRef(false);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const toggleItem = (index: number) => setOpenIndex((prev) => (prev === index ? null : index));
 
@@ -559,6 +586,18 @@ const LandingPage: React.FC = () => {
     ],
     [contacts]
   );
+
+  // ✅ ADDED START: Pixel event for landing view
+  useEffect(() => {
+    if (firedLandingView.current) return;
+    firedLandingView.current = true;
+
+    track('ViewContent', {
+      content_name: 'LandingPage',
+      content_category: 'Landing',
+      content_type: 'page',
+    });
+  }, []);
 
   return (
     <>
@@ -672,6 +711,12 @@ const LandingPage: React.FC = () => {
                       key={c.label}
                       href={c.href}
                       target={c.targetBlank ? '_blank' : undefined}
+                      onClick={() =>
+                        track('Contact', {
+                          channel: c.label.toLowerCase(),
+                          source: 'landing_contact_list',
+                        })
+                      }
                       className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm hover:shadow transition flex items-center gap-3"
                     >
                       <span className="text-slate-700">{c.icon}</span>
