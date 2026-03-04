@@ -5,6 +5,9 @@ import type { Metadata } from 'next';
 import AOSProvider from '@/components/AOSProvider';
 import MetaPixel from '@/components/MetaPixel/MetaPixel';
 
+// ✅✅✅ ADDED
+import { Suspense } from 'react';
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://upladomyr.com'),
   title: {
@@ -66,7 +69,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           paddingRight: 'env(safe-area-inset-right, 0)',
         }}
       >
-        <MetaPixel />
+        {/* ✅✅✅ CHANGED: wrap MetaPixel with Suspense (fix useSearchParams prerender error) */}
+        <Suspense fallback={null}>
+          <MetaPixel />
+        </Suspense>
+
         <AuthProvider>
           <AOSProvider /> {/* ✅ ADDED: AOS loads only on >=768px */}
           {children}

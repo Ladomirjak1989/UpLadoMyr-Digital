@@ -9,9 +9,18 @@ const PIXEL_ID = '1594928181725341';
 
 type ConsentState = { analytics: boolean; marketing: boolean };
 
+// ✅ ADDED: type fbq to avoid ts-ignore/ts-expect-error
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+    _fbq?: any;
+  }
+}
+
 function readConsent(): ConsentState | null {
   const raw = document.cookie.split('; ').find((c) => c.startsWith(`${CONSENT_COOKIE}=`));
   if (!raw) return null;
+
   try {
     return JSON.parse(decodeURIComponent(raw.split('=')[1])) as ConsentState;
   } catch {
@@ -36,6 +45,7 @@ export default function MetaPixel() {
       const saved = readConsent();
       setEnabled(!!saved?.marketing);
     };
+
     window.addEventListener('cookie-consent-updated', handler);
     return () => window.removeEventListener('cookie-consent-updated', handler);
   }, []);
@@ -44,11 +54,7 @@ export default function MetaPixel() {
   useEffect(() => {
     if (!enabled) return;
 
-    // ✅✅✅ CHANGED: ts-ignore -> ts-expect-error (fbq comes from Meta script)
-    // @ts-expect-error - fbq is injected by Meta Pixel script at runtime
     if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-      // ✅✅✅ CHANGED: ts-ignore -> ts-expect-error (fbq comes from Meta script)
-      // @ts-expect-error - fbq is injected by Meta Pixel script at runtime
       window.fbq('track', 'PageView');
     }
   }, [enabled, pathname, searchParams]);
@@ -72,14 +78,15 @@ export default function MetaPixel() {
         `}
       </Script>
 
-      {/* ✅✅✅ CHANGED: avoid <img> in JSX (next/no-img-element). Use Script in noscript. */}
       <noscript>
-        <Script
-          id="meta-pixel-noscript"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1" alt="" />`,
-          }}
+        {/* ✅ FIX: allow <img> here (Meta's official noscript fallback) */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          height="1"
+          width="1"
+          style={{ display: 'none' }}
+          src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`}
+          alt=""
         />
       </noscript>
     </>
