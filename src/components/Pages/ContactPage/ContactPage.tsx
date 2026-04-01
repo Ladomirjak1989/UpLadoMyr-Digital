@@ -6,13 +6,13 @@ import { FaUser, FaEnvelope, FaCommentDots } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FiArrowUp } from 'react-icons/fi';
-
-// ✅✅✅ ADDED
-import { track } from '@/lib/pixel';
+import { useRouter } from 'next/navigation';
 
 type ToastState = { type: 'success' | 'error'; text: string } | null;
 
 const ContactPage: React.FC = () => {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     name: '',
     lastName: '',
@@ -21,11 +21,8 @@ const ContactPage: React.FC = () => {
   });
 
   const [toast, setToast] = useState<ToastState>(null);
-  const [toastKey, setToastKey] = useState(0); // ✅ to restart progress animation
+  const [toastKey, setToastKey] = useState(0);
   const [isSending, setIsSending] = useState(false);
-
-  // ✅✅✅ ADDED (щоб не слати Contact 10 разів при даблкліку/лагу)
-  const [contactFired, setContactFired] = useState(false);
 
   const time = useMemo(
     () =>
@@ -40,28 +37,21 @@ const ContactPage: React.FC = () => {
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const showToast = (next: NonNullable<ToastState>) => {
     setToast(next);
     setToastKey((k) => k + 1);
-    setTimeout(() => setToast(null), 5000);
+    setTimeout(() => setToast(null), 1000);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSending) return;
-
-    // ✅✅✅ ADDED: Contact на натискання SEND (це “клік по кнопці” / intent)
-    if (!contactFired) {
-      track('Contact', {
-        content_name: 'Contact form',
-        action_source: 'website',
-        page: 'Contact',
-      });
-      setContactFired(true);
-    }
 
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -69,7 +59,7 @@ const ContactPage: React.FC = () => {
     const userId = process.env.NEXT_PUBLIC_EMAILJS_KEY;
 
     if (!serviceId || !templateId || !userId || !templateReplyId) {
-      showToast({ type: 'error', text: 'Configuration error. Please contact support.' });
+      showToast({ type: 'error', text: 'Email configuration error. Please contact support.' });
       return;
     }
 
@@ -78,6 +68,41 @@ const ContactPage: React.FC = () => {
     try {
       setIsSending(true);
 
+      const contactPayload = {
+        name: formData.name,
+        lastName: formData.lastName,
+        email: cleanEmail,
+        message: formData.message,
+      };
+
+      console.log('Sending contact payload:', contactPayload);
+      console.log('POST URL:', '/api/contact');
+
+      // 1. save contact request in backend
+      const backendRes = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactPayload),
+      });
+
+      console.log('Backend response status:', backendRes.status);
+
+      if (!backendRes.ok) {
+        const errorText = await backendRes.text();
+        console.error('Backend error response:', errorText);
+        throw new Error(`Backend request failed with status ${backendRes.status}: ${errorText}`);
+      }
+
+      const backendData: { success: boolean; ref: string } = await backendRes.json();
+      console.log('Backend success data:', backendData);
+
+      if (!backendData?.ref) {
+        throw new Error('Missing contact reference from backend');
+      }
+
+      // 2. send email to admin
       const response = await emailjs.send(
         serviceId,
         templateId,
@@ -86,12 +111,15 @@ const ContactPage: React.FC = () => {
           last_name: formData.lastName,
           email: cleanEmail,
           message: formData.message,
-          time: time,
+          time,
         },
         userId
       );
 
-      await emailjs.send(
+      console.log('EmailJS admin response:', response);
+
+      // 3. send auto-reply to user
+      const autoReplyResponse = await emailjs.send(
         serviceId,
         templateReplyId,
         {
@@ -99,38 +127,30 @@ const ContactPage: React.FC = () => {
           email: cleanEmail,
           reply_to: 'info@upladomyr.com',
           message: formData.message,
-          time: time,
+          time,
         },
         userId
       );
 
-      if (response.status === 200) {
-        // ✅✅✅ ADDED: Lead тільки коли реально успішно відправлено
-        track('Lead', {
-          content_name: 'Contact form submitted',
-          lead_type: 'emailjs_form',
-          page: 'Contact',
-        });
+      console.log('EmailJS auto-reply response:', autoReplyResponse);
 
-        showToast({ type: 'success', text: 'Your message has been sent successfully!' });
+      if (response.status === 200) {
         setFormData({ name: '', lastName: '', email: '', message: '' });
 
-        // ✅✅✅ ADDED: скидаємо флаг, щоб наступний лід теж трекнувся
-        setContactFired(false);
+        // redirect to thank-you page with backend ref
+        router.push(`/thank-you?ref=${encodeURIComponent(backendData.ref)}`);
       } else {
-        throw new Error('Failed to send message.');
+        throw new Error('Failed to send message via EmailJS.');
       }
-    } catch (err: any) {
-      console.error('Email sending error:', {
-        status: err?.status,
-        text: err?.text,
-        message: err?.message,
-        raw: err,
-      });
-      showToast({ type: 'error', text: 'Something went wrong. Please try again.' });
+    } catch (err: unknown) {
+      console.error('Email/contact sending error FULL:', err);
 
-      // ✅✅✅ ADDED: якщо впало — дозволяємо ще раз “Contact” при наступній спробі
-      setContactFired(false);
+      if (err instanceof Error) {
+        console.error('Error message:', err.message);
+        console.error('Error stack:', err.stack);
+      }
+
+      showToast({ type: 'error', text: 'Something went wrong. Please try again.' });
     } finally {
       setIsSending(false);
     }
@@ -321,7 +341,7 @@ const ContactPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ✅ Floating SaaS Toast + progress bar */}
+      {/* Floating SaaS Toast + progress bar */}
       <div className="fixed z-[9999] bottom-5 right-5 sm:bottom-6 sm:right-6 pointer-events-none">
         <div
           className={`transition-all duration-300 ease-out ${

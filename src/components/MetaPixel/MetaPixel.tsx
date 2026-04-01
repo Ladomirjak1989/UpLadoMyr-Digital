@@ -9,7 +9,6 @@ const PIXEL_ID = '1594928181725341';
 
 type ConsentState = { analytics: boolean; marketing: boolean };
 
-// ✅ ADDED: type fbq to avoid ts-ignore/ts-expect-error
 declare global {
   interface Window {
     fbq?: (...args: any[]) => void;
@@ -33,13 +32,11 @@ export default function MetaPixel() {
   const searchParams = useSearchParams();
   const [enabled, setEnabled] = useState(false);
 
-  // первинна перевірка
   useEffect(() => {
     const saved = readConsent();
     setEnabled(!!saved?.marketing);
   }, []);
 
-  // оновлення після Accept/Reject/Save
   useEffect(() => {
     const handler = () => {
       const saved = readConsent();
@@ -50,7 +47,7 @@ export default function MetaPixel() {
     return () => window.removeEventListener('cookie-consent-updated', handler);
   }, []);
 
-  // PageView на кожен client navigation
+  // ✅ ЄДИНИЙ PageView (без дубля)
   useEffect(() => {
     if (!enabled) return;
 
@@ -68,19 +65,21 @@ export default function MetaPixel() {
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
           n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          if(!f._fbq)f._fbq=n;
+          n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];
+          t=b.createElement(e);t.async=!0;
+          t.src=v;
+          s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)
+          }(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
+
           fbq('init', '${PIXEL_ID}');
-          fbq('track', 'PageView');
         `}
       </Script>
 
       <noscript>
-        {/* ✅ FIX: allow <img> here (Meta's official noscript fallback) */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           height="1"
           width="1"
