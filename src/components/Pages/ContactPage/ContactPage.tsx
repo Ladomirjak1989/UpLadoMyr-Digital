@@ -75,9 +75,6 @@ const ContactPage: React.FC = () => {
         message: formData.message,
       };
 
-      console.log('Sending contact payload:', contactPayload);
-      console.log('POST URL:', '/api/contact');
-
       // 1. save contact request in backend
       const backendRes = await fetch('/api/contact', {
         method: 'POST',
@@ -87,8 +84,6 @@ const ContactPage: React.FC = () => {
         body: JSON.stringify(contactPayload),
       });
 
-      console.log('Backend response status:', backendRes.status);
-
       if (!backendRes.ok) {
         const errorText = await backendRes.text();
         console.error('Backend error response:', errorText);
@@ -96,7 +91,6 @@ const ContactPage: React.FC = () => {
       }
 
       const backendData: { success: boolean; ref: string } = await backendRes.json();
-      console.log('Backend success data:', backendData);
 
       if (!backendData?.ref) {
         throw new Error('Missing contact reference from backend');
@@ -116,8 +110,6 @@ const ContactPage: React.FC = () => {
         userId
       );
 
-      console.log('EmailJS admin response:', response);
-
       // 3. send auto-reply to user
       const autoReplyResponse = await emailjs.send(
         serviceId,
@@ -132,7 +124,7 @@ const ContactPage: React.FC = () => {
         userId
       );
 
-      console.log('EmailJS auto-reply response:', autoReplyResponse);
+      console.warn('EmailJS auto-reply response:', autoReplyResponse);
 
       if (response.status === 200) {
         setFormData({ name: '', lastName: '', email: '', message: '' });
