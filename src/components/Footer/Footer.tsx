@@ -236,7 +236,7 @@ const Footer: React.FC = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 pb-2">
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <div className="flex items-center space-x-4 mb-4">
-              <div className="relative w-16 h-16">
+              <div className="relative w-10 h-10 sm:w-14 sm:h-12 md:w-16 md:h-14 lg:w-19 lg:h-14">
                 <Image
                   src="/img/header/logo4.avif"
                   alt="UpLadoMyr Logo"
