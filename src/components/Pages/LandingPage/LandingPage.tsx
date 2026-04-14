@@ -670,10 +670,10 @@ const LandingPage: React.FC = () => {
                 <p className="text-sm font-semibold text-slate-700">Business mindset</p>
 
                 <p className="mt-4 text-xl sm:text-2xl font-semibold leading-relaxed text-slate-900">
-                  “If you’re not embarrassed by the first version of your product, you’ve launched
-                  too late.”
+                  “If your business is not on the internet, then your business will be out of
+                  business.”
                 </p>
-                <p className="mt-2 text-sm font-semibold text-slate-600">— Reid Hoffman</p>
+                <p className="mt-2 text-sm font-semibold text-slate-600">— Bill Gates</p>
 
                 <div className="mt-8 grid grid-cols-2 gap-4">
                   <div className="rounded-2xl border border-slate-200 bg-white p-4">
