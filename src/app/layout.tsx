@@ -77,7 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AuthProvider>
           <AOSProvider /> {/* ✅ ADDED: AOS loads only on >=768px */}
           {children}
-          {/* <CookieConsent /> */}
+          <CookieConsent />
         </AuthProvider>
 
         <noscript>You need to enable JavaScript to run this app.</noscript>
