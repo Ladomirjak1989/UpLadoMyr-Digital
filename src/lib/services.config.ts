@@ -18,10 +18,10 @@ export const SERVICES: ServiceConfig[] = [
   {
     slug: 'visit-card',
     label: 'Business Card Website',
-    title: 'Template-based website',
+    title: 'Template-based website (Landing Page)',
     duration: '5–7 days',
     desc: '1 page, 3–4 blocks',
-    price: '€250',
+    price: '€400',
     icon: '/img/servicespricing/one-page-site.avif',
     link: '/services/visit-card',
     seoTitle: 'Template-based Business Card Website | UpLadoMyr Digital',
