@@ -36,7 +36,7 @@ function ContactBanner() {
       icon: <FaEnvelope size={20} />,
       label: 'Email',
       info: 'info@upladomyr.com',
-      href: 'mailto:info@upladomyr.com',
+      href: 'mailto:info@upladomyr.com?subject=Contact from Upladomyr',
 
       /* ✅✅✅ ADDED START */
       channel: 'email',
@@ -76,7 +76,7 @@ function ContactBanner() {
       icon: <SiWhatsapp size={20} />,
       label: 'WhatsApp',
       info: 'Chat on WhatsApp',
-      href: 'https://wa.me/+31619388895',
+      href: 'https://wa.me/31619388895',
 
       /* ✅✅✅ ADDED START */
       channel: 'whatsapp',
@@ -107,8 +107,14 @@ function ContactBanner() {
             <a
               key={index}
               href={contact.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={
+                contact.channel === 'email' || contact.channel === 'phone' ? undefined : '_blank'
+              }
+              rel={
+                contact.channel === 'email' || contact.channel === 'phone'
+                  ? undefined
+                  : 'noopener noreferrer'
+              }
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(null)}
               onFocus={() => setHovered(index)}
