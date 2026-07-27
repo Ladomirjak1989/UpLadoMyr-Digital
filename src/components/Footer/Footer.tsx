@@ -428,14 +428,14 @@ const Footer: React.FC = () => {
             <p>
               &copy; 2025-2026{' '}
               <Link
-                href="https://www.upladomyr.com"
+                href="https://upladomyr.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() =>
                   track('ViewContent', {
                     source: 'footer_copyright',
                     content_name: 'upladomyr.com',
-                    destination: 'https://www.upladomyr.com',
+                    destination: 'https://upladomyr.com',
                   })
                 }
                 className="text-blue-950 font-semibold font-dmserif hover:underline"
@@ -444,6 +444,7 @@ const Footer: React.FC = () => {
               </Link>
               . All rights reserved.
             </p>
+
             <span className="hidden md:inline">/</span>
             <Link
               href="/privacy"
@@ -518,6 +519,9 @@ const Footer: React.FC = () => {
 
             <ScrollToTopButton />
           </div>
+        </div>
+        <div className="px-4 md:px-16 flex flex-col md:flex-row justify-between items-center text-xs text-gray-800 gap-4">
+          KVK: 96675993. VAT: NL005224066B58. Registered in the Netherlands.
         </div>
       </div>
     </>
