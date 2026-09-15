@@ -17,10 +17,10 @@ const AboutBanner = () => {
           <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide mb-2">
             Who We Are
           </h1>
-          <p className="text-white text-sm sm:text-base md:text-lg font-light italic">
+          <h2 className="text-white text-sm sm:text-base md:text-lg font-light italic">
             A forward-thinking web development company dedicated to building performant, hand-coded
             websites — no templates, no shortcuts, just clean code and creative solutions.
-          </p>
+          </h2>
         </div>
       </div>
     </section>

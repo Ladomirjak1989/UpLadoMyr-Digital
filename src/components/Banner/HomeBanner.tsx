@@ -50,7 +50,7 @@ const HomeBanner: React.FC = () => {
         >
           {/* LEFT TEXT BLOCK */}
           <div className="max-w-2xl text-white space-y-6 sm:space-y-8 animate__animated animate__fadeInLeft">
-            <h1 className="text-3xl sm:text-3xl md:text-4xl font-bold drop-shadow-md leading-tight">
+            <h1 className="text-3xl sm:text-3xl md:text-7xl font-bold drop-shadow-md leading-tight">
               <span className="bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d] bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]">
                 Custom Websites
               </span>{' '}
@@ -61,7 +61,7 @@ const HomeBanner: React.FC = () => {
               Built for Growth
             </h1>
 
-            <p className="mt-2 text-lg sm:text-xl md:text-2xl text-white/90 leading-relaxed">
+            <h2 className="mt-2 text-lg sm:text-xl md:text-3xl text-white/90 leading-relaxed">
               At{' '}
               <span
                 className="font-semibold
@@ -76,7 +76,7 @@ const HomeBanner: React.FC = () => {
               , we engineer high-performance web products with clean architecture, secure backend
               systems and reliable delivery. From a polished business website to a complex platform
               — we build production-ready solutions designed to scale.
-            </p>
+            </h2>
 
             {/* CTA */}
             <Link
@@ -130,7 +130,7 @@ const HomeBanner: React.FC = () => {
             "
             aria-label="Quick contact"
           >
-            <p
+            <h2
               className="
                 font-tangerine
                 text-lg lg:text-xl
@@ -143,7 +143,7 @@ const HomeBanner: React.FC = () => {
             >
               Serious delivery — from discovery to launch. Clean build, clear communication, no
               shortcuts.
-            </p>
+            </h2>
 
             <div className="mt-5 flex items-center gap-3">
               <span className="inline-flex items-center justify-center rounded-full bg-white/95 text-black shadow border border-yellow-500/80 w-10 h-10">
@@ -179,9 +179,9 @@ const HomeBanner: React.FC = () => {
 
             <hr className="mt-5 w-52 border-white/25" />
 
-            <p className="mt-4 text-sm text-white/70 leading-relaxed">
+            <h2 className="mt-4 text-sm text-white/70 leading-relaxed">
               Available in NL / EN / UA / HU. Fast turnaround, clean process, predictable delivery.
-            </p>
+            </h2>
           </aside>
         </div>
       </div>

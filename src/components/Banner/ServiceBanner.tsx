@@ -17,10 +17,10 @@ const ServiceBanner = () => {
           <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide mb-2">
             Web Development Services
           </h1>
-          <p className="text-white text-sm sm:text-base md:text-lg font-light italic">
+          <h2 className="text-white text-sm sm:text-base md:text-lg font-light italic">
             Fast, modern and mobile-friendly websites tailored for ZZP professionals and small
             businesses — built to look great and convert.
-          </p>
+          </h2>
         </div>
       </div>
     </section>

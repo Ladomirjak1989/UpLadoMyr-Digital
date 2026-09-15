@@ -74,10 +74,10 @@ function FounderBanner() {
             and purpose.
           </h2>
 
-          <p className="mt-5 text-base sm:text-lg text-white/80 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+          <h2 className="mt-5 text-base sm:text-lg text-white/80 max-w-xl mx-auto lg:mx-0 leading-relaxed">
             Clean code, smart design, and solutions that actually work. From websites to full web
             applications, I help businesses turn ideas into results.
-          </p>
+          </h2>
 
           {/* CTAs */}
           <div className="mt-8 flex flex-col items-center lg:items-start gap-3">

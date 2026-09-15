@@ -58,12 +58,12 @@ const AboutPage: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-blue-950 mb-4">
             Modern Websites Tailored to Your Business.
           </h1>
-          <p className="text-lg text-gray-700">
+          <h2 className="text-lg text-gray-700">
             We build modern, high-performance websites and scalable digital platforms for
             freelancers, small businesses, and established companies. Whether leveraging proven
             frameworks or developing fully custom solutions, we focus on performance, security, and
             long-term scalability — ensuring your digital presence grows with your business.
-          </p>
+          </h2>
 
           <Link
             href="/contacts"
@@ -247,12 +247,12 @@ const AboutPage: React.FC = () => {
               Our Approach
             </h2>
 
-            <p className="text-gray-700 text-lg leading-relaxed text-center md:text-left">
+            <h3 className="text-gray-700 text-lg leading-relaxed text-center md:text-left">
               Every project we build is aligned with your business goals. Whether we develop a
               solution from scratch or use a carefully selected foundation, we always customize and
               optimize it for performance, mobile-first experience, and long-term scalability —
               ensuring it truly represents your brand.
-            </p>
+            </h3>
 
             {/* ✅✅✅ ADDED START: якщо хочеш CTA тут теж (бо ти сказала “всі CTA”) */}
             {/* Якщо у тебе на AboutPage реально є ще CTA — встав сюди або в інші місця. */}

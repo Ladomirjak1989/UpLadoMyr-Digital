@@ -110,10 +110,10 @@ const ProjectsPage: React.FC = () => {
                 </span>
               </h1>
 
-              <p className="mt-6 text-slate-800 italic max-w-2xl">
+              <h2 className="mt-6 text-slate-800 italic max-w-2xl">
                 Imagine a landing page that actually attracts new clients and looks sharp. We build
                 adaptive solutions that help your business hit goals and stand out from competitors.
-              </p>
+              </h2>
             </div>
 
             {/* Right: Image (imgP.jpg) */}
@@ -145,17 +145,14 @@ const ProjectsPage: React.FC = () => {
         data-aos="fade-up"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-16 lg:py-20">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
-            Why do you need a
-            <br />
-            <span
-              className="bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
+          <h1
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
              bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
-            >
-              WEBSITE
-            </span>
-            ?
-          </h2>
+          >
+            Custom Website & Web Application Development
+            <br />
+            <span className="font-bolt text-black">for Your Business?</span>
+          </h1>
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-10">
             {/* 1. Increase Sales */}
             <div className="flex items-start gap-5" data-aos="fade-up" data-aos-delay="50">
@@ -172,10 +169,10 @@ const ProjectsPage: React.FC = () => {
               </div>
               <div>
                 <h3 className="text-2xl font-semibold">Increase sales</h3>
-                <p className="mt-3 text-slate-800 italic">
+                <h4 className="mt-3 text-slate-800 italic">
                   A focused landing page persuades visitors to act. We craft conversion-driven pages
                   with modern design and solid marketing fundamentals.
-                </p>
+                </h4>
               </div>
             </div>
 
@@ -193,10 +190,10 @@ const ProjectsPage: React.FC = () => {
               </div>
               <div>
                 <h3 className="text-2xl font-semibold">Optimize costs</h3>
-                <p className="mt-3 text-slate-800 italic">
+                <h4 className="mt-3 text-slate-800 italic">
                   A one-page site is faster to build, easier to maintain, and laser-focused on what
                   your customers actually need — without waste.
-                </p>
+                </h4>
               </div>
             </div>
 
@@ -214,10 +211,10 @@ const ProjectsPage: React.FC = () => {
               </div>
               <div>
                 <h3 className="text-2xl font-semibold">Attract customers</h3>
-                <p className="mt-3 text-slate-800 italic">
+                <h4 className="mt-3 text-slate-800 italic">
                   Catch attention and turn it into loyalty with clear copy, striking visuals, and a
                   frictionless journey tailored to your audience.
-                </p>
+                </h4>
               </div>
             </div>
           </div>

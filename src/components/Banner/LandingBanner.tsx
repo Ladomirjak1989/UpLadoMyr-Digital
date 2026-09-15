@@ -60,9 +60,9 @@ const LandingBanner = () => {
             <div className="hidden lg:block w-1/2" />
 
             <div className="w-full lg:w-1/2 text-center lg:text-right">
-              <p className="text-xs sm:text-base uppercase tracking-widest text-white/85 font-semibold">
+              <h1 className="text-xs sm:text-base uppercase tracking-widest text-white/85 font-semibold">
                 PREMIUM WEB DEVELOPMENT
-              </p>
+              </h1>
 
               <h1 className="mt-3 sm:mt-4 text-3xl sm:text-5xl md:text-6xl font-extrabold text-white drop-shadow-xl leading-tight">
                 Grow your business.

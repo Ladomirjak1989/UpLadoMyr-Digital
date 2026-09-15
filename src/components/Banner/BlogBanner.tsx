@@ -20,10 +20,10 @@ const BlogBanner = () => {
           <h1 className="text-white font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
             Exclusive Website Tips
           </h1>
-          <p className="mt-4 text-sm sm:text-base md:text-lg text-slate-100 max-w-3xl mx-auto">
+          <h2 className="mt-4 text-sm sm:text-base md:text-lg text-slate-100 max-w-3xl mx-auto">
             Stay ahead of the curve &amp; get weekly updates on the latest industry trends, tips
             &amp; news.
-          </p>
+          </h2>
         </div>
       </div>
     </section>

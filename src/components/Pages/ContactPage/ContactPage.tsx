@@ -169,11 +169,11 @@ const ContactPage: React.FC = () => {
                 <h2 className="text-center text-2xl sm:text-3xl font-semibold text-blue-950 mb-4">
                   Let’s Discuss Your Project
                 </h2>
-                <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
+                <h3 className="text-gray-600 text-base sm:text-lg leading-relaxed">
                   Tell us about your business goals, timeline, and technical needs. Whether you’re
                   planning a new website, a scalable web platform, or need expert guidance — we’re
                   here to provide clear direction and practical solutions.
-                </p>
+                </h3>
               </div>
             </div>
 
@@ -183,9 +183,9 @@ const ContactPage: React.FC = () => {
                 <h2 className="text-3xl sm:text-4xl font-bold text-blue-950 mb-2">
                   Reach out to us
                 </h2>
-                <p className="text-gray-600 text-sm sm:text-base">
+                <h3 className="text-gray-600 text-sm sm:text-base">
                   Have any questions or feedback? Drop us a message!
-                </p>
+                </h3>
               </div>
 
               <form

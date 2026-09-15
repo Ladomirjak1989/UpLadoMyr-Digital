@@ -256,18 +256,18 @@ const HomePage: React.FC = () => {
           <div className="relative">
             {/* Main centered message */}
             <div className="text-center max-w-4xl mx-auto">
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 leading-tight">
                 Digital infrastructure is a strategic decision — not an expense.
-              </h3>
+              </h1>
 
-              <p className="mt-4 text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed">
+              <h2 className="mt-4 text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed">
                 A well-structured website or platform strengthens your brand, supports operations,
                 and creates long-term value for your business.
-              </p>
+              </h2>
 
-              <p className="mt-5 text-base sm:text-lg md:text-xl font-semibold text-slate-900">
+              <h2 className="mt-5 text-base sm:text-lg md:text-xl font-semibold text-slate-900">
                 We build systems designed for stability, clarity, and growth.
-              </p>
+              </h2>
             </div>
 
             {/* Quote on the right (smaller) */}
@@ -302,19 +302,19 @@ const HomePage: React.FC = () => {
       {/* Services Section */}
       <div className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
-          <h2
+          <h1
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-deep mb-2"
             data-aos="fade-down"
           >
             All-in-One Web Development for Entrepreneurs
-          </h2>
-          <p
+          </h1>
+          <h2
             className="font-tangerine text-center text-2xl sm:text-xl text-yellow-800 sm:text-yellow-600 italic mb-12"
             data-aos="fade-down"
           >
             Design <span className="text-blue-700">|</span> Develop{' '}
             <span className="text-blue-700">|</span> Deliver
-          </p>
+          </h2>
 
           <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" data-aos="fade-up">
             {services.map((service, index) => (
@@ -335,7 +335,9 @@ const HomePage: React.FC = () => {
                 <h4 className="font-semibold text-gray-800 mb-2 leading-snug">
                   {service.subtitle}
                 </h4>
-                <p className="text-gray-600 text-sm mb-4 leading-relaxed">{service.description}</p>
+                <h4 className="text-gray-600 text-sm mb-4 leading-relaxed">
+                  {service.description}
+                </h4>
                 <div className="text-xs bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] p-2 rounded-md">
                   {service.footer}
                 </div>
@@ -354,7 +356,7 @@ const HomePage: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {/* Left: big heading */}
             <div className="lg:col-span-2">
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
                 Why{' '}
                 <span
                   className="bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
@@ -365,12 +367,12 @@ const HomePage: React.FC = () => {
                 us
                 <br />
                 for your project?
-              </h2>
+              </h1>
 
-              <p className="mt-5 text-base sm:text-lg md:text-xl text-slate-800 leading-relaxed max-w-2xl">
+              <h2 className="mt-5 text-base sm:text-lg md:text-xl text-slate-800 leading-relaxed max-w-2xl">
                 From a high-quality business website to a scalable web platform — we deliver
                 structured development, clear communication, and production-ready results.
-              </p>
+              </h2>
 
               {/* Feature grid */}
               <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10">
@@ -387,9 +389,9 @@ const HomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">Clear scope & deliverables</h3>
-                    <p className="mt-2 text-slate-800 italic">
+                    <h4 className="mt-2 text-slate-800 italic">
                       Defined work, timelines and milestones — aligned before we start.
-                    </p>
+                    </h4>
                   </div>
                 </div>
 
@@ -406,9 +408,9 @@ const HomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">Communication that works</h3>
-                    <p className="mt-2 text-slate-800 italic">
+                    <h4 className="mt-2 text-slate-800 italic">
                       Fast responses, structured check-ins, one channel for all updates.
-                    </p>
+                    </h4>
                   </div>
                 </div>
 
@@ -425,9 +427,9 @@ const HomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">Full visibility of progress</h3>
-                    <p className="mt-2 text-slate-800 italic">
+                    <h4 className="mt-2 text-slate-800 italic">
                       You always know what’s done, what’s next, and what’s being shipped.
-                    </p>
+                    </h4>
                   </div>
                 </div>
 
@@ -444,9 +446,9 @@ const HomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">Smooth handover</h3>
-                    <p className="mt-2 text-slate-800 italic">
+                    <h4 className="mt-2 text-slate-800 italic">
                       Training + documentation so your team can manage confidently.
-                    </p>
+                    </h4>
                   </div>
                 </div>
 
@@ -463,9 +465,9 @@ const HomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">Post-launch support</h3>
-                    <p className="mt-2 text-slate-800 italic">
+                    <h4 className="mt-2 text-slate-800 italic">
                       Fixes and improvements to keep your product stable and fast.
-                    </p>
+                    </h4>
                   </div>
                 </div>
 
@@ -482,9 +484,9 @@ const HomePage: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold">Tailored — not templated</h3>
-                    <p className="mt-2 text-slate-800 italic">
+                    <h4 className="mt-2 text-slate-800 italic">
                       Built around your goals, requirements and real business needs.
-                    </p>
+                    </h4>
                   </div>
                 </div>
               </div>
@@ -534,12 +536,12 @@ const HomePage: React.FC = () => {
           >
             Web Development Methodology
           </h2>
-          <p
+          <h3
             className="font-tangerine text-center text-2xl sm:text-xl text-yellow-800 sm:text-yellow-600 italic mb-12 max-w-3xl mx-auto"
             data-aos="fade-in"
           >
             We focus on transparent processes and a structured approach...
-          </p>
+          </h3>
 
           <div className="flex flex-wrap justify-center items-start gap-10 sm:gap-12 relative">
             {steps.map((step, index) => (
@@ -628,12 +630,12 @@ const HomePage: React.FC = () => {
           >
             Technical Expertise
           </h2>
-          <p
+          <h3
             className="font-tangerine text-2xl sm:text-xl text-yellow-800 sm:text-yellow-600 italic max-w-4xl mx-auto mb-12"
             data-aos="fade-in"
           >
             We help businesses grow by delivering...
-          </p>
+          </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
             {blocks.map((block, i) => (
@@ -648,9 +650,9 @@ const HomePage: React.FC = () => {
                   <h3 className="font-bold text-deep mb-2 underline group-hover:text-accent transition duration-300">
                     {block.title}
                   </h3>
-                  <p className="text-gray-700 text-sm leading-relaxed transition duration-300 group-hover:text-gray-900">
+                  <h4 className="text-gray-700 text-sm leading-relaxed transition duration-300 group-hover:text-gray-900">
                     {block.tech}
-                  </p>
+                  </h4>
                 </div>
               </div>
             ))}

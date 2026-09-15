@@ -180,9 +180,9 @@ const Footer: React.FC = () => {
         style={{ backgroundImage: "url('/img/bannerhome/imgfooter.jpg')" }}
       >
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <h2 className="font-dmserif text-xl sm:text-2xl md:text-3xl font-bold mb-6 leading-snug">
+          <h1 className="font-dmserif text-xl sm:text-2xl md:text-3xl font-bold mb-6 leading-snug">
             Let’s build a website that works as hard as you do.
-          </h2>
+          </h1>
 
           <Link
             href="/contacts"
@@ -328,14 +328,14 @@ const Footer: React.FC = () => {
           </div>
 
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <h4 className="text-lg font-semibold mb-4 text-blue-950">
+            <h2 className="text-lg font-semibold mb-4 text-blue-950">
               WANT INSIGHTS IN YOUR INBOX?
-            </h4>
+            </h2>
 
-            <p className="font-tangerine text-lg sm:text-sm text-gray-800 sm:text-gray-500 mb-4 leading-relaxed">
+            <h3 className="font-tangerine text-lg sm:text-sm text-gray-800 sm:text-gray-500 mb-4 leading-relaxed">
               Looking to grow your business online? Leave your email — we’ll support you with expert
               tips and practical solutions.
-            </p>
+            </h3>
 
             <form
               onSubmit={handleSubmit}

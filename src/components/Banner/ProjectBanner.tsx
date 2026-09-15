@@ -15,10 +15,10 @@ const ProjectBanner = () => {
           <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide mb-2">
             Explore Our Portfolio
           </h1>
-          <p className="text-white text-sm sm:text-base md:text-lg font-light italic">
+          <h2 className="text-white text-sm sm:text-base md:text-lg font-light italic">
             Modern. Creative. Technically refined. Discover how we turn ideas into visually stunning
             and effective solutions.
-          </p>
+          </h2>
         </div>
       </div>
     </section>

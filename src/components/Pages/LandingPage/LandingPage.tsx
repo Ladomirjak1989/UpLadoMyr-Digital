@@ -368,18 +368,18 @@ function ServicePricingCarousel() {
                   </span>
                 </div>
 
-                <h3 className="mb-2 font-tangerine text-xl font-semibold text-blue-900">
+                <h2 className="mb-2 font-tangerine text-xl font-semibold text-blue-900">
                   {service.title}
-                </h3>
+                </h2>
 
-                <p className="mb-1 text-sm text-gray-700">Duration: {service.duration}</p>
-                <p className="mb-4 text-sm text-gray-600">{service.desc}</p>
+                <h3 className="mb-1 text-sm text-gray-700">Duration: {service.duration}</h3>
+                <h3 className="mb-4 text-sm text-gray-600">{service.desc}</h3>
               </div>
 
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-base text-blue-900">
+                <h3 className="text-base text-blue-900">
                   From <span className="text-yellow-700">{service.price}</span>
-                </p>
+                </h3>
 
                 <div className="flex items-center gap-1 text-sm text-blue-700 sm:hidden opacity-90">
                   <span>View details</span>
@@ -614,10 +614,10 @@ const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16" data-aos="fade-up">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div>
-              <p className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
+              <h1 className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
                 <span className="h-2 w-2 rounded-full bg-amber-500" />
                 Premium web development for entrepreneurs & SMEs
-              </p>
+              </h1>
 
               <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-slate-900">
                 Build a website or web application that{' '}
@@ -627,11 +627,11 @@ const LandingPage: React.FC = () => {
                 , scales, and looks premium everywhere.
               </h1>
 
-              <p className="mt-5 text-base sm:text-lg text-slate-700 leading-relaxed max-w-xl">
+              <h2 className="mt-5 text-base sm:text-lg text-slate-700 leading-relaxed max-w-xl">
                 We build structured digital systems: fast landing pages, business websites, and
                 scalable SaaS-style platforms with clean architecture, SEO-ready structure, and
                 conversion-focused UX.
-              </p>
+              </h2>
 
               <ul className="mt-6 space-y-2 text-slate-800">
                 <li className="flex gap-3">
@@ -654,25 +654,25 @@ const LandingPage: React.FC = () => {
 
               <SectionCTA contacts={contacts} />
 
-              <p className="mt-4 text-sm text-slate-600">
+              <h2 className="mt-4 text-sm text-slate-600">
                 SEO keywords: <span className="font-semibold">web development</span>,{' '}
                 <span className="font-semibold">Next.js website</span>,{' '}
                 <span className="font-semibold">business website</span>,{' '}
                 <span className="font-semibold">SaaS web app</span>,{' '}
                 <span className="font-semibold">SEO optimized website</span>.
-              </p>
+              </h2>
             </div>
 
             {/* Quote card */}
             <div className="relative" data-aos="fade-left">
               <div className="rounded-3xl bg-white/70 border border-amber-100 shadow-xl p-8 overflow-hidden backdrop-blur-sm">
                 <div className="absolute -top-20 -right-20 h-56 w-56 rounded-full bg-gradient-to-br from-amber-200/60 via-yellow-200/40 to-transparent blur-2xl" />
-                <p className="text-sm font-semibold text-slate-700">Business mindset</p>
+                <h3 className="text-sm font-semibold text-slate-700">Business mindset</h3>
 
-                <p className="mt-4 text-xl sm:text-2xl font-semibold leading-relaxed text-slate-900">
+                <h3 className="mt-4 text-xl sm:text-2xl font-semibold leading-relaxed text-slate-900">
                   “If your business is not on the internet, then your business will be out of
                   business.”
-                </p>
+                </h3>
                 <p className="mt-2 text-sm font-semibold text-slate-600">— Bill Gates</p>
 
                 <div className="mt-8 grid grid-cols-2 gap-4">
@@ -697,10 +697,10 @@ const LandingPage: React.FC = () => {
                 <div className="mt-8 rounded-2xl bg-gradient-to-br from-[#5a5a5a] via-[#ffd659] to-[#8c4a12] p-[1px]">
                   <div className="rounded-2xl bg-white p-5">
                     <p className="font-semibold text-slate-900">Straight talk:</p>
-                    <p className="text-slate-700 mt-2 leading-relaxed">
+                    <h2 className="text-slate-700 mt-2 leading-relaxed">
                       A cheap website is expensive later. We build the kind of foundation you won’t
                       regret when your traffic, content, and features grow.
-                    </p>
+                    </h2>
                   </div>
                 </div>
 
@@ -743,7 +743,7 @@ const LandingPage: React.FC = () => {
             <div className="flex items-center gap-3">
               <span className="h-3 w-3 rounded bg-pink-400" aria-hidden="true" />
               <p className="font-bold text-slate-900 tracking-wide">OUR CLIENTS</p>
-              <p className="text-sm text-slate-500">Selected collaborations & projects</p>
+              <h3 className="text-sm text-slate-500">Selected collaborations & projects</h3>
             </div>
 
             <div className="mt-6">
@@ -830,22 +830,22 @@ const LandingPage: React.FC = () => {
           {/* RIGHT: Content */}
           <div className="text-center lg:text-left">
             <div className="mb-6">
-              <p
+              <h2
                 className="text-lg sm:text-xl font-semibold tracking-wide
                 bg-gradient-to-br from-[#efc741] via-[#d89b2a] to-[#904e0d]
                 bg-clip-text text-transparent
                 drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)]"
               >
                 Bettina Ladomirjak
-              </p>
+              </h2>
 
-              <p
+              <h1
                 className="mt-1 text-sm sm:text-base font-medium
                 bg-gradient-to-br from-white/70 via-amber-200/70 to-white/60
                 bg-clip-text text-transparent opacity-90"
               >
                 Full-Stack Developer & Founder of UpLadoMyr Digital
-              </p>
+              </h1>
 
               <span
                 className="mt-4 block h-px w-44 sm:w-56 mx-auto lg:mx-0
@@ -859,10 +859,10 @@ const LandingPage: React.FC = () => {
               and purpose.
             </h2>
 
-            <p className="mt-5 text-base sm:text-lg text-white/80 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            <h2 className="mt-5 text-base sm:text-lg text-white/80 max-w-xl mx-auto lg:mx-0 leading-relaxed">
               Clean code, smart design, and solutions that actually work. From websites to full web
               applications, I help businesses turn ideas into results.
-            </p>
+            </h2>
 
             <div className="mt-8 flex flex-col items-center lg:items-start gap-3">
               <div className="flex flex-col sm:flex-row items-center gap-3">
@@ -933,11 +933,11 @@ const LandingPage: React.FC = () => {
                   your website or web application build
                 </h2>
 
-                <p className="mt-4 text-slate-700 text-base sm:text-lg leading-relaxed">
+                <h1 className="mt-4 text-slate-700 text-base sm:text-lg leading-relaxed">
                   Order a website or web application project and receive a{' '}
                   <span className="font-extrabold">10% discount</span>. Perfect time to launch
                   properly — fast, clean, and SEO-ready.
-                </p>
+                </h1>
 
                 <div className="mt-5 flex flex-wrap gap-3 text-sm">
                   <span className="rounded-full border border-slate-200 bg-white px-4 py-2 font-semibold text-slate-700">
@@ -953,13 +953,13 @@ const LandingPage: React.FC = () => {
               <div className="w-full lg:w-[420px]">
                 <div className="rounded-3xl bg-slate-900 p-7 shadow-xl">
                   <p className="text-white/80 text-sm font-semibold">Quick start</p>
-                  <p className="mt-2 text-white text-xl font-extrabold leading-snug">
+                  <h2 className="mt-2 text-white text-xl font-extrabold leading-snug">
                     Want the 10% discount?
-                  </p>
-                  <p className="mt-2 text-white/80 text-sm leading-relaxed">
+                  </h2>
+                  <h3 className="mt-2 text-white/80 text-sm leading-relaxed">
                     Send your idea + deadline and We’ll reply with a clear plan and estimate. No
                     obligation.
-                  </p>
+                  </h3>
 
                   <div className="mt-5 flex flex-col gap-3">
                     <Link
@@ -991,9 +991,9 @@ const LandingPage: React.FC = () => {
                       </Link>
                     </div>
 
-                    <p className="text-xs text-white/60">
+                    <h2 className="text-xs text-white/60">
                       *Discount applies for website orders from €2000.
-                    </p>
+                    </h2>
                   </div>
                 </div>
               </div>
@@ -1039,20 +1039,20 @@ const LandingPage: React.FC = () => {
       {/* ===== SERVICES GRID ===== */}
       <section className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
-          <h2
+          <h1
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-slate-900 mb-3"
             data-aos="fade-down"
           >
             All-in-One Web Development for Entrepreneurs
-          </h2>
+          </h1>
 
-          <p
+          <h2
             className="text-center text-base sm:text-lg text-slate-600 mb-10 max-w-3xl mx-auto"
             data-aos="fade-down"
           >
             High-performing business websites, landing pages that convert, and scalable web
             platforms.
-          </p>
+          </h2>
 
           <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" data-aos="fade-up">
             {services.map((service, index) => (
@@ -1085,13 +1085,13 @@ const LandingPage: React.FC = () => {
             className="mt-14 rounded-3xl border border-slate-200 bg-slate-50 p-8"
             data-aos="fade-up"
           >
-            <h3 className="text-2xl font-extrabold text-slate-900">
+            <h2 className="text-2xl font-extrabold text-slate-900">
               SEO-ready by structure, not by luck
-            </h3>
-            <p className="mt-3 text-slate-700 leading-relaxed max-w-4xl">
+            </h2>
+            <h2 className="mt-3 text-slate-700 leading-relaxed max-w-4xl">
               Semantic HTML, clean headings, fast loading, accessibility, and correct metadata. The
               “boring” foundation that still wins.
-            </p>
+            </h2>
             <p className="mt-3 text-slate-700 leading-relaxed max-w-4xl">
               Keywords: <span className="font-semibold">web developer</span>,{' '}
               <span className="font-semibold">Next.js development</span>,{' '}
@@ -1110,28 +1110,28 @@ const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             <div>
-              <p className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-extrabold text-slate-800 shadow-sm">
+              <h1 className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-extrabold text-slate-800 shadow-sm">
                 <span className="h-2 w-2 rounded-full bg-amber-500" />
                 For entrepreneurs & SMEs
-              </p>
+              </h1>
 
               <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight">
                 Why a website or web application is no longer optional, but a necessity and a
                 standard for business
               </h2>
 
-              <p className="mt-4 text-slate-700 text-base sm:text-lg leading-relaxed max-w-2xl">
+              <h2 className="mt-4 text-slate-700 text-base sm:text-lg leading-relaxed max-w-2xl">
                 Social media is rented land. Algorithms change, accounts get restricted, ads get
                 expensive. A website or web application is your permanent base — where trust, SEO
                 traffic, and conversions compound over time.
-              </p>
+              </h2>
 
               <div className="mt-7 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
                 <p className="font-extrabold text-slate-900">Old-school truth:</p>
-                <p className="mt-2 text-slate-700 leading-relaxed">
+                <h2 className="mt-2 text-slate-700 leading-relaxed">
                   Customers still Google you before they pay. If they can’t find a professional
                   website or web application, they assume you’re not serious.
-                </p>
+                </h2>
               </div>
 
               <div className="mt-4">
@@ -1146,44 +1146,44 @@ const LandingPage: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-                <p className="text-sm font-extrabold text-slate-900">Trust & credibility</p>
-                <p className="mt-2 text-sm text-slate-700 leading-relaxed">
+                <h2 className="text-sm font-extrabold text-slate-900">Trust & credibility</h2>
+                <h3 className="mt-2 text-sm text-slate-700 leading-relaxed">
                   A clean website or web application instantly builds trust and elevates your brand
                   — for clients worldwide and B2B decision-makers.
-                </p>
+                </h3>
               </div>
 
               <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-                <p className="text-sm font-extrabold text-slate-900">SEO = free traffic</p>
-                <p className="mt-2 text-sm text-slate-700 leading-relaxed">
+                <h2 className="text-sm font-extrabold text-slate-900">SEO = free traffic</h2>
+                <h3 className="mt-2 text-sm text-slate-700 leading-relaxed">
                   A proper structure + speed + metadata brings steady traffic without paying per
                   click forever.
-                </p>
+                </h3>
               </div>
 
               <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-                <p className="text-sm font-extrabold text-slate-900">Leads 24/7</p>
-                <p className="mt-2 text-sm text-slate-700 leading-relaxed">
+                <h2 className="text-sm font-extrabold text-slate-900">Leads 24/7</h2>
+                <h3 className="mt-2 text-sm text-slate-700 leading-relaxed">
                   Contact forms, WhatsApp, booking — your website or web application works while you
                   sleep.
-                </p>
+                </h3>
               </div>
 
               <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-                <p className="text-sm font-extrabold text-slate-900">Control & ownership</p>
-                <p className="mt-2 text-sm text-slate-700 leading-relaxed">
+                <h2 className="text-sm font-extrabold text-slate-900">Control & ownership</h2>
+                <h3 className="mt-2 text-sm text-slate-700 leading-relaxed">
                   You own your content, your design, your funnel — not a platform that can change
                   rules tomorrow.
-                </p>
+                </h3>
               </div>
 
               <div className="sm:col-span-2 rounded-3xl p-[1px] bg-gradient-to-br from-[#5a5a5a] via-[#ffd659] to-[#8c4a12]">
                 <div className="rounded-3xl bg-white p-6 shadow-sm">
-                  <p className="font-extrabold text-slate-900">Result:</p>
-                  <p className="mt-2 text-slate-700 leading-relaxed">
+                  <h2 className="font-extrabold text-slate-900">Result:</h2>
+                  <h3 className="mt-2 text-slate-700 leading-relaxed">
                     A website or a web application is a business asset — it increases trust,
                     generates leads, and supports growth without constant manual work.
-                  </p>
+                  </h3>
                 </div>
               </div>
             </div>
@@ -1199,7 +1199,7 @@ const LandingPage: React.FC = () => {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-16 py-12 md:py-16 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div className="lg:col-span-2">
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
                 Why{' '}
                 <span className="bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d] bg-clip-text text-transparent">
                   choose
@@ -1207,12 +1207,12 @@ const LandingPage: React.FC = () => {
                 us
                 <br />
                 for your project?
-              </h2>
+              </h1>
 
-              <p className="mt-5 text-base sm:text-lg md:text-xl text-slate-800 leading-relaxed max-w-2xl">
+              <h2 className="mt-5 text-base sm:text-lg md:text-xl text-slate-800 leading-relaxed max-w-2xl">
                 You get one responsible person, a clean delivery process, and a product that stays
                 stable after launch. No handovers. No chaos. No “we’ll fix it later”.
-              </p>
+              </h2>
 
               <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10">
                 <div className="flex items-start gap-5">
@@ -1222,10 +1222,10 @@ const LandingPage: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">Clear scope & deliverables</h3>
-                    <p className="mt-2 text-slate-800 italic">
+                    <h2 className="text-xl font-semibold">Clear scope & deliverables</h2>
+                    <h3 className="mt-2 text-slate-800 italic">
                       Defined milestones, timeline, and what you get — before work starts.
-                    </p>
+                    </h3>
                   </div>
                 </div>
 
@@ -1236,10 +1236,10 @@ const LandingPage: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">Communication that works</h3>
-                    <p className="mt-2 text-slate-800 italic">
+                    <h2 className="text-xl font-semibold">Communication that works</h2>
+                    <h3 className="mt-2 text-slate-800 italic">
                       Short feedback loops, fast replies, one place for all updates.
-                    </p>
+                    </h3>
                   </div>
                 </div>
 
@@ -1250,10 +1250,10 @@ const LandingPage: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">Full visibility of progress</h3>
-                    <p className="mt-2 text-slate-800 italic">
+                    <h2 className="text-xl font-semibold">Full visibility of progress</h2>
+                    <h3 className="mt-2 text-slate-800 italic">
                       You always know what’s done, what’s next, and what’s shipping.
-                    </p>
+                    </h3>
                   </div>
                 </div>
 
@@ -1264,10 +1264,10 @@ const LandingPage: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">Post-launch support</h3>
-                    <p className="mt-2 text-slate-800 italic">
+                    <h2 className="text-xl font-semibold">Post-launch support</h2>
+                    <h3 className="mt-2 text-slate-800 italic">
                       Fixes and improvements so your website stays fast and stable.
-                    </p>
+                    </h3>
                   </div>
                 </div>
 
@@ -1279,11 +1279,11 @@ const LandingPage: React.FC = () => {
                   </div>
 
                   <div>
-                    <h3 className="text-xl font-semibold">Fast launch, premium result</h3>
-                    <p className="mt-2 text-slate-800 italic">
+                    <h2 className="text-xl font-semibold">Fast launch, premium result</h2>
+                    <h3 className="mt-2 text-slate-800 italic">
                       Templates for speed + custom polish for uniqueness — you get both, done
                       properly.
-                    </p>
+                    </h3>
                   </div>
                 </div>
 
@@ -1294,10 +1294,10 @@ const LandingPage: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">Clean build quality</h3>
-                    <p className="mt-2 text-slate-800 italic">
+                    <h2 className="text-xl font-semibold">Clean build quality</h2>
+                    <h3 className="mt-2 text-slate-800 italic">
                       Maintainable code, SEO structure, performance-first delivery.
-                    </p>
+                    </h3>
                   </div>
                 </div>
               </div>
@@ -1328,11 +1328,11 @@ const LandingPage: React.FC = () => {
               </div>
 
               <div className="mt-8 rounded-3xl border border-slate-200 bg-white/70 p-6 shadow-sm">
-                <p className="font-extrabold text-slate-900">Quick start:</p>
-                <p className="mt-2 text-slate-700 text-sm leading-relaxed">
+                <h1 className="font-extrabold text-slate-900">Quick start:</h1>
+                <h2 className="mt-2 text-slate-700 text-sm leading-relaxed">
                   Send your idea + deadline + examples you like. We’ll reply with a clear plan and
                   next steps.
-                </p>
+                </h2>
 
                 <div className="mt-4">
                   <SectionCTA contacts={contacts} />
@@ -1352,9 +1352,9 @@ const LandingPage: React.FC = () => {
           >
             Service Packages
           </h2>
-          <p className="mt-4 text-center text-slate-700 max-w-3xl mx-auto" data-aos="fade-in">
+          <h3 className="mt-4 text-center text-slate-700 max-w-3xl mx-auto" data-aos="fade-in">
             Choose a clear package, get predictable delivery. No chaos, no vague promises.
-          </p>
+          </h3>
 
           <div className="mt-10" data-aos="fade-up">
             <ServicePricingCarousel />
@@ -1371,9 +1371,9 @@ const LandingPage: React.FC = () => {
           >
             Technical Expertise
           </h2>
-          <p className="text-slate-700 max-w-4xl mx-auto mb-12" data-aos="fade-in">
+          <h3 className="text-slate-700 max-w-4xl mx-auto mb-12" data-aos="fade-in">
             Modern stack, traditional discipline: clean structure and predictable logic.
-          </p>
+          </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
             {blocks.map((block, i) => (
@@ -1388,7 +1388,7 @@ const LandingPage: React.FC = () => {
                   <h3 className="font-extrabold text-slate-900 mb-2 underline group-hover:text-blue-800 transition">
                     {block.title}
                   </h3>
-                  <p className="text-gray-800 text-sm leading-relaxed">{block.tech}</p>
+                  <h4 className="text-gray-800 text-sm leading-relaxed">{block.tech}</h4>
                 </div>
               </div>
             ))}
@@ -1405,10 +1405,10 @@ const LandingPage: React.FC = () => {
           >
             Testimonials
           </h2>
-          <p className="mt-4 text-center text-slate-700 max-w-3xl mx-auto" data-aos="fade-in">
+          <h3 className="mt-4 text-center text-slate-700 max-w-3xl mx-auto" data-aos="fade-in">
             Real feedback from real projects. Consistency, speed, and structure — that’s what
             clients pay for.
-          </p>
+          </h3>
 
           <div className="mt-10" data-aos="fade-up">
             <Swiper
