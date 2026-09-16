@@ -33,6 +33,7 @@ import Image from 'next/image';
 import PaymentSteps from '../../PaymentSteps/PaymentSteps';
 import ServicePricing from '../../ServicesPricing/ServicesPricing';
 import Testimonials from '../../Testimonials/Testimonials';
+import IndustrySolutions from '../../IndustrySolutions/IndustrySolutions';
 
 interface Services {
   title: string;
@@ -347,6 +348,8 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
+      <IndustrySolutions />
+
       {/* ===== Why choose us ===== */}
       <section
         className="relative w-full overflow-hidden rounded-3xl bg-gradient-to-br from-[#fdfdfb] via-[#f6f2e3] to-[#c4bdb7] text-gray-950 mt-16"
@@ -517,7 +520,10 @@ const HomePage: React.FC = () => {
       </section>
 
       <PaymentSteps />
-      <ServicePricing />
+
+      <section id="prices" className="scroll-mt-28">
+        <ServicePricing />
+      </section>
 
       {/* Методологія */}
       <div className="relative w-full py-20 overflow-hidden">

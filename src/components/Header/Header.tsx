@@ -15,6 +15,7 @@ import { SERVICES } from '@/lib/services.config';
 const navbarConfig = [
   { link: '/', text: 'HOME' },
   { link: '/services', text: 'SERVICES' },
+  { link: '/#prices', text: 'PRICES' },
   { link: '/projects', text: 'PROJECTS' },
   { link: '/about', text: 'ABOUT US' },
   { link: '/blog', text: 'BLOG' },

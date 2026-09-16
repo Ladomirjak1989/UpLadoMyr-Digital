@@ -10,32 +10,94 @@ import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://upladomyr.com'),
+
   title: {
-    default: 'UpLadoMyr Digital',
+    default: 'UpLadoMyr Digital | Custom Web Development',
     template: '%s | UpLadoMyr Digital',
   },
-  description: 'Modern, fast websites for entrepreneurs and small businesses.',
+
+  description:
+    'UpLadoMyr Digital provides custom website development, web application development, full-stack development, Next.js, React, API integrations and website maintenance for businesses.',
+
+  applicationName: 'UpLadoMyr Digital',
+
+  keywords: [
+    'web development',
+    'custom web development',
+    'website development',
+    'web application development',
+    'custom website development',
+    'custom web applications',
+    'business website development',
+    'full stack web development',
+    'Next.js development',
+    'React development',
+    'Node.js development',
+    'API integration',
+    'SaaS development',
+    'responsive web design',
+    'website maintenance',
+  ],
+
+  authors: [
+    {
+      name: 'UpLadoMyr Digital',
+      url: 'https://upladomyr.com',
+    },
+  ],
+
+  creator: 'UpLadoMyr Digital',
+  publisher: 'UpLadoMyr Digital',
+
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+
   openGraph: {
-    title: 'UpLadoMyr Digital',
-    description: 'We create modern, fast and user-friendly websites for small businesses.',
+    title: 'UpLadoMyr Digital | Custom Web Development',
+
+    description:
+      'Custom websites, web applications, SaaS platforms and full-stack web development for businesses.',
+
     url: '/',
     siteName: 'UpLadoMyr Digital',
+
     type: 'website',
     locale: 'en_US',
+
     images: [
       {
         url: '/img/metaimage/meta-img1.avif',
         width: 1200,
         height: 630,
-        alt: 'UpLadoMyr Digital – modern business website on laptop and phone',
+        alt: 'UpLadoMyr Digital custom web development',
       },
     ],
   },
+
   twitter: {
     card: 'summary_large_image',
-    title: 'UpLadoMyr Digital',
-    description: 'Modern, fast websites for entrepreneurs and small businesses.',
+
+    title: 'UpLadoMyr Digital | Custom Web Development',
+
+    description: 'Custom website and web application development for businesses.',
+
     images: ['/img/metaimage/meta-img1.avif'],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
 };
 

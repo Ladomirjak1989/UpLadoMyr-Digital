@@ -3,7 +3,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import {
   FaArrowRight,
@@ -22,7 +21,6 @@ import {
 } from 'react-icons/fa';
 import { FiFileText, FiMessageCircle, FiCheckSquare, FiMonitor, FiStar } from 'react-icons/fi';
 
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { SiViber } from 'react-icons/si';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -30,13 +28,14 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import { motion } from 'framer-motion';
 import { track } from '@/lib/pixel';
 
 // якщо є — лишай. Якщо нема — заміниш на свій масив.А
-import { SERVICES } from '@/lib/services.config';
 import LandingBanner from '@/components/Banner/LandingBanner';
+import IndustrySolutions from '@/components/IndustrySolutions/IndustrySolutions';
+import ServicePricing from '../../ServicesPricing/ServicesPricing';
 
 interface ServiceItem {
   title: string;
@@ -80,51 +79,51 @@ type Testimonial = {
 const services: ServiceItem[] = [
   {
     icon: <FaPalette className="text-orange-500 text-3xl" />,
-    title: 'Experience Design',
-    subtitle: 'Designing intuitive, high-conversion user journeys',
+    title: 'Website Design & UX/UI',
+    subtitle: 'Professional website design focused on users, leads and conversions',
     description:
-      'We design clean, accessible interfaces that reduce friction, increase engagement, and make your brand feel premium on every device.',
-    footer: 'ADA/WCAG | Mobile-first | Conversion-focused UI',
+      'We create responsive, mobile-first website designs and intuitive UX/UI for business websites, landing pages and custom web applications. Every interface is built to improve usability, credibility and conversion rates.',
+    footer: 'Responsive Web Design | UX/UI Design | Mobile-First | Conversion-Focused',
   },
   {
     icon: <FaNetworkWired className="text-pink-500 text-3xl" />,
-    title: 'Architecture & Scalability',
-    subtitle: 'Systems that scale without rebuilding everything',
+    title: 'Web Application Architecture',
+    subtitle: 'Scalable architecture for custom web applications and SaaS platforms',
     description:
-      'We design robust architectures for growth — clean structure, predictable performance, and future-proof decisions from day one.',
-    footer: 'Scalable foundation | Security-first | Performance-driven',
+      'We plan scalable web application architecture for growing businesses, SaaS products and custom digital platforms, with performance, security and future development in mind.',
+    footer: 'Web App Architecture | SaaS Development | Scalability | Security',
   },
   {
     icon: <FaCode className="text-blue-500 text-3xl" />,
-    title: 'Full Stack Development',
-    subtitle: 'Production-ready builds — frontend + backend',
+    title: 'Full-Stack Web Development',
+    subtitle: 'Custom frontend and backend development for modern businesses',
     description:
-      'Next.js, TypeScript, APIs, databases — everything engineered as a system, not a “website that looks nice”.',
-    footer: 'Reliable codebase | Modern stack | Clean delivery',
+      'Full-stack web development using Next.js, React, TypeScript, Node.js, NestJS, APIs and databases. We build custom business websites and web applications that are fast, scalable and maintainable.',
+    footer: 'Next.js Development | React Development | Node.js | Full-Stack Development',
   },
   {
     icon: <FaLaptopCode className="text-purple-500 text-3xl" />,
     title: 'API Integration & Automation',
-    subtitle: 'Connect tools, reduce manual work, move faster',
+    subtitle: 'Custom API integrations and business process automation',
     description:
-      'We integrate APIs and automate workflows so your business runs smoother — fewer mistakes, faster processing, more clarity.',
-    footer: 'Automation | Real-time sync | Cleaner operations',
+      'We connect websites and web applications with third-party APIs, payment systems, CRM tools and external services while automating repetitive business processes and data flows.',
+    footer: 'API Integration | REST API | Payment Integration | Business Automation',
   },
   {
     icon: <FaBug className="text-red-500 text-3xl" />,
-    title: 'QA & Performance Testing',
-    subtitle: 'Fast, stable, and cross-browser reliable',
+    title: 'Website Performance & QA Testing',
+    subtitle: 'Fast, responsive and reliable websites across browsers and devices',
     description:
-      'We test responsiveness, real devices, performance bottlenecks — and fix issues before launch.',
-    footer: 'Cross-device testing | Speed audits | Fewer bugs',
+      'We test website speed, responsive layouts, functionality, accessibility and cross-browser compatibility to deliver reliable websites and web applications with strong technical performance.',
+    footer: 'Website Speed | Core Web Vitals | QA Testing | Cross-Browser Testing',
   },
   {
     icon: <FaWrench className="text-green-500 text-3xl" />,
-    title: 'Maintenance & Support',
-    subtitle: 'Post-launch support that protects your business',
+    title: 'Website Maintenance & Support',
+    subtitle: 'Ongoing website maintenance, updates and technical support',
     description:
-      'Monitoring, fixes, improvements — so it keeps working months later, not just on day one.',
-    footer: 'Monitoring | Updates | Fast response times',
+      'Keep your business website or web application secure, fast and reliable with ongoing website maintenance, bug fixes, updates, monitoring and post-launch development support.',
+    footer: 'Website Maintenance | Technical Support | Updates | Performance Monitoring',
   },
 ];
 
@@ -163,6 +162,41 @@ const faqData: FAQItem[] = [
     question: 'How long does a typical project take?',
     answer:
       'Most builds take 4–12 weeks depending on scope and feedback speed. We structure milestones so you always see progress.',
+  },
+  {
+    question: 'How much does custom website development cost?',
+    answer:
+      'The cost of custom website development depends on the number of pages, design requirements, functionality and integrations. After reviewing your requirements, we provide a clear project scope, estimated price and development timeline.',
+  },
+  {
+    question: 'Do you build websites for small businesses and entrepreneurs?',
+    answer:
+      'Yes. We build professional business websites for entrepreneurs, freelancers, SMEs and growing companies that need a strong online presence, lead generation and an SEO-ready website that can grow with the business.',
+  },
+  {
+    question: 'Do you develop custom web applications?',
+    answer:
+      'Yes. Our custom web application development can include dashboards, customer portals, booking systems, authentication, user roles, databases, APIs, payment integrations and other business-specific functionality.',
+  },
+  {
+    question: 'Do you build SEO-friendly websites?',
+    answer:
+      'Yes. We build SEO-ready websites with semantic HTML, logical heading structure, crawlable content, responsive design, optimized images, fast loading and metadata support.',
+  },
+  {
+    question: 'Can you redesign or improve an existing website?',
+    answer:
+      'Yes. We can redesign an existing business website and improve its UX/UI, responsiveness, speed, technical SEO foundation or outdated functionality using modern web technologies.',
+  },
+  {
+    question: 'Can you integrate payment systems, booking systems or third-party APIs?',
+    answer:
+      'Yes. We can integrate payment providers, booking systems, CRM tools, third-party services and REST APIs into websites and custom web applications. Integrations are selected and implemented according to your business requirements.',
+  },
+  {
+    question: 'Do you provide website maintenance and support after launch?',
+    answer:
+      'Yes. We provide post-launch website maintenance and technical support, including updates, bug fixes, performance improvements and further development as your business grows.',
   },
 ];
 
@@ -289,145 +323,6 @@ function SectionCTA({ contacts }: { contacts: Record<string, string> }) {
   );
 }
 
-function ServicePricingCarousel() {
-  const router = useRouter();
-
-  return (
-    <div className="relative">
-      <Swiper
-        slidesPerView={1}
-        spaceBetween={30}
-        pagination={{ clickable: true }}
-        breakpoints={{
-          640: { slidesPerView: 1 },
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-        }}
-        modules={[Pagination, Navigation]}
-        navigation={{
-          prevEl: '.service-swiper-prev',
-          nextEl: '.service-swiper-next',
-        }}
-        resistanceRatio={0}
-        longSwipes={false}
-        className="pb-12"
-      >
-        {SERVICES.map((service: any) => (
-          <SwiperSlide key={service.slug} className="h-auto">
-            <motion.div
-              role="button"
-              tabIndex={0}
-              data-aos="zoom-in"
-              whileHover={{ scale: 1.03 }}
-              className="group swiper-no-swiping relative flex h-full cursor-pointer flex-col justify-between
-                         overflow-hidden rounded-2xl border border-gray-300
-                         bg-gradient-to-br from-gray-100 to-gray-200
-                         p-6 shadow-xl focus:outline-none"
-              style={{ touchAction: 'manipulation' }}
-              onClick={() => {
-                // ✅ ADDED: service click tracking
-                track('ViewContent', {
-                  content_name: service.title,
-                  content_category: service.label,
-                  content_ids: [service.slug],
-                  content_type: 'service',
-                  source: 'landing_service_carousel',
-                });
-
-                router.push(service.link);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  track('ViewContent', {
-                    content_name: service.title,
-                    content_category: service.label,
-                    content_ids: [service.slug],
-                    content_type: 'service',
-                    source: 'landing_service_carousel_keyboard',
-                  });
-
-                  router.push(service.link);
-                }
-              }}
-            >
-              <div>
-                <div className="mb-4 flex items-center justify-between">
-                  <div className="rounded-full border border-gray-300 bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] p-2">
-                    <Image
-                      src={service.icon}
-                      alt={service.label}
-                      width={40}
-                      height={40}
-                      draggable={false}
-                    />
-                  </div>
-
-                  <span className="inline-block rounded-full border border-gray-300 bg-gradient-to-br from-[#f7f4ea] via-[#e5dfd0] to-[#d4bfaa] px-3 py-1 text-sm font-semibold">
-                    {service.label}
-                  </span>
-                </div>
-
-                <h2 className="mb-2 font-tangerine text-xl font-semibold text-blue-900">
-                  {service.title}
-                </h2>
-
-                <h3 className="mb-1 text-sm text-gray-700">Duration: {service.duration}</h3>
-                <h3 className="mb-4 text-sm text-gray-600">{service.desc}</h3>
-              </div>
-
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                <h3 className="text-base text-blue-900">
-                  From <span className="text-yellow-700">{service.price}</span>
-                </h3>
-
-                <div className="flex items-center gap-1 text-sm text-blue-700 sm:hidden opacity-90">
-                  <span>View details</span>
-                  <span aria-hidden className="inline-block animate-bounce">
-                    →
-                  </span>
-                </div>
-
-                <span
-                  className="pointer-events-none hidden sm:inline-flex sm:items-center sm:justify-center
-                             sm:rounded-lg sm:border sm:border-white
-                             sm:bg-blue-900 sm:px-4 sm:py-2
-                             sm:text-sm sm:text-yellow-500
-                             sm:transition-colors sm:duration-300
-                             sm:group-hover:bg-[#c7a23f]
-                             sm:group-hover:text-blue-900"
-                >
-                  Learn more
-                </span>
-              </div>
-            </motion.div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
-      <button
-        type="button"
-        className="service-swiper-prev absolute left-0 top-1/2 z-20 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2
-                   items-center justify-center rounded-full border border-slate-300 bg-white/95
-                   text-slate-400 shadow-md transition hover:text-slate-700"
-        aria-label="Previous service"
-      >
-        <FiChevronLeft />
-      </button>
-
-      <button
-        type="button"
-        className="service-swiper-next absolute right-0 top-1/2 z-20 flex h-10 w-10 translate-x-1/2 -translate-y-1/2
-                   items-center justify-center rounded-full border border-slate-300 bg-white/95
-                   text-slate-400 shadow-md transition hover:text-slate-700"
-        aria-label="Next service"
-      >
-        <FiChevronRight />
-      </button>
-    </div>
-  );
-}
-
 function CountUpNumber({
   value,
   suffix = '',
@@ -533,6 +428,7 @@ function StatsGrid({
 const LandingPage: React.FC = () => {
   const firedLandingView = useRef(false);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
   const toggleItem = (index: number) => setOpenIndex((prev) => (prev === index ? null : index));
 
   const contacts = useMemo(
@@ -614,24 +510,25 @@ const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16" data-aos="fade-up">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div>
-              <h1 className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
+              <p className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-white/70 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
                 <span className="h-2 w-2 rounded-full bg-amber-500" />
-                Premium web development for entrepreneurs & SMEs
-              </h1>
+                Custom Web Development for Entrepreneurs, SMEs & Growing Businesses
+              </p>
 
               <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-slate-900">
-                Build a website or web application that{' '}
+                Custom Website &{' '}
                 <span className="bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d] bg-clip-text text-transparent">
-                  sells
-                </span>
-                , scales, and looks premium everywhere.
+                  Web Application Development
+                </span>{' '}
+                for Businesses
               </h1>
 
-              <h2 className="mt-5 text-base sm:text-lg text-slate-700 leading-relaxed max-w-xl">
-                We build structured digital systems: fast landing pages, business websites, and
-                scalable SaaS-style platforms with clean architecture, SEO-ready structure, and
-                conversion-focused UX.
-              </h2>
+              <p className="mt-5 text-base sm:text-lg text-slate-700 leading-relaxed max-w-xl">
+                Professional web development services for businesses that need more than a basic
+                website. We build fast, responsive and SEO-ready business websites, landing pages,
+                custom web applications and scalable SaaS platforms using modern full-stack
+                technologies.
+              </p>
 
               <ul className="mt-6 space-y-2 text-slate-800">
                 <li className="flex gap-3">
@@ -653,14 +550,6 @@ const LandingPage: React.FC = () => {
               </ul>
 
               <SectionCTA contacts={contacts} />
-
-              <h2 className="mt-4 text-sm text-slate-600">
-                SEO keywords: <span className="font-semibold">web development</span>,{' '}
-                <span className="font-semibold">Next.js website</span>,{' '}
-                <span className="font-semibold">business website</span>,{' '}
-                <span className="font-semibold">SaaS web app</span>,{' '}
-                <span className="font-semibold">SEO optimized website</span>.
-              </h2>
             </div>
 
             {/* Quote card */}
@@ -734,61 +623,6 @@ const LandingPage: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {/* Logos Swiper */}
-          <div
-            className="mt-14 rounded-3xl bg-white border border-slate-200 shadow-sm px-5 sm:px-8 py-6"
-            data-aos="fade-up"
-          >
-            <div className="flex items-center gap-3">
-              <span className="h-3 w-3 rounded bg-pink-400" aria-hidden="true" />
-              <p className="font-bold text-slate-900 tracking-wide">OUR CLIENTS</p>
-              <h3 className="text-sm text-slate-500">Selected collaborations & projects</h3>
-            </div>
-
-            <div className="mt-6">
-              <Swiper
-                modules={[Autoplay]}
-                autoplay={{ delay: 1800, disableOnInteraction: false }}
-                loop
-                slidesPerView={2}
-                spaceBetween={14}
-                breakpoints={{
-                  480: { slidesPerView: 3, spaceBetween: 16 },
-                  768: { slidesPerView: 4, spaceBetween: 18 },
-                  1024: { slidesPerView: 5, spaceBetween: 22 },
-                }}
-              >
-                {clientLogos.map((logo, i) => (
-                  <SwiperSlide key={`${logo.name}-${i}`} className="h-auto">
-                    <div
-                      className={[
-                        // ✅ однакова геометрія
-                        'h-16 sm:h-18',
-                        'rounded-2xl border border-slate-200',
-                        'bg-gradient-to-br from-white to-slate-50',
-                        'shadow-sm hover:shadow transition',
-                        'px-3 py-2',
-                        'flex items-center justify-center',
-                      ].join(' ')}
-                    >
-                      <div className="min-w-0 text-center leading-tight">
-                        <div className="text-slate-900 font-extrabold tracking-wide text-sm sm:text-base truncate">
-                          {logo.name}
-                        </div>
-
-                        {logo.tagline ? (
-                          <div className="text-[11px] sm:text-xs text-slate-500 truncate">
-                            {logo.tagline}
-                          </div>
-                        ) : null}
-                      </div>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -839,13 +673,13 @@ const LandingPage: React.FC = () => {
                 Bettina Ladomirjak
               </h2>
 
-              <h1
+              <p
                 className="mt-1 text-sm sm:text-base font-medium
                 bg-gradient-to-br from-white/70 via-amber-200/70 to-white/60
                 bg-clip-text text-transparent opacity-90"
               >
-                Full-Stack Developer & Founder of UpLadoMyr Digital
-              </h1>
+                Full-Stack Web Developer & Founder of UpLadoMyr Digital
+              </p>
 
               <span
                 className="mt-4 block h-px w-44 sm:w-56 mx-auto lg:mx-0
@@ -909,7 +743,7 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ===== SPRING OFFER ===== */}
+      {/* ===== AUTUMN WEB DEVELOPMENT OFFER ===== */}
       <section className="relative overflow-hidden mt-8 py-16 sm:py-20 bg-white" data-aos="fade-up">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-emerald-200/40 blur-3xl" />
@@ -922,22 +756,22 @@ const LandingPage: React.FC = () => {
               <div className="max-w-2xl">
                 <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-white/70 px-4 py-2 text-sm font-extrabold text-slate-800 shadow-sm">
                   <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                  Spring promotion
+                  Autumn Web Development Offer
                 </div>
 
                 <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight">
-                  Spring offer:{' '}
+                  Autumn Special Offer:{' '}
                   <span className="bg-gradient-to-br from-emerald-600 via-amber-500 to-amber-700 bg-clip-text text-transparent">
                     10% OFF
                   </span>{' '}
                   your website or web application build
                 </h2>
 
-                <h1 className="mt-4 text-slate-700 text-base sm:text-lg leading-relaxed">
+                <p className="mt-4 text-slate-700 text-base sm:text-lg leading-relaxed">
                   Order a website or web application project and receive a{' '}
                   <span className="font-extrabold">10% discount</span>. Perfect time to launch
                   properly — fast, clean, and SEO-ready.
-                </h1>
+                </p>
 
                 <div className="mt-5 flex flex-wrap gap-3 text-sm">
                   <span className="rounded-full border border-slate-200 bg-white px-4 py-2 font-semibold text-slate-700">
@@ -969,7 +803,7 @@ const LandingPage: React.FC = () => {
                       px-6 py-3 font-extrabold text-slate-900 shadow-lg
                       hover:brightness-110 transition active:scale-[0.99]"
                     >
-                      Claim spring offer <FaArrowRight className="h-4 w-4" />
+                      Start Your Web Development Project <FaArrowRight className="h-4 w-4" />
                     </Link>
 
                     <div className="flex flex-wrap gap-2">
@@ -1039,19 +873,20 @@ const LandingPage: React.FC = () => {
       {/* ===== SERVICES GRID ===== */}
       <section className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
-          <h1
+          <h2
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-slate-900 mb-3"
             data-aos="fade-down"
           >
-            All-in-One Web Development for Entrepreneurs
-          </h1>
+            Custom Web Development Services for Businesses
+          </h2>
 
           <h2
             className="text-center text-base sm:text-lg text-slate-600 mb-10 max-w-3xl mx-auto"
             data-aos="fade-down"
           >
-            High-performing business websites, landing pages that convert, and scalable web
-            platforms.
+            Complete web development services — from professional business websites and
+            high-converting landing pages to custom web applications, SaaS platforms, API
+            integrations and ongoing website maintenance.
           </h2>
 
           <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" data-aos="fade-up">
@@ -1092,15 +927,127 @@ const LandingPage: React.FC = () => {
               Semantic HTML, clean headings, fast loading, accessibility, and correct metadata. The
               “boring” foundation that still wins.
             </h2>
-            <p className="mt-3 text-slate-700 leading-relaxed max-w-4xl">
-              Keywords: <span className="font-semibold">web developer</span>,{' '}
-              <span className="font-semibold">Next.js development</span>,{' '}
-              <span className="font-semibold">business website</span>,{' '}
-              <span className="font-semibold">landing page design</span>,{' '}
-              <span className="font-semibold">SaaS web app</span>.
-            </p>
 
             <SectionCTA contacts={contacts} />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-slate-50 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-sm font-bold uppercase tracking-wider text-amber-700">
+              Custom Digital Solutions
+            </p>
+
+            <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900">
+              Websites & Web Applications We Build
+            </h2>
+
+            <p className="mt-4 text-base sm:text-lg text-slate-700 leading-relaxed">
+              From professional business websites to complex custom web applications, we develop
+              digital solutions around your business goals, workflows and customers.
+            </p>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                title: 'Business Websites',
+                text: 'Professional business website development for companies, entrepreneurs and SMEs that need credibility, Google visibility and a strong online presence.',
+              },
+              {
+                title: 'Landing Pages',
+                text: 'High-converting landing page development for services, advertising campaigns, product launches and lead generation.',
+              },
+              {
+                title: 'Custom Web Applications',
+                text: 'Custom web application development for businesses that need functionality beyond a standard website.',
+              },
+              {
+                title: 'SaaS Platforms',
+                text: 'Scalable SaaS development with authentication, user accounts, dashboards, subscriptions, payments and custom business logic.',
+              },
+              {
+                title: 'Booking & Reservation Systems',
+                text: 'Custom online booking and reservation systems with availability, customer management, payments and automated workflows.',
+              },
+              {
+                title: 'Customer Portals & Dashboards',
+                text: 'Secure customer portals, admin dashboards and internal business tools with user roles, databases and API integrations.',
+              },
+            ].map((item) => (
+              <article
+                key={item.title}
+                className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <h3 className="text-xl font-extrabold text-slate-900">{item.title}</h3>
+
+                <p className="mt-3 text-sm sm:text-base text-slate-700 leading-relaxed">
+                  {item.text}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-wider text-amber-700">
+              From Idea to Launch
+            </p>
+
+            <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900">
+              Our Website & Web Application Development Process
+            </h2>
+
+            <p className="mt-4 text-slate-700 text-base sm:text-lg leading-relaxed">
+              A clear development process keeps your project predictable from the first conversation
+              to launch and post-launch support.
+            </p>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            {[
+              {
+                number: '01',
+                title: 'Discovery',
+                text: 'We discuss your business, goals, target audience, required functionality and project requirements.',
+              },
+              {
+                number: '02',
+                title: 'Planning',
+                text: 'We define the website structure, features, technology stack, development scope and milestones.',
+              },
+              {
+                number: '03',
+                title: 'Design & Development',
+                text: 'We create the responsive interface and develop the frontend, backend, APIs and database functionality.',
+              },
+              {
+                number: '04',
+                title: 'Testing & Optimization',
+                text: 'We test functionality, responsive design, website performance, usability and technical quality.',
+              },
+              {
+                number: '05',
+                title: 'Launch & Support',
+                text: 'Your website or web application is deployed and can continue with maintenance, updates and future development.',
+              },
+            ].map((step) => (
+              <article
+                key={step.number}
+                className="rounded-3xl border border-slate-200 bg-slate-50 p-6"
+              >
+                <span className="text-sm font-extrabold text-amber-700">{step.number}</span>
+
+                <h3 className="mt-3 text-lg font-extrabold text-slate-900">{step.title}</h3>
+
+                <p className="mt-3 text-sm text-slate-700 leading-relaxed">{step.text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -1110,14 +1057,13 @@ const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             <div>
-              <h1 className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-extrabold text-slate-800 shadow-sm">
+              <p className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-extrabold text-slate-800 shadow-sm">
                 <span className="h-2 w-2 rounded-full bg-amber-500" />
-                For entrepreneurs & SMEs
-              </h1>
+                Websites & Web Applications for Entrepreneurs and SMEs
+              </p>
 
               <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight">
-                Why a website or web application is no longer optional, but a necessity and a
-                standard for business
+                Why Your Business Needs a Professional Website or Custom Web Application
               </h2>
 
               <h2 className="mt-4 text-slate-700 text-base sm:text-lg leading-relaxed max-w-2xl">
@@ -1199,15 +1145,15 @@ const LandingPage: React.FC = () => {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-16 py-12 md:py-16 lg:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div className="lg:col-span-2">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
                 Why{' '}
                 <span className="bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d] bg-clip-text text-transparent">
                   choose
                 </span>{' '}
                 us
                 <br />
-                for your project?
-              </h1>
+                for Your Web Development Project?
+              </h2>
 
               <h2 className="mt-5 text-base sm:text-lg md:text-xl text-slate-800 leading-relaxed max-w-2xl">
                 You get one responsible person, a clean delivery process, and a product that stays
@@ -1328,7 +1274,7 @@ const LandingPage: React.FC = () => {
               </div>
 
               <div className="mt-8 rounded-3xl border border-slate-200 bg-white/70 p-6 shadow-sm">
-                <h1 className="font-extrabold text-slate-900">Quick start:</h1>
+                <p className="font-extrabold text-slate-900">Start Your Web Development Project</p>
                 <h2 className="mt-2 text-slate-700 text-sm leading-relaxed">
                   Send your idea + deadline + examples you like. We’ll reply with a clear plan and
                   next steps.
@@ -1350,17 +1296,19 @@ const LandingPage: React.FC = () => {
             className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center text-slate-900"
             data-aos="fade-down"
           >
-            Service Packages
+            Website & Web Application Development Packages
           </h2>
           <h3 className="mt-4 text-center text-slate-700 max-w-3xl mx-auto" data-aos="fade-in">
             Choose a clear package, get predictable delivery. No chaos, no vague promises.
           </h3>
 
           <div className="mt-10" data-aos="fade-up">
-            <ServicePricingCarousel />
+            <ServicePricing />
           </div>
         </div>
       </section>
+
+      <IndustrySolutions />
 
       {/* ===== TECH EXPERTISE ===== */}
       <section className="bg-white py-20">
@@ -1369,7 +1317,7 @@ const LandingPage: React.FC = () => {
             className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-4"
             data-aos="fade-down"
           >
-            Technical Expertise
+            Web Development Technologies We Use
           </h2>
           <h3 className="text-slate-700 max-w-4xl mx-auto mb-12" data-aos="fade-in">
             Modern stack, traditional discipline: clean structure and predictable logic.
@@ -1403,7 +1351,7 @@ const LandingPage: React.FC = () => {
             className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center text-slate-900"
             data-aos="fade-down"
           >
-            Testimonials
+            Client Reviews for Our Web Development Projects
           </h2>
           <h3 className="mt-4 text-center text-slate-700 max-w-3xl mx-auto" data-aos="fade-in">
             Real feedback from real projects. Consistency, speed, and structure — that’s what
@@ -1448,7 +1396,7 @@ const LandingPage: React.FC = () => {
       <section className="bg-gradient-to-t from-white to-gray-200 py-20" data-aos="fade-up">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-16">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-slate-900 mb-12">
-            Frequently Asked Questions
+            Web Development Frequently Asked Questions
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -1463,7 +1411,7 @@ const LandingPage: React.FC = () => {
             </div>
 
             <div className="space-y-5">
-              {faqData.slice(0, 5).map((item, idx) => {
+              {faqData.slice(0, showAllFaqs ? faqData.length : 5).map((item, idx) => {
                 const isOpen = openIndex === idx;
 
                 return (
@@ -1548,6 +1496,51 @@ const LandingPage: React.FC = () => {
                 );
               })}
 
+              {faqData.length > 5 && (
+                <div className="flex justify-center pt-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowAllFaqs((prev) => !prev);
+
+                      if (showAllFaqs && openIndex !== null && openIndex >= 5) {
+                        setOpenIndex(null);
+                      }
+                    }}
+                    aria-expanded={showAllFaqs}
+                    className="
+        inline-flex items-center justify-center gap-2
+        rounded-full border border-slate-300 bg-white
+        px-6 py-3
+        text-sm sm:text-base font-bold text-slate-800
+        shadow-sm
+        transition-all duration-300
+        hover:-translate-y-0.5
+        hover:border-amber-400
+        hover:bg-amber-50
+        hover:text-amber-800
+        hover:shadow-md
+        focus:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-amber-500
+        focus-visible:ring-offset-2
+      "
+                  >
+                    {showAllFaqs ? (
+                      <>
+                        Show Fewer Questions
+                        <FaMinus className="h-3.5 w-3.5" />
+                      </>
+                    ) : (
+                      <>
+                        Show More Questions
+                        <FaPlus className="h-3.5 w-3.5" />
+                      </>
+                    )}
+                  </button>
+                </div>
+              )}
+
               <div className="mt-10">
                 <div className="relative rounded-3xl p-[1px] bg-gradient-to-br from-[#5a5a5a] via-[#ffd659] to-[#8c4a12]">
                   <div className="rounded-3xl bg-white px-6 py-6 text-center shadow-md">
@@ -1569,6 +1562,63 @@ const LandingPage: React.FC = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Logos Swiper */}
+      <section className=" py-5">
+        <div
+          className="mt-14 rounded-3xl bg-white border border-slate-200 shadow-sm px-5 sm:px-8 py-6"
+          data-aos="fade-up"
+        >
+          <div className="flex items-center gap-3">
+            <span className="h-3 w-3 rounded bg-pink-400" aria-hidden="true" />
+            <p className="font-bold text-slate-900 tracking-wide">OUR CLIENTS</p>
+            <h3 className="text-sm text-slate-500">Selected collaborations & projects</h3>
+          </div>
+
+          <div className="mt-6">
+            <Swiper
+              modules={[Autoplay]}
+              autoplay={{ delay: 1800, disableOnInteraction: false }}
+              loop
+              slidesPerView={2}
+              spaceBetween={14}
+              breakpoints={{
+                480: { slidesPerView: 3, spaceBetween: 16 },
+                768: { slidesPerView: 4, spaceBetween: 18 },
+                1024: { slidesPerView: 5, spaceBetween: 22 },
+              }}
+            >
+              {clientLogos.map((logo, i) => (
+                <SwiperSlide key={`${logo.name}-${i}`} className="h-auto">
+                  <div
+                    className={[
+                      // ✅ однакова геометрія
+                      'h-16 sm:h-18',
+                      'rounded-2xl border border-slate-200',
+                      'bg-gradient-to-br from-white to-slate-50',
+                      'shadow-sm hover:shadow transition',
+                      'px-3 py-2',
+                      'flex items-center justify-center',
+                    ].join(' ')}
+                  >
+                    <div className="min-w-0 text-center leading-tight">
+                      <div className="text-slate-900 font-extrabold tracking-wide text-sm sm:text-base truncate">
+                        {logo.name}
+                      </div>
+
+                      {logo.tagline ? (
+                        <div className="text-[11px] sm:text-xs text-slate-500 truncate">
+                          {logo.tagline}
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
       </section>
