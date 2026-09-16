@@ -515,7 +515,7 @@ async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
 
             <div className="mt-4 space-y-1 text-sm text-slate-100/90">
               <p>Duration: {service.duration}</p>
-              <p>{service.desc}</p>
+              {/* <p>{service.desc}</p> */}
             </div>
 
             {/* ✅✅✅ CHANGED: CTA Link -> TrackedLink */}
