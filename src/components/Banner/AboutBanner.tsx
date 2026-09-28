@@ -98,7 +98,7 @@ const AboutBanner = () => {
           lg:px-12
         "
       >
-        <div className="max-w-3xl">
+        <div className="w-full max-w-4xl">
           {/* Eyebrow */}
           <div className="flex items-center gap-3">
             <span className="h-[2px] w-9 bg-amber-400" />
@@ -151,7 +151,7 @@ const AboutBanner = () => {
           <p
             className="
               mt-6
-              max-w-2xl
+              max-w-3xl
               text-base
               leading-8
               text-white/70
@@ -166,7 +166,7 @@ const AboutBanner = () => {
           <p
             className="
               mt-3
-              max-w-2xl
+              max-w-3xl
               text-sm
               leading-7
               text-white/55
@@ -182,46 +182,54 @@ const AboutBanner = () => {
 
           <div
             className="
-              mt-7
-              flex
-              flex-wrap
-              gap-x-6
-              gap-y-3
-            "
+    mt-7
+    grid
+    grid-cols-1
+    gap-3
+    sm:grid-cols-2
+    lg:grid-cols-3
+    lg:gap-5
+  "
           >
             {['Custom Development', 'Flexible Solutions', 'Clear Communication'].map((item) => (
               <div
                 key={item}
                 className="
-                  flex
-                  items-center
-                  gap-2
-                  text-xs
-                  font-semibold
-                  text-white/70
-                  sm:text-sm
-                "
+        grid
+        min-w-0
+        grid-cols-[20px_minmax(0,1fr)]
+        items-start
+        gap-2
+        text-xs
+        font-semibold
+        leading-5
+        text-white/70
+        sm:text-sm
+      "
               >
                 <span
                   className="
-                    flex
-                    h-5
-                    w-5
-                    items-center
-                    justify-center
-                    rounded-full
-                    bg-amber-400/10
-                    text-[10px]
-                    font-bold
-                    text-amber-300
-                    ring-1
-                    ring-amber-300/20
-                  "
+          mt-0.5
+          flex
+          h-5
+          w-5
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+          bg-amber-400/10
+          text-[10px]
+          font-bold
+          text-amber-300
+          ring-1
+          ring-amber-300/20
+        "
+                  aria-hidden="true"
                 >
                   ✓
                 </span>
 
-                {item}
+                <span className="min-w-0 break-words">{item}</span>
               </div>
             ))}
           </div>

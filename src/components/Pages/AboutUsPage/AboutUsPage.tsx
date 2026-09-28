@@ -224,13 +224,13 @@ const AboutPage: React.FC = () => {
             {/* Highlights */}
             <div
               className="
-          mt-7
-          grid
-          grid-cols-1
-          sm:grid-cols-2
-          gap-x-7
-          gap-y-3
-        "
+    mt-7
+    grid
+    grid-cols-1
+    gap-x-7
+    gap-y-4
+    sm:grid-cols-2
+  "
             >
               {[
                 'Custom-built solutions',
@@ -241,33 +241,38 @@ const AboutPage: React.FC = () => {
                 <div
                   key={item}
                   className="
-              flex
-              items-center
-              gap-3
-              text-sm
-              font-semibold
-              text-slate-700
-            "
+        grid
+        min-w-0
+        grid-cols-[20px_minmax(0,1fr)]
+        items-start
+        gap-3
+        text-sm
+        font-semibold
+        leading-5
+        text-slate-700
+      "
                 >
                   <span
                     className="
-                flex
-                h-5
-                w-5
-                shrink-0
-                items-center
-                justify-center
-                rounded-full
-                bg-blue-950
-                text-[10px]
-                font-bold
-                text-amber-400
-              "
+          mt-0.5
+          flex
+          h-5
+          w-5
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+          bg-blue-950
+          text-[10px]
+          font-bold
+          text-amber-400
+        "
+                    aria-hidden="true"
                   >
                     ✓
                   </span>
 
-                  {item}
+                  <span className="min-w-0 break-words">{item}</span>
                 </div>
               ))}
             </div>
