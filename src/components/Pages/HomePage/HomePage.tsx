@@ -644,12 +644,12 @@ const HomePage: React.FC = () => {
           <div
             className="
         mt-10
-        grid
-        grid-cols-1
-        lg:grid-cols-[1.55fr_0.75fr]
-        gap-10
-        lg:gap-14
-        items-start
+    grid
+    grid-cols-1
+    lg:grid-cols-[minmax(0,1.4fr)_minmax(360px,0.8fr)]
+    gap-10
+    lg:gap-14
+    items-start
       "
           >
             {/* ================= BENEFIT CARDS ================= */}
@@ -855,35 +855,39 @@ const HomePage: React.FC = () => {
                       <div
                         key={item}
                         className="
-                    flex
-                    items-center
-                    gap-3
-                    text-sm
-                    font-medium
-                    text-white/80
-                  "
+        grid
+        grid-cols-[20px_minmax(0,1fr)]
+        items-start
+        gap-3
+        text-sm
+        font-medium
+        leading-6
+        text-white/80
+      "
                       >
                         <span
                           className="
-                      flex
-                      h-5
-                      w-5
-                      shrink-0
-                      items-center
-                      justify-center
-                      rounded-full
-                      bg-amber-400/15
-                      text-[10px]
-                      font-bold
-                      text-amber-300
-                      ring-1
-                      ring-amber-300/20
-                    "
+          mt-0.5
+          flex
+          h-5
+          w-5
+          shrink-0
+          items-center
+          justify-center
+          rounded-full
+          bg-amber-400/15
+          text-[10px]
+          font-bold
+          text-amber-300
+          ring-1
+          ring-amber-300/20
+        "
+                          aria-hidden="true"
                         >
                           ✓
                         </span>
 
-                        {item}
+                        <span className="min-w-0 break-words">{item}</span>
                       </div>
                     ))}
                   </div>
