@@ -53,64 +53,420 @@ const AboutPage: React.FC = () => {
       <FounderBanner />
 
       {/* Hero Section */}
-      <section className="grid md:grid-cols-2 gap-10 items-center mb-16 mt-10">
-        <div data-aos="fade-right">
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-950 mb-4">
-            Modern Websites Tailored to Your Business.
-          </h1>
-          <h2 className="text-lg text-gray-700">
-            We build modern, high-performance websites and scalable digital platforms for
-            freelancers, small businesses, and established companies. Whether leveraging proven
-            frameworks or developing fully custom solutions, we focus on performance, security, and
-            long-term scalability — ensuring your digital presence grows with your business.
-          </h2>
+      <section
+        className="
+    relative
+    overflow-hidden
+    mt-1
+    mb-16
+    rounded-[12px]
+    border
+    border-amber-200/60
+    bg-gradient-to-br
+    from-white
+    via-blue-50/60
+    to-amber-50
+    px-5
+    sm:px-8
+    lg:px-12
+    py-10
+    sm:py-14
+    lg:py-16
+    shadow-[0_20px_60px_rgba(15,23,42,0.08)]
+  "
+      >
+        {/* Decorative background */}
+        <div
+          className="
+      pointer-events-none
+      absolute
+      -top-32
+      -right-32
+      h-80
+      w-80
+      rounded-full
+      bg-amber-300/20
+      blur-3xl
+    "
+          aria-hidden="true"
+        />
 
-          <Link
-            href="/contacts"
-            /* ✅✅✅ ADDED START: CTA click -> Contact event */
-            onClick={() =>
-              track('Contact', {
-                source: 'about_page',
-                cta: 'lets_work_together',
-                page: 'About',
-              })
-            }
-            /* ✅✅✅ ADDED END */
-            className=" mt-4 group relative inline-flex items-center gap-2 px-9 py-4 border-4 border-transparent text-base font-semibold rounded-full text-white bg-blue-900 shadow-[0_0_0_2px_#c7a23f] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-xl hover:shadow-[0_0_0_12px_transparent] hover:text-neutral-900 active:scale-95"
-          >
-            {/* Circle animation */}
-            <span className="absolute top-1/2 left-1/2 w-5 h-5 bg-[#c7a23f] rounded-full opacity-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-[220px] group-hover:h-[220px] group-hover:opacity-100 transform -translate-x-1/2 -translate-y-1/2" />
+        <div
+          className="
+      pointer-events-none
+      absolute
+      -bottom-32
+      -left-32
+      h-80
+      w-80
+      rounded-full
+      bg-blue-900/10
+      blur-3xl
+    "
+          aria-hidden="true"
+        />
 
-            {/* Text */}
-            <span className="relative z-10 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-3">
-              Let’s Work Together
-            </span>
+        <div className="relative z-10 grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+          {/* ================= LEFT CONTENT ================= */}
+          <div data-aos="fade-right">
+            {/* Eyebrow */}
+            <div className="flex items-center gap-3 mb-5">
+              <span className="h-[2px] w-9 bg-amber-500" />
 
-            {/* Arrow out */}
-            <svg
-              className="absolute right-4 w-6 z-10 fill-[#c7a23f] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:right-[-25%] group-hover:fill-neutral-900"
-              viewBox="0 0 24 24"
+              <p
+                className="
+            text-xs
+            sm:text-sm
+            font-bold
+            uppercase
+            tracking-[0.18em]
+            text-amber-700
+          "
+              >
+                Custom Web Development
+              </p>
+            </div>
+
+            {/* Main H1 */}
+            <h1
+              className="
+          max-w-3xl
+          text-3xl
+          sm:text-4xl
+          lg:text-5xl
+          xl:text-[3.4rem]
+          font-bold
+          leading-[1.08]
+          tracking-tight
+          text-blue-950
+        "
             >
-              <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
-            </svg>
+              Modern Websites & Web Applications Built for Your Business
+            </h1>
 
-            {/* Arrow in */}
-            <svg
-              className="absolute left-[-25%] w-6 z-10 fill-[#c7a23f] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:left-4 group-hover:fill-neutral-900"
-              viewBox="0 0 24 24"
+            {/* Main description */}
+            <p
+              className="
+          mt-6
+          max-w-2xl
+          text-base
+          sm:text-lg
+          leading-8
+          text-slate-700
+        "
             >
-              <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
-            </svg>
-          </Link>
-        </div>
-        <div data-aos="fade-left">
-          <Image
-            src="/img/bannerabout/about-img.avif"
-            alt="Hero image"
-            width={500}
-            height={400}
-            className="rounded-2xl shadow-lg w-full object-cover"
-          />
+              UpLadoMyr Digital designs and develops modern websites, custom web applications,
+              e-commerce solutions, SaaS platforms, MVPs, and digital business systems for companies
+              that need more than just an online presence.
+            </p>
+
+            <p
+              className="
+          mt-4
+          max-w-2xl
+          text-base
+          leading-7
+          text-slate-600
+        "
+            >
+              We combine thoughtful design with reliable development to create fast, secure,
+              responsive, and scalable digital solutions tailored to your business goals, customers,
+              and day-to-day operations.
+            </p>
+
+            {/* Worldwide */}
+            <div
+              className="
+          mt-7
+          flex
+          items-start
+          gap-4
+          rounded-2xl
+          border
+          border-amber-200
+          bg-white/70
+          px-5
+          py-4
+          shadow-sm
+          backdrop-blur-sm
+        "
+            >
+              <div
+                className="
+            mt-0.5
+            flex
+            h-10
+            w-10
+            shrink-0
+            items-center
+            justify-center
+            rounded-full
+            bg-blue-950
+            text-amber-400
+          "
+                aria-hidden="true"
+              >
+                🌍
+              </div>
+
+              <div>
+                <h2 className="text-sm sm:text-base font-bold text-blue-950">
+                  Working with clients worldwide
+                </h2>
+
+                <p className="mt-1 text-sm leading-6 text-slate-600">
+                  We collaborate remotely with startups, entrepreneurs, small businesses, and
+                  established companies across the United States, Europe, and worldwide.
+                </p>
+              </div>
+            </div>
+
+            {/* Highlights */}
+            <div
+              className="
+          mt-7
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          gap-x-7
+          gap-y-3
+        "
+            >
+              {[
+                'Custom-built solutions',
+                'Responsive & mobile-first',
+                'Performance & security',
+                'Scalable architecture',
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="
+              flex
+              items-center
+              gap-3
+              text-sm
+              font-semibold
+              text-slate-700
+            "
+                >
+                  <span
+                    className="
+                flex
+                h-5
+                w-5
+                shrink-0
+                items-center
+                justify-center
+                rounded-full
+                bg-blue-950
+                text-[10px]
+                font-bold
+                text-amber-400
+              "
+                  >
+                    ✓
+                  </span>
+
+                  {item}
+                </div>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <Link
+              href="/contacts"
+              onClick={() =>
+                track('Contact', {
+                  source: 'about_page',
+                  cta: 'lets_work_together',
+                  page: 'About',
+                })
+              }
+              className="
+          mt-8
+          group
+          relative
+          inline-flex
+          items-center
+          gap-2
+          px-9
+          py-4
+          border-4
+          border-transparent
+          text-base
+          font-semibold
+          rounded-full
+          text-white
+          bg-blue-900
+          shadow-[0_0_0_2px_#c7a23f]
+          overflow-hidden
+          transition-all
+          duration-700
+          ease-[cubic-bezier(0.23,1,0.32,1)]
+          hover:rounded-xl
+          hover:shadow-[0_0_0_12px_transparent]
+          hover:text-neutral-900
+          active:scale-95
+        "
+            >
+              {/* Circle animation */}
+              <span
+                className="
+            absolute
+            top-1/2
+            left-1/2
+            w-5
+            h-5
+            bg-[#c7a23f]
+            rounded-full
+            opacity-0
+            transition-all
+            duration-700
+            ease-[cubic-bezier(0.23,1,0.32,1)]
+            group-hover:w-[240px]
+            group-hover:h-[240px]
+            group-hover:opacity-100
+            transform
+            -translate-x-1/2
+            -translate-y-1/2
+          "
+              />
+
+              <span
+                className="
+            relative
+            z-10
+            transition-transform
+            duration-700
+            ease-[cubic-bezier(0.23,1,0.32,1)]
+            group-hover:translate-x-3
+          "
+              >
+                Let’s Work Together
+              </span>
+
+              {/* Arrow out */}
+              <svg
+                className="
+            absolute
+            right-4
+            w-6
+            z-10
+            fill-[#c7a23f]
+            transition-all
+            duration-700
+            ease-[cubic-bezier(0.23,1,0.32,1)]
+            group-hover:right-[-25%]
+            group-hover:fill-neutral-900
+          "
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
+              </svg>
+
+              {/* Arrow in */}
+              <svg
+                className="
+            absolute
+            left-[-25%]
+            w-6
+            z-10
+            fill-[#c7a23f]
+            transition-all
+            duration-700
+            ease-[cubic-bezier(0.23,1,0.32,1)]
+            group-hover:left-4
+            group-hover:fill-neutral-900
+          "
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
+              </svg>
+            </Link>
+          </div>
+
+          {/* ================= RIGHT IMAGE ================= */}
+          <div data-aos="fade-left" className="relative">
+            {/* Image glow */}
+            <div
+              className="
+          absolute
+          -inset-4
+          rounded-[32px]
+          bg-gradient-to-br
+          from-amber-300/30
+          via-transparent
+          to-blue-900/20
+          blur-2xl
+        "
+              aria-hidden="true"
+            />
+
+            <div
+              className="
+          relative
+          overflow-hidden
+          rounded-[28px]
+          border
+          border-amber-200/70
+          bg-white
+          p-2
+          shadow-[0_24px_60px_rgba(15,23,42,0.16)]
+        "
+            >
+              <Image
+                src="/img/bannerabout/about-img.avif"
+                alt="Custom website and web application development by UpLadoMyr Digital"
+                width={700}
+                height={560}
+                priority
+                className="
+            w-full
+            min-h-[360px]
+            lg:min-h-[480px]
+            object-cover
+            rounded-[22px]
+          "
+              />
+            </div>
+
+            {/* Small floating card */}
+            <div
+              className="
+          absolute
+          -bottom-5
+          left-5
+          sm:left-8
+          max-w-[280px]
+          rounded-2xl
+          border
+          border-amber-200
+          bg-white/95
+          px-5
+          py-4
+          shadow-xl
+          backdrop-blur-md
+        "
+            >
+              <p
+                className="
+            text-[11px]
+            font-bold
+            uppercase
+            tracking-[0.15em]
+            text-amber-700
+          "
+              >
+                Built for growth
+              </p>
+
+              <p className="mt-1 text-sm font-bold leading-5 text-blue-950">
+                Digital solutions designed around your business — not the other way around.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -151,41 +507,336 @@ const AboutPage: React.FC = () => {
       </div>
 
       {/*Mission & Vision*/}
-      <section className="mt-20 rounded-2xl p-8 shadow-lg max-w-7xl mx-auto" data-aos="fade-up">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          {/* Image + steps under it */}
-          <div data-aos="zoom-in">
-            <Image
-              src="/img/bannerabout/aboutpage-prototip.jpg"
-              alt="Website design process"
-              width={1000}
-              height={600}
-              className="rounded-2xl shadow-md w-full object-contain mb-4"
-            />
+      <section
+        className="
+    relative
+    mt-16
+    max-w-7xl
+    mx-auto
+    overflow-hidden
+    rounded-[12px]
+    border
+    border-blue-100
+    bg-gradient-to-br
+    from-blue-50
+    via-white
+    to-amber-50
+    px-5
+    sm:px-8
+    lg:px-12
+    py-10
+    sm:py-14
+    lg:py-16
+    shadow-[0_20px_60px_rgba(15,23,42,0.08)]
+  "
+        data-aos="fade-up"
+      >
+        {/* Decorative background */}
+        <div
+          className="
+      pointer-events-none
+      absolute
+      -top-28
+      -left-28
+      h-72
+      w-72
+      rounded-full
+      bg-blue-900/10
+      blur-3xl
+    "
+          aria-hidden="true"
+        />
 
-            {/* Steps */}
-            <div className="flex justify-between text-sm text-gray-800 font-semibold px-2">
-              <span>Sketch</span>
-              <span>Wireframe</span>
-              <span>Prototype</span>
-              <span>Development</span>
+        <div
+          className="
+      pointer-events-none
+      absolute
+      -bottom-28
+      -right-28
+      h-72
+      w-72
+      rounded-full
+      bg-amber-300/20
+      blur-3xl
+    "
+          aria-hidden="true"
+        />
+
+        <div
+          className="
+      relative
+      z-10
+      grid
+      grid-cols-1
+      md:grid-cols-2
+      gap-10
+      lg:gap-16
+      items-center
+    "
+        >
+          {/* ================= IMAGE + PROCESS ================= */}
+          <div data-aos="zoom-in">
+            <div
+              className="
+          relative
+          overflow-hidden
+          rounded-[26px]
+          border
+          border-amber-200/70
+          bg-white
+          p-2
+          shadow-[0_20px_50px_rgba(15,23,42,0.12)]
+        "
+            >
+              <Image
+                src="/img/bannerabout/aboutpage-prototip.jpg"
+                alt="Website and web application design and development process"
+                width={1000}
+                height={600}
+                className="
+            w-full
+            rounded-[20px]
+            object-cover
+          "
+              />
             </div>
-            <div className="mt-2 h-1 bg-gradient-to-r from-gray-400 via-blue-400 to-green-500 rounded-full" />
+
+            {/* PROCESS */}
+            <div className="mt-7">
+              <p
+                className="
+            mb-4
+            text-xs
+            font-bold
+            uppercase
+            tracking-[0.16em]
+            text-amber-700
+          "
+              >
+                From Idea to Launch
+              </p>
+
+              <div className="grid grid-cols-4 gap-2 sm:gap-4">
+                {[
+                  ['01', 'Discovery'],
+                  ['02', 'Strategy'],
+                  ['03', 'Design'],
+                  ['04', 'Development'],
+                ].map(([number, label]) => (
+                  <div key={number} className="relative text-center">
+                    <div
+                      className="
+                  mx-auto
+                  flex
+                  h-9
+                  w-9
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-gradient-to-br
+                  from-blue-950
+                  via-blue-900
+                  to-blue-800
+                  text-[11px]
+                  font-bold
+                  text-amber-400
+                  shadow-md
+                "
+                    >
+                      {number}
+                    </div>
+
+                    <p
+                      className="
+                  mt-2
+                  text-[11px]
+                  sm:text-sm
+                  font-semibold
+                  text-slate-700
+                "
+                    >
+                      {label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Progress line */}
+              <div
+                className="
+            mt-4
+            h-[3px]
+            w-full
+            rounded-full
+            bg-gradient-to-r
+            from-blue-950
+            via-amber-400
+            to-amber-700
+          "
+              />
+            </div>
           </div>
 
-          {/* Text content */}
+          {/* ================= CONTENT ================= */}
           <div data-aos="fade-left" data-aos-delay="200">
-            <h2 className="text-3xl font-tangerine font-bold text-yellow-600 mb-4">
-              Mission & Vision
+            {/* Eyebrow */}
+            <div className="flex items-center gap-3 mb-4">
+              <span className="h-[2px] w-9 bg-amber-500" />
+
+              <p
+                className="
+            text-xs
+            sm:text-sm
+            font-bold
+            uppercase
+            tracking-[0.18em]
+            text-amber-700
+          "
+              >
+                Mission & Vision
+              </p>
+            </div>
+
+            <h2
+              className="
+          text-2xl
+          sm:text-3xl
+          lg:text-4xl
+          font-bold
+          leading-tight
+          tracking-tight
+          text-blue-950
+        "
+            >
+              Turning Business Ideas Into Reliable Digital Solutions
             </h2>
-            <p className="text-gray-700 text-lg leading-relaxed">
-              Our mission is to empower freelancers and small businesses with high-quality,
-              handcrafted websites that are fast, responsive, and designed to convert.
-              <br />
-              <br />
-              We envision a web where custom code brings your brand’s identity to life without
-              compromise.
+
+            <p
+              className="
+          mt-5
+          text-base
+          sm:text-lg
+          leading-8
+          text-slate-700
+        "
+            >
+              Our mission is to help startups, entrepreneurs, small businesses, and established
+              companies transform their ideas into professional digital products that solve real
+              business challenges and create long-term value.
             </p>
+
+            <p
+              className="
+          mt-4
+          text-base
+          leading-7
+          text-slate-600
+        "
+            >
+              We develop custom websites, web applications, e-commerce solutions, SaaS platforms,
+              MVPs, and business systems with a strong focus on performance, security, usability,
+              responsive design, and scalable architecture.
+            </p>
+
+            {/* Mission / Vision cards */}
+            <div className="mt-7 grid sm:grid-cols-2 gap-4">
+              {/* Mission */}
+              <div
+                className="
+            rounded-2xl
+            border
+            border-amber-200
+            bg-white/80
+            p-5
+            shadow-sm
+            backdrop-blur-sm
+          "
+              >
+                <div
+                  className="
+              flex
+              h-9
+              w-9
+              items-center
+              justify-center
+              rounded-lg
+              bg-amber-50
+              text-sm
+              font-extrabold
+              text-amber-700
+              border
+              border-amber-200
+            "
+                >
+                  01
+                </div>
+
+                <h3 className="mt-4 text-base font-bold text-blue-950">Our Mission</h3>
+
+                <p className="mt-2 text-sm leading-6 text-slate-600">
+                  Build dependable digital solutions tailored to each client’s goals, customers, and
+                  business requirements.
+                </p>
+              </div>
+
+              {/* Vision */}
+              <div
+                className="
+            rounded-2xl
+            border
+            border-blue-100
+            bg-white/80
+            p-5
+            shadow-sm
+            backdrop-blur-sm
+          "
+              >
+                <div
+                  className="
+              flex
+              h-9
+              w-9
+              items-center
+              justify-center
+              rounded-lg
+              bg-blue-950
+              text-sm
+              font-extrabold
+              text-amber-400
+            "
+                >
+                  02
+                </div>
+
+                <h3 className="mt-4 text-base font-bold text-blue-950">Our Vision</h3>
+
+                <p className="mt-2 text-sm leading-6 text-slate-600">
+                  Create digital products that can evolve with the business instead of becoming a
+                  limitation as the company grows.
+                </p>
+              </div>
+            </div>
+
+            {/* Worldwide */}
+            <div
+              className="
+          mt-6
+          border-l-4
+          border-amber-500
+          rounded-r-xl
+          bg-gradient-to-r
+          from-amber-50
+          via-white/70
+          to-transparent
+          px-5
+          py-4
+        "
+            >
+              <p className="text-sm sm:text-base font-semibold leading-7 text-slate-800">
+                We work remotely with clients worldwide, combining clear communication, structured
+                development, and flexible collaboration regardless of location.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -216,56 +867,234 @@ const AboutPage: React.FC = () => {
 
       {/* Philosophy */}
       <section
-        className="
-    mt-20 max-w-7xl mx-auto px-4
-    relative overflow-hidden
-    bg-transparent
-    pb-[84px] sm:pb-[96px] md:pb-[110px]
+        className=" 
+    mt-20
+    max-w-7xl
+    mx-auto
+    px-4
+    sm:px-8
+    lg:px-12
+    pt-12
+    sm:pt-16
+    lg:pt-20
+    relative
+    overflow-hidden
+    rounded-[12px]
+    border
+    border-amber-200/60
+    bg-gradient-to-br
+    from-white
+    via-blue-50/70
+    to-amber-50
+    shadow-[0_20px_60px_rgba(15,23,42,0.08)]
+    pb-[84px]
+    sm:pb-[96px]
+    md:pb-[110px]
   "
         data-aos="fade-up"
       >
-        {/* CONTENT layer (always above wave) */}
-        <div className="relative z-10 grid md:grid-cols-2 gap-10 items-center">
-          {/* Image left */}
-          <div data-aos="zoom-in">
-            <Image
-              src="/img/bannerabout/web-design.avif"
-              alt="Web design process"
-              width={600}
-              height={400}
-              className="rounded-xl shadow-md w-full object-cover"
+        {/* CONTENT */}
+        <div className="relative z-10 grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+          {/* IMAGE */}
+          <div className="relative" data-aos="zoom-in">
+            <div
+              className="
+          absolute
+          -inset-3
+          rounded-2xl
+          bg-gradient-to-br
+          from-amber-200/40
+          via-transparent
+          to-blue-950/10
+          blur-xl
+        "
+              aria-hidden="true"
             />
+
+            <div
+              className="
+          relative
+          overflow-hidden
+          rounded-2xl
+          border
+          border-amber-200/60
+          shadow-xl
+        "
+            >
+              <Image
+                src="/img/bannerabout/web-design.avif"
+                alt="Custom website and web application development process at UpLadoMyr Digital"
+                width={600}
+                height={400}
+                className="
+            w-full
+            object-cover
+            transition-transform
+            duration-700
+            hover:scale-[1.03]
+          "
+              />
+            </div>
           </div>
 
-          {/* Text + icon */}
+          {/* CONTENT */}
           <div data-aos="fade-left" className="flex flex-col justify-center">
-            <div className="text-4xl text-yellow-600 mb-2 text-center md:text-left">
-              <FaLightbulb />
+            {/* EYEBROW */}
+            <div className="flex items-center justify-center md:justify-start gap-3 mb-4">
+              <div
+                className="
+            flex
+            h-11
+            w-11
+            items-center
+            justify-center
+            rounded-xl
+            border
+            border-amber-300
+            bg-amber-50
+            text-xl
+            text-amber-700
+            shadow-sm
+          "
+              >
+                <FaLightbulb />
+              </div>
+
+              <p
+                className="
+            text-xs
+            sm:text-sm
+            font-bold
+            uppercase
+            tracking-[0.18em]
+            text-amber-700
+          "
+              >
+                Our Development Approach
+              </p>
             </div>
 
-            <h2 className="text-3xl font-tangerine font-bold text-yellow-600 mb-4 text-center md:text-left">
-              Our Approach
+            {/* SEO HEADING */}
+            <h2
+              className="
+          text-2xl
+          sm:text-3xl
+          lg:text-4xl
+          font-bold
+          leading-tight
+          tracking-tight
+          text-blue-950
+          text-center
+          md:text-left
+        "
+            >
+              Custom Web Development Built Around Your Business
             </h2>
 
-            <h3 className="text-gray-700 text-lg leading-relaxed text-center md:text-left">
-              Every project we build is aligned with your business goals. Whether we develop a
-              solution from scratch or use a carefully selected foundation, we always customize and
-              optimize it for performance, mobile-first experience, and long-term scalability —
-              ensuring it truly represents your brand.
-            </h3>
+            {/* DESCRIPTION */}
+            <p
+              className="
+          mt-5
+          text-base
+          sm:text-lg
+          leading-8
+          text-slate-700
+          text-center
+          md:text-left
+        "
+            >
+              Every website and web application we develop starts with your business goals, target
+              audience, and technical requirements. Instead of forcing your project into a
+              one-size-fits-all solution, we choose the right development approach for your specific
+              needs.
+            </p>
 
-            {/* ✅✅✅ ADDED START: якщо хочеш CTA тут теж (бо ти сказала “всі CTA”) */}
-            {/* Якщо у тебе на AboutPage реально є ще CTA — встав сюди або в інші місця. */}
-            {/* ✅✅✅ ADDED END */}
+            <p
+              className="
+          mt-4
+          text-base
+          leading-7
+          text-slate-600
+          text-center
+          md:text-left
+        "
+            >
+              From custom business websites and e-commerce solutions to SaaS platforms, MVPs, and
+              complex web applications, we focus on clean architecture, responsive design,
+              performance, usability, and long-term scalability.
+            </p>
+
+            {/* HIGHLIGHTS */}
+            <div
+              className="
+          mt-7
+          grid
+          sm:grid-cols-2
+          gap-x-6
+          gap-y-3
+        "
+            >
+              {[
+                'Business-focused development',
+                'Mobile-first experience',
+                'Performance & scalability',
+                'Custom functionality',
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="
+              flex
+              items-center
+              gap-3
+              text-sm
+              font-semibold
+              text-slate-700
+            "
+                >
+                  <span
+                    className="
+                h-2
+                w-2
+                shrink-0
+                rounded-full
+                bg-amber-500
+              "
+                  />
+
+                  {item}
+                </div>
+              ))}
+            </div>
+
+            {/* FINAL MESSAGE */}
+            <div
+              className="
+          mt-7
+          border-l-4
+          border-amber-500
+          bg-gradient-to-r
+          from-amber-50
+          to-transparent
+          px-5
+          py-4
+          rounded-r-xl
+        "
+            >
+              <p className="text-sm sm:text-base leading-7 font-medium text-slate-800">
+                The result is a digital product designed not only to look professional, but to
+                support your business today and remain ready for future growth.
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* WAVE layer (never overlaps content) */}
+        {/* WAVE */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 hidden sm:block">
           <svg
             viewBox="0 0 1440 100"
             className="w-full h-[56px] md:h-[70px]"
             preserveAspectRatio="none"
+            aria-hidden="true"
           >
             <path fill="#f3f4f6" d="M0,0 C360,100 1080,0 1440,100 L1440,100 L0,100 Z" />
           </svg>

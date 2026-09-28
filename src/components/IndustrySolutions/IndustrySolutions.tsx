@@ -309,28 +309,47 @@ function IndustrySolutions() {
           <Link
             href="/contacts"
             className="
-              mt-6
-              inline-flex
-              items-center
-              justify-center
-              gap-2
-              rounded-xl
-              bg-blue-950
-              px-6 py-3
-              text-sm
-              font-bold
-              text-amber-400
-              shadow-md
-              transition-all
-              duration-300
-              hover:-translate-y-0.5
-              hover:bg-amber-500
-              hover:text-blue-950
-              hover:shadow-lg
-            "
+    mt-6
+    inline-flex
+    items-center
+    justify-center
+    gap-2
+    rounded-xl
+    border
+    border-amber-950
+
+    bg-gradient-to-br
+    from-blue-950
+    via-blue-900
+    to-blue-800
+
+    px-6
+    py-3
+    text-sm
+    font-extrabold
+    text-amber-400
+    shadow-lg
+    transition-all
+    duration-300
+
+    hover:-translate-y-0.5
+    hover:from-[#767675]
+    hover:via-[#efc741]
+    hover:to-[#904e0d]
+    hover:text-blue-950
+    hover:shadow-xl
+  "
           >
             Discuss Your Project
-            <FiArrowRight className="h-4 w-4" />
+            <FiArrowRight
+              className="
+      h-4
+      w-4
+      transition-transform
+      duration-300
+      group-hover:translate-x-1
+    "
+            />
           </Link>
         </div>
       </div>

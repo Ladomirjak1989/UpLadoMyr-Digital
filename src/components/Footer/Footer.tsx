@@ -179,11 +179,69 @@ const Footer: React.FC = () => {
         className="relative bg-cover bg-center text-white py-16 px-4 sm:px-8 lg:py-24"
         style={{ backgroundImage: "url('/img/bannerhome/imgfooter.jpg')" }}
       >
-        <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <h1 className="font-dmserif text-xl sm:text-2xl md:text-3xl font-bold mb-6 leading-snug">
-            Let’s build a website that works as hard as you do.
-          </h1>
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          {/* Small label */}
+          <p
+            className="
+      mb-4
+      text-xs
+      sm:text-sm
+      font-bold
+      uppercase
+      tracking-[0.18em]
+      text-amber-400
+    "
+          >
+            Ready to Start Your Project?
+          </p>
 
+          {/* Heading */}
+          <h2
+            className="
+      text-2xl
+      sm:text-3xl
+      md:text-4xl
+      font-bold
+      leading-tight
+      tracking-tight
+      text-white
+    "
+          >
+            Let&apos;s Build a Digital Solution That Helps Your Business Grow
+          </h2>
+
+          {/* Description */}
+          <p
+            className="
+      mt-5
+      max-w-2xl
+      mx-auto
+      text-sm
+      sm:text-base
+      md:text-lg
+      leading-7
+      text-white/70
+    "
+          >
+            Whether you need a professional website, e-commerce solution, custom web application,
+            SaaS platform, or MVP, we can turn your idea into a reliable digital product built
+            around your business goals.
+          </p>
+
+          {/* Worldwide */}
+          <p
+            className="
+      mt-3
+      text-sm
+      font-medium
+      text-amber-200/90
+    "
+          >
+            Working with startups, entrepreneurs, small businesses, and established companies
+            worldwide.
+          </p>
+
+          {/* ORIGINAL BUTTON */}
           <Link
             href="/contacts"
             onClick={() =>
@@ -193,25 +251,136 @@ const Footer: React.FC = () => {
                 destination: '/contacts',
               })
             }
-            className="group relative inline-flex items-center gap-2 px-9 py-4 border-4 border-transparent text-base font-semibold rounded-full text-white bg-blue-900 shadow-[0_0_0_2px_#c7a23f] overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] hover:rounded-xl hover:shadow-[0_0_0_12px_transparent] hover:text-neutral-900 active:scale-95"
+            className="
+      mt-8
+      group
+      relative
+      inline-flex
+      items-center
+      gap-2
+      px-9
+      py-4
+      border-4
+      border-transparent
+      text-base
+      font-semibold
+      rounded-full
+      text-white
+      bg-blue-900
+      shadow-[0_0_0_2px_#c7a23f]
+      overflow-hidden
+      transition-all
+      duration-700
+      ease-[cubic-bezier(0.23,1,0.32,1)]
+      hover:rounded-xl
+      hover:shadow-[0_0_0_12px_transparent]
+      hover:text-neutral-900
+      active:scale-95
+    "
           >
-            <span className="absolute top-1/2 left-1/2 w-5 h-5 bg-[#c7a23f] rounded-full opacity-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-[220px] group-hover:h-[220px] group-hover:opacity-100 transform -translate-x-1/2 -translate-y-1/2" />
-            <span className="relative z-10 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-3">
+            {/* Circle animation */}
+            <span
+              className="
+        absolute
+        top-1/2
+        left-1/2
+        w-5
+        h-5
+        bg-[#c7a23f]
+        rounded-full
+        opacity-0
+        transition-all
+        duration-700
+        ease-[cubic-bezier(0.23,1,0.32,1)]
+        group-hover:w-[220px]
+        group-hover:h-[220px]
+        group-hover:opacity-100
+        transform
+        -translate-x-1/2
+        -translate-y-1/2
+      "
+            />
+
+            {/* Text */}
+            <span
+              className="
+        relative
+        z-10
+        transition-transform
+        duration-700
+        ease-[cubic-bezier(0.23,1,0.32,1)]
+        group-hover:translate-x-3
+      "
+            >
               FREE CONSULTATION
             </span>
+
+            {/* Arrow out */}
             <svg
-              className="absolute right-4 w-6 z-10 fill-[#c7a23f] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:right-[-25%] group-hover:fill-neutral-900"
+              className="
+        absolute
+        right-4
+        w-6
+        z-10
+        fill-[#c7a23f]
+        transition-all
+        duration-700
+        ease-[cubic-bezier(0.23,1,0.32,1)]
+        group-hover:right-[-25%]
+        group-hover:fill-neutral-900
+      "
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
             </svg>
+
+            {/* Arrow in */}
             <svg
-              className="absolute left-[-25%] w-6 z-10 fill-[#c7a23f] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:left-4 group-hover:fill-neutral-900"
+              className="
+        absolute
+        left-[-25%]
+        w-6
+        z-10
+        fill-[#c7a23f]
+        transition-all
+        duration-700
+        ease-[cubic-bezier(0.23,1,0.32,1)]
+        group-hover:left-4
+        group-hover:fill-neutral-900
+      "
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z" />
             </svg>
           </Link>
+
+          {/* Trust text */}
+          <div
+            className="
+      mt-5
+      flex
+      flex-wrap
+      items-center
+      justify-center
+      gap-x-3
+      gap-y-1
+      text-xs
+      sm:text-sm
+      text-white/55
+    "
+          >
+            <span>Free initial consultation</span>
+
+            <span className="text-amber-400/60">•</span>
+
+            <span>No obligation</span>
+
+            <span className="text-amber-400/60">•</span>
+
+            <span>Worldwide collaboration</span>
+          </div>
         </div>
       </div>
 
@@ -426,7 +595,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-400 mt-2 pt-4 px-4 md:px-16 flex flex-col md:flex-row justify-between items-center text-xs text-gray-800 gap-4">
           <div className="flex flex-col md:flex-row items-center gap-2 text-center md:text-left mb-7">
             <p>
-              &copy; 2025-2026{' '}
+              &copy; 2026{' '}
               <Link
                 href="https://upladomyr.com"
                 target="_blank"
@@ -521,7 +690,8 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="px-4 md:px-16 flex flex-col md:flex-row justify-between items-center text-xs text-gray-800 gap-4">
-          KVK: 96675993. VAT: NL005224066B58. Registered in the Netherlands.
+          KVK: 96675993. VAT: NL005224066B58
+          {/* Registered in the Netherlands. */}
         </div>
       </div>
     </>

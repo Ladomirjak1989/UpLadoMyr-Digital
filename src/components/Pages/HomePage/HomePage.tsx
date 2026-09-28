@@ -59,6 +59,14 @@ interface FAQItem {
   answer: string;
 }
 
+interface BenefitItem {
+  label: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  featured?: boolean;
+}
+
 const services: Services[] = [
   {
     icon: <FaPalette className="text-orange-500 text-3xl" />,
@@ -241,6 +249,82 @@ const faqData: FAQItem[] = [
   },
 ];
 
+const benefits: BenefitItem[] = [
+  {
+    label: 'Smart Investment',
+    title: 'Competitive & Transparent Pricing',
+    description:
+      'Pricing is based on the actual scope of your project. You know what is included and what you are paying for, with no unnecessary agency overhead or surprise extras.',
+    icon: <span className="text-xl font-bold">$</span>,
+    featured: true,
+  },
+  {
+    label: 'Planning',
+    title: 'Clear Scope From the Start',
+    description:
+      'Requirements, functionality, priorities, deliverables, and key milestones are defined before development moves forward.',
+    icon: <FiFileText className="h-5 w-5" />,
+  },
+  {
+    label: 'Communication',
+    title: 'Direct & Clear Communication',
+    description:
+      'Questions, feedback, priorities, and important decisions stay organized so you always know where your project stands.',
+    icon: <FiMessageCircle className="h-5 w-5" />,
+  },
+  {
+    label: 'Transparency',
+    title: 'Progress You Can Follow',
+    description:
+      'Development is divided into understandable stages, giving you visibility into completed work, current priorities, and what comes next.',
+    icon: <FiCheckSquare className="h-5 w-5" />,
+  },
+  {
+    label: 'Quality',
+    title: 'Built for Real-World Use',
+    description:
+      'Responsive layouts, clean development, usability, performance, and careful testing are considered before your product reaches real users.',
+    icon: <FiStar className="h-5 w-5" />,
+  },
+  {
+    label: 'Individual Approach',
+    title: 'Built Around Your Requirements',
+    description:
+      'Technology and functionality are selected according to the needs of the project rather than forcing your business into a rigid, predefined package.',
+    icon: <FaICursor className="h-5 w-5" />,
+  },
+  {
+    label: 'Handover',
+    title: 'Clear & Organized Delivery',
+    description:
+      'Your finished project is delivered in an organized way, with the information and guidance needed to manage and use it confidently.',
+    icon: <FiMonitor className="h-5 w-5" />,
+  },
+  {
+    label: 'After Launch',
+    title: 'Continued Technical Support',
+    description:
+      'Maintenance, technical updates, improvements, and further development can continue after launch as your needs evolve.',
+    icon: <FaWrench className="h-5 w-5" />,
+  },
+];
+
+const whyChooseHighlights = [
+  'Transparent Pricing',
+  'Direct Communication',
+  'Quality-Focused Development',
+  'Support After Launch',
+];
+
+const projectTrustPoints = [
+  'Transparent & competitive pricing',
+  'Direct project communication',
+  'Clear scope and deliverables',
+  'Responsive development',
+  'Testing before launch',
+  'Post-launch support available',
+];
+
 const HomePage: React.FC = () => {
   const [visibleCount, setVisibleCount] = useState(5);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -255,37 +339,55 @@ const HomePage: React.FC = () => {
       <section className="bg-gradient-to-r from-white via-amber-50 to-white py-14">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-up">
           <div className="relative">
-            {/* Main centered message */}
+            {/* Main SEO content */}
             <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 leading-tight">
-                Digital infrastructure is a strategic decision — not an expense.
-              </h1>
+              <p className="text-sm sm:text-base font-semibold uppercase tracking-[0.16em] text-amber-700">
+                Custom Web Development for Businesses Worldwide
+              </p>
 
-              <h2 className="mt-4 text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed">
-                A well-structured website or platform strengthens your brand, supports operations,
-                and creates long-term value for your business.
+              <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 leading-tight">
+                Build a Website or Web Application That Supports Your Business Growth
               </h2>
 
-              <h2 className="mt-5 text-base sm:text-lg md:text-xl font-semibold text-slate-900">
-                We build systems designed for stability, clarity, and growth.
-              </h2>
+              <p className="mt-5 text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed">
+                Digital infrastructure is a strategic investment in your business. We design and
+                develop custom websites, web applications, SaaS platforms, MVPs, e-commerce
+                solutions, and business systems built around your goals, operations, and customers.
+              </p>
+
+              <p className="mt-5 text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed">
+                From professional business websites to complex custom web platforms, we focus on
+                performance, scalability, user experience, and reliable architecture to create
+                digital solutions that deliver long-term value.
+              </p>
+
+              <p className="mt-5 text-base sm:text-lg md:text-xl font-semibold text-slate-900 leading-relaxed">
+                We work with startups, entrepreneurs, and businesses worldwide — regardless of where
+                you are located.
+              </p>
+
+              <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
+                Your business can be based in the United States, Europe, or anywhere else in the
+                world. Our development process is designed for efficient remote collaboration from
+                initial planning to launch and ongoing support.
+              </p>
             </div>
 
-            {/* Quote on the right (smaller) */}
+            {/* Quote */}
             <div className="mt-10 flex justify-center lg:justify-end">
               <div className="relative w-full max-w-xl lg:max-w-lg text-center lg:text-right">
-                {/* Right accent line */}
                 <span
                   className="hidden lg:block absolute -right-4 top-1 bottom-1 w-[3px] rounded-full
-                 bg-gradient-to-b from-amber-700 to-amber-500"
+              bg-gradient-to-b from-amber-700 to-amber-500"
                   aria-hidden="true"
                 />
 
                 <div className="lg:pr-6">
                   <p
-                    className="text-md sm:text-sm md:text-xl font-medium italic leading-relaxed
+                    className="text-base sm:text-lg md:text-xl font-medium italic leading-relaxed
                 bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
-                bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
+                bg-clip-text text-transparent
+                drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
                   >
                     “Whoever sows generously will also reap generously.”
                   </p>
@@ -352,167 +454,486 @@ const HomePage: React.FC = () => {
 
       {/* ===== Why choose us ===== */}
       <section
-        className="relative w-full overflow-hidden rounded-3xl bg-gradient-to-br from-[#fdfdfb] via-[#f6f2e3] to-[#c4bdb7] text-gray-950 mt-16"
+        className="
+    relative
+    mt-1
+    w-full
+    overflow-hidden
+    border
+    border-slate-200/80
+    bg-gradient-to-br
+    from-white
+    via-[#f8f6ef]
+    to-[#eee9df]
+    shadow-[0_20px_60px_rgba(15,23,42,0.07)]
+  "
         data-aos="fade-up"
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-16 py-12 md:py-16 lg:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-            {/* Left: big heading */}
-            <div className="lg:col-span-2">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-                Why{' '}
-                <span
-                  className="bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
-             bg-clip-text text-transparent drop-shadow-[0_1px_1px_rgba(0,0,0,0.25)]"
+        {/* Background decoration */}
+        <div
+          className="
+      pointer-events-none
+      absolute
+      -top-40
+      -right-40
+      h-96
+      w-96
+      rounded-full
+      bg-amber-300/15
+      blur-3xl
+    "
+          aria-hidden="true"
+        />
+
+        <div
+          className="
+      pointer-events-none
+      absolute
+      -bottom-40
+      -left-40
+      h-96
+      w-96
+      rounded-full
+      bg-blue-900/10
+      blur-3xl
+    "
+          aria-hidden="true"
+        />
+
+        <div
+          className="
+      relative
+      z-10
+      mx-auto
+      max-w-7xl
+      px-5
+      sm:px-8
+      lg:px-12
+      py-14
+      md:py-16
+      lg:py-20
+    "
+        >
+          {/* ================= HEADER ================= */}
+          <div className="max-w-4xl">
+            <div className="mb-5 flex items-center gap-3">
+              <span className="h-[2px] w-9 bg-amber-500" />
+
+              <p
+                className="
+            text-xs
+            sm:text-sm
+            font-bold
+            uppercase
+            tracking-[0.18em]
+            text-amber-700
+          "
+              >
+                Why UpLadoMyr Digital
+              </p>
+            </div>
+
+            <h2
+              className="
+          text-3xl
+          sm:text-4xl
+          md:text-5xl
+          lg:text-[3.4rem]
+          font-bold
+          leading-[1.08]
+          tracking-tight
+          text-blue-950
+        "
+            >
+              Professional Web Development With{' '}
+              <span
+                className="
+            bg-gradient-to-r
+            from-[#b87517]
+            via-[#dcae35]
+            to-[#8d4e13]
+            bg-clip-text
+            text-transparent
+          "
+              >
+                Transparent & Competitive Pricing
+              </span>
+            </h2>
+
+            <p
+              className="
+          mt-6
+          max-w-3xl
+          text-base
+          sm:text-lg
+          leading-8
+          text-slate-700
+        "
+            >
+              Choosing the right web development partner means finding the right balance between
+              technical quality, communication, reliability, and cost. UpLadoMyr Digital provides
+              professional website and web application development with transparent, competitive
+              pricing and a clear process from the first discussion to launch.
+            </p>
+
+            <p
+              className="
+          mt-4
+          max-w-3xl
+          text-base
+          leading-7
+          text-slate-600
+        "
+            >
+              Every project is planned around your actual requirements, so you invest in the design,
+              functionality, and technology your business needs — with a clear understanding of the
+              scope, development process, and costs involved.
+            </p>
+          </div>
+
+          {/* ================= QUICK HIGHLIGHTS ================= */}
+          <div
+            className="
+        mt-9
+        grid
+        grid-cols-1
+        sm:grid-cols-2
+        lg:grid-cols-4
+        overflow-hidden
+        rounded-2xl
+        border
+        border-slate-200
+        bg-white/70
+        shadow-sm
+        backdrop-blur-sm
+      "
+          >
+            {whyChooseHighlights.map((item, index) => (
+              <div
+                key={item}
+                className="
+            border-b
+            border-slate-200
+            px-5
+            py-5
+            last:border-b-0
+            sm:border-b
+            lg:border-b-0
+            lg:border-r
+            lg:last:border-r-0
+          "
+              >
+                <p
+                  className="
+              text-[10px]
+              font-extrabold
+              uppercase
+              tracking-[0.16em]
+              text-amber-700
+            "
                 >
-                  choose
-                </span>{' '}
-                us
-                <br />
-                for your project?
-              </h1>
+                  {String(index + 1).padStart(2, '0')}
+                </p>
 
-              <h2 className="mt-5 text-base sm:text-lg md:text-xl text-slate-800 leading-relaxed max-w-2xl">
-                From a high-quality business website to a scalable web platform — we deliver
-                structured development, clear communication, and production-ready results.
-              </h2>
+                <p className="mt-1 text-sm font-bold text-blue-950">{item}</p>
+              </div>
+            ))}
+          </div>
 
-              {/* Feature grid */}
-              <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10">
-                {/* 1 */}
-                <div className="flex items-start gap-5" data-aos="fade-up" data-aos-delay="50">
-                  <div className="shrink-0">
+          {/* ================= MAIN CONTENT ================= */}
+          <div
+            className="
+        mt-10
+        grid
+        grid-cols-1
+        lg:grid-cols-[1.55fr_0.75fr]
+        gap-10
+        lg:gap-14
+        items-start
+      "
+          >
+            {/* ================= BENEFIT CARDS ================= */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {benefits.map((benefit, index) => (
+                <div
+                  key={benefit.title}
+                  className={`
+              group
+              rounded-2xl
+              border
+              p-6
+              shadow-sm
+              backdrop-blur-sm
+              transition-all
+              duration-300
+              hover:-translate-y-1
+              hover:shadow-lg
+
+              ${
+                benefit.featured
+                  ? `
+                    border-amber-200
+                    bg-gradient-to-br
+                    from-amber-50/80
+                    via-white
+                    to-white
+                    hover:border-amber-400
+                  `
+                  : `
+                    border-slate-200
+                    bg-white/80
+                    hover:border-amber-300/70
+                  `
+              }
+            `}
+                  data-aos="fade-up"
+                  data-aos-delay={50 + index * 50}
+                >
+                  <div className="flex items-start gap-4">
                     <div
-                      className="h-14 w-14 rounded-2xl ring-1 ring-white/10
-                          bg-gradient-to-br from-violet-300/25 via-fuchsia-300/25 to-cyan-300/25
-                          backdrop-blur-sm flex items-center justify-center"
+                      className="
+                  flex
+                  h-12
+                  w-12
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-xl
+                  border
+                  border-amber-300/30
+                  bg-blue-950
+                  text-amber-400
+                  shadow-sm
+                "
                     >
-                      <FiFileText className="h-7 w-7 text-violet-300" />
+                      {benefit.icon}
+                    </div>
+
+                    <div>
+                      <p
+                        className="
+                    text-[10px]
+                    font-bold
+                    uppercase
+                    tracking-[0.16em]
+                    text-amber-700
+                  "
+                      >
+                        {benefit.label}
+                      </p>
+
+                      <h3 className="mt-1 text-lg font-bold text-blue-950">{benefit.title}</h3>
                     </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-semibold">Clear scope & deliverables</h3>
-                    <h4 className="mt-2 text-slate-800 italic">
-                      Defined work, timelines and milestones — aligned before we start.
-                    </h4>
-                  </div>
+
+                  <p className="mt-4 text-sm leading-6 text-slate-600">{benefit.description}</p>
                 </div>
+              ))}
+            </div>
 
-                {/* 2 */}
-                <div className="flex items-start gap-5" data-aos="fade-up" data-aos-delay="100">
-                  <div className="shrink-0">
-                    <div
-                      className="h-14 w-14 rounded-2xl ring-1 ring-white/10
-                          bg-gradient-to-br from-cyan-300/25 via-sky-300/25 to-teal-300/25
-                          backdrop-blur-sm flex items-center justify-center"
-                    >
-                      <FiMessageCircle className="h-7 w-7 text-cyan-300" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold">Communication that works</h3>
-                    <h4 className="mt-2 text-slate-800 italic">
-                      Fast responses, structured check-ins, one channel for all updates.
-                    </h4>
-                  </div>
-                </div>
+            {/* ================= RIGHT SIDE ================= */}
+            <div className="lg:sticky lg:top-28" data-aos="fade-left">
+              <div
+                className="
+            relative
+            overflow-hidden
+            rounded-[28px]
+            bg-gradient-to-br
+            from-blue-950
+            via-blue-900
+            to-[#102a56]
+            p-7
+            sm:p-8
+            text-white
+            shadow-[0_24px_60px_rgba(15,23,42,0.20)]
+          "
+              >
+                {/* Glow */}
+                <div
+                  className="
+              pointer-events-none
+              absolute
+              -top-20
+              -right-20
+              h-52
+              w-52
+              rounded-full
+              bg-amber-400/15
+              blur-3xl
+            "
+                  aria-hidden="true"
+                />
 
-                {/* 3 */}
-                <div className="flex items-start gap-5" data-aos="fade-up" data-aos-delay="150">
-                  <div className="shrink-0">
-                    <div
-                      className="h-14 w-14 rounded-2xl ring-1 ring-white/10
-                          bg-gradient-to-br from-amber-300/25 via-orange-300/25 to-rose-300/25
-                          backdrop-blur-sm flex items-center justify-center"
-                    >
-                      <FiCheckSquare className="h-7 w-7 text-amber-300" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold">Full visibility of progress</h3>
-                    <h4 className="mt-2 text-slate-800 italic">
-                      You always know what’s done, what’s next, and what’s being shipped.
-                    </h4>
-                  </div>
-                </div>
+                <div className="relative z-10">
+                  <p
+                    className="
+                text-xs
+                font-bold
+                uppercase
+                tracking-[0.18em]
+                text-amber-300
+              "
+                  >
+                    More Value. Less Complexity.
+                  </p>
 
-                {/* 4 */}
-                <div className="flex items-start gap-5" data-aos="fade-up" data-aos-delay="200">
-                  <div className="shrink-0">
-                    <div
-                      className="h-14 w-14 rounded-2xl ring-1 ring-white/10
-                          bg-gradient-to-br from-fuchsia-300/25 via-pink-300/25 to-rose-300/25
-                          backdrop-blur-sm flex items-center justify-center"
-                    >
-                      <FaICursor className="h-7 w-7 text-rose-300" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold">Smooth handover</h3>
-                    <h4 className="mt-2 text-slate-800 italic">
-                      Training + documentation so your team can manage confidently.
-                    </h4>
-                  </div>
-                </div>
+                  <h3
+                    className="
+                mt-4
+                text-2xl
+                sm:text-3xl
+                font-bold
+                leading-tight
+              "
+                  >
+                    Professional Development With Personal Attention
+                  </h3>
 
-                {/* 5 */}
-                <div className="flex items-start gap-5" data-aos="fade-up" data-aos-delay="250">
-                  <div className="shrink-0">
-                    <div
-                      className="h-14 w-14 rounded-2xl ring-1 ring-white/10
-                          bg-gradient-to-br from-indigo-300/25 via-blue-300/25 to-cyan-300/25
-                          backdrop-blur-sm flex items-center justify-center"
-                    >
-                      <FiMonitor className="h-7 w-7 text-blue-300" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold">Post-launch support</h3>
-                    <h4 className="mt-2 text-slate-800 italic">
-                      Fixes and improvements to keep your product stable and fast.
-                    </h4>
-                  </div>
-                </div>
+                  <p
+                    className="
+                mt-5
+                text-sm
+                sm:text-base
+                leading-7
+                text-white/70
+              "
+                  >
+                    You are not passed between multiple departments or left wondering who is
+                    responsible for the next step. Communication stays direct, decisions stay clear,
+                    and your project receives focused attention throughout development.
+                  </p>
 
-                {/* 6 */}
-                <div className="flex items-start gap-5" data-aos="fade-up" data-aos-delay="300">
-                  <div className="shrink-0">
-                    <div
-                      className="h-14 w-14 rounded-2xl ring-1 ring-white/10
-                          bg-gradient-to-br from-emerald-300/25 via-teal-300/25 to-cyan-300/25
-                          backdrop-blur-sm flex items-center justify-center"
+                  {/* Pricing box */}
+                  <div
+                    className="
+                mt-6
+                rounded-2xl
+                border
+                border-amber-300/20
+                bg-amber-400/[0.08]
+                px-5
+                py-5
+              "
+                  >
+                    <p
+                      className="
+                  text-[10px]
+                  font-bold
+                  uppercase
+                  tracking-[0.17em]
+                  text-amber-300
+                "
                     >
-                      <FiStar className="h-7 w-7 text-emerald-300" />
-                    </div>
+                      Better Value for Your Budget
+                    </p>
+
+                    <p className="mt-2 text-sm leading-6 text-white/75">
+                      Professional web development can combine high-quality work with fair and
+                      transparent pricing. You receive a solution tailored to your requirements,
+                      with transparent pricing and a clear understanding of where your budget is
+                      being invested.
+                    </p>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-semibold">Tailored — not templated</h3>
-                    <h4 className="mt-2 text-slate-800 italic">
-                      Built around your goals, requirements and real business needs.
-                    </h4>
+
+                  <div className="my-7 h-px bg-white/10" />
+
+                  <p
+                    className="
+                text-sm
+                sm:text-base
+                leading-7
+                text-white/80
+              "
+                  >
+                    The priority is to deliver a product that is well structured, carefully tested,
+                    practical to maintain, and ready to support real business operations.
+                  </p>
+
+                  {/* Trust points */}
+                  <div className="mt-7 space-y-3">
+                    {projectTrustPoints.map((item) => (
+                      <div
+                        key={item}
+                        className="
+                    flex
+                    items-center
+                    gap-3
+                    text-sm
+                    font-medium
+                    text-white/80
+                  "
+                      >
+                        <span
+                          className="
+                      flex
+                      h-5
+                      w-5
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-full
+                      bg-amber-400/15
+                      text-[10px]
+                      font-bold
+                      text-amber-300
+                      ring-1
+                      ring-amber-300/20
+                    "
+                        >
+                          ✓
+                        </span>
+
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Professional collaboration */}
+                  <div
+                    className="
+                mt-7
+                border-t
+                border-white/10
+                pt-6
+              "
+                  >
+                    <p
+                      className="
+                  text-xs
+                  font-bold
+                  uppercase
+                  tracking-[0.15em]
+                  text-white/45
+                "
+                    >
+                      Professional Collaboration
+                    </p>
+
+                    <p className="mt-2 text-sm leading-6 text-white/65">
+                      Your project information, business ideas, and technical requirements are
+                      handled professionally throughout the collaboration.
+                    </p>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Right: supporting copy (message bubble) */}
-            <div className="lg:pl-8" data-aos="fade-left">
-              <div className="relative inline-block max-w-xl">
-                <div
-                  className="relative rounded-3xl px-6 py-5 italic text-[17px] leading-relaxed
-                 text-black/90 shadow-lg ring-1 ring-black/10
-                 bg-gradient-to-br from-[#5a5a5a] via-[#ffd659] to-[#8c4a12]"
-                >
-                  We don’t just “build a website.” We take ownership of the result. You get a clean,
-                  maintainable product with strong structure, reliable delivery, and the kind of
-                  quality that still works months after launch — not only on day one.
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute -bottom-3 left-10 h-6 w-6 rotate-45
-                   bg-gradient-to-br from-[#5a5a5a] via-[#ffd659] to-[#8c4a12]
-                   shadow-lg ring-1 ring-black/10 rounded-sm"
-                  />
-                </div>
+              {/* Bottom note */}
+              <div
+                className="
+            mt-5
+            rounded-2xl
+            border
+            border-slate-200
+            bg-white/60
+            px-5
+            py-4
+          "
+              >
+                <p className="text-sm leading-6 text-slate-600">
+                  <span className="font-bold text-blue-950">From first discussion to launch:</span>{' '}
+                  you know what is included, what is happening, what comes next, and what you are
+                  paying for.
+                </p>
               </div>
             </div>
           </div>
@@ -535,7 +956,7 @@ const HomePage: React.FC = () => {
           <path d="M0,100 C360,0 1080,0 1440,100 L1440,0 L0,0 Z" />
         </svg>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 bg-gradient-to-t from-gray-100 to-gray-200">
           <h2
             className="text-3xl sm:text-4xl md:text-5xl  font-bold text-center text-deep mb-6"
             data-aos="fade-down"

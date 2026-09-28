@@ -172,7 +172,7 @@ export default function ThankYouPage() {
                           Estimated response
                         </p>
                         <p className="text-sm font-medium text-slate-700 sm:text-base">
-                          Within 1 business day
+                          Within 1-2 business days
                         </p>
                       </div>
                     </div>

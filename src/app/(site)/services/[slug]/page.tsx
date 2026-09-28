@@ -1,430 +1,558 @@
 // app/(site)/services/[slug]/page.tsx
 
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+import { FiArrowRight, FiCheck, FiClock, FiDollarSign, FiLayers } from 'react-icons/fi';
+
 import { FRONTEND_BASE_URL } from '@/lib/api';
+
 import { type ServiceSlug, SERVICES, getServiceBySlug } from '@/lib/services.config';
+
 import ServiceFaq from '@/components/ServiceFaq/ServiceFaq';
-
-/* ✅✅✅ ADDED: client CTA tracker link */
 import TrackedLink from '@/components/TrackedLink/TrackedLink';
-/* ✅✅✅ END */
 
-// ───────────────────────── helpers ─────────────────────────
+// ─────────────────────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────────────────────
 
 function isServiceSlug(slug: string): slug is ServiceSlug {
-  return SERVICES.some((s) => s.slug === slug);
+  return SERVICES.some((service) => service.slug === slug);
 }
 
-// Додатковий контент для кожного сервісу – текстові блоки
-const SERVICE_DETAILS: Record<
-  ServiceSlug,
-  {
-    heroSubtitle: string;
-    intro: string;
-    benefits: string[];
-    deliverables: string[];
-    idealFor: string[];
-    process: { step: string; title: string; text: string }[];
-  }
-> = {
+// ─────────────────────────────────────────────────────────────
+// SERVICE DETAILS
+// ─────────────────────────────────────────────────────────────
+
+type ServiceDetails = {
+  eyebrow: string;
+  heroSubtitle: string;
+  intro: string;
+
+  benefits: {
+    title: string;
+    text: string;
+  }[];
+
+  idealFor: string[];
+
+  process: {
+    step: string;
+    title: string;
+    text: string;
+  }[];
+
+  projectNote: string;
+};
+
+const SERVICE_DETAILS: Record<ServiceSlug, ServiceDetails> = {
   'visit-card': {
-    heroSubtitle: 'A fast, simple online presence built on a ready-made template.',
-    intro:
-      'Perfect if you need a clean, professional one-page website that introduces who you are, what you do, and how clients can contact you – without overcomplicating things.',
-    benefits: [
-      'Quick turnaround and budget-friendly pricing',
-      'Works great on mobile, tablet, and desktop',
-      'Simple structure focused on your key message',
-      'Easy to extend later with extra sections or pages',
-    ],
-    deliverables: [
-      '1-page business card website based on a modern template',
-      'Branded colors, fonts, and basic layout adjustments',
-      'Contact form or direct links to WhatsApp / email / socials',
-      'Basic on-page SEO (titles, meta description, alt tags)',
-    ],
-    idealFor: [
-      'Freelancers and ZZP professionals just starting out',
-      'Local service businesses that need “Google-proof” presence',
-      'Small budgets that still want something decent and trustworthy',
-      'People who plan to upgrade to a custom website later',
-    ],
-    process: [
-      {
-        step: '01',
-        title: 'Short briefing',
-        text: 'We collect your logo, colors, services, contact details and any existing content.',
-      },
-      {
-        step: '02',
-        title: 'Template selection',
-        text: 'You choose one of the proposed layouts that fits your business and style.',
-      },
-      {
-        step: '03',
-        title: 'Content & setup',
-        text: 'We insert your texts and images, adjust colors and basic sections.',
-      },
-      {
-        step: '04',
-        title: 'Launch & support',
-        text: 'We publish the site on your domain and help with small final tweaks.',
-      },
-    ],
-  },
-  landing: {
-    heroSubtitle: 'A focused, conversion-oriented page built to sell one clear offer.',
-    intro:
-      'Landing pages are perfect for campaigns, lead generation, or one flagship service. The entire structure is built around one main action: call, book, or buy.',
-    benefits: [
-      'Conversion-focused UX, copy structure and layout',
-      'Sections tailored to answer objections and build trust',
-      'Optimised for mobile visitors and paid traffic',
-      'Ready for analytics & tracking pixels',
-    ],
-    deliverables: [
-      '1 high-converting landing page with up to 4 main blocks',
-      'Custom layout on top of a solid design system',
-      'Integration with forms, booking tools or email marketing',
-      'Technical SEO setup and performance optimisation',
-    ],
-    idealFor: [
-      'Service packages (coaching, consulting, renovations, etc.)',
-      'Lead-gen campaigns on Google Ads, Meta, LinkedIn',
-      'Special offers, events or product launches',
-      'Businesses testing a new idea before investing in a full site',
-    ],
-    process: [
-      {
-        step: '01',
-        title: 'Strategy & goal',
-        text: 'We define the primary conversion goal and ideal visitor journey.',
-      },
-      {
-        step: '02',
-        title: 'Wireframe & copy structure',
-        text: 'We map all key sections: hero, benefits, proof, FAQ, CTA and more.',
-      },
-      {
-        step: '03',
-        title: 'Design & build',
-        text: 'We implement the design, connect forms and tracking tools.',
-      },
-      {
-        step: '04',
-        title: 'Launch & optimisation',
-        text: 'We launch and can later help with A/B tests and improvements.',
-      },
-    ],
-  },
-  business: {
+    eyebrow: 'Professional Starter Website',
+
     heroSubtitle:
-      'A solid multi-page website that presents your company, services, and proof of work.',
+      'Launch a professional online presence quickly with a polished, responsive website built around your business.',
+
     intro:
-      'A business website gives you space for clear service descriptions, case studies, FAQ and all the credibility pieces modern clients expect before they contact you.',
+      'A template-based website is a practical starting point for businesses that need a professional website without the cost or timeline of a fully custom build. We customize the layout, branding, content and essential functionality so your business has a credible online presence from day one.',
+
     benefits: [
-      'Professional structure with clear navigation',
-      'Room for services, portfolio, testimonials and blog',
-      'Built with scalability in mind – easy to grow later',
-      'Clean code, SEO-friendly and performance optimised',
+      {
+        title: 'Professional first impression',
+        text: 'Present your services, expertise and contact information through a clean and trustworthy website.',
+      },
+      {
+        title: 'Fast launch',
+        text: 'A streamlined development process allows your website to go live quickly without unnecessary complexity.',
+      },
+      {
+        title: 'Responsive experience',
+        text: 'Your website is optimized for desktop, tablet and mobile visitors.',
+      },
+      {
+        title: 'SEO foundation',
+        text: 'The website includes essential on-page and technical SEO setup to give search engines a clear structure to understand.',
+      },
     ],
-    deliverables: [
-      'Up to 4 custom-designed pages (Home, Services, About, Contact, etc.)',
-      'Responsive design implemented without heavy builders',
-      'Contact/quote forms, maps, and key integrations',
-      'On-page SEO setup and basic analytics integration',
-    ],
+
     idealFor: [
-      'Established businesses that outgrew a simple one-pager',
-      'Companies that need to showcase multiple services',
-      'Entrepreneurs who want a “home base” for all marketing',
-      'Teams planning to add blog, resources or projects later on',
+      'Freelancers and independent professionals',
+      'Consultants and local service providers',
+      'New businesses establishing an online presence',
+      'Small businesses that do not yet need a multi-page website',
     ],
+
     process: [
       {
         step: '01',
-        title: 'Discovery workshop',
-        text: 'We clarify your services, audience, and positioning.',
+        title: 'Project Brief',
+        text: 'We review your business, services, target audience, branding and the content you want to present.',
       },
       {
         step: '02',
-        title: 'Information architecture',
-        text: 'We map out pages, navigation and key user flows.',
+        title: 'Template & Structure',
+        text: 'We select an appropriate professional layout and define the sections needed for your website.',
       },
       {
         step: '03',
-        title: 'Design & development',
-        text: 'We create page designs and implement them in clean code.',
+        title: 'Customization & Build',
+        text: 'We customize the design, add your content, configure forms and optimize the responsive layout.',
       },
       {
         step: '04',
-        title: 'Launch & handover',
-        text: 'We deploy, connect your domain and show you how to use everything.',
+        title: 'Testing & Launch',
+        text: 'We test the website across modern devices and browsers, connect your domain and launch the project.',
       },
     ],
+
+    projectNote:
+      'Additional sections, integrations, multilingual functionality or custom features can be added based on your requirements.',
   },
+
+  landing: {
+    eyebrow: 'Conversion-Focused Development',
+
+    heroSubtitle:
+      'A custom landing page designed around one clear goal: turning visitors into leads, inquiries or customers.',
+
+    intro:
+      'A landing page gives your advertising campaign or service offer a focused destination. Instead of sending paid traffic to a general website, the page is structured around a specific audience, message and conversion goal.',
+
+    benefits: [
+      {
+        title: 'Conversion-focused structure',
+        text: 'Every section supports the primary action you want visitors to take.',
+      },
+      {
+        title: 'Built for paid traffic',
+        text: 'The page structure is suitable for Google Ads, social campaigns and other targeted marketing traffic.',
+      },
+      {
+        title: 'Custom responsive design',
+        text: 'The landing page is designed specifically for your offer rather than relying on a generic page layout.',
+      },
+      {
+        title: 'Performance & tracking ready',
+        text: 'The technical foundation is optimized for speed and prepared for analytics and advertising tracking.',
+      },
+    ],
+
+    idealFor: [
+      'Google Ads and paid advertising campaigns',
+      'Professional service businesses',
+      'Product or service launches',
+      'Lead generation campaigns',
+      'Special offers and promotions',
+      'Businesses validating a new service or market',
+    ],
+
+    process: [
+      {
+        step: '01',
+        title: 'Strategy & Conversion Goal',
+        text: 'We define the target audience, offer and primary action visitors should take.',
+      },
+      {
+        step: '02',
+        title: 'Page Architecture',
+        text: 'We structure the page around your value proposition, benefits, trust elements, objections and calls to action.',
+      },
+      {
+        step: '03',
+        title: 'Design & Development',
+        text: 'We create the responsive interface, build the page and connect required forms or integrations.',
+      },
+      {
+        step: '04',
+        title: 'Testing & Launch',
+        text: 'We test responsiveness, performance and functionality before deploying the landing page.',
+      },
+    ],
+
+    projectNote:
+      'Advanced integrations, custom calculators, booking systems, complex animations or additional campaign pages can be quoted separately.',
+  },
+
+  business: {
+    eyebrow: 'Custom Business Website',
+
+    heroSubtitle:
+      'A professional multi-page website designed to build credibility, explain your services and generate new business opportunities.',
+
+    intro:
+      'Your website should do more than simply show that your company exists. A professional business website creates a clear digital foundation for your brand, services, marketing and lead generation. We build a scalable website structure that can grow together with your business.',
+
+    benefits: [
+      {
+        title: 'Professional positioning',
+        text: 'Present your company with a polished digital experience that builds trust with potential customers.',
+      },
+      {
+        title: 'Clear service architecture',
+        text: 'Organize your services and content so visitors can quickly understand what you offer and how to contact you.',
+      },
+      {
+        title: 'Built for growth',
+        text: 'The website architecture can later expand with additional services, case studies, blog content or integrations.',
+      },
+      {
+        title: 'SEO-ready foundation',
+        text: 'Clean structure, metadata, performance optimization and search-friendly page architecture are included from the start.',
+      },
+    ],
+
+    idealFor: [
+      'Established small and medium-sized businesses',
+      'Professional service companies',
+      'Construction and contractor businesses',
+      'Consulting and B2B companies',
+      'Businesses replacing an outdated website',
+      'Companies preparing to invest in SEO or Google Ads',
+    ],
+
+    process: [
+      {
+        step: '01',
+        title: 'Discovery & Strategy',
+        text: 'We review your business, target audience, competitors, services and project goals.',
+      },
+      {
+        step: '02',
+        title: 'Website Architecture',
+        text: 'We define the page structure, navigation, content hierarchy and important user journeys.',
+      },
+      {
+        step: '03',
+        title: 'Design & Development',
+        text: 'We design and build the responsive website, forms, integrations and required functionality.',
+      },
+      {
+        step: '04',
+        title: 'QA & Launch',
+        text: 'We test the website across devices and browsers, optimize performance and deploy it to production.',
+      },
+    ],
+
+    projectNote:
+      'The starting package includes up to 8 pages. Additional pages, advanced integrations, multilingual functionality and custom features can be added to the project scope.',
+  },
+
   ecommerce: {
-    heroSubtitle: 'A modern online store with a clean product catalogue, cart and payment flow.',
+    eyebrow: 'Custom E-commerce Development',
+
+    heroSubtitle:
+      'A professional online store designed around your products, customers and purchasing experience.',
+
     intro:
-      'We help you launch an e-commerce presence that is fast, trustworthy and easy to manage – without overcomplicated features you don’t need on day one.',
+      'A successful online store requires more than product pages and a checkout button. We create a complete shopping experience that helps customers discover products, understand what they are buying and complete purchases with confidence.',
+
     benefits: [
-      'Clear catalogue and product detail pages',
-      'Secure checkout and payment integration',
-      'Mobile-first UX for shoppers on the go',
-      'Built so you can manage products yourself later',
+      {
+        title: 'Professional storefront',
+        text: 'Present products through a clean, responsive shopping experience designed around your brand.',
+      },
+      {
+        title: 'Secure checkout',
+        text: 'Connect trusted payment providers and create a clear purchasing flow for your customers.',
+      },
+      {
+        title: 'Store management',
+        text: 'Manage products, orders and customer information through practical administration tools.',
+      },
+      {
+        title: 'Scalable architecture',
+        text: 'The store can evolve with additional products, categories, integrations and functionality as your business grows.',
+      },
     ],
-    deliverables: [
-      'E-commerce-ready website with product listing and product pages',
-      'Cart and checkout flow integrated with your chosen payment provider',
-      'Basic email notifications for orders',
-      'SEO-friendly product structure and clean URLs',
-    ],
+
     idealFor: [
-      'Small online shops starting with a focused product range',
-      'Existing offline businesses bringing products online',
-      'Entrepreneurs testing a niche without huge platform costs',
-      'Brands that want more control than on marketplace-only setups',
+      'Product-based businesses',
+      'Retail businesses moving online',
+      'Growing direct-to-consumer brands',
+      'Businesses replacing a limited existing store',
+      'Companies that need custom integrations',
+      'Businesses selling products or services online',
     ],
+
     process: [
       {
         step: '01',
-        title: 'Store concept',
-        text: 'We define product structure, shipping zones and payment options.',
+        title: 'Store Planning',
+        text: 'We define products, categories, payments, shipping requirements and the required customer journey.',
       },
       {
         step: '02',
-        title: 'Design & UX',
-        text: 'We design product listing, detail pages and cart flow.',
+        title: 'UX & Architecture',
+        text: 'We plan product discovery, product pages, cart, checkout and account functionality.',
       },
       {
         step: '03',
-        title: 'Implementation',
-        text: 'We build the store, connect payments and configure taxes & shipping.',
+        title: 'Development & Integration',
+        text: 'We build the storefront, administration tools and required payment or third-party integrations.',
       },
       {
         step: '04',
-        title: 'Testing & launch',
-        text: 'We test the entire flow and go live with you together.',
+        title: 'Testing & Launch',
+        text: 'We test the complete purchasing flow, payments, responsive experience and core store functionality before launch.',
       },
     ],
+
+    projectNote:
+      'Final pricing depends on catalog size, product variations, payment providers, shipping logic, integrations and custom functionality.',
   },
+
   crm: {
-    heroSubtitle: 'Custom CRM and internal systems that match how your business really works.',
+    eyebrow: 'Custom Software Development',
+
+    heroSubtitle:
+      'Custom web applications, CRM platforms and internal business systems designed around the way your company actually works.',
+
     intro:
-      'Instead of forcing your team into generic tools, we help design and build workflows that support sales, operations and customer care the way you actually operate.',
+      'When spreadsheets and generic software start limiting your operations, a custom web application can bring your processes, users and business data into one system. We design and develop software around your workflows instead of forcing your workflows into a generic product.',
+
     benefits: [
-      'Tailored to your processes and data structure',
-      'Integrations with tools your team already uses',
-      'Focus on usability so people actually adopt the system',
-      'Space to extend later with new modules and reports',
+      {
+        title: 'Built around your workflows',
+        text: 'Business logic and user journeys are designed specifically around your operational requirements.',
+      },
+      {
+        title: 'Centralized business data',
+        text: 'Bring customers, operations, workflows and important business information into one structured system.',
+      },
+      {
+        title: 'Automation & integrations',
+        text: 'Connect APIs and external services to reduce repetitive manual work and improve operational efficiency.',
+      },
+      {
+        title: 'Scalable architecture',
+        text: 'The system can evolve with new modules, roles, reports and integrations as your business grows.',
+      },
     ],
-    deliverables: [
-      'Requirements workshop and system architecture',
-      'Custom CRM or internal tool UI, tailored to your workflows',
-      'Integrations with email, calendar, or third-party services',
-      'Handover documentation and post-launch support options',
-    ],
+
     idealFor: [
-      'Teams that outgrew spreadsheets and ad-hoc tools',
-      'Businesses with complex pipelines or approval flows',
-      'Service companies with recurring client relationships',
-      'Founders who want data they can actually trust',
+      'Businesses replacing spreadsheets and manual workflows',
+      'Companies that need a custom CRM',
+      'Customer or partner portals',
+      'Internal dashboards and administration systems',
+      'Workflow and process automation',
+      'Businesses requiring API integrations',
+      'Companies with specialized operational processes',
     ],
+
     process: [
       {
         step: '01',
-        title: 'Process mapping',
-        text: 'We document your current workflows and pain points.',
+        title: 'Discovery & Requirements',
+        text: 'We document your workflows, users, requirements, integrations and business goals.',
       },
       {
         step: '02',
-        title: 'Solution design',
-        text: 'We propose a pragmatic system that fits your team and budget.',
+        title: 'System Architecture',
+        text: 'We define application architecture, database structure, roles, permissions and core user flows.',
       },
       {
         step: '03',
-        title: 'Development & integration',
-        text: 'We build the CRM and connect it with your existing tools.',
+        title: 'Development & QA',
+        text: 'We develop the application in structured stages and test functionality throughout the implementation.',
       },
       {
         step: '04',
-        title: 'Rollout & optimisation',
-        text: 'We onboard your team and help fine-tune the system over time.',
+        title: 'Deployment & Evolution',
+        text: 'We deploy the system, provide documentation and can continue development as new requirements emerge.',
       },
     ],
+
+    projectNote:
+      'Custom software pricing depends on system complexity, user roles, integrations, data requirements and automation. Larger projects are typically divided into clearly defined development phases.',
   },
 };
 
-// FAQ для кожного сервісу
+// ─────────────────────────────────────────────────────────────
+// FAQ
+// ─────────────────────────────────────────────────────────────
+
 const SERVICE_FAQ: Record<ServiceSlug, { question: string; answer: string }[]> = {
   'visit-card': [
     {
-      question: 'How long does a template-based website really take?',
+      question: 'How long does a starter website take?',
       answer:
-        'Most visit card websites are ready within 5–7 working days after we receive your content (texts, logo, images). Small changes after launch are also included.',
+        'Most starter websites can be completed within 3–5 business days once we have received the required content, branding and project information.',
     },
     {
-      question: 'Can I update the content myself later?',
+      question: 'Is hosting and domain registration included?',
       answer:
-        'Yes. We set things up so you can change basic texts, images and contact details yourself, or you can always ask us to update it for you.',
+        'Hosting and domain costs are normally separate because they remain registered for your business. We can help you choose the appropriate setup and connect everything during launch.',
     },
     {
-      question: 'Will this be enough to appear on Google?',
-      answer:
-        'For a starter presence – yes. We add basic on-page SEO (titles, meta description, alt tags). For active SEO campaigns you can upgrade later.',
+      question: 'Will the website work on mobile devices?',
+      answer: 'Yes. Responsive development for desktop, tablet and mobile devices is included.',
     },
     {
-      question: 'Can we reuse this website if I later want a bigger site?',
+      question: 'Is SEO included?',
       answer:
-        'Sure. We can extend the existing page with more sections or turn it into a multi-page site when your business grows.',
+        'The package includes a basic SEO foundation such as page metadata, semantic structure and image optimization. Ongoing SEO campaigns and content marketing are separate services.',
     },
     {
-      question: 'What do you need from me before you start?',
+      question: 'Can the website grow later?',
       answer:
-        'We need your logo (if you have one), brand colors, contact details, short description of your services and any photos you would like to use.',
+        'Yes. Additional sections, pages and functionality can be added later as your business grows.',
     },
   ],
+
   landing: [
     {
-      question: 'What is the main goal of a landing page?',
+      question: 'What is included in the landing page package?',
       answer:
-        'A landing page is built around one main action: call, book a call, fill a form, or buy. Everything on the page supports that single conversion goal.',
+        'The starting package includes one custom-coded landing page with up to 6 content sections, responsive design, lead generation functionality, SEO-ready structure, performance optimization and deployment.',
     },
     {
-      question: 'Can you connect my landing page to ads and tracking?',
+      question: 'Can I use the page for Google Ads?',
       answer:
-        'Yes. We prepare the page for Google Analytics, Meta Pixel, LinkedIn Insight Tag and can coordinate with your marketing partner.',
+        'Yes. The page can be structured specifically for paid advertising campaigns and prepared for analytics and conversion tracking.',
     },
     {
-      question: 'Do you help with copywriting for the landing?',
+      question: 'Do you write the content?',
       answer:
-        'We provide a recommended section structure and can help you refine or lightly edit your copy so that it supports conversions.',
+        'We help structure the messaging and can refine supplied content. Full professional copywriting can be added separately when required.',
     },
     {
-      question: 'Will the landing page work well on mobile?',
+      question: 'Can you integrate forms or booking systems?',
       answer:
-        'Absolutely. We design mobile-first, since most paid traffic today lands on phones rather than desktops.',
+        'Yes. Standard contact and lead forms are included. More advanced booking systems, CRM integrations or automation can be added depending on the project.',
     },
     {
-      question: 'Can this landing later become part of a full website?',
+      question: 'Can the landing page become part of a larger website?',
       answer:
-        'Yes. We can re-use the design and content as a base for a larger site if your campaign proves successful.',
+        'Yes. The design and content can later be incorporated into a larger business website.',
     },
   ],
+
   business: [
     {
-      question: 'How many pages are included in a business website?',
+      question: 'How many pages are included?',
       answer:
-        'The standard package includes up to 4 custom-designed pages – for example Home, Services, About, and Contact. We can always add more if needed.',
+        'The starting Business Website package includes up to 8 pages. The exact structure is defined during project planning.',
     },
     {
-      question: 'Can we add a blog or case studies later?',
+      question: 'Can you redesign my existing website?',
       answer:
-        'Yes. We plan the structure with future growth in mind, so adding a blog, case studies or resources later is straightforward.',
+        'Yes. We can redesign an existing website, restructure its content and migrate useful material to the new website.',
     },
     {
-      question: 'Is this website suitable for both Dutch and international clients?',
+      question: 'Can you add more pages later?',
       answer:
-        'Definitely. We can structure the content for multiple languages and later integrate a translation layer if you decide to go multilingual.',
+        'Yes. The website is built with future growth in mind, so additional services, landing pages, case studies, blog content and other sections can be added later.',
     },
     {
-      question: 'Do you integrate forms and basic automations?',
+      question: 'Is the website optimized for SEO?',
       answer:
-        'We integrate contact and quote forms, and can connect them to email, CRM or simple automation tools depending on your stack.',
+        'We provide an SEO-ready technical foundation including semantic structure, metadata, performance considerations and search-friendly page architecture. Ongoing SEO campaigns are separate.',
     },
     {
-      question: 'What if I already have a website and want a redesign?',
+      question: 'Can you build a multilingual website?',
       answer:
-        'We can migrate relevant content from your current website, refine the structure, and launch your new design on the same domain with minimal downtime.',
+        'Yes. Multilingual functionality can be added depending on your target markets and preferred translation workflow.',
     },
   ],
+
   ecommerce: [
     {
       question: 'Which payment providers can you integrate?',
       answer:
-        'Typically we work with providers like Stripe, Mollie or PayPal, but we can discuss others as long as they offer a solid API and support for your country.',
+        'Payment options depend on your country and business requirements. Common integrations include providers such as Stripe, PayPal and Mollie where appropriate.',
     },
     {
-      question: 'Can I manage products on my own?',
+      question: 'Can I manage products myself?',
       answer:
-        'Yes. We give you an admin interface where you can add, edit or hide products, change prices and update stock.',
+        'Yes. The store includes administration functionality for managing products and core store information.',
     },
     {
-      question: 'Is this solution good for a small product catalogue?',
+      question: 'Are shipping and taxes included?',
       answer:
-        'It is ideal for focused catalogues. You do not need hundreds of products to justify your own shop – starting with a small range is perfectly fine.',
+        'Standard shipping and tax configuration can be included. Complex international tax, fulfillment or shipping logic may require additional development.',
     },
     {
-      question: 'How do you handle shipping and taxes?',
+      question: 'Can customers create accounts?',
       answer:
-        'We configure shipping zones, basic tax rules and delivery options together with you so that they match your real-life operations.',
+        'Yes. Customer account functionality can be included so users can manage their information and relevant order data.',
     },
     {
-      question: 'What about performance and security?',
+      question: 'What affects the final price?',
       answer:
-        'We pay attention to performance, HTTPS, secure checkout and regular updates of the tech stack so your store stays fast and trustworthy.',
+        'The final cost depends on catalog size, product variations, payment providers, shipping requirements, integrations and custom store functionality.',
     },
   ],
+
   crm: [
     {
-      question: 'Do you use an existing CRM or build everything from scratch?',
+      question: 'What types of web applications do you build?',
       answer:
-        'It depends on your needs. Sometimes we extend existing tools; in other cases we build a lightweight custom solution where standard CRMs do not fit.',
+        'Projects can include custom CRM systems, customer portals, internal dashboards, administration platforms, workflow systems and other business applications.',
     },
     {
-      question: 'How long does a typical CRM project take?',
+      question: 'How much does custom software development cost?',
       answer:
-        'Smaller tools can be done in a few weeks, while more complex systems with integrations and multiple roles can take several months.',
+        'Custom web application projects start at the listed package price. The final quote depends on functionality, integrations, user roles, data requirements and overall system complexity.',
     },
     {
-      question: 'Can you integrate with my current tools?',
+      question: 'Can you integrate existing business tools?',
       answer:
-        'Yes. We look at tools you already use (email, calendar, accounting, project tools) and integrate where it makes sense and is technically possible.',
+        'Yes. We can integrate third-party platforms and APIs when they provide the necessary technical access and documentation.',
     },
     {
-      question: 'Will my team get training on how to use the system?',
+      question: 'Will different users have different permissions?',
       answer:
-        'We always include a handover and training session, plus short documentation or video walkthroughs so your team can onboard smoothly.',
+        'Yes. Custom applications can include secure authentication together with role-based permissions and access control.',
     },
     {
-      question: 'What happens if we need new features later?',
+      question: 'Can the application be expanded later?',
       answer:
-        'We build with extension in mind. New modules or reports can be added later based on real usage and feedback from your team.',
+        'Yes. We design the architecture with future modules, integrations and functionality in mind.',
     },
   ],
 };
 
-// ───────────────────── META ─────────────────────
+// ─────────────────────────────────────────────────────────────
+// METADATA
+// ─────────────────────────────────────────────────────────────
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  if (!isServiceSlug(slug)) return {};
+  if (!isServiceSlug(slug)) {
+    return {};
+  }
 
   const service = getServiceBySlug(slug);
-  if (!service) return {};
+
+  if (!service) {
+    return {};
+  }
 
   const baseUrl = FRONTEND_BASE_URL;
+
   const url = baseUrl ? `${baseUrl}${service.link}` : service.link;
 
   const title = service.seoTitle || `${service.title} | UpLadoMyr Digital`;
-  const description =
-    service.seoDescription ||
-    SERVICE_DETAILS[slug].intro ||
-    'Web development services for small businesses and self-employed professionals.';
+
+  const description = service.seoDescription || SERVICE_DETAILS[slug].intro;
 
   return {
     title,
     description,
-    alternates: { canonical: url },
+
+    alternates: {
+      canonical: url,
+    },
+
     openGraph: {
       title,
       description,
       url,
       type: 'website',
+      siteName: 'UpLadoMyr Digital',
     },
+
     twitter: {
       card: 'summary_large_image',
       title,
@@ -433,373 +561,1266 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-// ───────────────────── PAGE ─────────────────────
+// ─────────────────────────────────────────────────────────────
+// PAGE
+// ─────────────────────────────────────────────────────────────
 
 async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  if (!isServiceSlug(slug)) notFound();
+  if (!isServiceSlug(slug)) {
+    notFound();
+  }
 
   const service = getServiceBySlug(slug);
-  if (!service) notFound();
+
+  if (!service) {
+    notFound();
+  }
 
   const details = SERVICE_DETAILS[slug];
   const faqItems = SERVICE_FAQ[slug];
-  const otherServices = SERVICES.filter((s) => s.slug !== slug);
+
+  const otherServices = SERVICES.filter((item) => item.slug !== slug);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-      {/* Breadcrumb */}
-      <nav
-        className="mb-6 mt-3 flex flex-wrap items-center gap-1 text-sm text-slate-600"
-        data-aos="fade-down"
-      >
-        <Link
-          href="/"
-          className="relative px-0.5 text-slate-600 hover:text-amber-700 transition
-                     after:absolute after:left-0 after:-bottom-0.5 after:h-[2px] after:w-full
-                     after:origin-left after:scale-x-0 after:bg-amber-700
-                     after:transition-transform after:duration-200 hover:after:scale-x-100"
+    <main className="overflow-hidden bg-white">
+      {/* BREADCRUMB */}
+
+      <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 lg:px-8">
+        <nav
+          aria-label="Breadcrumb"
+          className="
+            flex
+            flex-wrap
+            items-center
+            gap-2
+            text-sm
+            text-slate-500
+          "
         >
-          Home
-        </Link>
-        <span className="text-slate-500">/</span>
-        <span className="font-medium text-amber-700">{service.title}</span>
-      </nav>
+          <Link
+            href="/"
+            className="
+              transition-colors
+              hover:text-amber-700
+            "
+          >
+            Home
+          </Link>
 
-      {/* Hero */}
+          <span>/</span>
+
+          <Link
+            href="/#prices"
+            className="
+              transition-colors
+              hover:text-amber-700
+            "
+          >
+            Services
+          </Link>
+
+          <span>/</span>
+
+          <span className="font-medium text-slate-900">{service.title}</span>
+        </nav>
+      </div>
+
+      {/* HERO */}
+
       <section
-        className="rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-100 via-white to-amber-50 p-6 sm:p-10 shadow-sm"
-        data-aos="fade-up"
+        className="
+          relative
+          border-b
+          border-slate-200
+          bg-gradient-to-br
+          from-white
+          via-slate-50
+          to-amber-50
+        "
       >
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex-1">
-            <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm">
-              <span className="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 font-semibold uppercase tracking-wide text-amber-300">
-                {service.label}
-              </span>
-              <span className="inline-flex items-center rounded-full bg-slate-200 px-3 py-1 text-slate-700">
-                ⏱ Duration: {service.duration}
-              </span>
-              <span className="inline-flex items-center rounded-full bg-slate-200 px-3 py-1 text-slate-700">
-                💰 From {service.price}
-              </span>
-            </div>
+        <div
+          className="
+            mx-auto
+            grid
+            max-w-7xl
+            gap-12
+            px-4
+            py-16
+            sm:px-6
+            lg:grid-cols-[1.35fr_0.65fr]
+            lg:items-center
+            lg:px-8
+            lg:py-24
+          "
+        >
+          {/* HERO CONTENT */}
 
-            <h1 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900">
+          <div>
+            <p
+              className="
+                text-sm
+                font-extrabold
+                uppercase
+                tracking-[0.18em]
+                text-amber-700
+              "
+            >
+              {details.eyebrow}
+            </p>
+
+            <h1
+              className="
+                mt-4
+                max-w-4xl
+                text-4xl
+                font-extrabold
+                tracking-tight
+                text-blue-950
+                sm:text-5xl
+                lg:text-6xl
+              "
+            >
               {service.title}
             </h1>
-            <p className="mt-3 text-base sm:text-lg text-slate-700">{details.heroSubtitle}</p>
+
+            <p
+              className="
+                mt-6
+                max-w-3xl
+                text-lg
+                leading-relaxed
+                text-slate-600
+                sm:text-xl
+              "
+            >
+              {details.heroSubtitle}
+            </p>
+
+            {/* HERO INFO */}
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <div
+                className="
+                  inline-flex
+                  items-center
+                  gap-2
+                  rounded-full
+                  border
+                  border-slate-200
+                  bg-white
+                  px-4
+                  py-2
+                  text-sm
+                  font-semibold
+                  text-slate-700
+                  shadow-sm
+                "
+              >
+                <FiClock className="text-amber-600" />
+
+                {service.duration}
+              </div>
+
+              <div
+                className="
+                  inline-flex
+                  items-center
+                  gap-2
+                  rounded-full
+                  border
+                  border-slate-200
+                  bg-white
+                  px-4
+                  py-2
+                  text-sm
+                  font-semibold
+                  text-slate-700
+                  shadow-sm
+                "
+              >
+                <FiDollarSign className="text-amber-600" />
+                Starting at {service.price} USD
+              </div>
+
+              <div
+                className="
+                  inline-flex
+                  items-center
+                  gap-2
+                  rounded-full
+                  border
+                  border-slate-200
+                  bg-white
+                  px-4
+                  py-2
+                  text-sm
+                  font-semibold
+                  text-slate-700
+                  shadow-sm
+                "
+              >
+                <FiLayers className="text-amber-600" />
+
+                {service.label}
+              </div>
+            </div>
+
+            {/* HERO CTA */}
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <TrackedLink
+                href="/contacts"
+                eventName="Contact"
+                payload={{
+                  source: 'service_hero',
+                  cta: 'start_project',
+                  service_slug: slug,
+                  service_label: service.label,
+                  service_title: service.title,
+                  destination: '/contacts',
+                }}
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-xl
+                  bg-blue-950
+                  px-6
+                  py-3.5
+                  text-sm
+                  font-extrabold
+                  text-amber-400
+                  shadow-lg
+                  transition-all
+                  duration-300
+                  hover:bg-amber-500
+                  hover:text-blue-950
+                "
+              >
+                {service.cta ?? 'Discuss Your Project'}
+
+                <FiArrowRight />
+              </TrackedLink>
+
+              <Link
+                href="/projects"
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  rounded-xl
+                  border
+                  border-slate-300
+                  bg-white
+                  px-6
+                  py-3.5
+                  text-sm
+                  font-bold
+                  text-blue-950
+                  transition-all
+                  hover:border-blue-950
+                  hover:bg-slate-50
+                "
+              >
+                View Our Work
+              </Link>
+            </div>
           </div>
 
-          {/* Highlight card */}
+          {/* PRICING CARD */}
+
           <div
-            className="mt-4 w-full max-w-sm rounded-2xl bg-slate-900/95 px-5 py-6 text-slate-50 shadow-lg lg:mt-0"
-            data-aos="zoom-in"
+            className="
+              relative
+              overflow-hidden
+              rounded-3xl
+              bg-blue-950
+              p-7
+              text-white
+              shadow-2xl
+              sm:p-8
+            "
           >
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]">
-                <Image
-                  src={service.icon}
-                  alt={service.label}
-                  width={32}
-                  height={32}
-                  className="h-8 w-8 object-contain"
-                />
+            <div
+              className="
+                absolute
+                -right-16
+                -top-16
+                h-48
+                w-48
+                rounded-full
+                bg-amber-400/10
+                blur-3xl
+              "
+            />
+
+            {service.badge && (
+              <span
+                className="
+                  mb-6
+                  inline-flex
+                  rounded-full
+                  bg-amber-400
+                  px-3
+                  py-1.5
+                  text-xs
+                  font-extrabold
+                  uppercase
+                  tracking-wider
+                  text-blue-950
+                "
+              >
+                {service.badge}
+              </span>
+            )}
+
+            <div className="flex items-center gap-4">
+              <div
+                className="
+                  flex
+                  h-16
+                  w-16
+                  items-center
+                  justify-center
+                  rounded-2xl
+                  bg-white/10
+                "
+              >
+                <Image src={service.icon} alt="" width={44} height={44} />
               </div>
+
               <div>
-                <p className="text-xs uppercase tracking-wide text-amber-200">Starting from</p>
-                <p className="text-xl font-semibold text-amber-300">{service.price}</p>
+                <p
+                  className="
+                    text-xs
+                    font-bold
+                    uppercase
+                    tracking-[0.15em]
+                    text-slate-400
+                  "
+                >
+                  {service.pricePrefix ?? 'Starting at'}
+                </p>
+
+                <div className="mt-1 flex items-end gap-2">
+                  <p
+                    className="
+                      text-4xl
+                      font-extrabold
+                      tracking-tight
+                      text-white
+                    "
+                  >
+                    {service.price}
+                  </p>
+
+                  <span className="mb-1 text-sm text-slate-400">USD</span>
+                </div>
               </div>
             </div>
 
-            <div className="mt-4 space-y-1 text-sm text-slate-100/90">
-              <p>Duration: {service.duration}</p>
-              {/* <p>{service.desc}</p> */}
-            </div>
+            <p className="mt-6 text-sm leading-relaxed text-slate-300">
+              Your final quote is based on project scope, functionality, integrations and technical
+              requirements.
+            </p>
 
-            {/* ✅✅✅ CHANGED: CTA Link -> TrackedLink */}
+            <div className="my-6 h-px bg-white/10" />
+
+            <ul className="space-y-3">
+              {service.includes.slice(0, 6).map((item) => (
+                <li
+                  key={item}
+                  className="
+                    flex
+                    items-start
+                    gap-3
+                    text-sm
+                    text-slate-200
+                  "
+                >
+                  <span
+                    className="
+                      mt-0.5
+                      flex
+                      h-5
+                      w-5
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-full
+                      bg-amber-400
+                      text-blue-950
+                    "
+                  >
+                    <FiCheck className="h-3 w-3" />
+                  </span>
+
+                  {item}
+                </li>
+              ))}
+            </ul>
+
             <TrackedLink
               href="/contacts"
               eventName="Contact"
               payload={{
-                source: 'service_highlight_card',
-                cta: 'request_a_quote',
+                source: 'service_pricing_card',
+                cta: 'request_quote',
                 service_slug: slug,
-                service_label: service.label,
                 service_title: service.title,
                 destination: '/contacts',
               }}
-              className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl
-                         bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
-                         px-4 py-2.5 text-sm font-semibold text-black shadow-lg
-                         hover:scale-[1.03] hover:shadow-xl transition-transform"
+              className="
+                mt-8
+                inline-flex
+                w-full
+                items-center
+                justify-center
+                gap-2
+                rounded-xl
+                bg-amber-400
+                px-5
+                py-3.5
+                text-sm
+                font-extrabold
+                text-blue-950
+                transition-all
+                hover:bg-amber-500
+              "
             >
-              Request a quote
-              <span aria-hidden>→</span>
+              Request a Project Quote
+              <FiArrowRight />
             </TrackedLink>
-            {/* ✅✅✅ END */}
+
+            <p className="mt-3 text-center text-xs text-slate-400">
+              Clear scope and pricing before development begins.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Intro + Benefits */}
-      <section
-        className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1.4fr)]"
-        data-aos="fade-up"
-      >
-        <div className="rounded-2xl border border-slate-200 bg-white/80 p-6 shadow-sm">
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
-            What this service gives you
-          </h2>
-          <p className="mt-3 text-slate-700">{details.intro}</p>
+      {/* INTRO / BENEFITS */}
 
-          <ul className="mt-4 space-y-2 text-sm sm:text-base text-slate-800">
-            {details.benefits.map((b) => (
-              <li key={b} className="flex items-start gap-2">
-                <span className="mt-1 h-2 w-2 rounded-full bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]" />
-                <span>{b}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Deliverables card */}
-      <section className="mt-10">
-        <div
-          className="
-      rounded-2xl border border-slate-200
-      bg-white/80 p-6 shadow-sm
-    "
-        >
-          <h3 className="text-lg font-semibold text-slate-900">What&apos;s included</h3>
-          <ul className="mt-3 space-y-2 text-sm text-slate-700 grid gap-4 sm:grid-cols-2">
-            {details.deliverables.map((d) => (
-              <li key={d} className="flex items-start gap-2">
-                <span className="mt-1 text-amber-500">✓</span>
-                <span>{d}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Ideal for */}
-      <section
-        className="mt-10 rounded-3xl bg-slate-50 border border-slate-200 px-6 py-8"
-        data-aos="fade-up"
-      >
-        <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
-          When this service is the right fit
-        </h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
-          {details.idealFor.map((i) => (
-            <div key={i} className="flex items-start gap-2 text-sm text-slate-800">
-              <span className="mt-1 text-blue-700">•</span>
-              <span>{i}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="mt-10" data-aos="fade-up" data-aos-delay="150">
-        <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
-          How we&apos;ll work together
-        </h2>
-
-        <div className="mt-5 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {details.process.map((step) => (
-            <div
-              key={step.title}
-              className="relative flex gap-4 rounded-2xl border border-slate-200 bg-white/90 p-5 shadow-sm"
-              data-aos="fade-up"
-              data-aos-delay={Number(step.step) * 80}
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <p
+              className="
+                text-sm
+                font-extrabold
+                uppercase
+                tracking-[0.16em]
+                text-amber-700
+              "
             >
-              {/* вертикальна смужка зліва */}
-              <div
-                aria-hidden="true"
-                className="mt-1 h-full w-[5px] rounded-full
-                           bg-gradient-to-b from-[#06275f] via-[#438bd8] to-[#82c2f6]
-                           shadow-[0_0_14px_rgba(47,123,255,0.55)]"
-              />
+              Why This Service
+            </p>
 
-              {/* контент карточки */}
-              <div className="relative z-10 flex-1">
-                <div className="absolute -top-6 -right-4 text-5xl font-black text-slate-100 select-none">
-                  {step.step}
+            <h2
+              className="
+                mt-3
+                text-3xl
+                font-extrabold
+                tracking-tight
+                text-blue-950
+                sm:text-4xl
+              "
+            >
+              Built around your business goals
+            </h2>
+
+            <p
+              className="
+                mt-5
+                text-base
+                leading-8
+                text-slate-600
+              "
+            >
+              {details.intro}
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {details.benefits.map((benefit) => (
+              <article
+                key={benefit.title}
+                className="
+                  rounded-2xl
+                  border
+                  border-slate-200
+                  bg-white
+                  p-6
+                  shadow-sm
+                  transition-all
+                  duration-300
+                  hover:-translate-y-1
+                  hover:shadow-lg
+                "
+              >
+                <div
+                  className="
+                    flex
+                    h-9
+                    w-9
+                    items-center
+                    justify-center
+                    rounded-full
+                    bg-emerald-50
+                    text-emerald-600
+                  "
+                >
+                  <FiCheck />
                 </div>
 
-                <p className="text-xs font-semibold uppercase tracking-wide text-amber-600">
-                  Step {step.step}
+                <h3
+                  className="
+                    mt-4
+                    text-lg
+                    font-bold
+                    text-blue-950
+                  "
+                >
+                  {benefit.title}
+                </h3>
+
+                <p
+                  className="
+                    mt-2
+                    text-sm
+                    leading-relaxed
+                    text-slate-600
+                  "
+                >
+                  {benefit.text}
                 </p>
-                <h3 className="mt-2 text-base font-semibold text-slate-900">{step.title}</h3>
-                <p className="mt-2 text-sm text-slate-700">{step.text}</p>
-              </div>
-            </div>
-          ))}
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Comparison + Pricing between services */}
-      <section
-        className="mt-12 rounded-3xl border border-slate-200 bg-white/80 px-6 py-8 shadow-sm"
-        data-aos="fade-up"
-      >
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-          {/* Comparison table */}
-          <div className="lg:w-2/3">
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
-              Compare with other packages
-            </h2>
-            <p className="mt-2 text-sm text-slate-700">
-              See how this service sits next to other options in terms of duration and starting
-              price.
+      {/* EVERYTHING INCLUDED */}
+
+      <section className="bg-slate-50">
+        <div
+          className="
+            mx-auto
+            max-w-7xl
+            px-4
+            py-20
+            sm:px-6
+            lg:px-8
+          "
+        >
+          <div className="mx-auto max-w-3xl text-center">
+            <p
+              className="
+                text-sm
+                font-extrabold
+                uppercase
+                tracking-[0.16em]
+                text-amber-700
+              "
+            >
+              Package Details
             </p>
 
-            <div className="mt-4 overflow-x-auto">
-              <table className="min-w-full border-separate border-spacing-y-2 text-sm">
-                <thead>
-                  <tr className="text-left text-slate-500">
-                    <th className="py-1 pr-4">Service</th>
-                    <th className="py-1 pr-4">Type</th>
-                    <th className="py-1 pr-4">Duration</th>
-                    <th className="py-1 pr-4">From</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[service, ...otherServices].map((s) => (
-                    <tr
-                      key={s.slug}
-                      className={`rounded-xl bg-slate-50/80 ${
-                        s.slug === service.slug ? 'ring-1 ring-amber-300 bg-amber-50/60' : ''
-                      }`}
-                    >
-                      <td className="py-2 pr-4 font-semibold text-slate-900">
-                        {s.title}
-                        {s.slug === service.slug && (
-                          <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-xs text-amber-800">
-                            Current
-                          </span>
-                        )}
-                      </td>
-                      <td className="py-2 pr-4 text-slate-700">{s.label}</td>
-                      <td className="py-2 pr-4 text-slate-700">{s.duration}</td>
-                      <td className="py-2 pr-4 text-slate-900">{s.price}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <h2
+              className="
+                mt-3
+                text-3xl
+                font-extrabold
+                text-blue-950
+                sm:text-4xl
+              "
+            >
+              What&apos;s included
+            </h2>
+
+            <p className="mt-4 text-slate-600">
+              The starting package includes the essential functionality needed to launch a
+              professional, production-ready solution.
+            </p>
           </div>
 
-          {/* Pricing cards / quick links */}
-          <div className="lg:w-1/3">
-            <h3 className="text-lg font-semibold text-slate-900">Quick pricing overview</h3>
-            <p className="mt-2 text-sm text-slate-700">
-              Explore other packages if you need more or less than this service offers.
-            </p>
-            <div className="mt-4 space-y-3">
-              {otherServices.map((s) => (
-                /* ✅✅✅ CHANGED: Link -> TrackedLink (CTA to other services) */
-                <TrackedLink
-                  key={s.slug}
-                  href={s.link}
-                  eventName="ViewContent"
-                  payload={{
-                    source: 'service_quick_pricing_overview',
-                    action: 'open_other_service',
-                    from_service_slug: slug,
-                    to_service_slug: s.slug,
-                    to_service_title: s.title,
-                    destination: s.link,
-                  }}
-                  className="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm hover:border-amber-400 hover:bg-amber-50 transition-colors"
+          <div
+            className="
+              mx-auto
+              mt-10
+              grid
+              max-w-5xl
+              gap-4
+              sm:grid-cols-2
+              lg:grid-cols-3
+            "
+          >
+            {service.includes.map((item) => (
+              <div
+                key={item}
+                className="
+                  flex
+                  items-start
+                  gap-3
+                  rounded-2xl
+                  border
+                  border-slate-200
+                  bg-white
+                  p-5
+                  shadow-sm
+                "
+              >
+                <span
+                  className="
+                    flex
+                    h-6
+                    w-6
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-full
+                    bg-emerald-50
+                    text-emerald-600
+                  "
                 >
-                  <div>
-                    <p className="font-semibold text-slate-900">{s.title}</p>
-                    <p className="text-xs text-slate-600">
-                      {s.duration} • From {s.price}
-                    </p>
-                  </div>
-                  <span className="text-xs font-semibold text-amber-700">View →</span>
-                </TrackedLink>
-                /* ✅✅✅ END */
+                  <FiCheck className="h-4 w-4" />
+                </span>
+
+                <span
+                  className="
+                    text-sm
+                    font-medium
+                    leading-relaxed
+                    text-slate-700
+                  "
+                >
+                  {item}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <p
+            className="
+              mx-auto
+              mt-8
+              max-w-3xl
+              text-center
+              text-sm
+              leading-relaxed
+              text-slate-500
+            "
+          >
+            {details.projectNote}
+          </p>
+        </div>
+      </section>
+
+      {/* IDEAL FOR */}
+
+      <section
+        className="
+          mx-auto
+          max-w-7xl
+          px-4
+          py-20
+          sm:px-6
+          lg:px-8
+        "
+      >
+        <div
+          className="
+            rounded-3xl
+            border
+            border-slate-200
+            bg-gradient-to-br
+            from-white
+            to-amber-50
+            p-7
+            sm:p-10
+          "
+        >
+          <div className="grid gap-10 lg:grid-cols-2">
+            <div>
+              <p
+                className="
+                  text-sm
+                  font-extrabold
+                  uppercase
+                  tracking-[0.16em]
+                  text-amber-700
+                "
+              >
+                Best Fit
+              </p>
+
+              <h2
+                className="
+                  mt-3
+                  text-3xl
+                  font-extrabold
+                  text-blue-950
+                "
+              >
+                Is this the right solution for you?
+              </h2>
+
+              <p
+                className="
+                  mt-4
+                  max-w-xl
+                  leading-relaxed
+                  text-slate-600
+                "
+              >
+                This package is a strong starting point for businesses with requirements similar to
+                the following.
+              </p>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              {details.idealFor.map((item) => (
+                <div
+                  key={item}
+                  className="
+                    flex
+                    items-start
+                    gap-3
+                    rounded-xl
+                    border
+                    border-slate-200
+                    bg-white
+                    p-4
+                  "
+                >
+                  <FiCheck
+                    className="
+                      mt-0.5
+                      shrink-0
+                      text-amber-600
+                    "
+                  />
+
+                  <span
+                    className="
+                      text-sm
+                      font-medium
+                      leading-relaxed
+                      text-slate-700
+                    "
+                  >
+                    {item}
+                  </span>
+                </div>
               ))}
             </div>
           </div>
         </div>
       </section>
 
+      {/* PROCESS */}
+
+      <section className="bg-blue-950">
+        <div
+          className="
+            mx-auto
+            max-w-7xl
+            px-4
+            py-20
+            sm:px-6
+            lg:px-8
+          "
+        >
+          <div className="mx-auto max-w-3xl text-center">
+            <p
+              className="
+                text-sm
+                font-extrabold
+                uppercase
+                tracking-[0.16em]
+                text-amber-400
+              "
+            >
+              Our Process
+            </p>
+
+            <h2
+              className="
+                mt-3
+                text-3xl
+                font-extrabold
+                text-white
+                sm:text-4xl
+              "
+            >
+              From idea to launch
+            </h2>
+
+            <p className="mt-4 text-slate-300">
+              A clear development process keeps the project structured, transparent and focused on
+              the final business outcome.
+            </p>
+          </div>
+
+          <div
+            className="
+              mt-12
+              grid
+              gap-5
+              md:grid-cols-2
+              xl:grid-cols-4
+            "
+          >
+            {details.process.map((step) => (
+              <article
+                key={step.step}
+                className="
+                  relative
+                  overflow-hidden
+                  rounded-2xl
+                  border
+                  border-white/10
+                  bg-white/5
+                  p-6
+                "
+              >
+                <span
+                  className="
+                    absolute
+                    -right-2
+                    -top-6
+                    text-8xl
+                    font-black
+                    text-white/[0.04]
+                  "
+                >
+                  {step.step}
+                </span>
+
+                <p
+                  className="
+                    text-xs
+                    font-extrabold
+                    uppercase
+                    tracking-[0.15em]
+                    text-amber-400
+                  "
+                >
+                  Step {step.step}
+                </p>
+
+                <h3
+                  className="
+                    mt-4
+                    text-lg
+                    font-bold
+                    text-white
+                  "
+                >
+                  {step.title}
+                </h3>
+
+                <p
+                  className="
+                    mt-3
+                    text-sm
+                    leading-relaxed
+                    text-slate-300
+                  "
+                >
+                  {step.text}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* OTHER SERVICES */}
+
+      <section
+        className="
+          mx-auto
+          max-w-7xl
+          px-4
+          py-20
+          sm:px-6
+          lg:px-8
+        "
+      >
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p
+              className="
+                text-sm
+                font-extrabold
+                uppercase
+                tracking-[0.16em]
+                text-amber-700
+              "
+            >
+              Compare Options
+            </p>
+
+            <h2
+              className="
+                mt-3
+                text-3xl
+                font-extrabold
+                text-blue-950
+              "
+            >
+              Explore other development packages
+            </h2>
+          </div>
+
+          <Link
+            href="/#prices"
+            className="
+              text-sm
+              font-bold
+              text-amber-700
+              hover:text-amber-800
+            "
+          >
+            View all pricing →
+          </Link>
+        </div>
+
+        <div
+          className="
+            mt-8
+            grid
+            gap-4
+            md:grid-cols-2
+            xl:grid-cols-4
+          "
+        >
+          {otherServices.map((item) => (
+            <TrackedLink
+              key={item.slug}
+              href={item.link}
+              eventName="ViewContent"
+              payload={{
+                source: 'service_other_services',
+                action: 'open_other_service',
+                from_service_slug: slug,
+                to_service_slug: item.slug,
+                to_service_title: item.title,
+                destination: item.link,
+              }}
+              className="
+                group
+                rounded-2xl
+                border
+                border-slate-200
+                bg-white
+                p-5
+                shadow-sm
+                transition-all
+                duration-300
+                hover:-translate-y-1
+                hover:border-amber-300
+                hover:shadow-lg
+              "
+            >
+              <p
+                className="
+                  text-xs
+                  font-bold
+                  uppercase
+                  tracking-[0.12em]
+                  text-amber-700
+                "
+              >
+                {item.label}
+              </p>
+
+              <h3
+                className="
+                  mt-2
+                  text-lg
+                  font-extrabold
+                  text-blue-950
+                "
+              >
+                {item.title}
+              </h3>
+
+              <div
+                className="
+                  mt-5
+                  flex
+                  items-end
+                  justify-between
+                  gap-3
+                "
+              >
+                <div>
+                  <p className="text-xs text-slate-500">Starting at</p>
+
+                  <p
+                    className="
+                      text-xl
+                      font-extrabold
+                      text-blue-950
+                    "
+                  >
+                    {item.price}
+                  </p>
+
+                  <p className="mt-1 text-xs text-slate-500">{item.duration}</p>
+                </div>
+
+                <span
+                  className="
+                    text-sm
+                    font-bold
+                    text-amber-700
+                    transition-transform
+                    group-hover:translate-x-1
+                  "
+                >
+                  View →
+                </span>
+              </div>
+            </TrackedLink>
+          ))}
+        </div>
+      </section>
+
       {/* FAQ */}
-      <section
-        className="mt-12 rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-300 via-blue-100 to-sky-800  px-6 py-8"
-        data-aos="fade-up"
-      >
-        <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Frequently asked questions</h2>
-        <p className="mt-2 text-sm text-slate-700">
-          A few common questions clients ask before starting this type of project.
-        </p>
 
-        <ServiceFaq items={faqItems} />
-      </section>
+      <section className="bg-slate-50">
+        <div
+          className="
+            mx-auto
+            max-w-5xl
+            px-4
+            py-20
+            sm:px-6
+            lg:px-8
+          "
+        >
+          <div className="text-center">
+            <p
+              className="
+                text-sm
+                font-extrabold
+                uppercase
+                tracking-[0.16em]
+                text-amber-700
+              "
+            >
+              FAQ
+            </p>
 
-      {/* Final CTA */}
-      <section
-        className="mt-12 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-[#111827] px-6 py-8 sm:px-10 sm:py-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
-        data-aos="fade-up"
-      >
-        <div>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-white">
-            Ready to talk about your {service.label.toLowerCase()}?
-          </h2>
-          <p className="mt-2 text-sm sm:text-base text-slate-200">
-            Tell us a bit about your business and we&apos;ll come back with a clear, no-nonsense
-            proposal and timeline.
-          </p>
-        </div>
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          {/* ✅✅✅ CHANGED: CTA Link -> TrackedLink */}
-          <TrackedLink
-            href="/contacts"
-            eventName="Contact"
-            payload={{
-              source: 'service_final_cta',
-              cta: 'request_a_proposal',
-              service_slug: slug,
-              service_label: service.label,
-              service_title: service.title,
-              destination: '/contacts',
-            }}
-            className="inline-flex items-center justify-center rounded-2xl
-                       bg-gradient-to-br from-[#767675] via-[#efc741] to-[#904e0d]
-                       px-6 py-2.5 text-sm font-semibold text-black shadow-lg
-                       hover:scale-[1.03] hover:shadow-xl transition-transform"
-          >
-            Request a proposal
-          </TrackedLink>
-          {/* ✅✅✅ END */}
+            <h2
+              className="
+                mt-3
+                text-3xl
+                font-extrabold
+                text-blue-950
+                sm:text-4xl
+              "
+            >
+              Frequently asked questions
+            </h2>
 
-          {/* ✅✅✅ CHANGED: CTA Link -> TrackedLink */}
-          <TrackedLink
-            href="/projects"
-            eventName="ViewContent"
-            payload={{
-              source: 'service_final_cta',
-              cta: 'view_recent_projects',
-              service_slug: slug,
-              destination: '/projects',
-            }}
-            className="inline-flex items-center justify-center rounded-2xl border border-slate-600
-                       px-6 py-2.5 text-sm font-semibold text-slate-100 hover:bg-slate-800 transition-colors"
-          >
-            View recent projects
-          </TrackedLink>
-          {/* ✅✅✅ END */}
+            <p
+              className="
+                mx-auto
+                mt-4
+                max-w-2xl
+                text-slate-600
+              "
+            >
+              Common questions about scope, pricing and the development process.
+            </p>
+          </div>
+
+          <div className="mt-10">
+            <ServiceFaq items={faqItems} />
+          </div>
         </div>
       </section>
-    </div>
+
+      {/* FINAL CTA */}
+
+      <section
+        className="
+          mx-auto
+          max-w-7xl
+          px-4
+          py-20
+          sm:px-6
+          lg:px-8
+        "
+      >
+        <div
+          className="
+            relative
+            overflow-hidden
+            rounded-3xl
+            bg-blue-950
+            px-6
+            py-12
+            text-center
+            sm:px-10
+            lg:px-16
+            lg:py-16
+          "
+        >
+          <div
+            className="
+              absolute
+              -left-20
+              -top-20
+              h-64
+              w-64
+              rounded-full
+              bg-amber-400/10
+              blur-3xl
+            "
+          />
+
+          <div
+            className="
+              absolute
+              -bottom-24
+              -right-20
+              h-64
+              w-64
+              rounded-full
+              bg-blue-400/10
+              blur-3xl
+            "
+          />
+
+          <div className="relative mx-auto max-w-3xl">
+            <p
+              className="
+                text-sm
+                font-extrabold
+                uppercase
+                tracking-[0.16em]
+                text-amber-400
+              "
+            >
+              Start Your Project
+            </p>
+
+            <h2
+              className="
+                mt-4
+                text-3xl
+                font-extrabold
+                tracking-tight
+                text-white
+                sm:text-4xl
+                lg:text-5xl
+              "
+            >
+              Have a project in mind?
+            </h2>
+
+            <p
+              className="
+                mx-auto
+                mt-5
+                max-w-2xl
+                text-base
+                leading-relaxed
+                text-slate-300
+                sm:text-lg
+              "
+            >
+              Tell us what you&apos;re building, what your business needs and what you want to
+              achieve. We&apos;ll review your requirements and prepare a clear project scope,
+              timeline and quote.
+            </p>
+
+            <div
+              className="
+                mt-8
+                flex
+                flex-col
+                justify-center
+                gap-3
+                sm:flex-row
+              "
+            >
+              <TrackedLink
+                href="/contacts"
+                eventName="Contact"
+                payload={{
+                  source: 'service_final_cta',
+                  cta: 'discuss_project',
+                  service_slug: slug,
+                  service_label: service.label,
+                  service_title: service.title,
+                  destination: '/contacts',
+                }}
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-xl
+                  bg-amber-400
+                  px-7
+                  py-3.5
+                  text-sm
+                  font-extrabold
+                  text-blue-950
+                  transition-all
+                  hover:bg-amber-500
+                "
+              >
+                Discuss Your Project
+                <FiArrowRight />
+              </TrackedLink>
+
+              <TrackedLink
+                href="/projects"
+                eventName="ViewContent"
+                payload={{
+                  source: 'service_final_cta',
+                  cta: 'view_projects',
+                  service_slug: slug,
+                  destination: '/projects',
+                }}
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  rounded-xl
+                  border
+                  border-white/20
+                  bg-white/5
+                  px-7
+                  py-3.5
+                  text-sm
+                  font-bold
+                  text-white
+                  transition-all
+                  hover:bg-white/10
+                "
+              >
+                View Recent Projects
+              </TrackedLink>
+            </div>
+
+            <p className="mt-5 text-xs text-slate-400">
+              No obligation. You&apos;ll receive a clear quote before development begins.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
 
