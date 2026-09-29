@@ -47,7 +47,7 @@ type ServiceDetails = {
 };
 
 const SERVICE_DETAILS: Record<ServiceSlug, ServiceDetails> = {
-  'visit-card': {
+  'template-website': {
     eyebrow: 'Professional Starter Website',
 
     heroSubtitle:
@@ -301,7 +301,7 @@ const SERVICE_DETAILS: Record<ServiceSlug, ServiceDetails> = {
       'Final pricing depends on catalog size, product variations, payment providers, shipping logic, integrations and custom functionality.',
   },
 
-  crm: {
+  'web-application-development': {
     eyebrow: 'Custom Software Development',
 
     heroSubtitle:
@@ -372,7 +372,7 @@ const SERVICE_DETAILS: Record<ServiceSlug, ServiceDetails> = {
 // ─────────────────────────────────────────────────────────────
 
 const SERVICE_FAQ: Record<ServiceSlug, { question: string; answer: string }[]> = {
-  'visit-card': [
+  'template-website': [
     {
       question: 'How long does a starter website take?',
       answer:
@@ -483,7 +483,7 @@ const SERVICE_FAQ: Record<ServiceSlug, { question: string; answer: string }[]> =
     },
   ],
 
-  crm: [
+  'web-application-development': [
     {
       question: 'What types of web applications do you build?',
       answer:

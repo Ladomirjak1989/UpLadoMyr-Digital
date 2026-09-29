@@ -1,4 +1,9 @@
-export type ServiceSlug = 'visit-card' | 'landing' | 'business' | 'ecommerce' | 'crm';
+export type ServiceSlug =
+  | 'template-website'
+  | 'landing'
+  | 'business'
+  | 'ecommerce'
+  | 'web-application-development';
 
 export type ServiceConfig = {
   slug: ServiceSlug;
@@ -67,7 +72,7 @@ export type ServiceConfig = {
 
 export const SERVICES: ServiceConfig[] = [
   {
-    slug: 'visit-card',
+    slug: 'template-website',
 
     label: 'Starter Website',
 
@@ -97,7 +102,7 @@ export const SERVICES: ServiceConfig[] = [
 
     icon: '/img/servicespricing/one-page-site.avif',
 
-    link: '/services/visit-card',
+    link: '/services/template-website',
 
     cta: 'Get Started',
 
@@ -239,21 +244,21 @@ export const SERVICES: ServiceConfig[] = [
 
     cta: 'Build My Online Store',
 
-    seoTitle: 'Custom E-commerce Website Development | UpLadoMyr Digital',
+    seoTitle: 'Custom E-commerce Development for Businesses | UpLadoMyr Digital',
 
     seoDescription:
       'Custom e-commerce website development with product management, secure checkout, payment integration, customer accounts and responsive design. Starting at $5,500.',
   },
 
   {
-    slug: 'crm',
+    slug: 'web-application-development',
 
-    label: 'Custom Web Application',
+    label: 'Custom Development',
 
-    title: 'Web App, CRM & Business System',
+    title: 'Custom Web Application & Business Systems',
 
     idealFor:
-      'For businesses that need custom software, dashboards, customer portals, workflow automation, integrations or advanced data management.',
+      'For businesses that need custom software, CRM systems, client portals, dashboards, workflow automation, third-party integrations or advanced data management',
 
     duration: '5–12+ weeks',
 
@@ -282,14 +287,14 @@ export const SERVICES: ServiceConfig[] = [
 
     icon: '/img/servicespricing/crm.avif',
 
-    link: '/services/crm',
+    link: '/services/web-application-development',
 
     cta: 'Discuss My Project',
 
-    seoTitle: 'Custom Web Application & CRM Development | UpLadoMyr Digital',
+    seoTitle: 'Custom Web Application Development | UpLadoMyr Digital',
 
     seoDescription:
-      'Custom web application, CRM and business software development with secure authentication, dashboards, databases, APIs, integrations and workflow automation. Starting at $12,000.',
+      'Custom web application and business software development including CRM systems, client portals, dashboards, databases, APIs, integrations and workflow automation. Starting at $12,000.',
   },
 ];
 
