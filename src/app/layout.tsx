@@ -4,8 +4,8 @@ import CookieConsent from '@/components/CookieConsent/CookieConsent';
 import type { Metadata } from 'next';
 import AOSProvider from '@/components/AOSProvider';
 import MetaPixel from '@/components/MetaPixel/MetaPixel';
+import GoogleAdsTag from '@/components/GoogleAds/GoogleAdsTag';
 
-// ✅✅✅ ADDED
 import { Suspense } from 'react';
 
 export const metadata: Metadata = {
@@ -103,15 +103,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // ⬇️ було bg-[#f7f4ea], тепер чисто білий
     <html lang="en" className="h-full bg-white">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-        {/* фіксуємо light-режим */}
+        {/* Force light mode */}
         <meta name="color-scheme" content="light" />
 
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+
         <meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)" />
       </head>
 
@@ -119,7 +119,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className="
           min-h-screen h-full antialiased overflow-x-hidden
           selection:bg-yellow-500 selection:text-slate-900
-          bg-slate-50 text-slate-900   /* ⬅️ дуже світло-сірий фон замість bg-[#f7f4ea] */
+          bg-slate-50 text-slate-900
         "
         style={{
           ['--container-w' as any]: '80rem',
@@ -131,14 +131,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           paddingRight: 'env(safe-area-inset-right, 0)',
         }}
       >
-        {/* ✅✅✅ CHANGED: wrap MetaPixel with Suspense (fix useSearchParams prerender error) */}
+        {/* Meta Pixel */}
         <Suspense fallback={null}>
           <MetaPixel />
         </Suspense>
 
+        {/* Google Ads Tag */}
+        <GoogleAdsTag />
+
         <AuthProvider>
-          <AOSProvider /> {/* ✅ ADDED: AOS loads only on >=768px */}
+          <AOSProvider />
+
           {children}
+
           <CookieConsent />
         </AuthProvider>
 
