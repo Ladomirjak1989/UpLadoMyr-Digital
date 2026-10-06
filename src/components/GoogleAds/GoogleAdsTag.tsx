@@ -1,7 +1,7 @@
 'use client';
 
 import Script from 'next/script';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const GOOGLE_ADS_ID = 'AW-18455284906';
 const CONSENT_COOKIE = 'cookie_consent';
@@ -19,7 +19,7 @@ declare global {
 }
 
 /**
- * Reads the consent preferences stored by CookieConsent.tsx.
+ * Read saved cookie consent.
  */
 function getConsent(): ConsentState | null {
   if (typeof document === 'undefined') {
@@ -40,8 +40,7 @@ function getConsent(): ConsentState | null {
 }
 
 /**
- * Creates dataLayer and gtag before the external
- * Google script is loaded.
+ * Initialize Google's dataLayer / gtag.
  */
 function initializeGtag() {
   window.dataLayer = window.dataLayer || [];
@@ -54,33 +53,39 @@ function initializeGtag() {
 }
 
 export default function GoogleAdsTag() {
-  const [marketingConsent, setMarketingConsent] = useState(false);
-
   useEffect(() => {
     initializeGtag();
 
     /**
-     * Google Consent Mode v2
+     * Read existing consent.
      *
-     * Default:
-     * advertising consent is denied.
+     * If there is no saved consent yet,
+     * advertising consent remains DENIED.
+     */
+    const consent = getConsent();
+    const marketingGranted = consent?.marketing === true;
+
+    /**
+     * Google Consent Mode v2
      */
     window.gtag?.('consent', 'default', {
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
+      ad_storage: marketingGranted ? 'granted' : 'denied',
+      ad_user_data: marketingGranted ? 'granted' : 'denied',
+      ad_personalization: marketingGranted ? 'granted' : 'denied',
+
+      // We are not using Google Analytics here.
+      analytics_storage: 'denied',
+
+      wait_for_update: 500,
     });
 
     /**
-     * Synchronize Google Ads with our
-     * cookie_consent preference.
+     * Update Google consent whenever the visitor
+     * changes Cookie Consent preferences.
      */
     const updateConsent = () => {
-      const consent = getConsent();
-
-      const granted = consent?.marketing === true;
-
-      setMarketingConsent(granted);
+      const updatedConsent = getConsent();
+      const granted = updatedConsent?.marketing === true;
 
       window.gtag?.('consent', 'update', {
         ad_storage: granted ? 'granted' : 'denied',
@@ -89,30 +94,12 @@ export default function GoogleAdsTag() {
       });
     };
 
-    /**
-     * Check previously saved consent
-     * when the website first loads.
-     */
-    updateConsent();
-
-    /**
-     * CookieConsent.tsx dispatches this event
-     * whenever the visitor changes preferences.
-     */
     window.addEventListener('cookie-consent-updated', updateConsent);
 
     return () => {
       window.removeEventListener('cookie-consent-updated', updateConsent);
     };
   }, []);
-
-  /**
-   * Do not load the Google Ads script
-   * until Marketing consent is granted.
-   */
-  if (!marketingConsent) {
-    return null;
-  }
 
   return (
     <>
