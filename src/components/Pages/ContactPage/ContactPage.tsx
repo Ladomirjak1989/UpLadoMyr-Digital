@@ -20,6 +20,8 @@ import {
   FiUser,
 } from 'react-icons/fi';
 
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
+
 // ─────────────────────────────────────────────────────────────
 // TYPES
 // ─────────────────────────────────────────────────────────────
@@ -334,6 +336,12 @@ const ContactPage: React.FC = () => {
 
   const [isSending, setIsSending] = useState(false);
 
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  const turnstileRef = useRef<TurnstileInstance>(null);
+
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
   // ───────────────────────────────────────────────────────────
   // TIME
   // ───────────────────────────────────────────────────────────
@@ -424,6 +432,15 @@ const ContactPage: React.FC = () => {
       return;
     }
 
+    if (!turnstileSiteKey || !turnstileToken) {
+      showToast({
+        type: 'error',
+        text: 'Please complete the security verification before submitting.',
+      });
+
+      return;
+    }
+
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
 
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
@@ -474,6 +491,8 @@ const ContactPage: React.FC = () => {
         website: cleanWebsite || null,
 
         message: formData.message.trim(),
+
+        turnstileToken,
       };
 
       // ───────────────────────────────────────────────────────
@@ -596,6 +615,9 @@ const ContactPage: React.FC = () => {
       throw new Error('Failed to send message via EmailJS.');
     } catch (error: unknown) {
       console.error('Email/contact sending error:', error);
+
+      setTurnstileToken(null);
+      turnstileRef.current?.reset();
 
       showToast({
         type: 'error',
@@ -1431,6 +1453,28 @@ const ContactPage: React.FC = () => {
                     .
                   </span>
                 </label>
+
+                {/* CLOUDFLARE TURNSTILE */}
+
+                <div className="flex w-full flex-col items-center gap-3">
+                  {turnstileSiteKey ? (
+                    <Turnstile
+                      ref={turnstileRef}
+                      siteKey={turnstileSiteKey}
+                      options={{
+                        theme: 'light',
+                        size: 'normal',
+                      }}
+                      onSuccess={(token) => setTurnstileToken(token)}
+                      onExpire={() => setTurnstileToken(null)}
+                      onError={() => setTurnstileToken(null)}
+                    />
+                  ) : (
+                    <p className="text-sm text-red-600">
+                      Security verification is currently unavailable.
+                    </p>
+                  )}
+                </div>
 
                 {/* SUBMIT */}
 
