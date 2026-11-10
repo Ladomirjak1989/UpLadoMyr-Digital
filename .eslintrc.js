@@ -1,4 +1,5 @@
 module.exports = {
+  root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
@@ -27,9 +28,9 @@ module.exports = {
         singleQuote: true,
         printWidth: 100,
         trailingComma: 'es5',
+        endOfLine: 'auto',
       },
     ],
   },
   ignorePatterns: ['*.config.js', 'node_modules/'],
 };
-
